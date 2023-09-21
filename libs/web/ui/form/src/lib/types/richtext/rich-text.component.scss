@@ -1,0 +1,14 @@
+::ng-deep .ql-tooltip.ql-editing {
+  left: 15px !important;
+  top: 0 !important;
+  margin-top: 0 !important;
+}
+
+::ng-deep .ql-editor {
+  max-height: 100% !important;
+  height: 100% !important;
+}
+
+::ng-deep quill-editor {
+  position: relative;
+}

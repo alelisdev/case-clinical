@@ -1,0 +1,98 @@
+
+fragment MessageDetails on Message {
+id
+createdAt
+updatedAt
+name
+image
+title
+description
+time
+read
+isMine
+userId
+chatId
+user {
+    id
+    name
+}
+chat {
+    id
+    name
+}
+
+
+
+
+
+}
+query AdminMessages($input: AdminListMessageInput) {
+  items: adminMessages(input: $input) {
+    ...MessageDetails
+  }
+  count: adminCountMessages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountMessages($input: AdminListMessageInput) {
+  count: adminCountMessages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminMessage($messageId: String!) {
+  item: adminMessage(messageId: $messageId) {
+    ...MessageDetails
+  }
+}
+mutation AdminCreateMessage($input: AdminCreateMessageInput!) {
+  created: adminCreateMessage(input: $input) {
+    ...MessageDetails
+  }
+}
+mutation AdminUpdateMessage($messageId: String!, $input: AdminUpdateMessageInput!) {
+  updated: adminUpdateMessage(messageId: $messageId, input: $input) {
+    ...MessageDetails
+  }
+}
+mutation AdminDeleteMessage($messageId: String!) {
+  deleted: adminDeleteMessage(messageId: $messageId) {
+    ...MessageDetails
+  }
+}
+
+query UserMessages($input: UserListMessageInput) {
+  items: userMessages(input: $input) {
+    ...MessageDetails
+  }
+  count: userCountMessages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountMessages($input: UserListMessageInput) {
+  count: userCountMessages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserMessage($messageId: String!) {
+  item: userMessage(messageId: $messageId) {
+    ...MessageDetails
+  }
+}
+mutation UserCreateMessage($input: UserCreateMessageInput!) {
+  created: userCreateMessage(input: $input) {
+    ...MessageDetails
+  }
+}
+mutation UserUpdateMessage($messageId: String!, $input: UserUpdateMessageInput!) {
+  updated: userUpdateMessage(messageId: $messageId, input: $input) {
+    ...MessageDetails
+  }
+}
+mutation UserDeleteMessage($messageId: String!) {
+  deleted: userDeleteMessage(messageId: $messageId) {
+    ...MessageDetails
+  }
+}

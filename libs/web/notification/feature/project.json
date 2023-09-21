@@ -1,0 +1,23 @@
+{
+  "name": "web-notification-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/notification/feature/src",
+  "prefix": "notification",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/notification/feature/src/**/*.ts", "libs/web/notification/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/notification/feature"],
+      "options": {
+        "jestConfig": "libs/web/notification/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

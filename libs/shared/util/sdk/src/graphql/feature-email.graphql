@@ -1,0 +1,92 @@
+fragment EmailDetails on Email {
+  id
+  createdAt
+  updatedAt
+  name
+  email
+  isPublic
+  primary
+  verified
+  verifyToken
+  verifyExpires
+  ownerId
+}
+
+fragment SearchDetails on Search {
+  email
+  name
+}
+
+query AdminEmails($input: AdminListEmailInput) {
+  items: adminEmails(input: $input) {
+    ...EmailDetails
+  }
+  count: adminCountEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEmails($input: AdminListEmailInput) {
+  count: adminCountEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminEmail($emailId: String!) {
+  item: adminEmail(emailId: $emailId) {
+    ...EmailDetails
+  }
+}
+mutation AdminCreateEmail($input: AdminCreateEmailInput!) {
+  created: adminCreateEmail(input: $input) {
+    ...EmailDetails
+  }
+}
+mutation AdminUpdateEmail($emailId: String!, $input: AdminUpdateEmailInput!) {
+  updated: adminUpdateEmail(emailId: $emailId, input: $input) {
+    ...EmailDetails
+  }
+}
+mutation AdminDeleteEmail($emailId: String!) {
+  deleted: adminDeleteEmail(emailId: $emailId) {
+    ...EmailDetails
+  }
+}
+
+query UserEmails($input: UserListEmailInput) {
+  items: userEmails(input: $input) {
+    ...EmailDetails
+  }
+  count: userCountEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEmails($input: UserListEmailInput) {
+  count: userCountEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserEmail($emailId: String!) {
+  item: userEmail(emailId: $emailId) {
+    ...EmailDetails
+  }
+}
+query UserSearchEmails($email: String!) {
+  items: userSearchEmails(email: $email) {
+    ...SearchDetails
+  }
+}
+mutation UserCreateEmail($input: UserCreateEmailInput!) {
+  created: userCreateEmail(input: $input) {
+    ...EmailDetails
+  }
+}
+mutation UserUpdateEmail($emailId: String!, $input: UserUpdateEmailInput!) {
+  updated: userUpdateEmail(emailId: $emailId, input: $input) {
+    ...EmailDetails
+  }
+}
+mutation UserDeleteEmail($emailId: String!) {
+  deleted: userDeleteEmail(emailId: $emailId) {
+    ...EmailDetails
+  }
+}

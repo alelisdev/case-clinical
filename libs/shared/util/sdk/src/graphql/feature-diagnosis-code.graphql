@@ -1,0 +1,181 @@
+
+
+fragment DiagnosisCodeDetails on DiagnosisCode {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationDiagnosisCodes {
+    id
+    name
+  }
+
+authorizationDiagnosisCodes {
+    id
+    name
+  }
+
+procedureOrTreatmentRequestDiagnosisCodes {
+    id
+    name
+  }
+
+recommendedOrderDiagnosisCodes {
+    id
+    name
+  }
+}
+
+fragment DiagnosisCodeLists on DiagnosisCode {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationDiagnosisCodes {
+    id
+    name
+  }
+
+
+authorizationDiagnosisCodes {
+    id
+    name
+  }
+
+
+procedureOrTreatmentRequestDiagnosisCodes {
+    id
+    name
+  }
+
+
+recommendedOrderDiagnosisCodes {
+    id
+    name
+  }
+
+}
+
+query AdminDiagnosisCodes($input: AdminListDiagnosisCodeInput) {
+  items: adminDiagnosisCodes(input: $input) {
+    ...DiagnosisCodeLists
+  }
+  count: adminCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountDiagnosisCodes($input: AdminListDiagnosisCodeInput) {
+  count: adminCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminDiagnosisCode($diagnosisCodeId: String!) {
+  item: adminDiagnosisCode(diagnosisCodeId: $diagnosisCodeId) {
+    ...DiagnosisCodeDetails
+  }
+}
+mutation AdminCreateDiagnosisCode($input: AdminCreateDiagnosisCodeInput!) {
+  created: adminCreateDiagnosisCode(input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+mutation AdminUpdateDiagnosisCode($diagnosisCodeId: String!, $input: AdminUpdateDiagnosisCodeInput!) {
+  updated: adminUpdateDiagnosisCode(diagnosisCodeId: $diagnosisCodeId, input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+mutation AdminDeleteDiagnosisCode($diagnosisCodeId: String!) {
+  deleted: adminDeleteDiagnosisCode(diagnosisCodeId: $diagnosisCodeId) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+query UserDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  items: userDiagnosisCodes(input: $input) {
+    ...DiagnosisCodeLists
+  }
+  count: userCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  count: userCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  items: userSelectDiagnosisCodes(input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+query UserDiagnosisCode($diagnosisCodeId: String!) {
+  item: userDiagnosisCode(diagnosisCodeId: $diagnosisCodeId) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+mutation UserCreateDiagnosisCode($input: UserCreateDiagnosisCodeInput!) {
+  created: userCreateDiagnosisCode(input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+mutation UserUpdateDiagnosisCode($diagnosisCodeId: String!, $input: UserUpdateDiagnosisCodeInput!) {
+  updated: userUpdateDiagnosisCode(diagnosisCodeId: $diagnosisCodeId, input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+mutation UserUpdateDiagnosisCodes($input: UserUpdateDiagnosisCodesInput!) {
+  updated: userUpdateDiagnosisCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteDiagnosisCode($diagnosisCodeId: String!) {
+  deleted: userDeleteDiagnosisCode(diagnosisCodeId: $diagnosisCodeId) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+query PublicDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  items: publicDiagnosisCodes(input: $input) {
+    ...DiagnosisCodeLists
+  }
+  count: publicCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  count: publicCountDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectDiagnosisCodes($input: UserListDiagnosisCodeInput) {
+  items: publicSelectDiagnosisCodes(input: $input) {
+    ...DiagnosisCodeDetails
+  }
+}
+
+query PublicDiagnosisCode($diagnosisCodeId: String!) {
+  item: publicDiagnosisCode(diagnosisCodeId: $diagnosisCodeId) {
+    ...DiagnosisCodeDetails
+  }
+}

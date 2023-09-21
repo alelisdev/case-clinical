@@ -1,0 +1,23 @@
+{
+  "name": "web-procedure-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/procedure-type/ui/src",
+  "prefix": "procedure-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/procedure-type/ui/src/**/*.ts", "libs/web/procedure-type/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/procedure-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/procedure-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,237 @@
+fragment DocumentOverview on Document {
+  id
+  name
+  attachment
+  extension
+  encoding
+}
+
+fragment DocumentDetails on Document {
+id
+createdAt
+updatedAt
+name
+attachment
+encoding
+extension
+contractId
+patientId
+folderId
+createdBy
+size
+type
+description
+contents
+prescriptionId
+patientStudyId
+procedureVendorId
+
+contract {
+  id
+  name
+}
+patient {
+  id
+  name
+}
+
+patientStudies {
+  id
+  name
+}
+procedureVendor {
+  id
+  name
+}
+
+
+
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+medicalReports {
+    id
+    name
+  }
+
+bills {
+    id
+    name
+  }
+
+prescriptions {
+    id
+    name
+  }
+
+eulas {
+    id
+    name
+  }
+}
+
+fragment DocumentLists on Document {
+id
+createdAt
+updatedAt
+name
+attachment
+encoding
+extension
+contractId
+patientId
+folderId
+createdBy
+size
+type
+description
+contents
+prescriptionId
+patientStudyId
+procedureVendorId
+contract {
+    id
+    name
+}
+patient {
+    id
+    name
+}
+
+provider {
+    id
+    name
+}
+patientStudies {
+    id
+    name
+}
+procedureVendor {
+    id
+    name
+}
+
+
+
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+
+medicalReports {
+    id
+    name
+  }
+
+
+bills {
+    id
+    name
+  }
+
+prescriptions {
+    id
+    name
+  }
+
+
+eulas {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminDocuments($input: AdminListDocumentInput) {
+  items: adminDocuments(input: $input) {
+    ...DocumentLists
+  }
+  count: adminCountDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountDocuments($input: AdminListDocumentInput) {
+  count: adminCountDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminDocument($documentId: String!) {
+  item: adminDocument(documentId: $documentId) {
+    ...DocumentDetails
+  }
+}
+mutation AdminCreateDocument($input: AdminCreateDocumentInput!) {
+  created: adminCreateDocument(input: $input) {
+    ...DocumentDetails
+  }
+}
+mutation AdminUpdateDocument($documentId: String!, $input: AdminUpdateDocumentInput!) {
+  updated: adminUpdateDocument(documentId: $documentId, input: $input) {
+    ...DocumentDetails
+  }
+}
+mutation AdminDeleteDocument($documentId: String!) {
+  deleted: adminDeleteDocument(documentId: $documentId) {
+    ...DocumentDetails
+  }
+}
+
+query UserDocuments($input: UserListDocumentInput) {
+  items: userDocuments(input: $input) {
+    ...DocumentLists
+  }
+  count: userCountDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountDocuments($input: UserListDocumentInput) {
+  count: userCountDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectDocuments($input: UserListDocumentInput) {
+  items: userSelectDocuments(input: $input) {
+    ...DocumentDetails
+  }
+}
+
+query UserDocument($documentId: String!) {
+  item: userDocument(documentId: $documentId) {
+    ...DocumentDetails
+  }
+}
+mutation UserCreateDocument($input: UserCreateDocumentInput!) {
+  created: userCreateDocument(input: $input) {
+    ...DocumentDetails
+  }
+}
+mutation UserUpdateDocument($documentId: String!, $input: UserUpdateDocumentInput!) {
+  updated: userUpdateDocument(documentId: $documentId, input: $input) {
+    ...DocumentDetails
+  }
+}
+
+mutation UserUpdateDocuments($input: UserUpdateDocumentsInput!) {
+  updated: userUpdateDocuments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteDocument($documentId: String!, $featureName: String!) {
+  deleted: userDeleteDocument(documentId: $documentId, featureName: $featureName) {
+    ...DocumentDetails
+  }
+}

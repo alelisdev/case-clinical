@@ -1,0 +1,148 @@
+
+fragment ClaimStatusDetails on ClaimStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+claimProcedures {
+    ...ClaimProcedureLists
+  }
+}
+
+fragment ClaimStatusLists on ClaimStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+claimProcedures {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminClaimStatuses($input: AdminListClaimStatusInput) {
+  items: adminClaimStatuses(input: $input) {
+    ...ClaimStatusLists
+  }
+  count: adminCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClaimStatuses($input: AdminListClaimStatusInput) {
+  count: adminCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClaimStatus($claimStatusId: String!) {
+  item: adminClaimStatus(claimStatusId: $claimStatusId) {
+    ...ClaimStatusDetails
+  }
+}
+mutation AdminCreateClaimStatus($input: AdminCreateClaimStatusInput!) {
+  created: adminCreateClaimStatus(input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+mutation AdminUpdateClaimStatus($claimStatusId: String!, $input: AdminUpdateClaimStatusInput!) {
+  updated: adminUpdateClaimStatus(claimStatusId: $claimStatusId, input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+mutation AdminDeleteClaimStatus($claimStatusId: String!) {
+  deleted: adminDeleteClaimStatus(claimStatusId: $claimStatusId) {
+    ...ClaimStatusDetails
+  }
+}
+
+query UserClaimStatuses($input: UserListClaimStatusInput) {
+  items: userClaimStatuses(input: $input) {
+    ...ClaimStatusLists
+  }
+  count: userCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClaimStatuses($input: UserListClaimStatusInput) {
+  count: userCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClaimStatuses($input: UserListClaimStatusInput) {
+  items: userSelectClaimStatuses(input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+
+query UserClaimStatus($claimStatusId: String!) {
+  item: userClaimStatus(claimStatusId: $claimStatusId) {
+    ...ClaimStatusDetails
+  }
+}
+
+mutation UserCreateClaimStatus($input: UserCreateClaimStatusInput!) {
+  created: userCreateClaimStatus(input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+mutation UserUpdateClaimStatus($claimStatusId: String!, $input: UserUpdateClaimStatusInput!) {
+  updated: userUpdateClaimStatus(claimStatusId: $claimStatusId, input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+
+mutation UserUpdateClaimStatuses($input: UserUpdateClaimStatusesInput!) {
+  updated: userUpdateClaimStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClaimStatus($claimStatusId: String!) {
+  deleted: userDeleteClaimStatus(claimStatusId: $claimStatusId) {
+    ...ClaimStatusDetails
+  }
+}
+
+query PublicClaimStatuses($input: UserListClaimStatusInput) {
+  items: publicClaimStatuses(input: $input) {
+    ...ClaimStatusLists
+  }
+  count: publicCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClaimStatuses($input: UserListClaimStatusInput) {
+  count: publicCountClaimStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClaimStatuses($input: UserListClaimStatusInput) {
+  items: publicSelectClaimStatuses(input: $input) {
+    ...ClaimStatusDetails
+  }
+}
+
+query PublicClaimStatus($claimStatusId: String!) {
+  item: publicClaimStatus(claimStatusId: $claimStatusId) {
+    ...ClaimStatusDetails
+  }
+}

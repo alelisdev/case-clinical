@@ -1,0 +1,169 @@
+
+fragment InvoiceDetailDetails on InvoiceDetail {
+id
+createdAt
+updatedAt
+name
+invoiceId
+dateOfService
+providerName
+procedureDescription
+quantity
+charges
+lineTotal
+invoice {
+  id
+  name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+}
+
+fragment InvoiceDetailLists on InvoiceDetail {
+id
+createdAt
+updatedAt
+name
+invoiceId
+dateOfService
+providerName
+procedureDescription
+quantity
+charges
+lineTotal
+invoice {
+    id
+    name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminInvoiceDetails($input: AdminListInvoiceDetailInput) {
+  items: adminInvoiceDetails(input: $input) {
+    ...InvoiceDetailLists
+  }
+  count: adminCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountInvoiceDetails($input: AdminListInvoiceDetailInput) {
+  count: adminCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminInvoiceDetail($invoiceDetailId: String!) {
+  item: adminInvoiceDetail(invoiceDetailId: $invoiceDetailId) {
+    ...InvoiceDetailDetails
+  }
+}
+mutation AdminCreateInvoiceDetail($input: AdminCreateInvoiceDetailInput!) {
+  created: adminCreateInvoiceDetail(input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+mutation AdminUpdateInvoiceDetail($invoiceDetailId: String!, $input: AdminUpdateInvoiceDetailInput!) {
+  updated: adminUpdateInvoiceDetail(invoiceDetailId: $invoiceDetailId, input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+mutation AdminDeleteInvoiceDetail($invoiceDetailId: String!) {
+  deleted: adminDeleteInvoiceDetail(invoiceDetailId: $invoiceDetailId) {
+    ...InvoiceDetailDetails
+  }
+}
+
+query UserInvoiceDetails($input: UserListInvoiceDetailInput) {
+  items: userInvoiceDetails(input: $input) {
+    ...InvoiceDetailLists
+  }
+  count: userCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountInvoiceDetails($input: UserListInvoiceDetailInput) {
+  count: userCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectInvoiceDetails($input: UserListInvoiceDetailInput) {
+  items: userSelectInvoiceDetails(input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+
+query UserInvoiceDetail($invoiceDetailId: String!) {
+  item: userInvoiceDetail(invoiceDetailId: $invoiceDetailId) {
+    ...InvoiceDetailDetails
+  }
+}
+
+mutation UserCreateInvoiceDetail($input: UserCreateInvoiceDetailInput!) {
+  created: userCreateInvoiceDetail(input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+mutation UserUpdateInvoiceDetail($invoiceDetailId: String!, $input: UserUpdateInvoiceDetailInput!) {
+  updated: userUpdateInvoiceDetail(invoiceDetailId: $invoiceDetailId, input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+
+mutation UserUpdateInvoiceDetails($input: UserUpdateInvoiceDetailsInput!) {
+  updated: userUpdateInvoiceDetails(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteInvoiceDetail($invoiceDetailId: String!) {
+  deleted: userDeleteInvoiceDetail(invoiceDetailId: $invoiceDetailId) {
+    ...InvoiceDetailDetails
+  }
+}
+
+query PublicInvoiceDetails($input: UserListInvoiceDetailInput) {
+  items: publicInvoiceDetails(input: $input) {
+    ...InvoiceDetailLists
+  }
+  count: publicCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountInvoiceDetails($input: UserListInvoiceDetailInput) {
+  count: publicCountInvoiceDetails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectInvoiceDetails($input: UserListInvoiceDetailInput) {
+  items: publicSelectInvoiceDetails(input: $input) {
+    ...InvoiceDetailDetails
+  }
+}
+
+query PublicInvoiceDetail($invoiceDetailId: String!) {
+  item: publicInvoiceDetail(invoiceDetailId: $invoiceDetailId) {
+    ...InvoiceDetailDetails
+  }
+}

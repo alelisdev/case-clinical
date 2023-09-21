@@ -1,0 +1,148 @@
+
+
+fragment MedicalRecordStatusDetails on MedicalRecordStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+appointments {
+    id
+    name
+  }
+}
+
+fragment MedicalRecordStatusLists on MedicalRecordStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+appointments {
+    id
+    name
+  }
+
+}
+
+query AdminMedicalRecordStatuses($input: AdminListMedicalRecordStatusInput) {
+  items: adminMedicalRecordStatuses(input: $input) {
+    ...MedicalRecordStatusLists
+  }
+  count: adminCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountMedicalRecordStatuses($input: AdminListMedicalRecordStatusInput) {
+  count: adminCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminMedicalRecordStatus($medicalRecordStatusId: String!) {
+  item: adminMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId) {
+    ...MedicalRecordStatusDetails
+  }
+}
+mutation AdminCreateMedicalRecordStatus($input: AdminCreateMedicalRecordStatusInput!) {
+  created: adminCreateMedicalRecordStatus(input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+mutation AdminUpdateMedicalRecordStatus($medicalRecordStatusId: String!, $input: AdminUpdateMedicalRecordStatusInput!) {
+  updated: adminUpdateMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId, input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+mutation AdminDeleteMedicalRecordStatus($medicalRecordStatusId: String!) {
+  deleted: adminDeleteMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+query UserMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  items: userMedicalRecordStatuses(input: $input) {
+    ...MedicalRecordStatusLists
+  }
+  count: userCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  count: userCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  items: userSelectMedicalRecordStatuses(input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+query UserMedicalRecordStatus($medicalRecordStatusId: String!) {
+  item: userMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+mutation UserCreateMedicalRecordStatus($input: UserCreateMedicalRecordStatusInput!) {
+  created: userCreateMedicalRecordStatus(input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+mutation UserUpdateMedicalRecordStatus($medicalRecordStatusId: String!, $input: UserUpdateMedicalRecordStatusInput!) {
+  updated: userUpdateMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId, input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+mutation UserUpdateMedicalRecordStatuses($input: UserUpdateMedicalRecordStatusesInput!) {
+  updated: userUpdateMedicalRecordStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteMedicalRecordStatus($medicalRecordStatusId: String!) {
+  deleted: userDeleteMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+query PublicMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  items: publicMedicalRecordStatuses(input: $input) {
+    ...MedicalRecordStatusLists
+  }
+  count: publicCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  count: publicCountMedicalRecordStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectMedicalRecordStatuses($input: UserListMedicalRecordStatusInput) {
+  items: publicSelectMedicalRecordStatuses(input: $input) {
+    ...MedicalRecordStatusDetails
+  }
+}
+
+query PublicMedicalRecordStatus($medicalRecordStatusId: String!) {
+  item: publicMedicalRecordStatus(medicalRecordStatusId: $medicalRecordStatusId) {
+    ...MedicalRecordStatusDetails
+  }
+}

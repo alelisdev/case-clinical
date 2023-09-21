@@ -1,0 +1,26 @@
+{
+  "name": "web-claim-procedure-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/claim-procedure/feature/src",
+  "prefix": "claim-procedure",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/claim-procedure/feature/src/**/*.ts",
+          "libs/web/claim-procedure/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/claim-procedure/feature"],
+      "options": {
+        "jestConfig": "libs/web/claim-procedure/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

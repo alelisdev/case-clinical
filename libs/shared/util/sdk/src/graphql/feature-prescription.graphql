@@ -1,0 +1,182 @@
+
+fragment PrescriptionDetails on Prescription {
+id
+createdAt
+updatedAt
+name
+medicalProvider
+dateWritten
+days
+note
+category
+kind
+quantity
+refills
+rxNumber
+sig
+strength
+unit
+patientId
+documentId
+patient {
+  id
+  name
+}
+document {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PrescriptionLists on Prescription {
+id
+createdAt
+updatedAt
+name
+medicalProvider
+dateWritten
+days
+note
+category
+kind
+quantity
+refills
+rxNumber
+sig
+strength
+unit
+patientId
+documentId
+patient {
+    id
+    name
+}
+document {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPrescriptions($input: AdminListPrescriptionInput) {
+  items: adminPrescriptions(input: $input) {
+    ...PrescriptionLists
+  }
+  count: adminCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPrescriptions($input: AdminListPrescriptionInput) {
+  count: adminCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPrescription($prescriptionId: String!) {
+  item: adminPrescription(prescriptionId: $prescriptionId) {
+    ...PrescriptionDetails
+  }
+}
+mutation AdminCreatePrescription($input: AdminCreatePrescriptionInput!) {
+  created: adminCreatePrescription(input: $input) {
+    ...PrescriptionDetails
+  }
+}
+mutation AdminUpdatePrescription($prescriptionId: String!, $input: AdminUpdatePrescriptionInput!) {
+  updated: adminUpdatePrescription(prescriptionId: $prescriptionId, input: $input) {
+    ...PrescriptionDetails
+  }
+}
+mutation AdminDeletePrescription($prescriptionId: String!) {
+  deleted: adminDeletePrescription(prescriptionId: $prescriptionId) {
+    ...PrescriptionDetails
+  }
+}
+
+query UserPrescriptions($input: UserListPrescriptionInput) {
+  items: userPrescriptions(input: $input) {
+    ...PrescriptionLists
+  }
+  count: userCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPrescriptions($input: UserListPrescriptionInput) {
+  count: userCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPrescriptions($input: UserListPrescriptionInput) {
+  items: userSelectPrescriptions(input: $input) {
+    ...PrescriptionDetails
+  }
+}
+
+query UserPrescription($prescriptionId: String!) {
+  item: userPrescription(prescriptionId: $prescriptionId) {
+    ...PrescriptionDetails
+  }
+}
+
+mutation UserCreatePrescription($input: UserCreatePrescriptionInput!) {
+  created: userCreatePrescription(input: $input) {
+    ...PrescriptionDetails
+  }
+}
+mutation UserUpdatePrescription($prescriptionId: String!, $input: UserUpdatePrescriptionInput!) {
+  updated: userUpdatePrescription(prescriptionId: $prescriptionId, input: $input) {
+    ...PrescriptionDetails
+  }
+}
+
+mutation UserUpdatePrescriptions($input: UserUpdatePrescriptionsInput!) {
+  updated: userUpdatePrescriptions(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePrescription($prescriptionId: String!) {
+  deleted: userDeletePrescription(prescriptionId: $prescriptionId) {
+    ...PrescriptionDetails
+  }
+}
+
+query PublicPrescriptions($input: UserListPrescriptionInput) {
+  items: publicPrescriptions(input: $input) {
+    ...PrescriptionLists
+  }
+  count: publicCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPrescriptions($input: UserListPrescriptionInput) {
+  count: publicCountPrescriptions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPrescriptions($input: UserListPrescriptionInput) {
+  items: publicSelectPrescriptions(input: $input) {
+    ...PrescriptionDetails
+  }
+}
+
+query PublicPrescription($prescriptionId: String!) {
+  item: publicPrescription(prescriptionId: $prescriptionId) {
+    ...PrescriptionDetails
+  }
+}

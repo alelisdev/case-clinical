@@ -1,0 +1,23 @@
+{
+  "name": "mobile-layout-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/layout/feature/src",
+  "prefix": "layout",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/layout/feature/src/**/*.ts", "libs/mobile/layout/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/layout/feature"],
+      "options": {
+        "jestConfig": "libs/mobile/layout/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

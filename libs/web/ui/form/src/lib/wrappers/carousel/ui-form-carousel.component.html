@@ -1,0 +1,20 @@
+<div class="w-full">
+  <swiper
+  [config]="config"
+  (swiper)="onSwiper($event)"
+  (slideChange)="onSlideChange()"
+  >
+    <ng-container *ngIf="manualArrangement">
+      <ng-template swiperSlide *ngFor="let chiledField of field.fieldGroup">
+        <formly-field [field]="chiledField"></formly-field>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngIf="!manualArrangement">
+      <ng-template swiperSlide *ngFor="let datum of data">
+        <ui-context-provider class="flex" [data]="datum">
+          <formly-field [field]="carouselItem"></formly-field>
+        </ui-context-provider>
+      </ng-template>
+    </ng-container>
+  </swiper>
+</div>

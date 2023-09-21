@@ -1,0 +1,152 @@
+
+fragment HealthInsuranceDetails on HealthInsurance {
+id
+createdAt
+updatedAt
+name
+healthInsuranceKind
+identificationGroupNumber
+mediCalNumber
+medicareNumber
+policyNumber
+legalCaseId
+
+
+
+
+
+
+}
+
+fragment HealthInsuranceLists on HealthInsurance {
+id
+createdAt
+updatedAt
+name
+healthInsuranceKind
+identificationGroupNumber
+mediCalNumber
+medicareNumber
+policyNumber
+legalCaseId
+
+
+
+
+
+
+}
+
+
+
+query AdminHealthInsurances($input: AdminListHealthInsuranceInput) {
+  items: adminHealthInsurances(input: $input) {
+    ...HealthInsuranceLists
+  }
+  count: adminCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountHealthInsurances($input: AdminListHealthInsuranceInput) {
+  count: adminCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminHealthInsurance($healthInsuranceId: String!) {
+  item: adminHealthInsurance(healthInsuranceId: $healthInsuranceId) {
+    ...HealthInsuranceDetails
+  }
+}
+mutation AdminCreateHealthInsurance($input: AdminCreateHealthInsuranceInput!) {
+  created: adminCreateHealthInsurance(input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+mutation AdminUpdateHealthInsurance($healthInsuranceId: String!, $input: AdminUpdateHealthInsuranceInput!) {
+  updated: adminUpdateHealthInsurance(healthInsuranceId: $healthInsuranceId, input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+mutation AdminDeleteHealthInsurance($healthInsuranceId: String!) {
+  deleted: adminDeleteHealthInsurance(healthInsuranceId: $healthInsuranceId) {
+    ...HealthInsuranceDetails
+  }
+}
+
+query UserHealthInsurances($input: UserListHealthInsuranceInput) {
+  items: userHealthInsurances(input: $input) {
+    ...HealthInsuranceLists
+  }
+  count: userCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountHealthInsurances($input: UserListHealthInsuranceInput) {
+  count: userCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectHealthInsurances($input: UserListHealthInsuranceInput) {
+  items: userSelectHealthInsurances(input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+
+query UserHealthInsurance($healthInsuranceId: String!) {
+  item: userHealthInsurance(healthInsuranceId: $healthInsuranceId) {
+    ...HealthInsuranceDetails
+  }
+}
+
+mutation UserCreateHealthInsurance($input: UserCreateHealthInsuranceInput!) {
+  created: userCreateHealthInsurance(input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+mutation UserUpdateHealthInsurance($healthInsuranceId: String!, $input: UserUpdateHealthInsuranceInput!) {
+  updated: userUpdateHealthInsurance(healthInsuranceId: $healthInsuranceId, input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+
+mutation UserUpdateHealthInsurances($input: UserUpdateHealthInsurancesInput!) {
+  updated: userUpdateHealthInsurances(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteHealthInsurance($healthInsuranceId: String!) {
+  deleted: userDeleteHealthInsurance(healthInsuranceId: $healthInsuranceId) {
+    ...HealthInsuranceDetails
+  }
+}
+
+query PublicHealthInsurances($input: UserListHealthInsuranceInput) {
+  items: publicHealthInsurances(input: $input) {
+    ...HealthInsuranceLists
+  }
+  count: publicCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountHealthInsurances($input: UserListHealthInsuranceInput) {
+  count: publicCountHealthInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectHealthInsurances($input: UserListHealthInsuranceInput) {
+  items: publicSelectHealthInsurances(input: $input) {
+    ...HealthInsuranceDetails
+  }
+}
+
+query PublicHealthInsurance($healthInsuranceId: String!) {
+  item: publicHealthInsurance(healthInsuranceId: $healthInsuranceId) {
+    ...HealthInsuranceDetails
+  }
+}

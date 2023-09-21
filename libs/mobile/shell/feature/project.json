@@ -1,0 +1,23 @@
+{
+  "name": "mobile-shell-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/shell/feature/src",
+  "prefix": "shell",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/shell/feature/src/**/*.ts", "libs/mobile/shell/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/shell/feature"],
+      "options": {
+        "jestConfig": "libs/mobile/shell/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

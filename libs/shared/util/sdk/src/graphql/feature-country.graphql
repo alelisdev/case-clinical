@@ -1,0 +1,154 @@
+
+fragment CountryDetails on Country {
+id
+createdAt
+updatedAt
+name
+iso
+code
+flagImagePos
+
+
+
+
+
+
+contactPhoneNumbers {
+    ...ContactPhoneNumberLists
+  }
+}
+
+fragment CountryLists on Country {
+id
+createdAt
+updatedAt
+name
+iso
+code
+flagImagePos
+
+
+
+
+
+
+contactPhoneNumbers {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCountries($input: AdminListCountryInput) {
+  items: adminCountries(input: $input) {
+    ...CountryLists
+  }
+  count: adminCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCountries($input: AdminListCountryInput) {
+  count: adminCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCountry($countryId: String!) {
+  item: adminCountry(countryId: $countryId) {
+    ...CountryDetails
+  }
+}
+mutation AdminCreateCountry($input: AdminCreateCountryInput!) {
+  created: adminCreateCountry(input: $input) {
+    ...CountryDetails
+  }
+}
+mutation AdminUpdateCountry($countryId: String!, $input: AdminUpdateCountryInput!) {
+  updated: adminUpdateCountry(countryId: $countryId, input: $input) {
+    ...CountryDetails
+  }
+}
+mutation AdminDeleteCountry($countryId: String!) {
+  deleted: adminDeleteCountry(countryId: $countryId) {
+    ...CountryDetails
+  }
+}
+
+query UserCountries($input: UserListCountryInput) {
+  items: userCountries(input: $input) {
+    ...CountryLists
+  }
+  count: userCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCountries($input: UserListCountryInput) {
+  count: userCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCountries($input: UserListCountryInput) {
+  items: userSelectCountries(input: $input) {
+    ...CountryDetails
+  }
+}
+
+query UserCountry($countryId: String!) {
+  item: userCountry(countryId: $countryId) {
+    ...CountryDetails
+  }
+}
+
+mutation UserCreateCountry($input: UserCreateCountryInput!) {
+  created: userCreateCountry(input: $input) {
+    ...CountryDetails
+  }
+}
+mutation UserUpdateCountry($countryId: String!, $input: UserUpdateCountryInput!) {
+  updated: userUpdateCountry(countryId: $countryId, input: $input) {
+    ...CountryDetails
+  }
+}
+
+mutation UserUpdateCountries($input: UserUpdateCountriesInput!) {
+  updated: userUpdateCountries(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCountry($countryId: String!) {
+  deleted: userDeleteCountry(countryId: $countryId) {
+    ...CountryDetails
+  }
+}
+
+query PublicCountries($input: UserListCountryInput) {
+  items: publicCountries(input: $input) {
+    ...CountryLists
+  }
+  count: publicCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCountries($input: UserListCountryInput) {
+  count: publicCountCountries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCountries($input: UserListCountryInput) {
+  items: publicSelectCountries(input: $input) {
+    ...CountryDetails
+  }
+}
+
+query PublicCountry($countryId: String!) {
+  item: publicCountry(countryId: $countryId) {
+    ...CountryDetails
+  }
+}

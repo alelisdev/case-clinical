@@ -1,0 +1,96 @@
+
+fragment ChatDetails on Chat {
+id
+createdAt
+updatedAt
+name
+userId
+unreadCount
+muted
+lastMessage
+lastMessageAt
+user {
+    id
+    name
+}
+
+
+
+
+
+messages {
+    id
+    name
+  }
+
+}
+query AdminChats($input: AdminListChatInput) {
+  items: adminChats(input: $input) {
+    ...ChatDetails
+  }
+  count: adminCountChats(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountChats($input: AdminListChatInput) {
+  count: adminCountChats(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminChat($chatId: String!) {
+  item: adminChat(chatId: $chatId) {
+    ...ChatDetails
+  }
+}
+mutation AdminCreateChat($input: AdminCreateChatInput!) {
+  created: adminCreateChat(input: $input) {
+    ...ChatDetails
+  }
+}
+mutation AdminUpdateChat($chatId: String!, $input: AdminUpdateChatInput!) {
+  updated: adminUpdateChat(chatId: $chatId, input: $input) {
+    ...ChatDetails
+  }
+}
+mutation AdminDeleteChat($chatId: String!) {
+  deleted: adminDeleteChat(chatId: $chatId) {
+    ...ChatDetails
+  }
+}
+
+query UserChats($input: UserListChatInput) {
+  items: userChats(input: $input) {
+    ...ChatDetails
+  }
+  count: userCountChats(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountChats($input: UserListChatInput) {
+  count: userCountChats(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserChat($chatId: String!) {
+  item: userChat(chatId: $chatId) {
+    ...ChatDetails
+  }
+}
+mutation UserCreateChat($input: UserCreateChatInput!) {
+  created: userCreateChat(input: $input) {
+    ...ChatDetails
+  }
+}
+mutation UserUpdateChat($chatId: String!, $input: UserUpdateChatInput!) {
+  updated: userUpdateChat(chatId: $chatId, input: $input) {
+    ...ChatDetails
+  }
+}
+mutation UserDeleteChat($chatId: String!) {
+  deleted: userDeleteChat(chatId: $chatId) {
+    ...ChatDetails
+  }
+}

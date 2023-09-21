@@ -1,0 +1,66 @@
+<ng-select
+  class="mt-0"
+  #ngSelect
+  appendTo="body"
+  [class]="to?.className || 'custom'"
+  [items]="sortedItems"
+  [placeholder]="to?.placeholder || 'Select ' + (to.label || '')"
+  [bindLabel]="to?.labelProp ?? 'label'"
+  [bindValue]="to?.valueProp ?? 'value'"
+  [multiple]="to.multiple"
+  [virtualScroll]="true"
+  [loading]="loading"
+  [groupBy]="to.groupBy"
+  [compareWith]="to?.compareWith || compareWith"
+  (change)="onChange($event)"
+  (search)="changed($event)"
+  [readonly]="to.readOnly"
+>
+  <ng-template ng-header-tmp>
+    <div class="flex flex-row gap-2">
+      <ui-button label="Advanced Search" color="primary" class="w-full" [fill]="true" icon="plus" type="button" (click)="$event.stopPropagation(); this.openListDialog(viewEntities, {
+          height: '90%',
+          width: '90%'
+        })">
+      </ui-button>
+      <ui-button *ngIf="!to.readonly" label="Edit" color="primary" class="h-full w-full" [fill]="true" icon="plus" type="button" [disabled]="!value"
+        (click)="$event.stopPropagation(); this.openDialog(editEntityTpl, { value: this.value, width: to.width })">
+      </ui-button>
+    </div>
+  </ng-template>
+  <ng-template ng-footer-tmp class="footer">
+    <button
+      *ngIf="!to.readonly"
+      class="cursor-pointer text-gray-500 flex w-full gap-1 p-3 hover:bg-gray-100 hover:text-gray-700 transition duration-200 items-center text-semibold text-md"
+      type="button" (click)="$event.stopPropagation(); this.openDialog(createEntityTpl, { value: {}, width: to.width })">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+      Add New {{to.label}}
+    </button>
+  </ng-template>
+</ng-select>
+
+<ng-template #createEntityTpl let-ref>
+  <div class="flex-grow flex flex-col p-4 gap-2 overflow-auto">
+    <ng-container *ngTemplateOutlet="createTemplate; context: { data: {value: {}, ref: ref, onSave: onSave }}">
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #editEntityTpl let-ref>
+  <div class="flex-grow flex flex-col p-4 gap-2 overflow-auto">
+    <ng-container *ngTemplateOutlet="editTemplate; context: { data: {value: ref.data?.value, ref: ref, onSave: onSave }}">
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #viewEntities let-ref>
+  <div class="flex flex-col p-4 gap-2 h-full bg-grey-light">
+    <div class="text-semibold text-lg">{{to.label}} Lookup</div>
+    <div class="w-full h-full">
+      <ng-container *ngTemplateOutlet="listTemplate; context: {'data': { items: allItems, itemDidSelect: itemDidSelect, ref: ref }}"></ng-container>
+    </div>
+  </div>
+</ng-template>

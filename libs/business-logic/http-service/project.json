@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/http-service/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/http-service"],
+      "options": {
+        "project": "libs/http-service/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/http-service/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/http-service/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/http-service"],
+      "options": {
+        "jestConfig": "libs/http-service/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/http-service/**/*.ts", "libs/http-service/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-http-service"
+}

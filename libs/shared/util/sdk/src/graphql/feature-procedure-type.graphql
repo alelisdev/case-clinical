@@ -1,0 +1,158 @@
+
+fragment ProcedureTypeDetails on ProcedureType {
+id
+createdAt
+updatedAt
+name
+orderIndex
+dateCreated
+isSystem
+removed
+modality
+
+
+
+
+
+
+caseAccounts {
+    ...CaseAccountLists
+  }
+}
+
+fragment ProcedureTypeLists on ProcedureType {
+id
+createdAt
+updatedAt
+name
+orderIndex
+dateCreated
+isSystem
+removed
+modality
+
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminProcedureTypes($input: AdminListProcedureTypeInput) {
+  items: adminProcedureTypes(input: $input) {
+    ...ProcedureTypeLists
+  }
+  count: adminCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureTypes($input: AdminListProcedureTypeInput) {
+  count: adminCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureType($procedureTypeId: String!) {
+  item: adminProcedureType(procedureTypeId: $procedureTypeId) {
+    ...ProcedureTypeDetails
+  }
+}
+mutation AdminCreateProcedureType($input: AdminCreateProcedureTypeInput!) {
+  created: adminCreateProcedureType(input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+mutation AdminUpdateProcedureType($procedureTypeId: String!, $input: AdminUpdateProcedureTypeInput!) {
+  updated: adminUpdateProcedureType(procedureTypeId: $procedureTypeId, input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+mutation AdminDeleteProcedureType($procedureTypeId: String!) {
+  deleted: adminDeleteProcedureType(procedureTypeId: $procedureTypeId) {
+    ...ProcedureTypeDetails
+  }
+}
+
+query UserProcedureTypes($input: UserListProcedureTypeInput) {
+  items: userProcedureTypes(input: $input) {
+    ...ProcedureTypeLists
+  }
+  count: userCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureTypes($input: UserListProcedureTypeInput) {
+  count: userCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureTypes($input: UserListProcedureTypeInput) {
+  items: userSelectProcedureTypes(input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+
+query UserProcedureType($procedureTypeId: String!) {
+  item: userProcedureType(procedureTypeId: $procedureTypeId) {
+    ...ProcedureTypeDetails
+  }
+}
+
+mutation UserCreateProcedureType($input: UserCreateProcedureTypeInput!) {
+  created: userCreateProcedureType(input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+mutation UserUpdateProcedureType($procedureTypeId: String!, $input: UserUpdateProcedureTypeInput!) {
+  updated: userUpdateProcedureType(procedureTypeId: $procedureTypeId, input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+
+mutation UserUpdateProcedureTypes($input: UserUpdateProcedureTypesInput!) {
+  updated: userUpdateProcedureTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureType($procedureTypeId: String!) {
+  deleted: userDeleteProcedureType(procedureTypeId: $procedureTypeId) {
+    ...ProcedureTypeDetails
+  }
+}
+
+query PublicProcedureTypes($input: UserListProcedureTypeInput) {
+  items: publicProcedureTypes(input: $input) {
+    ...ProcedureTypeLists
+  }
+  count: publicCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureTypes($input: UserListProcedureTypeInput) {
+  count: publicCountProcedureTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureTypes($input: UserListProcedureTypeInput) {
+  items: publicSelectProcedureTypes(input: $input) {
+    ...ProcedureTypeDetails
+  }
+}
+
+query PublicProcedureType($procedureTypeId: String!) {
+  item: publicProcedureType(procedureTypeId: $procedureTypeId) {
+    ...ProcedureTypeDetails
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "api-contract-kind-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/contract-kind/feature/src",
+  "prefix": "contract-kind",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/contract-kind/data-access/src/**/*.ts",
+          "libs/api/contract-kind/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/contract-kind/data-access"],
+      "options": {
+        "jestConfig": "libs/api/contract-kind/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-navigation-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/navigation/ui/src",
+  "prefix": "navigation",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/navigation/ui/src/**/*.ts", "libs/web/navigation/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/navigation/ui"],
+      "options": {
+        "jestConfig": "libs/web/navigation/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

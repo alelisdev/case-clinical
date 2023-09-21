@@ -1,0 +1,23 @@
+::ng-deep formly-field-file-new
+{
+     position: relative;
+}
+::ng-deep formly-field-file-new + div {
+    position: absolute;
+}
+
+:host {
+    flex-grow: 1;
+}
+::ng-deep .mat-tooltip {
+word-break: break-all !important;
+white-space: normal !important;
+}
+
+/* Apply the custom CSS using ::ng-deep */
+::ng-deep .ngx-file-drop-zone {
+    border-style: solid !important;
+    border-radius: 10px;
+  }
+
+  

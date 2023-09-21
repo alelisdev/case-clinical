@@ -1,0 +1,36 @@
+export const configuration = () => ({
+  prefix: 'api',
+  environment: process.env.NODE_ENV,
+  host: process.env.HOST,
+  port: parseInt(process.env.PORT, 10),
+  apiUrl: process.env.API_URL,
+  api: {
+    cookie: {
+      name: process.env.API_COOKIE_NAME,
+      options: {
+        domain: process.env.API_COOKIE_DOMAIN,
+        httpOnly: true,
+      },
+    },
+    cors: {
+      origin: [process.env.WEB_URL,
+        'http://localhost:3000',
+        'http://localhost:8080',
+        'http://localhost:8000',
+        'http://localhost:8081',
+        'http://localhost:8082',
+        'http://localhost:4200',
+        'http://10.10.17.42:8080',
+        'http://10.10.17.42:8000',
+        'http://10.10.17.42:8081',
+        'http://10.10.17.42:8082',
+        'http://10.10.17.42:4200',
+        'https://case-clinical-underwriting.azurewebsites.net/',
+      'https://patient-uat.caseclinical.com',
+    'https://admin-uat.caseclinical.com',
+    'https://provider-uat.caseclinical.com',
+  'https://attorney-uat.caseclinical.com'],
+    },
+    limit: '50mb',
+  },
+})

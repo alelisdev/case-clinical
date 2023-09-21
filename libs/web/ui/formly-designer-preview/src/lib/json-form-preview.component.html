@@ -1,0 +1,5 @@
+<ui-context-provider [data]="contextData" class="w-full" >
+  <form [formGroup]="form" #ngForm *ngIf="fields" class="relative w-full">
+    <formly-form [form]="form" [model]="modelData" [fields]="fields"></formly-form>
+  </form>
+</ui-context-provider>

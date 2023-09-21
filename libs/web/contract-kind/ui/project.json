@@ -1,0 +1,23 @@
+{
+  "name": "web-contract-kind-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/contract-kind/ui/src",
+  "prefix": "contract-kind",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/contract-kind/ui/src/**/*.ts", "libs/web/contract-kind/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/contract-kind/ui"],
+      "options": {
+        "jestConfig": "libs/web/contract-kind/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

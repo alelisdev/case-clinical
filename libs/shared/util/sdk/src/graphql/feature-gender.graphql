@@ -1,0 +1,152 @@
+
+fragment GenderDetails on Gender {
+id
+createdAt
+updatedAt
+name
+code
+value
+
+
+
+
+
+
+patients {
+    ...PatientLists
+  }
+}
+
+fragment GenderLists on Gender {
+id
+createdAt
+updatedAt
+name
+code
+value
+
+
+
+
+
+
+patients {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminGenders($input: AdminListGenderInput) {
+  items: adminGenders(input: $input) {
+    ...GenderLists
+  }
+  count: adminCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountGenders($input: AdminListGenderInput) {
+  count: adminCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminGender($genderId: String!) {
+  item: adminGender(genderId: $genderId) {
+    ...GenderDetails
+  }
+}
+mutation AdminCreateGender($input: AdminCreateGenderInput!) {
+  created: adminCreateGender(input: $input) {
+    ...GenderDetails
+  }
+}
+mutation AdminUpdateGender($genderId: String!, $input: AdminUpdateGenderInput!) {
+  updated: adminUpdateGender(genderId: $genderId, input: $input) {
+    ...GenderDetails
+  }
+}
+mutation AdminDeleteGender($genderId: String!) {
+  deleted: adminDeleteGender(genderId: $genderId) {
+    ...GenderDetails
+  }
+}
+
+query UserGenders($input: UserListGenderInput) {
+  items: userGenders(input: $input) {
+    ...GenderLists
+  }
+  count: userCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountGenders($input: UserListGenderInput) {
+  count: userCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectGenders($input: UserListGenderInput) {
+  items: userSelectGenders(input: $input) {
+    ...GenderDetails
+  }
+}
+
+query UserGender($genderId: String!) {
+  item: userGender(genderId: $genderId) {
+    ...GenderDetails
+  }
+}
+
+mutation UserCreateGender($input: UserCreateGenderInput!) {
+  created: userCreateGender(input: $input) {
+    ...GenderDetails
+  }
+}
+mutation UserUpdateGender($genderId: String!, $input: UserUpdateGenderInput!) {
+  updated: userUpdateGender(genderId: $genderId, input: $input) {
+    ...GenderDetails
+  }
+}
+
+mutation UserUpdateGenders($input: UserUpdateGendersInput!) {
+  updated: userUpdateGenders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteGender($genderId: String!) {
+  deleted: userDeleteGender(genderId: $genderId) {
+    ...GenderDetails
+  }
+}
+
+query PublicGenders($input: UserListGenderInput) {
+  items: publicGenders(input: $input) {
+    ...GenderLists
+  }
+  count: publicCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountGenders($input: UserListGenderInput) {
+  count: publicCountGenders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectGenders($input: UserListGenderInput) {
+  items: publicSelectGenders(input: $input) {
+    ...GenderDetails
+  }
+}
+
+query PublicGender($genderId: String!) {
+  item: publicGender(genderId: $genderId) {
+    ...GenderDetails
+  }
+}

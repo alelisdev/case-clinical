@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "case-clinical",
+    "private_key_id": "7ea5c587d4129f8209e4dab0c5be7ebb315a80b5",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCz6jBe8plr6ycj\nxxi8+po3J+TrQrmbP/Dz7cdEthC6iGKI4gjIZLIYBdptyvAUjOw5rZuaZMbXWDBo\n+DhI9Z6hEFTsLPMf9M9/CFCTQomvnCJFHkC1wm0lH+bJdr2e6Ez9P7+TFDA1qb7C\nIZLU60iS5aATXsHBALnY9FKkNV5IBljhjtUVEYOxQWHVn8EXUov1njSYAvfXzpKS\nvdJCbiBrxdu0gPPdG6bJbpBBkdYMVA2aSIzLB3pBdgFb7LZ5XeF0n3wgQdYucMlL\nV2lT5kOxsYeaDokmxM+8TyH52gbtXzVgk6istZxZkcib5hwcgN+1qlt2VIoIn6ug\nfl9QKQWrAgMBAAECggEAHEU+WI0SYozO16ZfUsKmHOid5gHUHHsNp6bDWx6ovkbU\nBOJPsv1vpqq0ye/Ljc8fB2kqPDZ9sDThVn06iuxdgr2IOpxNj8XuHO33i0w3Smrk\nT6wTSvxEHkNHBn0sCp5CCsFLnxbbBHOpz+NqqR5Xhw2h+6k2FNfCXD74BWmFaRei\nxURr9Ow3gV1o4buFxS45voIk+lemxpW8VCQ98WhDVW/bqRxVdD83aiL57v+9/9Nx\nOscnEwaLdPIck3KcDdfRRV7ZzOzWnisswcU2HPT1Qu9O6P/GB6IbqEt86Pi0E0oj\nlXR54xaBiqujDwhoqLHbjiH81XNvUrrQhSk6zofzcQKBgQDbc6mUmk5wXmovZLgk\nMcGnZ8lNzIIF6gz7qvhjgBOOFDQo6wpXhZ+4S8OFTAw8/o/CWTSe7ilwWnz4NSc5\n3Tioaynbij48CnT3uu7u2B9W0HmZpw+PhNZ8wqGC9SYxFrreQs0ds4gjxRRvAczq\nqweUdfKZFiy4q5fOuDwyDWVUNQKBgQDR4N1Q898n3iD5FluE0MinYdVpV+SNipri\nx1c0cr/hGnw+EuXEWcEl5KzH/S/CVK3YQAY15njy/qZEOlS84nNNfcwobBXo609S\nj1Cqjpf8WEek9Hh2F6kiPcORFfbhH+vpvvYKUCAUxBcveUwpgraXK0t/kWt3HtRf\nkVtig+BuXwKBgQCs6Sd3FVY0p8/W4+9LZYEGnHo6uKbCbjYonf/0tleyHS00CG4v\no/PDTL8T6mXCMXmoUo1ppJI2GrZZA9iSeUJJQZbLitOaj0q2Xy4gN14KE12cuctC\n9BHkX57PBsY+63/13ICtpGXieUiuZqbFSFlCmuS5xoUaROnqUbPsZC2w+QKBgQC4\nXH/s2ZzAZ6atR89y1vg72HvgQp35G7U82oCnCNm2wk47NNxy46kAQWTpdGXcngfr\n+ym5dU/vnHOvYVIIbh99BbEuHOwOI44VZuEkQYgO2fltVHbwvY4MDxdYvmOUlDbm\nqKF2o7Xap/n58OJPYIxGNHjogXRWOlWx8XzGCDRAnwKBgQCS5IPE3KgJckBf99hs\nSa947Hq+lRi532Kbjt5fpG9FioPAsK80nSuJSPiwyb+3v6VmgK3lxDw4V5ZF+ywh\nHAC/BBUNbJyUITlFHzYgwmjEDA+arsjFUH8udlIIzsR7/Yff5cKTwmjGH2wj0G9e\nA515qYQy64dBrdS71MrTqgn74A==\n-----END PRIVATE KEY-----\n",
+    "client_email": "case-clinical-translate-by-sch@case-clinical.iam.gserviceaccount.com",
+    "client_id": "107994100401316880728",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/case-clinical-translate-by-sch%40case-clinical.iam.gserviceaccount.com"
+  }

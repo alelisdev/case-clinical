@@ -1,0 +1,39 @@
+fragment UserCourseProgressDetails on UserCourseProgress {
+    id
+    currentStep
+    userId
+    completed
+}
+
+query userUserCourseProgresses($input: UserListUserCourseProgressInput! ) {
+  items: userUserCourseProgresses(input: $input) {
+    ...UserCourseProgressDetails
+  }
+  count: userCountUserCourseProgresses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserUserCourseProgress($userCourseProgressId: String!) {
+  item: userUserCourseProgress(userCourseProgressId: $userCourseProgressId) {
+    ...UserCourseProgressDetails
+  }
+}
+
+mutation userCreateUserCourseProgress($input: UserCreateUserCourseProgressInput! ) {
+  created: userCreateUserCourseProgress(input: $input) {
+    ...UserCourseProgressDetails
+  }
+}
+
+
+mutation UserDeleteUserCourseProgress($userCourseProgressId: String!) {
+  deleted: userDeleteUserCourseProgress(userCourseProgressId: $userCourseProgressId) {
+    ...UserCourseProgressDetails
+  }
+}
+mutation UserUpdateUserCourseProgress($userCourseProgressId: String!, $input: UserUpdateUserCourseProgressInput! ) {
+  updated: userUpdateUserCourseProgress(userCourseProgressId: $userCourseProgressId, input: $input) {
+    ...UserCourseProgressDetails
+  }
+}

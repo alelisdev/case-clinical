@@ -1,0 +1,9 @@
+<div *ngIf="formlySetting$ | async as formlySetting" class="w-full max-w-3xl">
+  <ui-formly-json-form
+    class="w-full h-full"
+    formName="admin_formly_settings"
+    [showSubmitButton]="true"
+    [model]="formlySetting?.value"
+    [componentStore]="store"
+  ></ui-formly-json-form>
+</div>

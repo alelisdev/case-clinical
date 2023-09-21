@@ -1,0 +1,158 @@
+
+fragment PriorAuthorizationDiagnosisCodeDetails on PriorAuthorizationDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+priorAuthorizationRequestId
+diagnosis {
+  id
+  name
+}
+priorAuthorizationRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthorizationDiagnosisCodeLists on PriorAuthorizationDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+priorAuthorizationRequestId
+diagnosis {
+    id
+    name
+}
+priorAuthorizationRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPriorAuthorizationDiagnosisCodes($input: AdminListPriorAuthorizationDiagnosisCodeInput) {
+  items: adminPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeLists
+  }
+  count: adminCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthorizationDiagnosisCodes($input: AdminListPriorAuthorizationDiagnosisCodeInput) {
+  count: adminCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!) {
+  item: adminPriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminCreatePriorAuthorizationDiagnosisCode($input: AdminCreatePriorAuthorizationDiagnosisCodeInput!) {
+  created: adminCreatePriorAuthorizationDiagnosisCode(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminUpdatePriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!, $input: AdminUpdatePriorAuthorizationDiagnosisCodeInput!) {
+  updated: adminUpdatePriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId, input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminDeletePriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!) {
+  deleted: adminDeletePriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+query UserPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  items: userPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeLists
+  }
+  count: userCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  count: userCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  items: userSelectPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+query UserPriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!) {
+  item: userPriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+mutation UserCreatePriorAuthorizationDiagnosisCode($input: UserCreatePriorAuthorizationDiagnosisCodeInput!) {
+  created: userCreatePriorAuthorizationDiagnosisCode(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+mutation UserUpdatePriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!, $input: UserUpdatePriorAuthorizationDiagnosisCodeInput!) {
+  updated: userUpdatePriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId, input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+mutation UserUpdatePriorAuthorizationDiagnosisCodes($input: UserUpdatePriorAuthorizationDiagnosisCodesInput!) {
+  updated: userUpdatePriorAuthorizationDiagnosisCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!) {
+  deleted: userDeletePriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+query PublicPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  items: publicPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeLists
+  }
+  count: publicCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  count: publicCountPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthorizationDiagnosisCodes($input: UserListPriorAuthorizationDiagnosisCodeInput) {
+  items: publicSelectPriorAuthorizationDiagnosisCodes(input: $input) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}
+
+query PublicPriorAuthorizationDiagnosisCode($priorAuthorizationDiagnosisCodeId: String!) {
+  item: publicPriorAuthorizationDiagnosisCode(priorAuthorizationDiagnosisCodeId: $priorAuthorizationDiagnosisCodeId) {
+    ...PriorAuthorizationDiagnosisCodeDetails
+  }
+}

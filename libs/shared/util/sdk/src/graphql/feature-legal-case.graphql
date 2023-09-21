@@ -1,0 +1,585 @@
+
+fragment LegalCaseDetails on LegalCase {
+id
+createdAt
+updatedAt
+name
+accidentTypeId
+patientId
+medLevelId
+firmId
+attorneyId
+agentId
+caseStatusId
+caseTypeId
+patientTreatmentStatusId
+medicalRecordNumber
+pharmacyControlNumber
+pchGroupNumber
+dateOfLoss
+caseStatusDate
+caseStatusOther
+paralegal
+paralegalContact
+caseNoteSummary
+policyLimit
+attorneyFee
+referringPhysician
+noMoreTreatment
+medpay
+fileNumber
+caseNumber
+accidentState
+assignedTo
+attorneyPaid
+attorneySentDate
+writeOff
+noMRI
+noPT
+noFirstAppointment
+hot
+documentsUploaded
+attorneyReview
+escalatedReview
+inActive
+criteria1712
+documentUploadedDate
+patientDischargedGatheringRecordsDate
+resubmitted
+caseProgressStatusId
+firmCaseManager
+adverseInsuranceStatusId
+createdBy
+renegotiatePayOffDate
+accidentType {
+  id
+  name
+}
+patient {
+  id
+  name
+  firstName
+  lastName
+  homeAddress
+  workAddress
+  primaryPhoneNumber
+  primaryEmailAddress
+  dateOfBirth
+  primaryAddressLine1
+  primaryAddressLine2
+  primaryAddressCity
+  primaryAddressStateOrProvince
+  primaryAddressPostalCode
+  workEmailAddress
+  workAddressLine1
+  workAddressLine2
+  workAddressCity
+  workAddressStateOrProvince
+  workAddressPostalCode
+  homePhoneNumber
+  mobileNumber
+  gender {
+  id
+  name
+  }
+}
+medLevel {
+  id
+  name
+}
+firm {
+  id
+  reportFirmName: name
+  ...FirmDetails
+}
+attorney {
+  id
+  name
+}
+caseStatus {
+  id
+  name
+}
+caseType {
+  id
+  name
+}
+patientTreatmentStatus {
+  id
+  name
+}
+caseProgressStatus {
+  id
+  name
+}
+adverseInsuranceStatus {
+  id
+  name
+}
+
+underwriting_dateCreated
+underwriting_lastUpdateDate
+underwriting_timeSensitive
+underwriting_needsMoreInfo
+underwriting_billsAttached
+underwriting_completedMedRecs
+underwriting_balance
+underwriting_signedLien
+underwriting_procedureRequested
+underwriting_medBills
+underwriting_estimate
+underwriting_plaintiff
+underwriting_covered
+underwriting_remarks
+accidentInformation_accidentDescription
+accidentInformation_dateOfLoss
+accidentInformation_review
+accidentInformation_initialEvaluation
+accidentInformation_evaluation
+accidentInformation_evaluationAfterHowLong
+accidentInformation_evaluatedIn
+accidentInformation_complaints
+accidentInformation_previousHistory
+accidentInformation_gapInCare
+accidentInformation_gapInCareWhen
+accidentInformation_preExistingProblems
+accidentInformation_priorInjuries
+accidentInformation_otherInjuriesSince
+motorVehicleAccident_mvaDriver
+motorVehicleAccident_mvaPassenger
+motorVehicleAccident_mvaVehicle
+motorVehicleAccident_mvaClaimants
+motorVehicleAccident_mvaOperable
+motorVehicleAccident_mvaTar
+motorVehicleAccident_mvaDamage
+motorVehicleAccident_mvaLess
+motorVehicleAccident_mvaGreater
+motorVehicleAccident_mvaAmount
+premiseAccident_clientHasObtainedPlaintiffAdvance
+premiseAccident_advanceAmount
+premiseAccident_lossOfEarningsIsBeingFiled
+premiseAccident_doYouAnticipateAdditionalMedicalTreatmentOnDifferentBodyPart
+premiseAccident_explain
+premiseAccident_clientHasCriminalHistory
+premiseAccident_criminalHistory
+premiseAccident_locationOfIncident
+productLiability_product
+productLiability_whereDidItHappen
+productLiability_proofOfLiability
+productLiability_productWasRecalled
+workRelated_selfInsuredWorkComp
+workRelated_workCompCaseIsOpenClosed
+workRelated_workCompCaseSettledAmount
+workRelated_workCompCaseSettlementIncludesFutureMedicals
+workRelated_reasonNotFiledUnderWorkComp
+
+balanceRequests{
+  ...BalanceRequestLists
+}
+
+
+caseAccounts {
+   ...CaseAccountLists
+  }
+
+casePreAccidents {
+   ...CasePreAccidentLists
+  }
+
+casePreInjuries {
+    id
+    name
+    affectsInjury
+    anatomic
+    dateCreated
+    injured
+    injuryDate
+    removed
+  }
+
+casePreProblems {
+    id
+    name
+    duration
+    problemDate
+    regions
+    removed
+    sameRegion
+    symptoms
+  }
+
+
+insurances {
+   ...InsuranceLists
+  }
+
+casePreProcedures {
+   ...CasePreProcedureLists
+  }
+
+caseProcedures {
+    ...CaseProcedureLists
+  }
+
+priorMedsToDates {
+   ...PriorMedsToDateLists
+  }
+
+appointments {
+    ...AppointmentLists
+  }
+
+propertyDamages {
+  ...DocumentOverview
+}
+
+miscellaneousDocuments {
+  ...DocumentOverview
+}
+}
+
+fragment LegalCaseLists on LegalCase {
+id
+createdAt
+updatedAt
+name
+accidentTypeId
+patientId
+medLevelId
+firmId
+attorneyId
+agentId
+caseStatusId
+caseTypeId
+patientTreatmentStatusId
+medicalRecordNumber
+pharmacyControlNumber
+pchGroupNumber
+dateOfLoss
+caseStatusDate
+caseStatusOther
+paralegal
+paralegalContact
+caseNoteSummary
+policyLimit
+attorneyFee
+referringPhysician
+noMoreTreatment
+medpay
+fileNumber
+caseNumber
+accidentState
+assignedTo
+attorneyPaid
+attorneySentDate
+writeOff
+noMRI
+noPT
+noFirstAppointment
+hot
+documentsUploaded
+attorneyReview
+escalatedReview
+inActive
+criteria1712
+documentUploadedDate
+patientDischargedGatheringRecordsDate
+resubmitted
+caseProgressStatusId
+firmCaseManager
+adverseInsuranceStatusId
+createdBy
+renegotiatePayOffDate
+accidentType {
+    id
+    name
+}
+patient {
+    id
+    name
+    firstName
+    lastName
+}
+medLevel {
+    id
+    name
+}
+firm {
+    id
+    name
+}
+attorney {
+    id
+    name
+}
+caseStatus {
+    id
+    name
+}
+caseType {
+    id
+    name
+}
+patientTreatmentStatus {
+    id
+    name
+}
+caseProgressStatus {
+    id
+    name
+}
+adverseInsuranceStatus {
+    id
+    name
+}
+
+taskItems {
+    id
+    name
+}
+
+underwriting_dateCreated
+underwriting_lastUpdateDate
+underwriting_timeSensitive
+underwriting_needsMoreInfo
+underwriting_billsAttached
+underwriting_completedMedRecs
+underwriting_balance
+underwriting_signedLien
+underwriting_procedureRequested
+underwriting_medBills
+underwriting_estimate
+underwriting_plaintiff
+underwriting_covered
+underwriting_remarks
+accidentInformation_accidentDescription
+accidentInformation_dateOfLoss
+accidentInformation_review
+accidentInformation_initialEvaluation
+accidentInformation_evaluation
+accidentInformation_evaluationAfterHowLong
+accidentInformation_evaluatedIn
+accidentInformation_complaints
+accidentInformation_previousHistory
+accidentInformation_gapInCare
+accidentInformation_gapInCareWhen
+accidentInformation_preExistingProblems
+accidentInformation_priorInjuries
+accidentInformation_otherInjuriesSince
+motorVehicleAccident_mvaDriver
+motorVehicleAccident_mvaPassenger
+motorVehicleAccident_mvaVehicle
+motorVehicleAccident_mvaClaimants
+motorVehicleAccident_mvaOperable
+motorVehicleAccident_mvaTar
+motorVehicleAccident_mvaDamage
+motorVehicleAccident_mvaLess
+motorVehicleAccident_mvaGreater
+motorVehicleAccident_mvaAmount
+premiseAccident_clientHasObtainedPlaintiffAdvance
+premiseAccident_advanceAmount
+premiseAccident_lossOfEarningsIsBeingFiled
+premiseAccident_doYouAnticipateAdditionalMedicalTreatmentOnDifferentBodyPart
+premiseAccident_explain
+premiseAccident_clientHasCriminalHistory
+premiseAccident_criminalHistory
+premiseAccident_locationOfIncident
+productLiability_product
+productLiability_whereDidItHappen
+productLiability_proofOfLiability
+productLiability_productWasRecalled
+workRelated_selfInsuredWorkComp
+workRelated_workCompCaseIsOpenClosed
+workRelated_workCompCaseSettledAmount
+workRelated_workCompCaseSettlementIncludesFutureMedicals
+workRelated_reasonNotFiledUnderWorkComp
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+
+casePreAccidents {
+    id
+    name
+  }
+
+
+casePreInjuries {
+    id
+    name
+  }
+
+
+casePreProblems {
+    id
+    name
+  }
+
+
+insurances {
+    id
+    name
+  }
+
+
+casePreProcedures {
+    id
+    name
+  }
+
+balanceRequests{
+  ...BalanceRequestLists
+}
+
+caseProcedures {
+    ...CaseProcedureLists
+  }
+
+
+priorMedsToDates {
+    id
+    name
+  }
+
+
+appointments {
+    id
+    name
+  }
+propertyDamages {
+  id
+  name
+}
+
+miscellaneousDocuments {
+  id
+  name
+}
+
+}
+
+
+
+query AdminLegalCases($input: AdminListLegalCaseInput) {
+  items: adminLegalCases(input: $input) {
+    ...LegalCaseLists
+  }
+  count: adminCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLegalCases($input: AdminListLegalCaseInput) {
+  count: adminCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLegalCase($legalCaseId: String!) {
+  item: adminLegalCase(legalCaseId: $legalCaseId) {
+    ...LegalCaseDetails
+  }
+}
+mutation AdminCreateLegalCase($input: AdminCreateLegalCaseInput!) {
+  created: adminCreateLegalCase(input: $input) {
+    ...LegalCaseDetails
+  }
+}
+mutation AdminUpdateLegalCase($legalCaseId: String!, $input: AdminUpdateLegalCaseInput!) {
+  updated: adminUpdateLegalCase(legalCaseId: $legalCaseId, input: $input) {
+    ...LegalCaseDetails
+  }
+}
+mutation AdminDeleteLegalCase($legalCaseId: String!) {
+  deleted: adminDeleteLegalCase(legalCaseId: $legalCaseId) {
+    ...LegalCaseDetails
+  }
+}
+
+query UserLegalCases($input: UserListLegalCaseInput) {
+  items: userLegalCases(input: $input) {
+    ...LegalCaseLists
+  }
+  count: userCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserLegalCaseUpdates {
+  legalCases: userLegalCaseUpdates {
+    ...LegalCaseLists
+  }
+}
+
+query UserCountLegalCases($input: UserListLegalCaseInput) {
+  count: userCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLegalCases($input: UserListLegalCaseInput) {
+  items: userSelectLegalCases(input: $input) {
+    ...LegalCaseDetails
+  }
+}
+
+query UserLegalCase($legalCaseId: String!) {
+  item: userLegalCase(legalCaseId: $legalCaseId) {
+    ...LegalCaseDetails
+  }
+}
+
+mutation UserCreateLegalCase($input: UserCreateLegalCaseInput!) {
+  created: userCreateLegalCase(input: $input) {
+    ...LegalCaseDetails
+  }
+}
+mutation UserUpdateLegalCase($legalCaseId: String!, $input: UserUpdateLegalCaseInput!) {
+  updated: userUpdateLegalCase(legalCaseId: $legalCaseId, input: $input) {
+    ...LegalCaseDetails
+  }
+}
+
+mutation UserUpdateLegalCases($input: UserUpdateLegalCasesInput!) {
+  updated: userUpdateLegalCases(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLegalCase($legalCaseId: String!) {
+  deleted: userDeleteLegalCase(legalCaseId: $legalCaseId) {
+    ...LegalCaseDetails
+  }
+}
+
+query PublicLegalCases($input: UserListLegalCaseInput) {
+  items: publicLegalCases(input: $input) {
+    ...LegalCaseLists
+  }
+  count: publicCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLegalCases($input: UserListLegalCaseInput) {
+  count: publicCountLegalCases(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLegalCases($input: UserListLegalCaseInput) {
+  items: publicSelectLegalCases(input: $input) {
+    ...LegalCaseDetails
+  }
+}
+
+query PublicLegalCase($legalCaseId: String!) {
+  item: publicLegalCase(legalCaseId: $legalCaseId) {
+    ...LegalCaseDetails
+  }
+}

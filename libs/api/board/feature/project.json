@@ -1,0 +1,23 @@
+{
+  "name": "api-board-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/board/feature/src",
+  "prefix": "board",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/board/data-access/src/**/*.ts", "libs/api/board/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/board/data-access"],
+      "options": {
+        "jestConfig": "libs/api/board/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

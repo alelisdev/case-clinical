@@ -1,0 +1,186 @@
+
+<ng-container *featureFlag="'PriorAuthorizationEquipment.View'">
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="md:p-4 w-full h-full flex flex-col min-h-0">
+    <ng-template #controlsTemplate>
+    <div class="flex items-center space-x-4">
+      <div
+        class="transition-all duration-100 ease-in"
+        [style.width.px]="vm.searchFocused || vm.searchQuery?.name?.length > 0 ? 200 : 140"
+      >
+        <ui-search
+          [value]="vm.searchQuery?.name"
+          (valueChange)="onSearchQueryChange($event)"
+          (submit)="onSubmitSearchQuery()"
+          (focus)="setSearchFocus(true)"
+          (blur)="setSearchFocus(false)"
+        ></ui-search>
+      </div>
+      <div class="relative z-0 inline-flex h-full shadow-sm rounded-md">
+        <button
+          type="button"
+          [class.border-blue-600]="activeView === 'list'"
+          (click)="this.setActiveView('list')"
+          class="relative inline-flex text-center justify-center items-center px-4 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-transparent text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+        >
+          <ui-icon class="h-4 w-4 dark:text-gray-200" icon="list"></ui-icon>
+        </button>
+
+        <button
+          type="button"
+          [class.border-blue-600]="activeView === 'card'"
+          (click)="this.setActiveView('card')"
+          class="relative inline-flex text-center justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-transparent text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+        >
+          <ui-icon class="h-4 w-4 dark:text-gray-200" icon="viewGrid"></ui-icon>
+        </button>
+
+        <button
+          type="button"
+          [class.border-blue-600]="activeView === 'table'"
+          (click)="this.setActiveView('table')"
+          class="-ml-px text-center dark:bg-transparent dark:border-gray-600 relative justify-center inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+        >
+          <ui-icon class="h-4 w-4 dark:text-gray-200" icon="table"></ui-icon>
+        </button>
+      </div>
+      <ui-button [label]="'Create'" [icon]="'plusCircle'" [variant]="'primary'" [routerLink]="'create'"></ui-button>
+    </div>
+  </ng-template>
+
+  <ng-template #headerTemplate>
+    <ui-card-header [title]="'Prior Authorization Equipment'" [controlsTemplate]="controlsTemplate"></ui-card-header>
+  </ng-template>
+
+  <ng-template #paginationTemplate>
+    <ui-pagination
+      [skip]="vm.paging?.skip"
+      [total]="vm.paging?.total"
+      [limit]="vm.paging?.limit"
+      (skipChange)="onSkipChange($event)"
+    ></ui-pagination>
+  </ng-template>
+
+  <ui-panel class="flex flex-col w-full h-full relative"
+    [headerTemplate]="headerTemplate"
+    [footerTemplate]="paginationTemplate"
+    [disableHeaderPadding]="true"
+    [disableBodyPadding]="true"
+    [disableFooterPadding]="true"
+  >
+    <ng-container  class="flex-auto">
+      <ng-container *ngIf="!vm.items?.length">
+        <div class="flex py-19 justify-center align-center">No Prior Authorization Equipment found...</div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container [ngSwitch]="this.activeView">
+      
+      <!-- Card View Start -->
+      <ng-container *ngSwitchCase="'card'">
+        <div class="flex flex-1">
+        <div class="px-4 py-8 sm:px-0">
+          <div *ngIf="loading$ | async" class="grid-cols-3">
+            <ngx-skeleton-loader
+              count="8"
+              [theme]="{
+                margin: '.5rem',
+                height: '180px',
+                width: '372px'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
+
+          <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <li
+              *ngFor="let item of vm.data"
+              class="col-span-1 bg-white rounded-lg shadow"
+            >
+              <div
+                class="flex items-center justify-between w-full p-6 space-x-6"
+              >
+                <div class="flex-1 truncate">
+                  <div class="flex items-center space-x-3">
+                    <h3
+                      class="text-sm font-medium leading-5 text-gray-900 truncate"
+                    >
+                      {{ item.name }}
+                    </h3>
+                  </div>
+                  <p class="mt-1 text-sm leading-5 text-gray-500 truncate">
+                    <!-- Other Content: 
+                   {{ item }} -->
+                  </p>
+                </div>
+                <img
+                  class="flex-shrink-0 w-10 h-10 bg-gray-300 rounded-full"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
+                  alt=""
+                />
+              </div>
+              <div class="border-t border-gray-200">
+                <div class="flex -mt-px">
+                  <div class="flex flex-1 w-0 border-r border-gray-200">
+                    <span
+                      [routerLink]="[item.id]"
+                      class="relative inline-flex items-center justify-center flex-1 w-0 py-4 -mr-px text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-transparent rounded-bl-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+                    >
+                      <svg
+                        class="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                        ></path>
+                      </svg>
+                      <a
+                        [routerLink]="[item.id]"
+                        class="ml-3"
+                        >View Details</a
+                      >
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'table'">
+          <ag-grid-angular
+            #agGrid
+            id="myGrid"
+            class="ag-theme-alpine h-full w-full"
+            [rowData]="vm.data"
+            [columnDefs]="columnDefs"
+            [modules]="modules"
+            [rowSelection]="'single'"
+            [enableColResize]="true"
+            [enableSorting]="true"
+            [enableFilter]="true"
+            [sideBar]="sideBar"
+            (selectionChanged)="onSelectionChanged()"
+            [frameworkComponents]="frameworkComponents"
+            [defaultColDef]="defaultColDef"
+            (sortChanged) = "onSortChanged($event)"
+            (filterChanged) = "onFilterChanged($event)"
+            (firstDataRendered) = "onFirstDataRendered($event)"
+            (gridReady) = "onGridReady($event)"
+          ></ag-grid-angular>
+      </ng-container>
+
+      <ui-stacked-list *ngSwitchDefault [items]="vm.items"></ui-stacked-list>
+    </ng-container>
+  </ui-panel>
+  </div>  
+</ng-container>
+</ng-container>

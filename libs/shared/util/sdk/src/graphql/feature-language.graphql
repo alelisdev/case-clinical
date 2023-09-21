@@ -1,0 +1,148 @@
+
+fragment LanguageDetails on Language {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+patients {
+   ...PatientLists
+  }
+}
+
+fragment LanguageLists on Language {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+patients {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminLanguages($input: AdminListLanguageInput) {
+  items: adminLanguages(input: $input) {
+    ...LanguageLists
+  }
+  count: adminCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLanguages($input: AdminListLanguageInput) {
+  count: adminCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLanguage($languageId: String!) {
+  item: adminLanguage(languageId: $languageId) {
+    ...LanguageDetails
+  }
+}
+mutation AdminCreateLanguage($input: AdminCreateLanguageInput!) {
+  created: adminCreateLanguage(input: $input) {
+    ...LanguageDetails
+  }
+}
+mutation AdminUpdateLanguage($languageId: String!, $input: AdminUpdateLanguageInput!) {
+  updated: adminUpdateLanguage(languageId: $languageId, input: $input) {
+    ...LanguageDetails
+  }
+}
+mutation AdminDeleteLanguage($languageId: String!) {
+  deleted: adminDeleteLanguage(languageId: $languageId) {
+    ...LanguageDetails
+  }
+}
+
+query UserLanguages($input: UserListLanguageInput) {
+  items: userLanguages(input: $input) {
+    ...LanguageLists
+  }
+  count: userCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLanguages($input: UserListLanguageInput) {
+  count: userCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLanguages($input: UserListLanguageInput) {
+  items: userSelectLanguages(input: $input) {
+    ...LanguageDetails
+  }
+}
+
+query UserLanguage($languageId: String!) {
+  item: userLanguage(languageId: $languageId) {
+    ...LanguageDetails
+  }
+}
+
+mutation UserCreateLanguage($input: UserCreateLanguageInput!) {
+  created: userCreateLanguage(input: $input) {
+    ...LanguageDetails
+  }
+}
+mutation UserUpdateLanguage($languageId: String!, $input: UserUpdateLanguageInput!) {
+  updated: userUpdateLanguage(languageId: $languageId, input: $input) {
+    ...LanguageDetails
+  }
+}
+
+mutation UserUpdateLanguages($input: UserUpdateLanguagesInput!) {
+  updated: userUpdateLanguages(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLanguage($languageId: String!) {
+  deleted: userDeleteLanguage(languageId: $languageId) {
+    ...LanguageDetails
+  }
+}
+
+query PublicLanguages($input: UserListLanguageInput) {
+  items: publicLanguages(input: $input) {
+    ...LanguageLists
+  }
+  count: publicCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLanguages($input: UserListLanguageInput) {
+  count: publicCountLanguages(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLanguages($input: UserListLanguageInput) {
+  items: publicSelectLanguages(input: $input) {
+    ...LanguageDetails
+  }
+}
+
+query PublicLanguage($languageId: String!) {
+  item: publicLanguage(languageId: $languageId) {
+    ...LanguageDetails
+  }
+}

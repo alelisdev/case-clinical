@@ -1,0 +1,23 @@
+{
+  "name": "web-forms-ui-team-role",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/forms/ui/team-role/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/forms/ui/team-role/src/**/*.ts", "libs/web/forms/ui/team-role/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/forms/ui/team-role"],
+      "options": {
+        "jestConfig": "libs/web/forms/ui/team-role/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

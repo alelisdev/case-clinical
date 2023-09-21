@@ -1,0 +1,156 @@
+
+fragment CasePreProcedureDetails on CasePreProcedure {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+procedureType
+procedureDate
+dateCreated
+removed
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment CasePreProcedureLists on CasePreProcedure {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+procedureType
+procedureDate
+dateCreated
+removed
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminCasePreProcedures($input: AdminListCasePreProcedureInput) {
+  items: adminCasePreProcedures(input: $input) {
+    ...CasePreProcedureLists
+  }
+  count: adminCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCasePreProcedures($input: AdminListCasePreProcedureInput) {
+  count: adminCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCasePreProcedure($casePreProcedureId: String!) {
+  item: adminCasePreProcedure(casePreProcedureId: $casePreProcedureId) {
+    ...CasePreProcedureDetails
+  }
+}
+mutation AdminCreateCasePreProcedure($input: AdminCreateCasePreProcedureInput!) {
+  created: adminCreateCasePreProcedure(input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+mutation AdminUpdateCasePreProcedure($casePreProcedureId: String!, $input: AdminUpdateCasePreProcedureInput!) {
+  updated: adminUpdateCasePreProcedure(casePreProcedureId: $casePreProcedureId, input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+mutation AdminDeleteCasePreProcedure($casePreProcedureId: String!) {
+  deleted: adminDeleteCasePreProcedure(casePreProcedureId: $casePreProcedureId) {
+    ...CasePreProcedureDetails
+  }
+}
+
+query UserCasePreProcedures($input: UserListCasePreProcedureInput) {
+  items: userCasePreProcedures(input: $input) {
+    ...CasePreProcedureLists
+  }
+  count: userCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCasePreProcedures($input: UserListCasePreProcedureInput) {
+  count: userCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCasePreProcedures($input: UserListCasePreProcedureInput) {
+  items: userSelectCasePreProcedures(input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+
+query UserCasePreProcedure($casePreProcedureId: String!) {
+  item: userCasePreProcedure(casePreProcedureId: $casePreProcedureId) {
+    ...CasePreProcedureDetails
+  }
+}
+
+mutation UserCreateCasePreProcedure($input: UserCreateCasePreProcedureInput!) {
+  created: userCreateCasePreProcedure(input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+mutation UserUpdateCasePreProcedure($casePreProcedureId: String!, $input: UserUpdateCasePreProcedureInput!) {
+  updated: userUpdateCasePreProcedure(casePreProcedureId: $casePreProcedureId, input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+
+mutation UserUpdateCasePreProcedures($input: UserUpdateCasePreProceduresInput!) {
+  updated: userUpdateCasePreProcedures(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCasePreProcedure($casePreProcedureId: String!) {
+  deleted: userDeleteCasePreProcedure(casePreProcedureId: $casePreProcedureId) {
+    ...CasePreProcedureDetails
+  }
+}
+
+query PublicCasePreProcedures($input: UserListCasePreProcedureInput) {
+  items: publicCasePreProcedures(input: $input) {
+    ...CasePreProcedureLists
+  }
+  count: publicCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCasePreProcedures($input: UserListCasePreProcedureInput) {
+  count: publicCountCasePreProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCasePreProcedures($input: UserListCasePreProcedureInput) {
+  items: publicSelectCasePreProcedures(input: $input) {
+    ...CasePreProcedureDetails
+  }
+}
+
+query PublicCasePreProcedure($casePreProcedureId: String!) {
+  item: publicCasePreProcedure(casePreProcedureId: $casePreProcedureId) {
+    ...CasePreProcedureDetails
+  }
+}

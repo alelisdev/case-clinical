@@ -1,0 +1,154 @@
+
+fragment FirmStatusDetails on FirmStatus {
+id
+createdAt
+updatedAt
+name
+blackListed
+active
+statusColor
+
+
+
+
+
+
+firms {
+   ...FirmLists
+  }
+}
+
+fragment FirmStatusLists on FirmStatus {
+id
+createdAt
+updatedAt
+name
+blackListed
+active
+statusColor
+
+
+
+
+
+
+firms {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminFirmStatuses($input: AdminListFirmStatusInput) {
+  items: adminFirmStatuses(input: $input) {
+    ...FirmStatusLists
+  }
+  count: adminCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFirmStatuses($input: AdminListFirmStatusInput) {
+  count: adminCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFirmStatus($firmStatusId: String!) {
+  item: adminFirmStatus(firmStatusId: $firmStatusId) {
+    ...FirmStatusDetails
+  }
+}
+mutation AdminCreateFirmStatus($input: AdminCreateFirmStatusInput!) {
+  created: adminCreateFirmStatus(input: $input) {
+    ...FirmStatusDetails
+  }
+}
+mutation AdminUpdateFirmStatus($firmStatusId: String!, $input: AdminUpdateFirmStatusInput!) {
+  updated: adminUpdateFirmStatus(firmStatusId: $firmStatusId, input: $input) {
+    ...FirmStatusDetails
+  }
+}
+mutation AdminDeleteFirmStatus($firmStatusId: String!) {
+  deleted: adminDeleteFirmStatus(firmStatusId: $firmStatusId) {
+    ...FirmStatusDetails
+  }
+}
+
+query UserFirmStatuses($input: UserListFirmStatusInput) {
+  items: userFirmStatuses(input: $input) {
+    ...FirmStatusLists
+  }
+  count: userCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFirmStatuses($input: UserListFirmStatusInput) {
+  count: userCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFirmStatuses($input: UserListFirmStatusInput) {
+  items: userSelectFirmStatuses(input: $input) {
+    ...FirmStatusDetails
+  }
+}
+
+query UserFirmStatus($firmStatusId: String!) {
+  item: userFirmStatus(firmStatusId: $firmStatusId) {
+    ...FirmStatusDetails
+  }
+}
+
+mutation UserCreateFirmStatus($input: UserCreateFirmStatusInput!) {
+  created: userCreateFirmStatus(input: $input) {
+    ...FirmStatusDetails
+  }
+}
+mutation UserUpdateFirmStatus($firmStatusId: String!, $input: UserUpdateFirmStatusInput!) {
+  updated: userUpdateFirmStatus(firmStatusId: $firmStatusId, input: $input) {
+    ...FirmStatusDetails
+  }
+}
+
+mutation UserUpdateFirmStatuses($input: UserUpdateFirmStatusesInput!) {
+  updated: userUpdateFirmStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteFirmStatus($firmStatusId: String!) {
+  deleted: userDeleteFirmStatus(firmStatusId: $firmStatusId) {
+    ...FirmStatusDetails
+  }
+}
+
+query PublicFirmStatuses($input: UserListFirmStatusInput) {
+  items: publicFirmStatuses(input: $input) {
+    ...FirmStatusLists
+  }
+  count: publicCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountFirmStatuses($input: UserListFirmStatusInput) {
+  count: publicCountFirmStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectFirmStatuses($input: UserListFirmStatusInput) {
+  items: publicSelectFirmStatuses(input: $input) {
+    ...FirmStatusDetails
+  }
+}
+
+query PublicFirmStatus($firmStatusId: String!) {
+  item: publicFirmStatus(firmStatusId: $firmStatusId) {
+    ...FirmStatusDetails
+  }
+}

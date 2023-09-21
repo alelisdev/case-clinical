@@ -1,0 +1,22 @@
+{
+  "name": "api-email-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/email/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/email/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/email/feature"],
+      "options": {
+        "jestConfig": "libs/api/email/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

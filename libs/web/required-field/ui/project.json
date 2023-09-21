@@ -1,0 +1,23 @@
+{
+  "name": "web-required-field-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/required-field/ui/src",
+  "prefix": "required-field",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/required-field/ui/src/**/*.ts", "libs/web/required-field/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/required-field/ui"],
+      "options": {
+        "jestConfig": "libs/web/required-field/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

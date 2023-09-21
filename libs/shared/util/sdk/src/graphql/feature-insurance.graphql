@@ -1,0 +1,190 @@
+
+fragment InsuranceDetails on Insurance {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+insuranceTypeId
+insuranceSectorId
+policyNumber
+insuranceCompany
+minimumCoverageAmount
+maximumCoverageAmount
+isStackable
+adjuster
+leadId
+legalCase {
+  id
+  name
+}
+insuranceType {
+  id
+  name
+}
+insuranceSector {
+  id
+  name
+}
+lead {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment InsuranceLists on Insurance {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+insuranceTypeId
+insuranceSectorId
+policyNumber
+insuranceCompany
+minimumCoverageAmount
+maximumCoverageAmount
+isStackable
+adjuster
+leadId
+legalCase {
+    id
+    name
+}
+insuranceType {
+    id
+    name
+}
+insuranceSector {
+    id
+    name
+}
+lead {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminInsurances($input: AdminListInsuranceInput) {
+  items: adminInsurances(input: $input) {
+    ...InsuranceLists
+  }
+  count: adminCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountInsurances($input: AdminListInsuranceInput) {
+  count: adminCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminInsurance($insuranceId: String!) {
+  item: adminInsurance(insuranceId: $insuranceId) {
+    ...InsuranceDetails
+  }
+}
+mutation AdminCreateInsurance($input: AdminCreateInsuranceInput!) {
+  created: adminCreateInsurance(input: $input) {
+    ...InsuranceDetails
+  }
+}
+mutation AdminUpdateInsurance($insuranceId: String!, $input: AdminUpdateInsuranceInput!) {
+  updated: adminUpdateInsurance(insuranceId: $insuranceId, input: $input) {
+    ...InsuranceDetails
+  }
+}
+mutation AdminDeleteInsurance($insuranceId: String!) {
+  deleted: adminDeleteInsurance(insuranceId: $insuranceId) {
+    ...InsuranceDetails
+  }
+}
+
+query UserInsurances($input: UserListInsuranceInput) {
+  items: userInsurances(input: $input) {
+    ...InsuranceLists
+  }
+  count: userCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountInsurances($input: UserListInsuranceInput) {
+  count: userCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectInsurances($input: UserListInsuranceInput) {
+  items: userSelectInsurances(input: $input) {
+    ...InsuranceDetails
+  }
+}
+
+query UserInsurance($insuranceId: String!) {
+  item: userInsurance(insuranceId: $insuranceId) {
+    ...InsuranceDetails
+  }
+}
+
+mutation UserCreateInsurance($input: UserCreateInsuranceInput!) {
+  created: userCreateInsurance(input: $input) {
+    ...InsuranceDetails
+  }
+}
+mutation UserUpdateInsurance($insuranceId: String!, $input: UserUpdateInsuranceInput!) {
+  updated: userUpdateInsurance(insuranceId: $insuranceId, input: $input) {
+    ...InsuranceDetails
+  }
+}
+
+mutation UserUpdateInsurances($input: UserUpdateInsurancesInput!) {
+  updated: userUpdateInsurances(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteInsurance($insuranceId: String!) {
+  deleted: userDeleteInsurance(insuranceId: $insuranceId) {
+    ...InsuranceDetails
+  }
+}
+
+query PublicInsurances($input: UserListInsuranceInput) {
+  items: publicInsurances(input: $input) {
+    ...InsuranceLists
+  }
+  count: publicCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountInsurances($input: UserListInsuranceInput) {
+  count: publicCountInsurances(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectInsurances($input: UserListInsuranceInput) {
+  items: publicSelectInsurances(input: $input) {
+    ...InsuranceDetails
+  }
+}
+
+query PublicInsurance($insuranceId: String!) {
+  item: publicInsurance(insuranceId: $insuranceId) {
+    ...InsuranceDetails
+  }
+}

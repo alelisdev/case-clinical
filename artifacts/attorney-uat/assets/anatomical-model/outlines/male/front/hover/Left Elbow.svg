@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="30px" viewBox="0 0 36 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Left Elbow</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.25">
+        <g id="Male/Front/Hover" transform="translate(-173.000000, -196.000000)" fill="#A0AEC0" stroke="#A0AEC0" stroke-width="2">
+            <path d="M205.355241,219.466644 C201.003512,226.038719 199.253138,225.547561 195.372533,222.865186 C191.629325,220.277784 188.306096,217.14808 187.832878,217.14808 C186.869073,217.14808 181.802301,223.537095 181.117214,223.537095 C180.432127,223.537095 178.159574,217.14808 174.98665,209.225273 C175.480709,204.634991 176.447503,202.32046 176.813737,197.759421 C187.851617,195.810586 201.003512,200.197916 207.011665,203.84787 C206.586745,209.020921 206.436377,217.83389 205.355241,219.466644 Z" id="Left-Elbow" transform="translate(190.999158, 211.002296) scale(-1, 1) translate(-190.999158, -211.002296) "></path>
+        </g>
+    </g>
+</svg>

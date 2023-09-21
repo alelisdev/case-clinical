@@ -1,0 +1,25 @@
+
+.drop-container {
+	&:hover .drop {
+		display: block;
+	}
+	.drop {
+        width: 100%;
+        border-radius: 5px;
+        z-index: 300;
+        background-color: white;
+		display: none;
+		position: absolute;
+		top: 20px;
+		left: 8px;
+		.dropdown-item {
+			display: block;
+			padding: 8px 16px;
+			&:hover, &:active {
+				background-color: #EEEEEE;
+			}
+		}
+
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.2)
+	}
+}

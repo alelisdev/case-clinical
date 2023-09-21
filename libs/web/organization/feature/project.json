@@ -1,0 +1,23 @@
+{
+  "name": "web-organization-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/organization/feature/src",
+  "prefix": "organization",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/organization/feature/src/**/*.ts", "libs/web/organization/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/organization/feature"],
+      "options": {
+        "jestConfig": "libs/web/organization/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

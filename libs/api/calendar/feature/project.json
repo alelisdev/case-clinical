@@ -1,0 +1,22 @@
+{
+  "name": "api-calendar-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/calendar/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/calendar/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/calendar/feature"],
+      "options": {
+        "jestConfig": "libs/api/calendar/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-user-calendar-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/user-calendar/ui/src",
+  "prefix": "user-calendar",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/user-calendar/ui/src/**/*.ts", "libs/web/user-calendar/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/user-calendar/ui"],
+      "options": {
+        "jestConfig": "libs/web/user-calendar/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

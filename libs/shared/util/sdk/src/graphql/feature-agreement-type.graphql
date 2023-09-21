@@ -1,0 +1,148 @@
+
+fragment AgreementTypeDetails on AgreementType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+    ...CaseAccountLists
+  }
+}
+
+fragment AgreementTypeLists on AgreementType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAgreementTypes($input: AdminListAgreementTypeInput) {
+  items: adminAgreementTypes(input: $input) {
+    ...AgreementTypeLists
+  }
+  count: adminCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAgreementTypes($input: AdminListAgreementTypeInput) {
+  count: adminCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAgreementType($agreementTypeId: String!) {
+  item: adminAgreementType(agreementTypeId: $agreementTypeId) {
+    ...AgreementTypeDetails
+  }
+}
+mutation AdminCreateAgreementType($input: AdminCreateAgreementTypeInput!) {
+  created: adminCreateAgreementType(input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+mutation AdminUpdateAgreementType($agreementTypeId: String!, $input: AdminUpdateAgreementTypeInput!) {
+  updated: adminUpdateAgreementType(agreementTypeId: $agreementTypeId, input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+mutation AdminDeleteAgreementType($agreementTypeId: String!) {
+  deleted: adminDeleteAgreementType(agreementTypeId: $agreementTypeId) {
+    ...AgreementTypeDetails
+  }
+}
+
+query UserAgreementTypes($input: UserListAgreementTypeInput) {
+  items: userAgreementTypes(input: $input) {
+    ...AgreementTypeLists
+  }
+  count: userCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAgreementTypes($input: UserListAgreementTypeInput) {
+  count: userCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAgreementTypes($input: UserListAgreementTypeInput) {
+  items: userSelectAgreementTypes(input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+
+query UserAgreementType($agreementTypeId: String!) {
+  item: userAgreementType(agreementTypeId: $agreementTypeId) {
+    ...AgreementTypeDetails
+  }
+}
+
+mutation UserCreateAgreementType($input: UserCreateAgreementTypeInput!) {
+  created: userCreateAgreementType(input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+mutation UserUpdateAgreementType($agreementTypeId: String!, $input: UserUpdateAgreementTypeInput!) {
+  updated: userUpdateAgreementType(agreementTypeId: $agreementTypeId, input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+
+mutation UserUpdateAgreementTypes($input: UserUpdateAgreementTypesInput!) {
+  updated: userUpdateAgreementTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAgreementType($agreementTypeId: String!) {
+  deleted: userDeleteAgreementType(agreementTypeId: $agreementTypeId) {
+    ...AgreementTypeDetails
+  }
+}
+
+query PublicAgreementTypes($input: UserListAgreementTypeInput) {
+  items: publicAgreementTypes(input: $input) {
+    ...AgreementTypeLists
+  }
+  count: publicCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAgreementTypes($input: UserListAgreementTypeInput) {
+  count: publicCountAgreementTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAgreementTypes($input: UserListAgreementTypeInput) {
+  items: publicSelectAgreementTypes(input: $input) {
+    ...AgreementTypeDetails
+  }
+}
+
+query PublicAgreementType($agreementTypeId: String!) {
+  item: publicAgreementType(agreementTypeId: $agreementTypeId) {
+    ...AgreementTypeDetails
+  }
+}

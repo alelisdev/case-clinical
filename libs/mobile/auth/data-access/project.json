@@ -1,0 +1,23 @@
+{
+  "name": "mobile-auth-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/auth/data-access/src",
+  "prefix": "auth",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/auth/data-access/src/**/*.ts", "libs/mobile/auth/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/auth/data-access"],
+      "options": {
+        "jestConfig": "libs/mobile/auth/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

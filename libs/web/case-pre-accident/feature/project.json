@@ -1,0 +1,26 @@
+{
+  "name": "web-case-pre-accident-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-pre-accident/feature/src",
+  "prefix": "case-pre-accident",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/case-pre-accident/feature/src/**/*.ts",
+          "libs/web/case-pre-accident/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-pre-accident/feature"],
+      "options": {
+        "jestConfig": "libs/web/case-pre-accident/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

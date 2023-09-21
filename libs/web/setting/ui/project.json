@@ -1,0 +1,23 @@
+{
+  "name": "web-setting-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/setting/ui/src",
+  "prefix": "setting",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/setting/ui/src/**/*.ts", "libs/web/setting/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/setting/ui"],
+      "options": {
+        "jestConfig": "libs/web/setting/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

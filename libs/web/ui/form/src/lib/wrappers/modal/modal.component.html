@@ -1,0 +1,18 @@
+<!-- <div class="text-red-800" > -->
+  <formly-field *ngIf="!to.hideToggle" (click)="openDialog(dlg, { value: null })" [field]="field.fieldGroup[0]"></formly-field>
+<!-- </div> -->
+
+<ng-template #dlg let-ref>
+  <div class="flex flex-col p-4 gap-2 h-full bg-grey-light overflow-auto">
+    <div class="w-full h-full">
+      <!-- <ng-container #fieldComponent></ng-container> -->
+      <form class='w-full' [formGroup]="dlgForm" novalidate (ngSubmit)="submit()">
+        <div>
+          <formly-form [fields]="fields" [form]="dlgForm" [model]="formModel" [options]="dlgOptions"></formly-form>
+          <button *ngIf="!to.hideSave" type="submit" class="bg-blue-600 text-white rounded-md mt-2 px-5 py-2" [disabled]="!dlgForm.valid">Save</button>
+        </div>
+        <ng-content></ng-content>
+      </form>
+    </div>
+  </div>
+</ng-template>

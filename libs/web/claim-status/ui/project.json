@@ -1,0 +1,23 @@
+{
+  "name": "web-claim-status-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/claim-status/ui/src",
+  "prefix": "claim-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/claim-status/ui/src/**/*.ts", "libs/web/claim-status/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/claim-status/ui"],
+      "options": {
+        "jestConfig": "libs/web/claim-status/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

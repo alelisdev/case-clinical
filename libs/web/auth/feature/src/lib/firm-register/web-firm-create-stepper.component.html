@@ -1,0 +1,26 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="inset-0 absolute overflow-y-auto">
+    <div class="p-2 md:p-4">
+      <ng-template #controlsTemplate>
+        <div class="px-6 space-x-3">
+          <ui-button label="Discard" variant="white" (click)="handleDiscardClick($event)"></ui-button>
+        </div>
+      </ng-template>
+
+      <ng-template #headerTemplate>
+        <ui-card-header [title]="'Create New'" [controlsTemplate]="controlsTemplate"></ui-card-header>
+      </ng-template>
+
+      <ng-template #footerTemplate>
+        <div class="flex items-center justify-end pt-3 pb-6 dark:bg-transparent">
+          <ng-container></ng-container>
+        </div>
+      </ng-template>
+
+      <ui-panel [headerTemplate]="headerTemplate" [footerTemplate]="footerTemplate" class="">
+        <ui-form [fields]="steps" [model]="model" [options]="options" (submitForm)="createIntake($event)">
+        </ui-form>
+      </ui-panel>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,95 @@
+
+fragment SideDetails on Side {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+whereDoesItHurts {
+    id
+    name
+  }
+
+}
+query AdminSides($input: AdminListSideInput) {
+  items: adminSides(input: $input) {
+    ...SideDetails
+  }
+  count: adminCountSides(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountSides($input: AdminListSideInput) {
+  count: adminCountSides(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminSide($sideId: String!) {
+  item: adminSide(sideId: $sideId) {
+    ...SideDetails
+  }
+}
+mutation AdminCreateSide($input: AdminCreateSideInput!) {
+  created: adminCreateSide(input: $input) {
+    ...SideDetails
+  }
+}
+mutation AdminUpdateSide($sideId: String!, $input: AdminUpdateSideInput!) {
+  updated: adminUpdateSide(sideId: $sideId, input: $input) {
+    ...SideDetails
+  }
+}
+mutation AdminDeleteSide($sideId: String!) {
+  deleted: adminDeleteSide(sideId: $sideId) {
+    ...SideDetails
+  }
+}
+
+query UserSides($input: UserListSideInput) {
+  items: userSides(input: $input) {
+    ...SideDetails
+  }
+  count: userCountSides(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountSides($input: UserListSideInput) {
+  count: userCountSides(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectSides($input: UserListSideInput) {
+  items: userSelectSides(input: $input) {
+    ...SideDetails
+  }
+}
+
+query UserSide($sideId: String!) {
+  item: userSide(sideId: $sideId) {
+    ...SideDetails
+  }
+}
+mutation UserCreateSide($input: UserCreateSideInput!) {
+  created: userCreateSide(input: $input) {
+    ...SideDetails
+  }
+}
+mutation UserUpdateSide($sideId: String!, $input: UserUpdateSideInput!) {
+  updated: userUpdateSide(sideId: $sideId, input: $input) {
+    ...SideDetails
+  }
+}
+mutation UserDeleteSide($sideId: String!) {
+  deleted: userDeleteSide(sideId: $sideId) {
+    ...SideDetails
+  }
+}

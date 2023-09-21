@@ -1,0 +1,14 @@
+<ui-formly-json-form
+*ngIf="vm$ | async as vm"
+class="w-full h-full"
+formName="page_patient_checkout"
+[showSubmitButton]="false"
+[model]="model"
+[formData]="getFormData(vm)"
+[componentStore]="store"
+(save)="this.store.confirmAndPayEffect($event)"
+(formIsReady)="this.onResize()"
+[resetForm]="false"
+></ui-formly-json-form>
+
+<!-- [formData]="formData" -->

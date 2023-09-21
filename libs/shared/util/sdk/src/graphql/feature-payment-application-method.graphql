@@ -1,0 +1,148 @@
+
+fragment PaymentApplicationMethodDetails on PaymentApplicationMethod {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    ...PaymentLists
+  }
+}
+
+fragment PaymentApplicationMethodLists on PaymentApplicationMethod {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPaymentApplicationMethods($input: AdminListPaymentApplicationMethodInput) {
+  items: adminPaymentApplicationMethods(input: $input) {
+    ...PaymentApplicationMethodLists
+  }
+  count: adminCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPaymentApplicationMethods($input: AdminListPaymentApplicationMethodInput) {
+  count: adminCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPaymentApplicationMethod($paymentApplicationMethodId: String!) {
+  item: adminPaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+mutation AdminCreatePaymentApplicationMethod($input: AdminCreatePaymentApplicationMethodInput!) {
+  created: adminCreatePaymentApplicationMethod(input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+mutation AdminUpdatePaymentApplicationMethod($paymentApplicationMethodId: String!, $input: AdminUpdatePaymentApplicationMethodInput!) {
+  updated: adminUpdatePaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId, input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+mutation AdminDeletePaymentApplicationMethod($paymentApplicationMethodId: String!) {
+  deleted: adminDeletePaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+query UserPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  items: userPaymentApplicationMethods(input: $input) {
+    ...PaymentApplicationMethodLists
+  }
+  count: userCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  count: userCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  items: userSelectPaymentApplicationMethods(input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+query UserPaymentApplicationMethod($paymentApplicationMethodId: String!) {
+  item: userPaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+mutation UserCreatePaymentApplicationMethod($input: UserCreatePaymentApplicationMethodInput!) {
+  created: userCreatePaymentApplicationMethod(input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+mutation UserUpdatePaymentApplicationMethod($paymentApplicationMethodId: String!, $input: UserUpdatePaymentApplicationMethodInput!) {
+  updated: userUpdatePaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId, input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+mutation UserUpdatePaymentApplicationMethods($input: UserUpdatePaymentApplicationMethodsInput!) {
+  updated: userUpdatePaymentApplicationMethods(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePaymentApplicationMethod($paymentApplicationMethodId: String!) {
+  deleted: userDeletePaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+query PublicPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  items: publicPaymentApplicationMethods(input: $input) {
+    ...PaymentApplicationMethodLists
+  }
+  count: publicCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  count: publicCountPaymentApplicationMethods(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPaymentApplicationMethods($input: UserListPaymentApplicationMethodInput) {
+  items: publicSelectPaymentApplicationMethods(input: $input) {
+    ...PaymentApplicationMethodDetails
+  }
+}
+
+query PublicPaymentApplicationMethod($paymentApplicationMethodId: String!) {
+  item: publicPaymentApplicationMethod(paymentApplicationMethodId: $paymentApplicationMethodId) {
+    ...PaymentApplicationMethodDetails
+  }
+}

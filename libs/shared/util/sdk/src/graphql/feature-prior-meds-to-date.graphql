@@ -1,0 +1,181 @@
+
+fragment PriorMedsToDateDetails on PriorMedsToDate {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+priorMedsToDateStatusId
+specialtyId
+visitKindId
+quantity
+amount
+legalCase {
+  id
+  name
+}
+priorMedsToDateStatus {
+  id
+  name
+}
+
+specialty{
+  id
+  name
+}
+
+visitKind{
+  id
+  name
+}
+
+
+}
+
+fragment PriorMedsToDateLists on PriorMedsToDate {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+priorMedsToDateStatusId
+specialtyId
+visitKindId
+quantity
+amount
+legalCase {
+    id
+    name
+}
+priorMedsToDateStatus {
+    id
+    name
+}
+
+specialty{
+  id
+  name
+}
+
+visitKind{
+  id
+  name
+}
+
+
+
+}
+
+
+
+query AdminPriorMedsToDates($input: AdminListPriorMedsToDateInput) {
+  items: adminPriorMedsToDates(input: $input) {
+    ...PriorMedsToDateLists
+  }
+  count: adminCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorMedsToDates($input: AdminListPriorMedsToDateInput) {
+  count: adminCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorMedsToDate($priorMedsToDateId: String!) {
+  item: adminPriorMedsToDate(priorMedsToDateId: $priorMedsToDateId) {
+    ...PriorMedsToDateDetails
+  }
+}
+mutation AdminCreatePriorMedsToDate($input: AdminCreatePriorMedsToDateInput!) {
+  created: adminCreatePriorMedsToDate(input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+mutation AdminUpdatePriorMedsToDate($priorMedsToDateId: String!, $input: AdminUpdatePriorMedsToDateInput!) {
+  updated: adminUpdatePriorMedsToDate(priorMedsToDateId: $priorMedsToDateId, input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+mutation AdminDeletePriorMedsToDate($priorMedsToDateId: String!) {
+  deleted: adminDeletePriorMedsToDate(priorMedsToDateId: $priorMedsToDateId) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+query UserPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  items: userPriorMedsToDates(input: $input) {
+    ...PriorMedsToDateLists
+  }
+  count: userCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  count: userCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  items: userSelectPriorMedsToDates(input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+query UserPriorMedsToDate($priorMedsToDateId: String!) {
+  item: userPriorMedsToDate(priorMedsToDateId: $priorMedsToDateId) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+mutation UserCreatePriorMedsToDate($input: UserCreatePriorMedsToDateInput!) {
+  created: userCreatePriorMedsToDate(input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+mutation UserUpdatePriorMedsToDate($priorMedsToDateId: String!, $input: UserUpdatePriorMedsToDateInput!) {
+  updated: userUpdatePriorMedsToDate(priorMedsToDateId: $priorMedsToDateId, input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+mutation UserUpdatePriorMedsToDates($input: UserUpdatePriorMedsToDatesInput!) {
+  updated: userUpdatePriorMedsToDates(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorMedsToDate($priorMedsToDateId: String!) {
+  deleted: userDeletePriorMedsToDate(priorMedsToDateId: $priorMedsToDateId) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+query PublicPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  items: publicPriorMedsToDates(input: $input) {
+    ...PriorMedsToDateLists
+  }
+  count: publicCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  count: publicCountPriorMedsToDates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorMedsToDates($input: UserListPriorMedsToDateInput) {
+  items: publicSelectPriorMedsToDates(input: $input) {
+    ...PriorMedsToDateDetails
+  }
+}
+
+query PublicPriorMedsToDate($priorMedsToDateId: String!) {
+  item: publicPriorMedsToDate(priorMedsToDateId: $priorMedsToDateId) {
+    ...PriorMedsToDateDetails
+  }
+}

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caseclinical-provider-frontend
+  namespace: pch
+  labels:
+    app: caseclinical-provider-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caseclinical-provider-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: caseclinical-provider-frontend
+      labels:
+        app: caseclinical-provider-frontend
+    spec:
+      containers:
+      - name: caseclinical-provider-frontend
+        image: caseclinicaluat.azurecr.io/caseclinical-provider-frontend
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 50m
+            memory: 150Mi 
+          limits:
+            cpu: 200m
+            memory: 400Mi
+        ports:
+        - containerPort: 80

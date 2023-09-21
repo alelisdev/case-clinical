@@ -1,0 +1,217 @@
+
+
+fragment RecommendedOrderDetails on RecommendedOrder {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+status
+
+timeDelta
+
+
+
+
+diagnosisCodes {
+    id
+    name
+  }
+
+authorizations {
+    id
+    name
+    authorization {
+      id
+      name
+      vendor {
+        id
+        name
+      }
+      authorizationCategory {
+        id
+        name
+      }
+      authorizationType {
+        id
+        name
+      }
+      procedure {
+        id
+        name
+      }
+    }
+    recommendedOrder {
+      id
+      name
+    }
+  }
+}
+
+fragment RecommendedOrderLists on RecommendedOrder {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+status
+
+
+
+timeDelta
+
+
+diagnosisCodes {
+    id
+    name
+  }
+
+
+authorizations {
+    id
+    name
+    authorization {
+      id
+      name
+      updatedAt
+      createdAt
+      vendor {
+        id
+        name
+      }
+      authorizationCategory {
+        id
+        name
+      }
+      authorizationType {
+        id
+        name
+      }
+      procedure {
+        id
+        name
+      }
+    }
+    recommendedOrder {
+      id
+      name
+    }
+  }
+
+}
+
+query AdminRecommendedOrders($input: AdminListRecommendedOrderInput) {
+  items: adminRecommendedOrders(input: $input) {
+    ...RecommendedOrderLists
+  }
+  count: adminCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRecommendedOrders($input: AdminListRecommendedOrderInput) {
+  count: adminCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRecommendedOrder($recommendedOrderId: String!) {
+  item: adminRecommendedOrder(recommendedOrderId: $recommendedOrderId) {
+    ...RecommendedOrderDetails
+  }
+}
+mutation AdminCreateRecommendedOrder($input: AdminCreateRecommendedOrderInput!) {
+  created: adminCreateRecommendedOrder(input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+mutation AdminUpdateRecommendedOrder($recommendedOrderId: String!, $input: AdminUpdateRecommendedOrderInput!) {
+  updated: adminUpdateRecommendedOrder(recommendedOrderId: $recommendedOrderId, input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+mutation AdminDeleteRecommendedOrder($recommendedOrderId: String!) {
+  deleted: adminDeleteRecommendedOrder(recommendedOrderId: $recommendedOrderId) {
+    ...RecommendedOrderDetails
+  }
+}
+
+query UserRecommendedOrders($input: UserListRecommendedOrderInput) {
+  items: userRecommendedOrders(input: $input) {
+    ...RecommendedOrderLists
+  }
+  count: userCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRecommendedOrders($input: UserListRecommendedOrderInput) {
+  count: userCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRecommendedOrders($input: UserListRecommendedOrderInput) {
+  items: userSelectRecommendedOrders(input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+
+query UserRecommendedOrder($recommendedOrderId: String!) {
+  item: userRecommendedOrder(recommendedOrderId: $recommendedOrderId) {
+    ...RecommendedOrderDetails
+  }
+}
+
+mutation UserCreateRecommendedOrder($input: UserCreateRecommendedOrderInput!) {
+  created: userCreateRecommendedOrder(input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+mutation UserUpdateRecommendedOrder($recommendedOrderId: String!, $input: UserUpdateRecommendedOrderInput!) {
+  updated: userUpdateRecommendedOrder(recommendedOrderId: $recommendedOrderId, input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+
+mutation UserUpdateRecommendedOrders($input: UserUpdateRecommendedOrdersInput!) {
+  updated: userUpdateRecommendedOrders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRecommendedOrder($recommendedOrderId: String!) {
+  deleted: userDeleteRecommendedOrder(recommendedOrderId: $recommendedOrderId) {
+    ...RecommendedOrderDetails
+  }
+}
+
+query PublicRecommendedOrders($input: UserListRecommendedOrderInput) {
+  items: publicRecommendedOrders(input: $input) {
+    ...RecommendedOrderLists
+  }
+  count: publicCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRecommendedOrders($input: UserListRecommendedOrderInput) {
+  count: publicCountRecommendedOrders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRecommendedOrders($input: UserListRecommendedOrderInput) {
+  items: publicSelectRecommendedOrders(input: $input) {
+    ...RecommendedOrderDetails
+  }
+}
+
+query PublicRecommendedOrder($recommendedOrderId: String!) {
+  item: publicRecommendedOrder(recommendedOrderId: $recommendedOrderId) {
+    ...RecommendedOrderDetails
+  }
+}

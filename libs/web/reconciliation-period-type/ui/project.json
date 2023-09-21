@@ -1,0 +1,26 @@
+{
+  "name": "web-reconciliation-period-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/reconciliation-period-type/ui/src",
+  "prefix": "reconciliation-period-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/reconciliation-period-type/ui/src/**/*.ts",
+          "libs/web/reconciliation-period-type/ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/reconciliation-period-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/reconciliation-period-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

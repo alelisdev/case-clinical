@@ -1,0 +1,148 @@
+
+fragment ProcessDetails on Process {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+  ...ContractLists
+  }
+}
+
+fragment ProcessLists on Process {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminProcesses($input: AdminListProcessInput) {
+  items: adminProcesses(input: $input) {
+    ...ProcessLists
+  }
+  count: adminCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcesses($input: AdminListProcessInput) {
+  count: adminCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcess($processId: String!) {
+  item: adminProcess(processId: $processId) {
+    ...ProcessDetails
+  }
+}
+mutation AdminCreateProcess($input: AdminCreateProcessInput!) {
+  created: adminCreateProcess(input: $input) {
+    ...ProcessDetails
+  }
+}
+mutation AdminUpdateProcess($processId: String!, $input: AdminUpdateProcessInput!) {
+  updated: adminUpdateProcess(processId: $processId, input: $input) {
+    ...ProcessDetails
+  }
+}
+mutation AdminDeleteProcess($processId: String!) {
+  deleted: adminDeleteProcess(processId: $processId) {
+    ...ProcessDetails
+  }
+}
+
+query UserProcesses($input: UserListProcessInput) {
+  items: userProcesses(input: $input) {
+    ...ProcessLists
+  }
+  count: userCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcesses($input: UserListProcessInput) {
+  count: userCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcesses($input: UserListProcessInput) {
+  items: userSelectProcesses(input: $input) {
+    ...ProcessDetails
+  }
+}
+
+query UserProcess($processId: String!) {
+  item: userProcess(processId: $processId) {
+    ...ProcessDetails
+  }
+}
+
+mutation UserCreateProcess($input: UserCreateProcessInput!) {
+  created: userCreateProcess(input: $input) {
+    ...ProcessDetails
+  }
+}
+mutation UserUpdateProcess($processId: String!, $input: UserUpdateProcessInput!) {
+  updated: userUpdateProcess(processId: $processId, input: $input) {
+    ...ProcessDetails
+  }
+}
+
+mutation UserUpdateProcesses($input: UserUpdateProcessesInput!) {
+  updated: userUpdateProcesses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcess($processId: String!) {
+  deleted: userDeleteProcess(processId: $processId) {
+    ...ProcessDetails
+  }
+}
+
+query PublicProcesses($input: UserListProcessInput) {
+  items: publicProcesses(input: $input) {
+    ...ProcessLists
+  }
+  count: publicCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcesses($input: UserListProcessInput) {
+  count: publicCountProcesses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcesses($input: UserListProcessInput) {
+  items: publicSelectProcesses(input: $input) {
+    ...ProcessDetails
+  }
+}
+
+query PublicProcess($processId: String!) {
+  item: publicProcess(processId: $processId) {
+    ...ProcessDetails
+  }
+}

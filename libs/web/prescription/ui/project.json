@@ -1,0 +1,23 @@
+{
+  "name": "web-prescription-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/prescription/ui/src",
+  "prefix": "prescription",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/prescription/ui/src/**/*.ts", "libs/web/prescription/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/prescription/ui"],
+      "options": {
+        "jestConfig": "libs/web/prescription/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

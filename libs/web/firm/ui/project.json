@@ -1,0 +1,23 @@
+{
+  "name": "web-firm-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/firm/ui/src",
+  "prefix": "firm",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/firm/ui/src/**/*.ts", "libs/web/firm/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/firm/ui"],
+      "options": {
+        "jestConfig": "libs/web/firm/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

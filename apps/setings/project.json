@@ -1,0 +1,162 @@
+{
+  "name": "settings",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/settings/src",
+  "prefix": "underwriting-portal",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/settings",
+        "index": "apps/settings/src/index.html",
+        "main": "apps/settings/src/main.ts",
+        "polyfills": "apps/settings/src/polyfills.ts",
+        "tsConfig": "apps/settings/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "allowedCommonJsDependencies": [
+          "apexcharts",
+          "highlight.js",
+          "crypto-js/enc-utf8",
+          "crypto-js/hmac-sha256",
+          "crypto-js/enc-base64",
+          "@prisma/client"
+        ],
+        "assets": [
+          "apps/settings/src/assets",
+          "apps/settings/src/assets/favicon",
+          {
+            "glob": "_redirects",
+            "input": "apps/settings/src",
+            "output": "/"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+            "output": "/assets/"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/monaco-editor",
+            "output": "assets/monaco-editor"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/settings/src/@fuse/styles"]
+        },
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "node_modules/bootstrap-markdown/css/bootstrap-markdown.min.css",
+          "node_modules/prismjs/themes/prism.css",
+          "apps/settings/src/@fuse/styles/tailwind.scss",
+          "apps/settings/src/@fuse/styles/themes.scss",
+          "apps/settings/src/styles/vendors.scss",
+          "apps/settings/src/@fuse/styles/main.scss",
+          "apps/settings/src/styles/styles.scss",
+          "apps/settings/src/styles/tailwind.scss",
+          "node_modules/@ngneat/hot-toast/src/styles/styles.css"
+        ],
+        "scripts": [
+          "node_modules/jquery/dist/jquery.js",
+          "node_modules/bootstrap-markdown/js/bootstrap-markdown.js",
+          "node_modules/prismjs/prism.js",
+          "node_modules/prismjs/components/prism-css.min.js",
+          "node_modules/prismjs/components/prism-javascript.min.js",
+          "node_modules/prismjs/components/prism-typescript.min.js"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "15mb",
+              "maximumError": "18mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "100kb",
+              "maximumError": "150kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "libs/web/core/feature/src/environments/environment.ts",
+              "with": "libs/web/core/feature/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "uat": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "18mb",
+              "maximumError": "20mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "150kb",
+              "maximumError": "200kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "libs/core/feature/src/environments/environment.ts",
+              "with": "libs/core/feature/src/environments/environment.uat.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "settings:build:production"
+        },
+        "development": {
+          "browserTarget": "settings:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "proxyConfig": "apps/settings/proxy.conf.js"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "settings:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/settings/src/test.ts",
+        "polyfills": "apps/settings/src/polyfills.ts",
+        "tsConfig": "apps/settings/tsconfig.spec.json",
+        "karmaConfig": "apps/settings/karma.conf.js",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/settings/src/assets", "apps/settings/src/assets/favicon"],
+        "styles": ["apps/settings/src/styles.scss"],
+        "scripts": []
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint",
+      "options": {
+        "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
+        "tsConfig": ["apps/settings/tsconfig.app.json", "apps/settings/tsconfig.spec.json"]
+      }
+    }
+  }
+}

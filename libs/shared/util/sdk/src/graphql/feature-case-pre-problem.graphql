@@ -1,0 +1,160 @@
+
+fragment CasePreProblemDetails on CasePreProblem {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+sameRegion
+problemDate
+duration
+symptoms
+regions
+removed
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment CasePreProblemLists on CasePreProblem {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+sameRegion
+problemDate
+duration
+symptoms
+regions
+removed
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminCasePreProblems($input: AdminListCasePreProblemInput) {
+  items: adminCasePreProblems(input: $input) {
+    ...CasePreProblemLists
+  }
+  count: adminCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCasePreProblems($input: AdminListCasePreProblemInput) {
+  count: adminCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCasePreProblem($casePreProblemId: String!) {
+  item: adminCasePreProblem(casePreProblemId: $casePreProblemId) {
+    ...CasePreProblemDetails
+  }
+}
+mutation AdminCreateCasePreProblem($input: AdminCreateCasePreProblemInput!) {
+  created: adminCreateCasePreProblem(input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+mutation AdminUpdateCasePreProblem($casePreProblemId: String!, $input: AdminUpdateCasePreProblemInput!) {
+  updated: adminUpdateCasePreProblem(casePreProblemId: $casePreProblemId, input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+mutation AdminDeleteCasePreProblem($casePreProblemId: String!) {
+  deleted: adminDeleteCasePreProblem(casePreProblemId: $casePreProblemId) {
+    ...CasePreProblemDetails
+  }
+}
+
+query UserCasePreProblems($input: UserListCasePreProblemInput) {
+  items: userCasePreProblems(input: $input) {
+    ...CasePreProblemLists
+  }
+  count: userCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCasePreProblems($input: UserListCasePreProblemInput) {
+  count: userCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCasePreProblems($input: UserListCasePreProblemInput) {
+  items: userSelectCasePreProblems(input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+
+query UserCasePreProblem($casePreProblemId: String!) {
+  item: userCasePreProblem(casePreProblemId: $casePreProblemId) {
+    ...CasePreProblemDetails
+  }
+}
+
+mutation UserCreateCasePreProblem($input: UserCreateCasePreProblemInput!) {
+  created: userCreateCasePreProblem(input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+mutation UserUpdateCasePreProblem($casePreProblemId: String!, $input: UserUpdateCasePreProblemInput!) {
+  updated: userUpdateCasePreProblem(casePreProblemId: $casePreProblemId, input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+
+mutation UserUpdateCasePreProblems($input: UserUpdateCasePreProblemsInput!) {
+  updated: userUpdateCasePreProblems(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCasePreProblem($casePreProblemId: String!) {
+  deleted: userDeleteCasePreProblem(casePreProblemId: $casePreProblemId) {
+    ...CasePreProblemDetails
+  }
+}
+
+query PublicCasePreProblems($input: UserListCasePreProblemInput) {
+  items: publicCasePreProblems(input: $input) {
+    ...CasePreProblemLists
+  }
+  count: publicCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCasePreProblems($input: UserListCasePreProblemInput) {
+  count: publicCountCasePreProblems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCasePreProblems($input: UserListCasePreProblemInput) {
+  items: publicSelectCasePreProblems(input: $input) {
+    ...CasePreProblemDetails
+  }
+}
+
+query PublicCasePreProblem($casePreProblemId: String!) {
+  item: publicCasePreProblem(casePreProblemId: $casePreProblemId) {
+    ...CasePreProblemDetails
+  }
+}

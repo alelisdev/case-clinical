@@ -1,0 +1,156 @@
+
+fragment AuthorizationKindDetails on AuthorizationKind {
+id
+createdAt
+updatedAt
+name
+categoryId
+category {
+  id
+  name
+}
+
+
+
+
+
+priorAuthorizationRequests {
+   ...PriorAuthorizationRequestLists
+  }
+}
+
+fragment AuthorizationKindLists on AuthorizationKind {
+id
+createdAt
+updatedAt
+name
+categoryId
+category {
+    id
+    name
+}
+
+
+
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAuthorizationKinds($input: AdminListAuthorizationKindInput) {
+  items: adminAuthorizationKinds(input: $input) {
+    ...AuthorizationKindLists
+  }
+  count: adminCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizationKinds($input: AdminListAuthorizationKindInput) {
+  count: adminCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorizationKind($authorizationKindId: String!) {
+  item: adminAuthorizationKind(authorizationKindId: $authorizationKindId) {
+    ...AuthorizationKindDetails
+  }
+}
+mutation AdminCreateAuthorizationKind($input: AdminCreateAuthorizationKindInput!) {
+  created: adminCreateAuthorizationKind(input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+mutation AdminUpdateAuthorizationKind($authorizationKindId: String!, $input: AdminUpdateAuthorizationKindInput!) {
+  updated: adminUpdateAuthorizationKind(authorizationKindId: $authorizationKindId, input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+mutation AdminDeleteAuthorizationKind($authorizationKindId: String!) {
+  deleted: adminDeleteAuthorizationKind(authorizationKindId: $authorizationKindId) {
+    ...AuthorizationKindDetails
+  }
+}
+
+query UserAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  items: userAuthorizationKinds(input: $input) {
+    ...AuthorizationKindLists
+  }
+  count: userCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  count: userCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  items: userSelectAuthorizationKinds(input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+
+query UserAuthorizationKind($authorizationKindId: String!) {
+  item: userAuthorizationKind(authorizationKindId: $authorizationKindId) {
+    ...AuthorizationKindDetails
+  }
+}
+
+mutation UserCreateAuthorizationKind($input: UserCreateAuthorizationKindInput!) {
+  created: userCreateAuthorizationKind(input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+mutation UserUpdateAuthorizationKind($authorizationKindId: String!, $input: UserUpdateAuthorizationKindInput!) {
+  updated: userUpdateAuthorizationKind(authorizationKindId: $authorizationKindId, input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+
+mutation UserUpdateAuthorizationKinds($input: UserUpdateAuthorizationKindsInput!) {
+  updated: userUpdateAuthorizationKinds(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorizationKind($authorizationKindId: String!) {
+  deleted: userDeleteAuthorizationKind(authorizationKindId: $authorizationKindId) {
+    ...AuthorizationKindDetails
+  }
+}
+
+query PublicAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  items: publicAuthorizationKinds(input: $input) {
+    ...AuthorizationKindLists
+  }
+  count: publicCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  count: publicCountAuthorizationKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizationKinds($input: UserListAuthorizationKindInput) {
+  items: publicSelectAuthorizationKinds(input: $input) {
+    ...AuthorizationKindDetails
+  }
+}
+
+query PublicAuthorizationKind($authorizationKindId: String!) {
+  item: publicAuthorizationKind(authorizationKindId: $authorizationKindId) {
+    ...AuthorizationKindDetails
+  }
+}

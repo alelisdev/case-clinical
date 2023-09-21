@@ -1,0 +1,211 @@
+
+fragment RoleDetails on Role {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+userRoles {
+    id
+    name
+  }
+
+roleFeaturePermissions {
+    id
+    name
+  }
+}
+
+fragment RoleLists on Role {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+userRoles {
+    id
+    name
+  }
+
+
+roleFeaturePermissions {
+    id
+    name
+  }
+
+}
+
+fragment RoleInfoDetails on Role {
+  id
+  createdAt
+  updatedAt
+  name
+}
+
+fragment UserInfoDetails on User {
+  id
+  createdAt
+  updatedAt
+  developer
+  username
+  password
+  name
+  firstName
+  lastName
+  avatar: avatarUrl
+  line1
+  line2
+  city
+  state
+  postalCode
+  phone
+  bio
+  status
+  dateOfBirth
+  cellPhone
+  education
+
+  emails {
+    id
+    name
+    email
+  }
+
+  userRoles {
+    id
+    name
+    roleId
+  }
+}
+
+query fetchUsersAndRoles($userInput: UserListUserInput!, $roleInput: UserListRoleInput!) {
+  users: userUsers(input: $userInput) {
+    ...UserInfoDetails
+  },
+  roles: userRoles(input: $roleInput) {
+    ...RoleInfoDetails
+  }
+}
+
+
+query AdminRoles($input: AdminListRoleInput) {
+  items: adminRoles(input: $input) {
+    ...RoleLists
+  }
+  count: adminCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRoles($input: AdminListRoleInput) {
+  count: adminCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRole($roleId: String!) {
+  item: adminRole(roleId: $roleId) {
+    ...RoleDetails
+  }
+}
+mutation AdminCreateRole($input: AdminCreateRoleInput!) {
+  created: adminCreateRole(input: $input) {
+    ...RoleDetails
+  }
+}
+mutation AdminUpdateRole($roleId: String!, $input: AdminUpdateRoleInput!) {
+  updated: adminUpdateRole(roleId: $roleId, input: $input) {
+    ...RoleDetails
+  }
+}
+mutation AdminDeleteRole($roleId: String!) {
+  deleted: adminDeleteRole(roleId: $roleId) {
+    ...RoleDetails
+  }
+}
+
+query UserRoles($input: UserListRoleInput) {
+  items: userRoles(input: $input) {
+    ...RoleLists
+  }
+  count: userCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRoles($input: UserListRoleInput) {
+  count: userCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRoles($input: UserListRoleInput) {
+  items: userSelectRoles(input: $input) {
+    ...RoleDetails
+  }
+}
+
+query UserRole($roleId: String!) {
+  item: userRole(roleId: $roleId) {
+    ...RoleDetails
+  }
+}
+
+mutation UserCreateRole($input: UserCreateRoleInput!) {
+  created: userCreateRole(input: $input) {
+    ...RoleDetails
+  }
+}
+mutation UserUpdateRole($roleId: String!, $input: UserUpdateRoleInput!) {
+  updated: userUpdateRole(roleId: $roleId, input: $input) {
+    ...RoleDetails
+  }
+}
+
+mutation UserUpdateRoles($input: UserUpdateRolesInput!) {
+  updated: userUpdateRoles(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRole($roleId: String!) {
+  deleted: userDeleteRole(roleId: $roleId) {
+    ...RoleDetails
+  }
+}
+
+query PublicRoles($input: UserListRoleInput) {
+  items: publicRoles(input: $input) {
+    ...RoleLists
+  }
+  count: publicCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRoles($input: UserListRoleInput) {
+  count: publicCountRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRoles($input: UserListRoleInput) {
+  items: publicSelectRoles(input: $input) {
+    ...RoleDetails
+  }
+}
+
+query PublicRole($roleId: String!) {
+  item: publicRole(roleId: $roleId) {
+    ...RoleDetails
+  }
+}

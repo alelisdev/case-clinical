@@ -1,0 +1,166 @@
+fragment FormLayoutDetails on FormLayout {
+  id
+  name
+  config
+  type
+  previewImage
+  testData
+  modelData
+  title
+  order
+  customLayouts
+  children {
+    id
+    name
+    config
+    title
+    order
+    type
+    previewImage
+    testData
+    customLayouts
+  }
+}
+
+fragment FormLayoutOverview on FormLayout {
+  id
+  name
+  type
+  previewImage
+}
+
+query userWebComponent($formName: String) {
+  template: userWebComponent(formName: $formName) {
+     ...FormLayoutDetails
+  }
+}
+
+query userWebWrapper($formName: String) {
+  wrapper: userWebWrapper(formName: $formName) {
+     ...FormLayoutDetails
+  }
+}
+
+query userWebComponents {
+  components: userWebComponents {
+    ...FormLayoutOverview
+  }
+}
+
+query userWebWrappers {
+  wrappers: userWebWrappers {
+    ...FormLayoutOverview
+  }
+}
+
+mutation userCreateWebComponent($formName: String!, $config: String!) {
+  created: userCreateWebComponent(formName: $formName, config: $config) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userCreateWebWrapper($formName: String!, $config: String!) {
+  created: userCreateWebWrapper(formName: $formName, config: $config) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userUpdateWebComponent($formName: String!, $config: String!, $previewImage: String!, $testData: String!, $modelData: String!) {
+  updated: userUpdateWebComponent(formName: $formName, config: $config, previewImage: $previewImage, testData: $testData, modelData: $modelData) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userUpdateWebWrapper($formName: String!, $config: String!, $previewImage: String!, $testData: String!, $modelData: String!) {
+  updated: userUpdateWebWrapper(formName: $formName, config: $config, previewImage: $previewImage, testData: $testData, modelData: $modelData) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userDeleteWebComponent($formName: String!) {
+  deleted: userDeleteWebComponent(formName: $formName) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userDeleteWebWrapper($formName: String!) {
+  deleted: userDeleteWebWrapper(formName: $formName) {
+    ...FormLayoutDetails
+  }
+}
+
+query userWebTemplate($formName: String) {
+  template: userWebTemplate(formName: $formName) {
+     ...FormLayoutDetails
+  }
+}
+
+query userWebTemplates {
+  templates: userWebTemplates {
+    ...FormLayoutOverview
+  }
+}
+
+mutation userCreateWebTemplate($formName: String!, $config: String!) {
+  created: userCreateWebTemplate(formName: $formName, config: $config) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation userUpdateWebTemplate($formName: String!, $config: String!, $previewImage: String!, $testData: String!, $modelData: String!) {
+  updated: userUpdateWebTemplate(formName: $formName, config: $config, previewImage: $previewImage, testData: $testData, modelData: $modelData) {
+   ...FormLayoutDetails
+  }
+}
+
+mutation userDeleteWebTemplate($formName: String!) {
+  deleted: userDeleteWebTemplate(formName: $formName) {
+    ...FormLayoutDetails
+  }
+}
+
+query UserFormLayout($formName: String!) {
+  layout: userFormLayout(formName: $formName) {
+  	...FormLayoutDetails
+  }
+}
+
+query PublicFormLayout($formName: String!) {
+  layout: publicFormLayout(formName: $formName) {
+  	...FormLayoutDetails
+  }
+}
+
+query UserAdminFormLayouts {
+  layouts: userAdminFormLayouts {
+    ...FormLayoutDetails
+  }
+}
+
+query PublicFormLayouts($formName: String) {
+  layouts: publicFormLayouts(formName: $formName) {
+    ...FormLayoutDetails
+  }
+}
+
+mutation UserUpdateFormLayout($formName: String!, $config: String!, $testData: String!, $modelData: String!) {
+  layout: userUpdateFormLayout(formName: $formName, config: $config, testData: $testData, modelData: $modelData) {
+  	...FormLayoutDetails
+  }
+}
+
+mutation UserCreateChildForm($input: UserChildFormCreateInput!) {
+  layout: userCreateChildForm(input: $input) {
+  	...FormLayoutDetails
+  }
+}
+
+mutation UserUpdateChildForm($input: UserChildFormUpdateInput !) {
+  layout: userUpdateChildForm(input: $input) {
+  	...FormLayoutDetails
+  }
+}
+
+mutation UserDeleteChildForm($formId: String!) {
+  formId: userDeleteChildForm(formId: $formId)
+}

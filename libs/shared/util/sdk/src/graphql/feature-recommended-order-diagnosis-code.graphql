@@ -1,0 +1,157 @@
+
+
+fragment RecommendedOrderDiagnosisCodeDetails on RecommendedOrderDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+recommendedOrderId
+diagnosis {
+  id
+  name
+}
+recommendedOrder {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RecommendedOrderDiagnosisCodeLists on RecommendedOrderDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+recommendedOrderId
+diagnosis {
+    id
+    name
+}
+recommendedOrder {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminRecommendedOrderDiagnosisCodes($input: AdminListRecommendedOrderDiagnosisCodeInput) {
+  items: adminRecommendedOrderDiagnosisCodes(input: $input) {
+    ...RecommendedOrderDiagnosisCodeLists
+  }
+  count: adminCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRecommendedOrderDiagnosisCodes($input: AdminListRecommendedOrderDiagnosisCodeInput) {
+  count: adminCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!) {
+  item: adminRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+mutation AdminCreateRecommendedOrderDiagnosisCode($input: AdminCreateRecommendedOrderDiagnosisCodeInput!) {
+  created: adminCreateRecommendedOrderDiagnosisCode(input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+mutation AdminUpdateRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!, $input: AdminUpdateRecommendedOrderDiagnosisCodeInput!) {
+  updated: adminUpdateRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId, input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+mutation AdminDeleteRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!) {
+  deleted: adminDeleteRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+query UserRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  items: userRecommendedOrderDiagnosisCodes(input: $input) {
+    ...RecommendedOrderDiagnosisCodeLists
+  }
+  count: userCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  count: userCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  items: userSelectRecommendedOrderDiagnosisCodes(input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+query UserRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!) {
+  item: userRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+mutation UserCreateRecommendedOrderDiagnosisCode($input: UserCreateRecommendedOrderDiagnosisCodeInput!) {
+  created: userCreateRecommendedOrderDiagnosisCode(input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+mutation UserUpdateRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!, $input: UserUpdateRecommendedOrderDiagnosisCodeInput!) {
+  updated: userUpdateRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId, input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+mutation UserUpdateRecommendedOrderDiagnosisCodes($input: UserUpdateRecommendedOrderDiagnosisCodesInput!) {
+  updated: userUpdateRecommendedOrderDiagnosisCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!) {
+  deleted: userDeleteRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+query PublicRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  items: publicRecommendedOrderDiagnosisCodes(input: $input) {
+    ...RecommendedOrderDiagnosisCodeLists
+  }
+  count: publicCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  count: publicCountRecommendedOrderDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRecommendedOrderDiagnosisCodes($input: UserListRecommendedOrderDiagnosisCodeInput) {
+  items: publicSelectRecommendedOrderDiagnosisCodes(input: $input) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}
+
+query PublicRecommendedOrderDiagnosisCode($recommendedOrderDiagnosisCodeId: String!) {
+  item: publicRecommendedOrderDiagnosisCode(recommendedOrderDiagnosisCodeId: $recommendedOrderDiagnosisCodeId) {
+    ...RecommendedOrderDiagnosisCodeDetails
+  }
+}

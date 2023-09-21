@@ -1,0 +1,158 @@
+
+fragment CasePreAccidentDetails on CasePreAccident {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+accidentDate
+injuries
+symptoms
+dateCreated
+removed
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment CasePreAccidentLists on CasePreAccident {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+accidentDate
+injuries
+symptoms
+dateCreated
+removed
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminCasePreAccidents($input: AdminListCasePreAccidentInput) {
+  items: adminCasePreAccidents(input: $input) {
+    ...CasePreAccidentLists
+  }
+  count: adminCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCasePreAccidents($input: AdminListCasePreAccidentInput) {
+  count: adminCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCasePreAccident($casePreAccidentId: String!) {
+  item: adminCasePreAccident(casePreAccidentId: $casePreAccidentId) {
+    ...CasePreAccidentDetails
+  }
+}
+mutation AdminCreateCasePreAccident($input: AdminCreateCasePreAccidentInput!) {
+  created: adminCreateCasePreAccident(input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+mutation AdminUpdateCasePreAccident($casePreAccidentId: String!, $input: AdminUpdateCasePreAccidentInput!) {
+  updated: adminUpdateCasePreAccident(casePreAccidentId: $casePreAccidentId, input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+mutation AdminDeleteCasePreAccident($casePreAccidentId: String!) {
+  deleted: adminDeleteCasePreAccident(casePreAccidentId: $casePreAccidentId) {
+    ...CasePreAccidentDetails
+  }
+}
+
+query UserCasePreAccidents($input: UserListCasePreAccidentInput) {
+  items: userCasePreAccidents(input: $input) {
+    ...CasePreAccidentLists
+  }
+  count: userCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCasePreAccidents($input: UserListCasePreAccidentInput) {
+  count: userCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCasePreAccidents($input: UserListCasePreAccidentInput) {
+  items: userSelectCasePreAccidents(input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+
+query UserCasePreAccident($casePreAccidentId: String!) {
+  item: userCasePreAccident(casePreAccidentId: $casePreAccidentId) {
+    ...CasePreAccidentDetails
+  }
+}
+
+mutation UserCreateCasePreAccident($input: UserCreateCasePreAccidentInput!) {
+  created: userCreateCasePreAccident(input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+mutation UserUpdateCasePreAccident($casePreAccidentId: String!, $input: UserUpdateCasePreAccidentInput!) {
+  updated: userUpdateCasePreAccident(casePreAccidentId: $casePreAccidentId, input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+
+mutation UserUpdateCasePreAccidents($input: UserUpdateCasePreAccidentsInput!) {
+  updated: userUpdateCasePreAccidents(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCasePreAccident($casePreAccidentId: String!) {
+  deleted: userDeleteCasePreAccident(casePreAccidentId: $casePreAccidentId) {
+    ...CasePreAccidentDetails
+  }
+}
+
+query PublicCasePreAccidents($input: UserListCasePreAccidentInput) {
+  items: publicCasePreAccidents(input: $input) {
+    ...CasePreAccidentLists
+  }
+  count: publicCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCasePreAccidents($input: UserListCasePreAccidentInput) {
+  count: publicCountCasePreAccidents(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCasePreAccidents($input: UserListCasePreAccidentInput) {
+  items: publicSelectCasePreAccidents(input: $input) {
+    ...CasePreAccidentDetails
+  }
+}
+
+query PublicCasePreAccident($casePreAccidentId: String!) {
+  item: publicCasePreAccident(casePreAccidentId: $casePreAccidentId) {
+    ...CasePreAccidentDetails
+  }
+}

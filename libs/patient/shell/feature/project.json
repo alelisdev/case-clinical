@@ -1,0 +1,17 @@
+{
+  "name": "patient-shell-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/patient/shell/feature/src",
+  "prefix": "case-clinical",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/patient/shell/feature/**/*.ts", "libs/patient/shell/feature/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,158 @@
+
+fragment LeadTreatmentDetails on LeadTreatment {
+id
+createdAt
+updatedAt
+name
+leadId
+treatmentId
+lead {
+  id
+  name
+}
+treatment {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment LeadTreatmentLists on LeadTreatment {
+id
+createdAt
+updatedAt
+name
+leadId
+treatmentId
+lead {
+    id
+    name
+}
+treatment {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminLeadTreatments($input: AdminListLeadTreatmentInput) {
+  items: adminLeadTreatments(input: $input) {
+    ...LeadTreatmentLists
+  }
+  count: adminCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeadTreatments($input: AdminListLeadTreatmentInput) {
+  count: adminCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLeadTreatment($leadTreatmentId: String!) {
+  item: adminLeadTreatment(leadTreatmentId: $leadTreatmentId) {
+    ...LeadTreatmentDetails
+  }
+}
+mutation AdminCreateLeadTreatment($input: AdminCreateLeadTreatmentInput!) {
+  created: adminCreateLeadTreatment(input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+mutation AdminUpdateLeadTreatment($leadTreatmentId: String!, $input: AdminUpdateLeadTreatmentInput!) {
+  updated: adminUpdateLeadTreatment(leadTreatmentId: $leadTreatmentId, input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+mutation AdminDeleteLeadTreatment($leadTreatmentId: String!) {
+  deleted: adminDeleteLeadTreatment(leadTreatmentId: $leadTreatmentId) {
+    ...LeadTreatmentDetails
+  }
+}
+
+query UserLeadTreatments($input: UserListLeadTreatmentInput) {
+  items: userLeadTreatments(input: $input) {
+    ...LeadTreatmentLists
+  }
+  count: userCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeadTreatments($input: UserListLeadTreatmentInput) {
+  count: userCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeadTreatments($input: UserListLeadTreatmentInput) {
+  items: userSelectLeadTreatments(input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+
+query UserLeadTreatment($leadTreatmentId: String!) {
+  item: userLeadTreatment(leadTreatmentId: $leadTreatmentId) {
+    ...LeadTreatmentDetails
+  }
+}
+
+mutation UserCreateLeadTreatment($input: UserCreateLeadTreatmentInput!) {
+  created: userCreateLeadTreatment(input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+mutation UserUpdateLeadTreatment($leadTreatmentId: String!, $input: UserUpdateLeadTreatmentInput!) {
+  updated: userUpdateLeadTreatment(leadTreatmentId: $leadTreatmentId, input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+
+mutation UserUpdateLeadTreatments($input: UserUpdateLeadTreatmentsInput!) {
+  updated: userUpdateLeadTreatments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLeadTreatment($leadTreatmentId: String!) {
+  deleted: userDeleteLeadTreatment(leadTreatmentId: $leadTreatmentId) {
+    ...LeadTreatmentDetails
+  }
+}
+
+query PublicLeadTreatments($input: UserListLeadTreatmentInput) {
+  items: publicLeadTreatments(input: $input) {
+    ...LeadTreatmentLists
+  }
+  count: publicCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeadTreatments($input: UserListLeadTreatmentInput) {
+  count: publicCountLeadTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeadTreatments($input: UserListLeadTreatmentInput) {
+  items: publicSelectLeadTreatments(input: $input) {
+    ...LeadTreatmentDetails
+  }
+}
+
+query PublicLeadTreatment($leadTreatmentId: String!) {
+  item: publicLeadTreatment(leadTreatmentId: $leadTreatmentId) {
+    ...LeadTreatmentDetails
+  }
+}

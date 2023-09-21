@@ -1,0 +1,164 @@
+
+fragment ManufacturerDetails on Manufacturer {
+id
+createdAt
+updatedAt
+name
+primaryPhoneNumber
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+notes
+
+
+
+
+
+
+implants {
+   ...ImplantLists
+  }
+}
+
+fragment ManufacturerLists on Manufacturer {
+id
+createdAt
+updatedAt
+name
+primaryPhoneNumber
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+notes
+
+
+
+
+
+
+implants {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminManufacturers($input: AdminListManufacturerInput) {
+  items: adminManufacturers(input: $input) {
+    ...ManufacturerLists
+  }
+  count: adminCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountManufacturers($input: AdminListManufacturerInput) {
+  count: adminCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminManufacturer($manufacturerId: String!) {
+  item: adminManufacturer(manufacturerId: $manufacturerId) {
+    ...ManufacturerDetails
+  }
+}
+mutation AdminCreateManufacturer($input: AdminCreateManufacturerInput!) {
+  created: adminCreateManufacturer(input: $input) {
+    ...ManufacturerDetails
+  }
+}
+mutation AdminUpdateManufacturer($manufacturerId: String!, $input: AdminUpdateManufacturerInput!) {
+  updated: adminUpdateManufacturer(manufacturerId: $manufacturerId, input: $input) {
+    ...ManufacturerDetails
+  }
+}
+mutation AdminDeleteManufacturer($manufacturerId: String!) {
+  deleted: adminDeleteManufacturer(manufacturerId: $manufacturerId) {
+    ...ManufacturerDetails
+  }
+}
+
+query UserManufacturers($input: UserListManufacturerInput) {
+  items: userManufacturers(input: $input) {
+    ...ManufacturerLists
+  }
+  count: userCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountManufacturers($input: UserListManufacturerInput) {
+  count: userCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectManufacturers($input: UserListManufacturerInput) {
+  items: userSelectManufacturers(input: $input) {
+    ...ManufacturerDetails
+  }
+}
+
+query UserManufacturer($manufacturerId: String!) {
+  item: userManufacturer(manufacturerId: $manufacturerId) {
+    ...ManufacturerDetails
+  }
+}
+
+mutation UserCreateManufacturer($input: UserCreateManufacturerInput!) {
+  created: userCreateManufacturer(input: $input) {
+    ...ManufacturerDetails
+  }
+}
+mutation UserUpdateManufacturer($manufacturerId: String!, $input: UserUpdateManufacturerInput!) {
+  updated: userUpdateManufacturer(manufacturerId: $manufacturerId, input: $input) {
+    ...ManufacturerDetails
+  }
+}
+
+mutation UserUpdateManufacturers($input: UserUpdateManufacturersInput!) {
+  updated: userUpdateManufacturers(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteManufacturer($manufacturerId: String!) {
+  deleted: userDeleteManufacturer(manufacturerId: $manufacturerId) {
+    ...ManufacturerDetails
+  }
+}
+
+query PublicManufacturers($input: UserListManufacturerInput) {
+  items: publicManufacturers(input: $input) {
+    ...ManufacturerLists
+  }
+  count: publicCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountManufacturers($input: UserListManufacturerInput) {
+  count: publicCountManufacturers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectManufacturers($input: UserListManufacturerInput) {
+  items: publicSelectManufacturers(input: $input) {
+    ...ManufacturerDetails
+  }
+}
+
+query PublicManufacturer($manufacturerId: String!) {
+  item: publicManufacturer(manufacturerId: $manufacturerId) {
+    ...ManufacturerDetails
+  }
+}

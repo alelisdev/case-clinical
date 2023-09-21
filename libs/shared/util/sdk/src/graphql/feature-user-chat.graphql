@@ -1,0 +1,47 @@
+fragment UserChatDetails on ChatModel {
+  id
+  createdAt
+  updatedAt
+  user {
+    firstName
+    lastName
+  }
+  matrixUserId
+  userId
+  firmId
+}
+fragment ChatLoginDetails on ChatLoginModel {
+  user_id
+  access_token
+  refresh_token
+}
+
+fragment ChatRoom on UserChatRoom {
+  room_id
+  access_token
+  refresh_token
+}
+
+query UserChatList {
+  items: userChatList {
+    ...UserChatDetails
+  }
+}
+
+query UserChatLogin {
+  item: userChatLogin {
+    ...ChatLoginDetails
+  }
+}
+
+mutation CreateChatRoom($input: UserCreateChatRoom!) {
+  item: createChatRoom(input: $input) {
+    ...ChatRoom
+  }
+}
+
+mutation JoinChatRoom($input: UserJoinChatRoom!) {
+  item: joinChatRoom(input: $input) {
+    ...ChatRoom
+  }
+}

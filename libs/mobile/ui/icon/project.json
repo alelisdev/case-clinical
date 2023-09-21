@@ -1,0 +1,23 @@
+{
+  "name": "mobile-ui-icon",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/ui/icon/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/ui/icon/src/**/*.ts", "libs/mobile/ui/icon/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/ui/icon"],
+      "options": {
+        "jestConfig": "libs/mobile/ui/icon/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

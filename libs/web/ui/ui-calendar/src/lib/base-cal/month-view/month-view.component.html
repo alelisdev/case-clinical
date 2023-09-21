@@ -1,0 +1,59 @@
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div
+    class="p-1 h-full flex-col items-start aspect-square duration-100 justify-start dark:bg-slate-800"
+  >
+    <time
+      [dateTime]="day.date"
+      [ngClass]="[
+        isSelectedDate(day.date)
+          ? isToday(day.date)
+            ? 'flex h-6 w-6 items-center justify-center rounded-full bg-primary font-semibold text-white'
+            : 'flex h-6 w-6 items-center justify-center rounded-full bg-primary font-semibold text-white'
+          : isToday(day.date)
+          ? 'text-red-600 font-bold'
+          : ''
+      ]"
+    >
+      {{ day.date.getDate() }}
+    </time>
+
+    <div class="truncateh-full w-full">
+      <ol class="text-xs md:text-sm">
+        <li
+          *ngFor="let event of day.events.slice(0, 5)"
+        >
+        <ng-container *ngTemplateOutlet="monthViewRef; context: { event: event?.extendedProps?.extraData ?? [] }"></ng-container>
+        </li>
+
+        <li *ngIf="day.events.length > 5" class="text-gray-500">+ {{ day.events.length - 5 }} more</li>
+      </ol>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #customHeaderTemplate>
+  <div
+    class="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none"
+  >
+    <div class="bg-white py-2 text-red-700">S<span class="sr-only sm:not-sr-only">un</span></div>
+    <div class="bg-white py-2">M<span class="sr-only sm:not-sr-only">on</span></div>
+    <div class="bg-white py-2">T<span class="sr-only sm:not-sr-only">ue</span></div>
+    <div class="bg-white py-2">W<span class="sr-only sm:not-sr-only">ed</span></div>
+    <div class="bg-white py-2">T<span class="sr-only sm:not-sr-only">hu</span></div>
+    <div class="bg-white py-2">F<span class="sr-only sm:not-sr-only">ri</span></div>
+    <div class="bg-white py-2">S<span class="sr-only sm:not-sr-only">at</span></div>
+  </div>
+</ng-template>
+
+<div class="flex flex-col overflow-auto">
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [cellTemplate]="customCellTemplate"
+    [headerTemplate]="customHeaderTemplate"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+  >
+  </mwl-calendar-month-view>
+</div>
+

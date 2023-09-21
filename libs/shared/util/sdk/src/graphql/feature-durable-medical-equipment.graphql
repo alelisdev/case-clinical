@@ -1,0 +1,166 @@
+
+fragment DurableMedicalEquipmentDetails on DurableMedicalEquipment {
+id
+createdAt
+updatedAt
+name
+itemCode
+vendorId
+size
+brand
+itemURL
+estimatedCost
+vendor {
+  id
+  name
+}
+
+
+
+
+
+priorAuthDmes {
+    ...PriorAuthDmeLists
+  }
+}
+
+fragment DurableMedicalEquipmentLists on DurableMedicalEquipment {
+id
+createdAt
+updatedAt
+name
+itemCode
+vendorId
+size
+brand
+itemURL
+estimatedCost
+vendor {
+    id
+    name
+}
+
+
+
+
+
+priorAuthDmes {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminDurableMedicalEquipments($input: AdminListDurableMedicalEquipmentInput) {
+  items: adminDurableMedicalEquipments(input: $input) {
+    ...DurableMedicalEquipmentLists
+  }
+  count: adminCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountDurableMedicalEquipments($input: AdminListDurableMedicalEquipmentInput) {
+  count: adminCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminDurableMedicalEquipment($durableMedicalEquipmentId: String!) {
+  item: adminDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+mutation AdminCreateDurableMedicalEquipment($input: AdminCreateDurableMedicalEquipmentInput!) {
+  created: adminCreateDurableMedicalEquipment(input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+mutation AdminUpdateDurableMedicalEquipment($durableMedicalEquipmentId: String!, $input: AdminUpdateDurableMedicalEquipmentInput!) {
+  updated: adminUpdateDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId, input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+mutation AdminDeleteDurableMedicalEquipment($durableMedicalEquipmentId: String!) {
+  deleted: adminDeleteDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+query UserDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  items: userDurableMedicalEquipments(input: $input) {
+    ...DurableMedicalEquipmentLists
+  }
+  count: userCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  count: userCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  items: userSelectDurableMedicalEquipments(input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+query UserDurableMedicalEquipment($durableMedicalEquipmentId: String!) {
+  item: userDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+mutation UserCreateDurableMedicalEquipment($input: UserCreateDurableMedicalEquipmentInput!) {
+  created: userCreateDurableMedicalEquipment(input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+mutation UserUpdateDurableMedicalEquipment($durableMedicalEquipmentId: String!, $input: UserUpdateDurableMedicalEquipmentInput!) {
+  updated: userUpdateDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId, input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+mutation UserUpdateDurableMedicalEquipments($input: UserUpdateDurableMedicalEquipmentsInput!) {
+  updated: userUpdateDurableMedicalEquipments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteDurableMedicalEquipment($durableMedicalEquipmentId: String!) {
+  deleted: userDeleteDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+query PublicDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  items: publicDurableMedicalEquipments(input: $input) {
+    ...DurableMedicalEquipmentLists
+  }
+  count: publicCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  count: publicCountDurableMedicalEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectDurableMedicalEquipments($input: UserListDurableMedicalEquipmentInput) {
+  items: publicSelectDurableMedicalEquipments(input: $input) {
+    ...DurableMedicalEquipmentDetails
+  }
+}
+
+query PublicDurableMedicalEquipment($durableMedicalEquipmentId: String!) {
+  item: publicDurableMedicalEquipment(durableMedicalEquipmentId: $durableMedicalEquipmentId) {
+    ...DurableMedicalEquipmentDetails
+  }
+}

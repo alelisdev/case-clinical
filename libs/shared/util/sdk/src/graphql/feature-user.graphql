@@ -1,0 +1,337 @@
+
+fragment UserDetails on User {
+id
+createdAt
+updatedAt
+name
+developer
+username
+password
+firstName
+lastName
+avatarUrl
+line1
+line2
+city
+state
+postalCode
+phone
+bio
+slug
+status
+signupStatus
+verified
+customerId
+planId
+dateOfBirth
+cellPhone
+education
+attorneyId
+vendorId
+patientId
+officeName
+patient {
+  id
+  name
+}
+vendor {
+  id
+  name
+}
+
+attorney {
+ id
+ name
+}
+
+
+settings {
+    id
+    name
+  }
+
+userRoles {
+    id
+    name
+  }
+
+emails {
+    id
+    name
+  }
+
+priorAuthorizationRequestsReferredTo {
+    id
+    name
+  }
+
+priorAuthorizationRequestsMedicalProvider {
+    id
+    name
+  }
+
+messages {
+    id
+    name
+  }
+
+navigations {
+    id
+    name
+  }
+
+notifications {
+    id
+    name
+  }
+
+shortcuts {
+    id
+    name
+  }
+
+providerDocuments {
+    id
+    name
+  }
+
+chats {
+    id
+    name
+  }
+
+assignedDocuments {
+    id
+    name
+  }
+
+userFeatures {
+    id
+    name
+  }
+
+
+userFeaturePermissions {
+    id
+    name
+  }
+}
+
+fragment UserLists on User {
+id
+createdAt
+updatedAt
+name
+developer
+username
+password
+firstName
+lastName
+avatarUrl
+line1
+line2
+city
+state
+postalCode
+phone
+bio
+slug
+status
+signupStatus
+verified
+customerId
+planId
+dateOfBirth
+cellPhone
+education
+attorneyId
+vendorId
+patientId
+officeName
+patient {
+  id
+  name
+}
+vendor {
+    id
+    name
+}
+attorney {
+    id
+    name
+}
+
+
+settings {
+    id
+    name
+  }
+
+
+userRoles {
+    id
+    name
+  }
+
+
+emails {
+    id
+    name
+  }
+
+
+priorAuthorizationRequestsReferredTo {
+    id
+    name
+  }
+
+
+priorAuthorizationRequestsMedicalProvider {
+    id
+    name
+  }
+
+
+messages {
+    id
+    name
+  }
+
+
+navigations {
+    id
+    name
+  }
+
+
+notifications {
+    id
+    name
+  }
+
+
+shortcuts {
+    id
+    name
+  }
+
+
+providerDocuments {
+    id
+    name
+  }
+
+
+chats {
+    id
+    name
+  }
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+
+userFeatures {
+    id
+    name
+  }
+
+
+userFeaturePermissions {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminUsers($input: AdminListUserInput) {
+  items: adminUsers(input: $input) {
+    ...UserLists
+  }
+  count: adminCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountUsers($input: AdminListUserInput) {
+  count: adminCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminUser($userId: String!) {
+  item: adminUser(userId: $userId) {
+    ...UserDetails
+  }
+}
+mutation AdminCreateUser($input: AdminCreateUserInput!) {
+  created: adminCreateUser(input: $input) {
+    ...UserDetails
+  }
+}
+mutation AdminUpdateUser($userId: String!, $input: AdminUpdateUserInput!) {
+  updated: adminUpdateUser(userId: $userId, input: $input) {
+    ...UserDetails
+  }
+}
+mutation AdminDeleteUser($userId: String!) {
+  deleted: adminDeleteUser(userId: $userId) {
+    ...UserDetails
+  }
+}
+
+query UserUsers($input: UserListUserInput) {
+  items: userUsers(input: $input) {
+    ...UserLists
+  }
+  count: userCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountUsers($input: UserListUserInput) {
+  count: userCountUsers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectUsers($input: UserListUserInput) {
+  items: userSelectUsers(input: $input) {
+    ...UserDetails
+  }
+}
+
+query UserUser($userId: String!) {
+  item: userUser(userId: $userId) {
+    ...UserDetails
+  }
+}
+
+mutation UserCreateUser($input: UserCreateUserInput!) {
+  created: userCreateUser(input: $input) {
+    ...UserDetails
+  }
+}
+mutation UserUpdateUser($userId: String!, $input: UserUpdateUserInput!) {
+  updated: userUpdateUser(userId: $userId, input: $input) {
+    ...UserDetails
+  }
+}
+
+mutation UserUpdateUsers($input: UserUpdateUsersInput!) {
+  updated: userUpdateUsers(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteUser($userId: String!) {
+  deleted: userDeleteUser(userId: $userId) {
+    ...UserDetails
+  }
+}
+

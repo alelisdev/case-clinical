@@ -1,0 +1,234 @@
+
+fragment LocationDetails on Location {
+id
+createdAt
+updatedAt
+name
+locationName
+line1
+line2
+city
+state
+postalCode
+latitude
+longitude
+abbrev
+division
+country
+officePhone
+fax
+attentionTo
+placeOfServiceId
+vendorLocationId
+placeOfService {
+  id
+  name
+}
+
+vendorLocation {
+ ...VendorLocationLists
+}
+
+locationImages {
+  ...DocumentOverview
+}
+
+
+providerLocations {
+    id
+    name
+    location {
+      id
+      name
+    }
+    clinicalProvider {
+      id
+      name
+    }
+  }
+
+caseAccounts {
+    ...CaseAccountLists
+  }
+
+caseProcedures {
+    ...CaseProcedureLists
+  }
+
+appointments {
+    ...AppointmentLists
+  }
+}
+
+fragment LocationLists on Location {
+id
+createdAt
+updatedAt
+name
+locationName
+line1
+line2
+city
+state
+postalCode
+latitude
+longitude
+abbrev
+division
+country
+officePhone
+fax
+attentionTo
+placeOfServiceId
+vendorLocationId
+placeOfService {
+    id
+    name
+}
+
+vendorLocation {
+  id
+  name
+}
+
+locationImages {
+  id
+  name
+}
+
+providerLocations {
+  id
+  name
+}
+
+caseAccounts {
+  id
+  name
+}
+
+caseProcedures {
+  id
+  name
+}
+
+
+appointments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminLocations($input: AdminListLocationInput) {
+  items: adminLocations(input: $input) {
+    ...LocationLists
+  }
+  count: adminCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLocations($input: AdminListLocationInput) {
+  count: adminCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLocation($locationId: String!) {
+  item: adminLocation(locationId: $locationId) {
+    ...LocationDetails
+  }
+}
+mutation AdminCreateLocation($input: AdminCreateLocationInput!) {
+  created: adminCreateLocation(input: $input) {
+    ...LocationDetails
+  }
+}
+mutation AdminUpdateLocation($locationId: String!, $input: AdminUpdateLocationInput!) {
+  updated: adminUpdateLocation(locationId: $locationId, input: $input) {
+    ...LocationDetails
+  }
+}
+mutation AdminDeleteLocation($locationId: String!) {
+  deleted: adminDeleteLocation(locationId: $locationId) {
+    ...LocationDetails
+  }
+}
+
+query UserLocations($input: UserListLocationInput) {
+  items: userLocations(input: $input) {
+    ...LocationLists
+  }
+  count: userCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLocations($input: UserListLocationInput) {
+  count: userCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLocations($input: UserListLocationInput) {
+  items: userSelectLocations(input: $input) {
+    ...LocationDetails
+  }
+}
+
+query UserLocation($locationId: String!) {
+  item: userLocation(locationId: $locationId) {
+    ...LocationDetails
+  }
+}
+
+mutation UserCreateLocation($input: UserCreateLocationInput!) {
+  created: userCreateLocation(input: $input) {
+    ...LocationDetails
+  }
+}
+mutation UserUpdateLocation($locationId: String!, $input: UserUpdateLocationInput!) {
+  updated: userUpdateLocation(locationId: $locationId, input: $input) {
+    ...LocationDetails
+  }
+}
+
+mutation UserUpdateLocations($input: UserUpdateLocationsInput!) {
+  updated: userUpdateLocations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLocation($locationId: String!) {
+  deleted: userDeleteLocation(locationId: $locationId) {
+    ...LocationDetails
+  }
+}
+
+query PublicLocations($input: UserListLocationInput) {
+  items: publicLocations(input: $input) {
+    ...LocationLists
+  }
+  count: publicCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLocations($input: UserListLocationInput) {
+  count: publicCountLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLocations($input: UserListLocationInput) {
+  items: publicSelectLocations(input: $input) {
+    ...LocationDetails
+  }
+}
+
+query PublicLocation($locationId: String!) {
+  item: publicLocation(locationId: $locationId) {
+    ...LocationDetails
+  }
+}

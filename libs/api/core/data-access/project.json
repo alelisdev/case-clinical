@@ -1,0 +1,22 @@
+{
+  "name": "api-core-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/core/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/core/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/core/data-access"],
+      "options": {
+        "jestConfig": "libs/api/core/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

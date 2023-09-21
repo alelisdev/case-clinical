@@ -1,0 +1,26 @@
+{
+  "name": "api-place-of-service-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/place-of-service/feature/src",
+  "prefix": "place-of-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/place-of-service/data-access/src/**/*.ts",
+          "libs/api/place-of-service/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/place-of-service/data-access"],
+      "options": {
+        "jestConfig": "libs/api/place-of-service/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+
+fragment BodyPartDetails on BodyPart {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment BodyPartLists on BodyPart {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminBodyParts($input: AdminListBodyPartInput) {
+  items: adminBodyParts(input: $input) {
+    ...BodyPartLists
+  }
+  count: adminCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountBodyParts($input: AdminListBodyPartInput) {
+  count: adminCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminBodyPart($bodyPartId: String!) {
+  item: adminBodyPart(bodyPartId: $bodyPartId) {
+    ...BodyPartDetails
+  }
+}
+mutation AdminCreateBodyPart($input: AdminCreateBodyPartInput!) {
+  created: adminCreateBodyPart(input: $input) {
+    ...BodyPartDetails
+  }
+}
+mutation AdminUpdateBodyPart($bodyPartId: String!, $input: AdminUpdateBodyPartInput!) {
+  updated: adminUpdateBodyPart(bodyPartId: $bodyPartId, input: $input) {
+    ...BodyPartDetails
+  }
+}
+mutation AdminDeleteBodyPart($bodyPartId: String!) {
+  deleted: adminDeleteBodyPart(bodyPartId: $bodyPartId) {
+    ...BodyPartDetails
+  }
+}
+
+query UserBodyParts($input: UserListBodyPartInput) {
+  items: userBodyParts(input: $input) {
+    ...BodyPartLists
+  }
+  count: userCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountBodyParts($input: UserListBodyPartInput) {
+  count: userCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectBodyParts($input: UserListBodyPartInput) {
+  items: userSelectBodyParts(input: $input) {
+    ...BodyPartDetails
+  }
+}
+
+query UserBodyPart($bodyPartId: String!) {
+  item: userBodyPart(bodyPartId: $bodyPartId) {
+    ...BodyPartDetails
+  }
+}
+
+mutation UserCreateBodyPart($input: UserCreateBodyPartInput!) {
+  created: userCreateBodyPart(input: $input) {
+    ...BodyPartDetails
+  }
+}
+mutation UserUpdateBodyPart($bodyPartId: String!, $input: UserUpdateBodyPartInput!) {
+  updated: userUpdateBodyPart(bodyPartId: $bodyPartId, input: $input) {
+    ...BodyPartDetails
+  }
+}
+
+mutation UserUpdateBodyParts($input: UserUpdateBodyPartsInput!) {
+  updated: userUpdateBodyParts(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteBodyPart($bodyPartId: String!) {
+  deleted: userDeleteBodyPart(bodyPartId: $bodyPartId) {
+    ...BodyPartDetails
+  }
+}
+
+query PublicBodyParts($input: UserListBodyPartInput) {
+  items: publicBodyParts(input: $input) {
+    ...BodyPartLists
+  }
+  count: publicCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountBodyParts($input: UserListBodyPartInput) {
+  count: publicCountBodyParts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectBodyParts($input: UserListBodyPartInput) {
+  items: publicSelectBodyParts(input: $input) {
+    ...BodyPartDetails
+  }
+}
+
+query PublicBodyPart($bodyPartId: String!) {
+  item: publicBodyPart(bodyPartId: $bodyPartId) {
+    ...BodyPartDetails
+  }
+}

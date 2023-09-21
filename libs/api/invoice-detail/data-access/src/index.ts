@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-invoice-detail.input'
+export * from './lib/dto/admin-list-invoice-detail.input'
+export * from './lib/dto/admin-update-invoice-detail.input'
+export * from './lib/dto/invoice-detail.input'
+export * from './lib/dto/user-create-invoice-detail.input'
+export * from './lib/dto/user-list-invoice-detail.input'
+export * from './lib/dto/user-update-invoice-detail.input'
+export * from './lib/dto/user-update-invoice-details.input'
+export * from './lib/models/invoice-detail.model'
+export * from './lib/api-invoice-detail-data-access.module'
+
+export * from './lib/api-invoice-detail-data-access-admin.service'
+export * from './lib/api-invoice-detail-data-access-public.service'
+export * from './lib/api-invoice-detail-data-access-user.service'

@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/logging/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/logging"],
+      "options": {
+        "project": "libs/logging/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/logging/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/logging/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/logging"],
+      "options": {
+        "jestConfig": "libs/logging/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/logging/**/*.ts", "libs/logging/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-logging"
+}

@@ -1,0 +1,225 @@
+<ng-container *ngIf="documents && documents.length > 0 && mode === 'default'">
+  <div class="flex flex-wrap gap-2 items-stretch">
+    <div *ngFor="let file of documents; let i = index" class="rounded-xl p-2.5 bg-stone-200">
+      <a
+        webUiFormFieldFile
+        ngDefaultControl
+        class="text-blue-500 no-underline hover:cursor-pointer break-all"
+        [download]="file?.name"
+        [formControl]="formControl"
+        [formlyAttributes]="field"
+        #tooltip="matTooltip"
+        [matTooltip]="file?.name"
+        (click)="openDocument(file, $event, i)"
+        >{{ getAbbrName(file?.name) }}
+      </a>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="mode === 'eye'">
+  <div>
+    <a
+      webUiFormFieldFile
+      class="text-blue-500 flex no-underline hover:cursor-pointer break-all"
+      [download]="documents[0]?.name"
+      #tooltip="matTooltip"
+      [matTooltip]="documents[0]?.name"
+      (click)="openDocument(documents[0], $event)"
+    >
+      <mat-icon svgIcon="heroicons_outline:eye"></mat-icon>
+    </a>
+  </div>
+</ng-container>
+<ng-container *ngIf="mode === 'button'">
+  <div>
+    <a
+      webUiFormFieldFile
+      class="text-blue-500 flex no-underline hover:cursor-pointer break-all"
+      [download]="documents[0]?.name"
+      #tooltip="matTooltip"
+      [matTooltip]="documents[0]?.name"
+      (click)="openDocument(documents[0], $event)"
+    >
+      <button mat-flat-button [color]="'primary'">Preview</button>
+    </a>
+  </div>
+</ng-container>
+<ng-container *ngIf="mode === 'avatar'">
+  <ng-container *ngIf="avatarImage | async as doc; else whileLoading">
+    <div
+      class="h-full w-full center-image"
+      *ngIf="doc.extension.split('/')[0] === 'image'"
+      [style.backgroundImage]="'url(' + doc.attachment + ')'"
+    >
+      <img [src]="doc.attachment" class="h-full w-auto" />
+    </div>
+  </ng-container>
+  <ng-template #whileLoading>
+    <div
+      class="flex items-center justify-center w-full h-full overflow-hidden font-bold leading-none text-gray-600 uppercase bg-gray-200 rounded text-2xl dark:bg-gray-700 dark:text-gray-200"
+    >
+      {{ loadingText }}
+    </div>
+  </ng-template>
+</ng-container>
+<ng-container *ngIf="mode === 'edit'">
+  <div class="flex flex-wrap gap-2 items-stretch">
+    <div *ngIf="documents?.id" class="rounded-xl p-2.5 bg-stone-200">
+      <a
+        webUiFormFieldFile
+        ngDefaultControl
+        class="text-blue-500 no-underline hover:cursor-pointer break-all"
+        [download]="documents?.name"
+        [formControl]="formControl"
+        [formlyAttributes]="field"
+        #tooltip="matTooltip"
+        [matTooltip]="documents?.name"
+        (click)="openDocument(documents, $event)"
+        >{{ getAbbrName(documents?.name) }}
+      </a>
+    </div>
+  </div>
+</ng-container>
+<ng-template #documentTpl let-ref>
+  <div class="flex flex-col flex-grow overflow-hidden" *ngIf="document | async as doc">
+    <div class="flex justify-between px-3 py-3">
+      <span class="text-xl font-bold truncate" #tooltip="matTooltip" [matTooltip]="doc?.name?.split('.')[0]">{{
+        getAbbrName(doc?.name?.split('.')[0])
+      }}</span>
+      <div class="flex items-center gap-4">
+        <ui-button
+          *ngIf="isDownloadable && doc?.extension?.split('/')[0] === 'image'"
+          label="Download"
+          variant="Default"
+          (click)="download(doc)"
+        ></ui-button>
+        <ui-button label="Close" variant="white" (click)="ref.close()"></ui-button>
+      </div>
+    </div>
+    <div class="flex-grow flex-shrink-0 basis-200px basis relative overflow-y-auto">
+      <ng-container *ngIf="isLoading">
+        <div class="w-full h-full absolute top-0 left-0 flex">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div class="flex items-center justify-center" style="width: 100%; height: 100%">
+          <div class="text-center">
+            <p>Loading...</p>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isLoading">
+        <ng-container *ngIf="doc && doc.isDicom">
+          <!-- static url for now -->
+          <!-- <p class="h-full w-full">Temporary: This is a DICOM file. Right Now we are not supporting View File. We are working on it.</p> -->
+          <iframe *ngIf="doc.url" [src]="doc.url" class="h-full w-full"></iframe>
+        </ng-container>
+        <ng-container *ngIf="doc && !doc.isDicom">
+          <ng-container *ngIf="doc.extension === 'application/pdf'">
+            <div class="h-full w-full" [ngClass]="loading ? 'opacity-0' : 'opacity-100'">
+              <ngx-extended-pdf-viewer
+                [base64Src]="getDataUrl(doc?.attachment)"
+                [useBrowserLocale]="true"
+                [textLayer]="false"
+                [enableDragAndDrop]="false"
+                [showHandToolButton]="true"
+                [showOpenFileButton]="false"
+                (progress)="progressLog($event)"
+              ></ngx-extended-pdf-viewer>
+            </div>
+            <div class="w-full h-full absolute top-0 left-0" [ngClass]="loading ? 'flex' : 'hidden'">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="doc.extension && doc.extension.split('/')[0] === 'image'">
+            <div class="overflow-x-auto flex h-full items-center justify-center">
+              <img [src]="safeUrl(doc.attachment)" alt="Image from server" class="h-auto w-auto minImage" (error)="showDownloadOnError(imgElement, hiddenDownload, $event)" #imgElement />
+              <div class="flex justify-center flex-col gap-4 items-center hidden" #hiddenDownload>
+                <p>This image file cannot be previewed, click below to download</p>
+                <ui-button label="Download" variant="Default" class="mt-2" (click)="download(doc)"></ui-button>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="doc.extension && doc.extension !== 'application/pdf' && doc.extension.split('/')[0] !== 'image'"
+          >
+            <div class="flex items-center justify-center" style="width: 100%; height: 100%">
+              <div class="text-center">
+                <p>Only PDF, Image and DICOM Image view are supported for now.</p>
+                <p class="mb-2">Click below for download</p>
+                <ui-button label="Download" variant="Default" class="mt-2" (click)="download(doc)"></ui-button>
+                <p class="mt-2">{{doc.name}}</p>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+    <!-- Footer next previous button -->
+    <div class="text-center" *ngIf="documents?.length > 1">
+      <button class="next-prev" (click)="nextPrevClick(false)" [disabled]="selectedIndex == 0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+          <path
+            fill-rule="evenodd"
+            fill="#3B82F6"
+            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+      <button class="next-prev" (click)="nextPrevClick(true)" [disabled]="selectedIndex === documents?.length - 1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+          <path
+            fill-rule="evenodd"
+            fill="#3B82F6"
+            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</ng-template>
+<ng-container *ngIf="mode === 'gallery'">
+  <div class="w-full my-4 mx-2" *ngIf="galleryImages">
+    <ng-container *ngIf="galleryImages.length > 0; else noImages">
+      <div
+        class="w-full flex items-stretch justify-between current-image-gallery h-100 transition-all"
+        [style.backgroundImage]="'url(' + getCurrentGallery() + ')'"
+      >
+        <button class="px-4" (click)="setPrevious()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path
+              fill-rule="evenodd"
+              fill="#3B82F6"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+        <button class="px-4" (click)="setNext()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path
+              fill-rule="evenodd"
+              fill="#3B82F6"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full flex flex-wrap justify-center gap-2 items-center py-2 px-4 my-4">
+        <ng-container *ngFor="let img of galleryImages; index as i">
+          <div
+            class="h-12 transition-all rounded p-1"
+            [ngClass]="i === currentGalleryIndex ? 'border border-blue-500' : 'opacity-50'"
+          >
+            <img [src]="safeUrl(img?.attachment)" class="h-full w-auto" alt="thumbnail" (click)="setCurrent(i)" />
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-template #noImages>
+      <h4 class="text-gray-500 text-center text-2xl font-semibold">No Images Uploaded</h4>
+    </ng-template>
+  </div>
+</ng-container>

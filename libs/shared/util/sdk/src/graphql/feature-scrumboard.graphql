@@ -1,0 +1,146 @@
+fragment BoardLabelDetails on BoardLabel {
+   id
+   title
+   boardId
+}
+
+fragment BoardList on Board {
+   id
+    title
+    createdAt
+    updatedAt
+    description
+    icon
+    lastActivity
+}
+
+fragment BoardDetails on Board {
+   id
+    title
+    createdAt
+    updatedAt
+    description
+    icon
+    lastActivity
+    lists {
+      id
+      title
+      position
+      cards {
+        ...BoardCardDetails
+      }
+    }
+}
+
+fragment BoardListDetails on BoardList {
+   id
+    title
+    createdAt
+    updatedAt
+    title
+    position
+    cards {
+        ...BoardCardDetails
+      }
+}
+
+fragment BoardCardDetails on BoardCard {
+   title
+    id
+    createdAt
+    updatedAt
+    dueDate
+    boardListId
+    labels {
+      id
+      title
+    }
+    position
+    users {
+    	username
+      avatarUrl
+      id
+    }
+    documents {
+     ...DocumentOverview
+    }
+}
+
+query UserBoards($input: UserListBoardInput!) {
+  boards: userBoards(input: $input) {
+    ...BoardList
+  }
+}
+
+mutation UserCreateBoard($input: UserCreateBoardInput!) {
+  created: userCreateBoard(input: $input) {
+    ...BoardDetails
+  }
+}
+
+mutation UserUpdateBoard($boardId: String!, $input: UserUpdateBoardInput!) {
+  updated: userUpdateBoard(boardId: $boardId, input: $input) {
+    ...BoardDetails
+  }
+}
+
+mutation UserDeleteBoard($boardId: String!) {
+  deleted: userDeleteBoard(boardId: $boardId) {
+    ...BoardDetails
+  }
+}
+
+query UserBoard($boardId: String!) {
+  board: userBoard(boardId: $boardId) {
+    ...BoardDetails
+  }
+}
+
+query UserBoardLabels($input: UserListBoardLabelInput!) {
+  labels: userBoardLabels(input: $input) {
+    ...BoardLabelDetails
+  }
+}
+
+mutation UserCreateBoardLabel($input: UserCreateBoardLabelInput!) {
+  created: userCreateBoardLabel(input: $input) {
+    ...BoardLabelDetails
+  }
+}
+
+mutation UserUpdateBoardLabel($boardLabelId: String!, $input: UserUpdateBoardLabelInput!) {
+  updated: userUpdateBoardLabel(boardLabelId: $boardLabelId, input: $input) {
+    ...BoardLabelDetails
+  }
+}
+
+mutation UserCreateBoardList($input: UserCreateBoardListInput!) {
+  created: userCreateBoardList(input: $input) {
+    ...BoardListDetails
+  }
+}
+
+mutation UserUpdateBoardList($boardListId: String!, $input: UserUpdateBoardListInput!) {
+  updated: userUpdateBoardList(boardListId: $boardListId, input: $input) {
+   ...BoardListDetails
+  }
+}
+
+mutation UserDeleteBoardList($boardListId: String!) {
+  deleted: userDeleteBoardList(boardListId: $boardListId) {
+   ...BoardListDetails
+  }
+}
+
+mutation UserCreateBoardCard($input: UserCreateBoardCardInput!) {
+  created: userCreateBoardCard(input: $input) {
+    ...BoardCardDetails
+  }
+}
+
+mutation UserUpdateBoardCard($boardCardId: String!, $input: UserUpdateBoardCardInput!) {
+  updated: userUpdateBoardCard(boardCardId: $boardCardId, input: $input) {
+    ...BoardCardDetails
+  }
+}
+

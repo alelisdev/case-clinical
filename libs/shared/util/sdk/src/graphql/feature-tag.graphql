@@ -1,0 +1,159 @@
+
+
+fragment TagDetails on Tag {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+taskTags {
+    id
+    name
+  }
+
+clinicalProviderTags {
+    id
+    name
+  }
+}
+
+fragment TagLists on Tag {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+taskTags {
+    id
+    name
+  }
+
+
+clinicalProviderTags {
+    id
+    name
+  }
+
+}
+
+query AdminTags($input: AdminListTagInput) {
+  items: adminTags(input: $input) {
+    ...TagLists
+  }
+  count: adminCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTags($input: AdminListTagInput) {
+  count: adminCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTag($tagId: String!) {
+  item: adminTag(tagId: $tagId) {
+    ...TagDetails
+  }
+}
+mutation AdminCreateTag($input: AdminCreateTagInput!) {
+  created: adminCreateTag(input: $input) {
+    ...TagDetails
+  }
+}
+mutation AdminUpdateTag($tagId: String!, $input: AdminUpdateTagInput!) {
+  updated: adminUpdateTag(tagId: $tagId, input: $input) {
+    ...TagDetails
+  }
+}
+mutation AdminDeleteTag($tagId: String!) {
+  deleted: adminDeleteTag(tagId: $tagId) {
+    ...TagDetails
+  }
+}
+
+query UserTags($input: UserListTagInput) {
+  items: userTags(input: $input) {
+    ...TagLists
+  }
+  count: userCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTags($input: UserListTagInput) {
+  count: userCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTags($input: UserListTagInput) {
+  items: userSelectTags(input: $input) {
+    ...TagDetails
+  }
+}
+
+query UserTag($tagId: String!) {
+  item: userTag(tagId: $tagId) {
+    ...TagDetails
+  }
+}
+
+mutation UserCreateTag($input: UserCreateTagInput!) {
+  created: userCreateTag(input: $input) {
+    ...TagDetails
+  }
+}
+mutation UserUpdateTag($tagId: String!, $input: UserUpdateTagInput!) {
+  updated: userUpdateTag(tagId: $tagId, input: $input) {
+    ...TagDetails
+  }
+}
+
+mutation UserUpdateTags($input: UserUpdateTagsInput!) {
+  updated: userUpdateTags(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTag($tagId: String!) {
+  deleted: userDeleteTag(tagId: $tagId) {
+    ...TagDetails
+  }
+}
+
+query PublicTags($input: UserListTagInput) {
+  items: publicTags(input: $input) {
+    ...TagLists
+  }
+  count: publicCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTags($input: UserListTagInput) {
+  count: publicCountTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTags($input: UserListTagInput) {
+  items: publicSelectTags(input: $input) {
+    ...TagDetails
+  }
+}
+
+query PublicTag($tagId: String!) {
+  item: publicTag(tagId: $tagId) {
+    ...TagDetails
+  }
+}

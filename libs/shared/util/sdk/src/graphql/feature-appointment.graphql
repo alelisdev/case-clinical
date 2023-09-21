@@ -1,0 +1,454 @@
+
+
+fragment AppointmentDetails on Appointment {
+id
+createdAt
+updatedAt
+name
+appointmentDateAndTime
+locationId
+checkedIn
+checkedInDateTime
+medicalReportId
+billId
+miscellaneousId
+imagingId
+duration
+patientId
+clinicalProviderId
+legalCaseId
+appointmentStatusId
+notes
+recurringEventId
+isFirstInstance
+description
+start
+end
+allDay
+recurrence
+assignedToId
+medicalRecordStatusId
+finalVisitApproved
+visitKindId
+location {
+  id
+  name
+  latitude
+  longitude
+}
+
+visitKind {
+  id
+  name
+}
+
+medicalReport {
+  ...DocumentDetails
+}
+
+bill {
+  ...DocumentDetails
+}
+
+miscellaneous {
+  ...DocumentDetails
+}
+
+imaging {
+    ...DocumentDetails
+  }
+
+  patient {
+    id
+    name
+    primaryAddressCity
+    primaryAddressStateOrProvince
+    primaryEmailAddress
+    primaryPhoneNumber
+    mobileNumber
+    users {
+      avatarUrl
+    }
+    gender {
+      id
+      name
+    }
+  }
+  clinicalProvider {
+    id
+    createdAt
+    updatedAt
+    name
+    firstName
+    lastName
+    phoneNumber
+    emailAddress
+    profilePictureId
+    compressProfilePictureId
+    vendor {
+      id
+      name
+    }
+    clinicalProviderSpecialties {
+      id
+      name
+      specialtyId
+      specialty {
+        id
+        name
+      }
+    }
+    profileImage {
+      ...DocumentOverview
+    }
+
+    clinicalProviderLocations {
+      id
+      createdAt
+      updatedAt
+      name
+      locationId
+      location {
+        id
+        name
+      }
+    }
+  }
+legalCase {
+  id
+  name
+}
+appointmentStatus {
+  id
+  name
+}
+
+assignedTo {
+  id
+  name
+}
+medicalRecordStatus {
+  id
+  name
+}
+
+claimProcedures {
+    ...ClaimProcedureDetails
+  }
+
+caseProcedures {
+    ...CaseProcedureDetails
+  }
+}
+
+fragment AppointmentLists on Appointment {
+id
+createdAt
+updatedAt
+name
+appointmentDateAndTime
+locationId
+checkedIn
+checkedInDateTime
+medicalReportId
+billId
+miscellaneousId
+imagingId
+duration
+patientId
+clinicalProviderId
+legalCaseId
+appointmentStatusId
+notes
+recurringEventId
+isFirstInstance
+description
+start
+end
+allDay
+recurrence
+assignedToId
+medicalRecordStatusId
+finalVisitApproved
+visitKindId
+location {
+  id
+  name
+  latitude
+  longitude
+}
+visitKind {
+  id
+  name
+}
+medicalReport {
+    id
+    name
+}
+bill {
+    id
+    name
+}
+imaging {
+    id
+    name
+}
+  miscellaneous {
+    id
+    name
+  }
+patient {
+    id
+    name
+    primaryAddressCity
+    primaryAddressStateOrProvince
+    primaryEmailAddress
+    primaryPhoneNumber
+    mobileNumber
+    users {
+      avatarUrl
+    }
+    gender {
+      id
+      name
+    }
+  }
+clinicalProvider {
+    id
+    createdAt
+    updatedAt
+    name
+    firstName
+    lastName
+    phoneNumber
+    emailAddress
+    profilePictureId
+    compressProfilePictureId
+    vendor {
+      id
+      name
+      phoneNumber
+      emailAddress
+      city
+      state
+      postalCode
+    }
+    clinicalProviderSpecialties {
+      id
+      name
+      specialtyId
+      specialty {
+        id
+        name
+      }
+    }
+    profileImage {
+      ...DocumentOverview
+    }
+
+    clinicalProviderLocations {
+      id
+      createdAt
+      updatedAt
+      name
+      locationId
+      location {
+        id
+        name
+      }
+    }
+  }
+  legalCase {
+    id
+    name
+    caseStatusDate
+    caseStatus {
+      id
+      name
+      tickerDate
+    }
+  }
+appointmentStatus {
+    id
+    name
+}
+assignedTo {
+    id
+    name
+}
+medicalRecordStatus {
+    id
+    name
+}
+
+
+
+
+
+claimProcedures {
+    id
+    name
+  }
+
+
+caseProcedures {
+    id
+    name
+  }
+
+}
+
+query AdminAppointments($input: AdminListAppointmentInput) {
+  items: adminAppointments(input: $input) {
+    ...AppointmentLists
+  }
+  count: adminCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAppointments($input: AdminListAppointmentInput) {
+  count: adminCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAppointment($appointmentId: String!) {
+  item: adminAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+mutation AdminCreateAppointment($input: AdminCreateAppointmentInput!) {
+  created: adminCreateAppointment(input: $input) {
+    ...AppointmentDetails
+  }
+}
+mutation AdminUpdateAppointment($appointmentId: String!, $input: AdminUpdateAppointmentInput!) {
+  updated: adminUpdateAppointment(appointmentId: $appointmentId, input: $input) {
+    ...AppointmentDetails
+  }
+}
+mutation AdminDeleteAppointment($appointmentId: String!) {
+  deleted: adminDeleteAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+query UserAppointments($input: UserListAppointmentInput) {
+  items: userAppointments(input: $input) {
+    ...AppointmentLists
+  }
+  count: userCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAppointments($input: UserListAppointmentInput) {
+  count: userCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAppointments($input: UserListAppointmentInput) {
+  items: userSelectAppointments(input: $input) {
+    ...AppointmentDetails
+  }
+}
+
+query UserAppointment($appointmentId: String!) {
+  item: userAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserCreateAppointment($input: UserCreateAppointmentInput!) {
+  created: userCreateAppointment(input: $input) {
+    ...AppointmentDetails
+  }
+}
+mutation UserUpdateAppointment($appointmentId: String!, $input: UserUpdateAppointmentInput!) {
+  updated: userUpdateAppointment(appointmentId: $appointmentId, input: $input) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserUploadBill($input: UserUpdateAppointmentInput!) {
+  updated: userUploadBill(input: $input) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserCheckInAppointment($appointmentId: String!) {
+  updated: userCheckInAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserRequestReschedule($appointmentId: String!) {
+  updated: userRequestReschedule(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserRescheduleAppointment($appointmentId: String!, $rescheduleDate: Date!) {
+  created: userRescheduleAppointment(appointmentId: $appointmentId, rescheduleDate: $rescheduleDate) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserHideAppointment($appointmentId: String!) {
+  updated: userHideAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserCancelAppointment($appointmentId: String!) {
+  updated: userCancelAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+mutation UserConfirmAppointment($appointmentId: String!) {
+  updated: userConfirmAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+
+mutation UserUpdateAppointments($input: UserUpdateAppointmentsInput!) {
+  updated: userUpdateAppointments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAppointment($appointmentId: String!) {
+  deleted: userDeleteAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}
+
+query PublicAppointments($input: UserListAppointmentInput) {
+  items: publicAppointments(input: $input) {
+    ...AppointmentLists
+  }
+  count: publicCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAppointments($input: UserListAppointmentInput) {
+  count: publicCountAppointments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAppointments($input: UserListAppointmentInput) {
+  items: publicSelectAppointments(input: $input) {
+    ...AppointmentDetails
+  }
+}
+
+query PublicAppointment($appointmentId: String!) {
+  item: publicAppointment(appointmentId: $appointmentId) {
+    ...AppointmentDetails
+  }
+}

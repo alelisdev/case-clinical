@@ -1,0 +1,149 @@
+
+fragment LeadStatusDetails on LeadStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment LeadStatusLists on LeadStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminLeadStatuses($input: AdminListLeadStatusInput) {
+  items: adminLeadStatuses(input: $input) {
+    ...LeadStatusLists
+  }
+  count: adminCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeadStatuses($input: AdminListLeadStatusInput) {
+  count: adminCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLeadStatus($leadStatusId: String!) {
+  item: adminLeadStatus(leadStatusId: $leadStatusId) {
+    ...LeadStatusDetails
+  }
+}
+mutation AdminCreateLeadStatus($input: AdminCreateLeadStatusInput!) {
+  created: adminCreateLeadStatus(input: $input) {
+    ...LeadStatusDetails
+  }
+}
+mutation AdminUpdateLeadStatus($leadStatusId: String!, $input: AdminUpdateLeadStatusInput!) {
+  updated: adminUpdateLeadStatus(leadStatusId: $leadStatusId, input: $input) {
+    ...LeadStatusDetails
+  }
+}
+mutation AdminDeleteLeadStatus($leadStatusId: String!) {
+  deleted: adminDeleteLeadStatus(leadStatusId: $leadStatusId) {
+    ...LeadStatusDetails
+  }
+}
+
+query UserLeadStatuses($input: UserListLeadStatusInput) {
+  items: userLeadStatuses(input: $input) {
+    ...LeadStatusLists
+  }
+  count: userCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeadStatuses($input: UserListLeadStatusInput) {
+  count: userCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeadStatuses($input: UserListLeadStatusInput) {
+  items: userSelectLeadStatuses(input: $input) {
+    ...LeadStatusDetails
+  }
+}
+
+query UserLeadStatus($leadStatusId: String!) {
+  item: userLeadStatus(leadStatusId: $leadStatusId) {
+    ...LeadStatusDetails
+  }
+}
+
+mutation UserCreateLeadStatus($input: UserCreateLeadStatusInput!) {
+  created: userCreateLeadStatus(input: $input) {
+    ...LeadStatusDetails
+  }
+}
+mutation UserUpdateLeadStatus($leadStatusId: String!, $input: UserUpdateLeadStatusInput!) {
+  updated: userUpdateLeadStatus(leadStatusId: $leadStatusId, input: $input) {
+    ...LeadStatusDetails
+  }
+}
+
+mutation UserUpdateLeadStatuses($input: UserUpdateLeadStatusesInput!) {
+  updated: userUpdateLeadStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLeadStatus($leadStatusId: String!) {
+  deleted: userDeleteLeadStatus(leadStatusId: $leadStatusId) {
+    ...LeadStatusDetails
+  }
+}
+
+query PublicLeadStatuses($input: UserListLeadStatusInput) {
+  items: publicLeadStatuses(input: $input) {
+    ...LeadStatusLists
+  }
+  count: publicCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeadStatuses($input: UserListLeadStatusInput) {
+  count: publicCountLeadStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeadStatuses($input: UserListLeadStatusInput) {
+  items: publicSelectLeadStatuses(input: $input) {
+    ...LeadStatusDetails
+  }
+}
+
+query PublicLeadStatus($leadStatusId: String!) {
+  item: publicLeadStatus(leadStatusId: $leadStatusId) {
+    ...LeadStatusDetails
+  }
+}

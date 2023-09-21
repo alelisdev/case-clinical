@@ -1,0 +1,158 @@
+
+fragment UserRoleDetails on UserRole {
+id
+createdAt
+updatedAt
+name
+roleId
+userId
+role {
+  id
+  name
+}
+user {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment UserRoleLists on UserRole {
+id
+createdAt
+updatedAt
+name
+roleId
+userId
+role {
+    id
+    name
+}
+user {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminUserRoles($input: AdminListUserRoleInput) {
+  items: adminUserRoles(input: $input) {
+    ...UserRoleLists
+  }
+  count: adminCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountUserRoles($input: AdminListUserRoleInput) {
+  count: adminCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminUserRole($userRoleId: String!) {
+  item: adminUserRole(userRoleId: $userRoleId) {
+    ...UserRoleDetails
+  }
+}
+mutation AdminCreateUserRole($input: AdminCreateUserRoleInput!) {
+  created: adminCreateUserRole(input: $input) {
+    ...UserRoleDetails
+  }
+}
+mutation AdminUpdateUserRole($userRoleId: String!, $input: AdminUpdateUserRoleInput!) {
+  updated: adminUpdateUserRole(userRoleId: $userRoleId, input: $input) {
+    ...UserRoleDetails
+  }
+}
+mutation AdminDeleteUserRole($userRoleId: String!) {
+  deleted: adminDeleteUserRole(userRoleId: $userRoleId) {
+    ...UserRoleDetails
+  }
+}
+
+query UserUserRoles($input: UserListUserRoleInput) {
+  items: userUserRoles(input: $input) {
+    ...UserRoleLists
+  }
+  count: userCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountUserRoles($input: UserListUserRoleInput) {
+  count: userCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectUserRoles($input: UserListUserRoleInput) {
+  items: userSelectUserRoles(input: $input) {
+    ...UserRoleDetails
+  }
+}
+
+query UserUserRole($userRoleId: String!) {
+  item: userUserRole(userRoleId: $userRoleId) {
+    ...UserRoleDetails
+  }
+}
+
+mutation UserCreateUserRole($input: UserCreateUserRoleInput!) {
+  created: userCreateUserRole(input: $input) {
+    ...UserRoleDetails
+  }
+}
+mutation UserUpdateUserRole($userRoleId: String!, $input: UserUpdateUserRoleInput!) {
+  updated: userUpdateUserRole(userRoleId: $userRoleId, input: $input) {
+    ...UserRoleDetails
+  }
+}
+
+mutation UserUpdateUserRoles($input: UserUpdateUserRolesInput!) {
+  updated: userUpdateUserRoles(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteUserRole($userRoleId: String!) {
+  deleted: userDeleteUserRole(userRoleId: $userRoleId) {
+    ...UserRoleDetails
+  }
+}
+
+query PublicUserRoles($input: UserListUserRoleInput) {
+  items: publicUserRoles(input: $input) {
+    ...UserRoleLists
+  }
+  count: publicCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountUserRoles($input: UserListUserRoleInput) {
+  count: publicCountUserRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectUserRoles($input: UserListUserRoleInput) {
+  items: publicSelectUserRoles(input: $input) {
+    ...UserRoleDetails
+  }
+}
+
+query PublicUserRole($userRoleId: String!) {
+  item: publicUserRole(userRoleId: $userRoleId) {
+    ...UserRoleDetails
+  }
+}

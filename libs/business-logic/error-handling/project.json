@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/error-handling/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/error-handling"],
+      "options": {
+        "project": "libs/error-handling/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/error-handling/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/error-handling/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/error-handling"],
+      "options": {
+        "jestConfig": "libs/error-handling/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/error-handling/**/*.ts", "libs/error-handling/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-error-handling"
+}

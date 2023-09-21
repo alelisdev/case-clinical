@@ -1,0 +1,26 @@
+{
+  "name": "web-product-liability-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/product-liability/feature/src",
+  "prefix": "product-liability",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/product-liability/feature/src/**/*.ts",
+          "libs/web/product-liability/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/product-liability/feature"],
+      "options": {
+        "jestConfig": "libs/web/product-liability/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

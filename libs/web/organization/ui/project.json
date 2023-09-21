@@ -1,0 +1,23 @@
+{
+  "name": "web-organization-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/organization/ui/src",
+  "prefix": "organization",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/organization/ui/src/**/*.ts", "libs/web/organization/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/organization/ui"],
+      "options": {
+        "jestConfig": "libs/web/organization/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

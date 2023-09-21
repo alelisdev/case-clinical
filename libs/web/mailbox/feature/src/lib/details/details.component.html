@@ -1,0 +1,499 @@
+<div class="flex flex-col flex-auto overflow-y-auto lg:overflow-hidden bg-card dark:bg-default">
+    <mat-progress-bar class="absolute inset-x-0 top-0 h-0.5 z-20" *ngIf="_mailboxService.mailDetailLoading$ | async" [mode]="'indeterminate'"></mat-progress-bar>
+    <ng-container *ngIf="mail; else selectMailToRead">
+
+        <!-- Header -->
+        <div class="z-10 relative flex flex-col flex-0 w-full border-b">
+
+            <!-- Toolbar -->
+            <div class="flex items-center min-h-16 px-4 md:px-6 border-b bg-gray-50 dark:bg-transparent">
+
+                <!-- Back button -->
+                <a
+                    class="lg:hidden md:-ml-2"
+                    mat-icon-button
+                    [routerLink]="['./']">
+                    <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                </a>
+
+                <!-- Legal case dropdown -->
+                    <div class="flex items-center w-1/2 legal-case-dropdown" *ngIf="!_mailboxService.getLegalCaseId">
+                        <div>
+                            <label>Legal Case</label>
+                        </div>
+                        <div class="pl-3 w-1/2">
+                            <ng-select 
+                                [(ngModel)]="legalCaseId"
+                                [items]="items" 
+                                [class]="classNames"
+                                [clearable]="true"
+                                bindLabel="name" 
+                                bindValue="id"
+                                (change)="onLegalCaseChange($event)"
+                                #dropdown>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                <!-- Toggle labels button & menu -->
+                <div class="ml-auto">
+                    <button
+                        *ngIf="!_mailboxService.getLegalCaseId"
+                        class="ml-auto"
+                        mat-icon-button
+                        title="Labels"
+                        [matMenuTriggerFor]="toggleLabelMenu">
+                        <mat-icon [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                    </button>
+                    <mat-menu #toggleLabelMenu="matMenu">
+                        <ng-container *ngFor="let label of labels; trackBy: trackByFn">
+                            <div mat-menu-item>
+                                <mat-checkbox
+                                    (change)="toggleLabel($event, label)"
+                                    [color]="'primary'"
+                                    [checked]="mail.labels.includes(label.id)"
+                                    [checked]="checked(label)"
+                                    [disableRipple]="true"
+                                    [title]="label.display_name"
+                                    >
+                                    <div class="truncate w-60">
+                                        {{label.display_name}}
+                                    </div>
+                                </mat-checkbox>
+                            </div>
+                        </ng-container>
+                    </mat-menu>
+
+                    <!-- Toggle important button -->
+                    <!-- <button
+                        class="ml-2"
+                        mat-icon-button
+                        (click)="toggleImportant()">
+                        <mat-icon
+                            [ngClass]="{'text-red-600 dark:text-red-500': mail.important}"
+                            [svgIcon]="'heroicons_outline:exclamation-circle'"></mat-icon>
+                    </button> -->
+
+                    <!-- Toggle starred button -->
+                    <button
+                        class="ml-2"
+                        mat-icon-button
+                        [title]="mail.starred ? 'Starred' : 'Not Starred'"
+                        (click)="toggleStar(true, mail.id)">
+                        <mat-icon
+                            [ngClass]="{'text-orange-500 dark:text-orange-400': mail.starred}"
+                            [svgIcon]="mail.starred ? 'heroicons_solid:star' : 'heroicons_outline:star'"></mat-icon>
+                    </button>
+
+                    <!-- Other actions button & menu -->
+                    <button
+                        class="ml-2"
+                        mat-icon-button
+                        [matMenuTriggerFor]="mailMenu">
+                        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #mailMenu="matMenu">
+                        <ng-container [ngTemplateOutlet]="matMenuContainer" [ngTemplateOutletContext]="{ obj: {data: mail, isThread: true} }"></ng-container>
+                    </mat-menu>
+                </div>
+            </div>
+
+            <!-- Subject and Labels -->
+            <div class="flex flex-wrap items-center py-5 px-6">
+                <!-- Subject -->
+                <div class="flex flex-auto my-1 mr-4 text-2xl">{{mail.subject}}</div>
+                <!-- Labels -->
+                <ng-container *ngIf="mail.labels && mail.labels.length > 0">
+                    <div class="flex flex-wrap items-center justify-start -mx-1">
+                        <ng-container *ngFor="let label of mail.labels">
+                            <ng-container *ngIf="!['drafts', 'spam', 'trash', 'sent', 'inbox', 'all'].includes(label.name)">
+                                <div
+                                [title]="label.display_name"
+                                class="m-1 py-0.5 px-2.5 rounded-full text-sm font-medium whitespace-nowrap truncate max-w-36"
+                                [ngClass]="labelColors.blue.combined"
+                                >
+                                {{label.display_name}}
+                            </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+
+        <!-- Threads -->
+        <div
+            class="flex flex-col flex-auto shrink-0 lg:shrink p-3 lg:overflow-y-auto bg-gray-100 dark:bg-transparent"
+            fuseScrollReset>
+            <!-- Thread -->
+            <ng-container *ngFor="let message of mail.messages; let i = index">
+                <mat-expansion-panel
+                    [expanded]="expandedMsgIds.includes(message.id)"
+                    class="flex flex-col flex-0 w-full shadow rounded-2xl overflow-hidden bg-card dark:bg-black dark:bg-opacity-10 mb-5"
+                    (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+                    <mat-expansion-panel-header #panelH (click)="matHeaderClick(panelH, i, message.id)">
+                        <mat-panel-title>
+                        <!-- Header -->
+                            <div class="flex items-center w-full">
+                                <div class="flex items-center w-full">
+                                    <!-- Sender avatar -->
+                                    <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+                                        <!-- <ng-container>
+                                                <img
+                                                class="w-full h-full"
+                                                [src]="message.from.avatar"
+                                                alt="User avatar">
+                                            </ng-container> -->
+                                        <ng-container>
+                                            <div
+                                                class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                                {{message.from[0]?.name.charAt(0)}}
+                                            </div>
+                                        </ng-container>
+        
+                                    </div>
+        
+                                    <!-- Info -->
+                                    <div class="ml-4 min-w-0">
+        
+                                        <!-- From -->
+                                        <div class="font-semibold truncate">{{message.from[0].name}}</div>
+        
+                                        <!-- To -->
+                                        <div class="flex items-center mt-0.5 leading-5">
+                                            <div>to</div>
+                                            <div class="ml-1 font-semibold">
+                                                <ng-container *ngIf="message.to && message.to.length > 0">
+                                                    <ng-container *ngFor="let toList of message.to; let i = index">
+                                                        <ng-container *ngIf="i < totalToMail">
+                                                            <span>{{toList.name}}<span
+                                                                    *ngIf="(i < totalToMail - 1) && i !== (message.to.length - 1)">,
+                                                                </span></span>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </ng-container>
+        
+                                            </div>
+                                            <!-- <ng-container *ngIf="(message.cc.length + message.bcc.length) > 0">
+                                                    <div>
+                                                        <span class="ml-1">and</span>
+                                                        <span class="ml-1 font-semibold">{{message.cc.length + message.bcc.length}}</span>
+                                                        <span
+                                                            class="ml-1 font-semibold"
+                                                            [ngPlural]="(message.cc.length + message.bcc.length)">
+                                                            <ng-template ngPluralCase="=1">other</ng-template>
+                                                            <ng-template ngPluralCase="other">others</ng-template>
+                                                        </span>
+                                                    </div>
+                                                </ng-container> -->
+        
+                                            <!-- Info details panel button -->
+                                            <button class="w-5 h-5 min-h-5 ml-1" mat-icon-button
+                                                (click)="openInfoDetailsPanel(message);$event.stopPropagation()"  [id]="'infoPanel' + message.id">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                                            </button>
+        
+                                            <!-- Info details panel -->
+                                            <ng-template #infoDetailsPanel let-data>
+                                                <div
+                                                    class="flex flex-col py-4 px-6 w-full max-w-160 space-y-1.5 border text-md rounded shadow-md overflow-auto bg-card">
+                                                    <!-- From -->
+                                                    <div class="flex" *ngIf="selectedMsg.from && selectedMsg.from.length > 0">
+                                                        <div class="min-w-14 font-medium text-right">from:</div>
+                                                        <!-- <div class="pl-2 whitespace-pre-wrap">{{selectedMsg.from[0].name + '<' + selectedMsg.from[0].email + '>'}} </div> -->
+                                                        <div class="pl-2 whitespace-pre-wrap">
+                                                            <ng-container *ngFor="let from of selectedMsg.from; let i = index">
+                                                                <span>{{from.name + '<' + from.email + '>' }}<span
+                                                                        *ngIf="i !== (selectedMsg.from.length - 1)">, </span></span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <!-- To -->
+                                                    <div class="flex" *ngIf="selectedMsg.to && selectedMsg.to.length > 0">
+                                                        <div class="min-w-14 font-medium text-right">to:</div>
+                                                        <!-- <div class="pl-2 whitespace-pre-wrap">{{mail.to[0].name + '<' + mail.to[0].email + '>'}}</div> -->
+                                                        <div class="pl-2 whitespace-pre-wrap">
+                                                            <ng-container *ngFor="let to of selectedMsg.to; let i = index">
+                                                                <span>{{to.name + '<' + to.email + '>' }}<span
+                                                                        *ngIf="i !== (selectedMsg.to.length - 1)">, </span></span>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Cc -->
+                                                    <ng-container *ngIf="selectedMsg.cc && selectedMsg.cc.length > 0">
+                                                        <div class="flex">
+                                                            <div class="min-w-14 font-medium text-right">cc:</div>
+                                                            <div class="pl-2 whitespace-pre-wrap">
+                                                                <ng-container *ngFor="let cc of selectedMsg.cc; let i = index">
+                                                                    <span>{{cc.name + '<' + cc.email + '>' }}<span
+                                                                            *ngIf="i !== (selectedMsg.cc.length - 1)">,
+                                                                    </span></span>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                    <!-- Bbc -->
+                                                    <ng-container *ngIf="selectedMsg.bcc && selectedMsg.bcc.length > 0">
+                                                        <div class="flex">
+                                                            <div class="min-w-14 font-medium text-right">bcc:</div>
+                                                            <div class="pl-2 whitespace-pre-wrap">
+                                                                <div class="pl-2 whitespace-pre-wrap">
+                                                                    <ng-container
+                                                                        *ngFor="let bcc of selectedMsg.bcc; let i = index">
+                                                                        <span>{{bcc.name + '<' + bcc.email + '>' }}<span
+                                                                                *ngIf="i !== (selectedMsg.bcc.length - 1)">,
+                                                                        </span></span>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                    <!-- Date -->
+                                                    <div class="flex">
+                                                        <div class="min-w-14 font-medium text-right">date:</div>
+                                                        <div class="pl-2 whitespace-pre-wrap">{{selectedMsg.date * 1000 |
+                                                            date:'EEEE, MMMM d, y - hh:mm a'}}</div>
+                                                    </div>
+                                                    <!-- Subject -->
+                                                    <div class="flex">
+                                                        <div class="min-w-14 font-medium text-right">subject:</div>
+                                                        <div class="pl-2 whitespace-pre-wrap">{{selectedMsg.subject}}</div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+        
+                                    </div>
+                                </div>
+                                <div class="flex flex-0">
+                                    <!-- Toggle starred button -->
+                                    <button class="ml-2" mat-icon-button [title]="message.starred ? 'Starred' : 'Not Starred'"
+                                        (click)="toggleStar(false, message.id); $event.stopPropagation()">
+                                        <mat-icon [ngClass]="{'text-orange-500 dark:text-orange-400': message.starred}"
+                                            [svgIcon]="message.starred ? 'heroicons_solid:star' : 'heroicons_outline:star'"></mat-icon>
+                                    </button>
+        
+                                    <!-- Other actions button & menu -->
+                                    <button class="ml-2" mat-icon-button [matMenuTriggerFor]="mailMenu" (click)="$event.stopPropagation()">
+                                        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                                    </button>
+                                    <mat-menu #mailMenu="matMenu">
+                                        <ng-container [ngTemplateOutlet]="matMenuContainer"
+                                            [ngTemplateOutletContext]="{ obj: {data: message, isThread: false} }"></ng-container>
+                                    </mat-menu>
+                                </div>
+                            </div>
+
+    
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-expansion-panel-body>
+                        <div class="flex flex-col py-8 px-6">
+                            <!-- Content -->
+                            <div [innerHTML]="safeHTML(message.body)">
+                            </div>
+                        
+                            <!-- Attachments -->
+                            <ng-container *ngIf="message.files && message.files.length > 0">
+                                <div class="flex flex-col w-full">
+                                    <!-- Title -->
+                                    <div class="flex items-center mt-12">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:paper-clip'"></mat-icon>
+                                        <div class="ml-2 font-semibold">{{message.files.length}} Attachments</div>
+                                    </div>
+                        
+                                    <!-- Files -->
+                                    <div class="flex flex-wrap -m-3 mt-3">
+                                        <ng-container *ngFor="let attachment of message.files">
+                                            <div class="flex items-center m-3">
+                                                <!-- Preview -->
+                                                <!-- <img
+                                                                            class="w-10 h-10 rounded-md overflow-hidden"
+                                                                            *ngIf="attachment.content_type.startsWith('image/')"
+                                                                            [src]="'assets/images/apps/mailbox/' + attachment.preview"> -->
+                                                <div class="flex items-center justify-center w-10 h-10 rounded-md overflow-hidden bg-primary-100"
+                                                    *ngIf="attachment.filename.includes('.') ; else fileExtension">
+                                                    <div class="flex items-center justify-center text-sm font-semibold text-primary-500-800">
+                                                        {{attachment.filename.split('.').at(-1).trim().toUpperCase()}}
+                                                    </div>
+                                                </div>
+                                                <ng-template #fileExtension>
+                                                    <div
+                                                        class="flex items-center justify-center w-10 h-10 rounded-md overflow-hidden bg-primary-100">
+                                                        <div
+                                                            class="flex items-center justify-center text-sm font-semibold text-primary-500-800">
+                                                            FILE
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+                                                <!-- File info -->
+                                                <div class="ml-3">
+                                                    <div class="text-md text-left font-medium truncate w-30 cursor-pointer"
+                                                        [title]="attachment.filename ? attachment.filename : 'File'"
+                                                        (click)="filePreview(attachment)">
+                                                        {{attachment.filename ? attachment.filename : 'File'}}
+                                                    </div>
+                                                    <div class="text-sm font-medium truncate text-secondary">
+                                                        {{attachment.size / 1000 | number:'1.0-2'}} KB
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="ml-3 cursor-pointer" (click)="downloadFile(attachment)">
+                                                                            <mat-icon [svgIcon]="'heroicons_outline:download'"></mat-icon>
+                                                                        </div> -->
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        
+                            <ng-container>
+                                <ui-file-preview #filePreviewModal mode="edit" [isDownloadable]="true"></ui-file-preview>
+                            </ng-container>
+                        </div>
+                        <!-- Footer -->
+                        <div class="flex w-full p-6 border-t bg-gray-50 dark:bg-transparent">
+        
+                            <!-- Buttons -->
+                            <ng-container *ngIf="!replyFormActive">
+                                <div class="flex flex-wrap w-full -m-2">
+                                    <!-- Reply -->
+                                    <button class="m-2" mat-stroked-button [color]="'primary'" (click)="reply(message)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:reply'"></mat-icon>
+                                        <span class="ml-2">Reply</span>
+                                    </button>
+                                    <!-- Reply all -->
+                                    <button class="m-2" mat-stroked-button *ngIf="message?.to?.length > 1" [color]="'primary'"
+                                        (click)="replyAll(message)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:reply'"></mat-icon>
+                                        <span class="ml-2">Reply All</span>
+                                    </button>
+                                    <!-- Forward -->
+                                    <button class="m-2" mat-stroked-button [color]="'primary'" (click)="forward(message)">
+                                        <mat-icon class="icon-size-5" [color]="'primary'"
+                                            [svgIcon]="'heroicons_solid:chevron-double-right'"></mat-icon>
+                                        <span class="ml-2">Forward</span>
+                                    </button>
+                                </div>
+                            </ng-container>
+        
+                            <!-- Reply form -->
+                            <!-- <ng-container *ngIf="replyFormActive">
+                                    <div
+                                        class="flex flex-col w-full"
+                                        #replyForm>
+            
+                                        <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript">
+                                            <textarea
+                                                class="textarea"
+                                                matInput
+                                                [placeholder]="'Type your reply here'"
+                                                [rows]="4"></textarea>
+                                        </mat-form-field>
+            
+                                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+                                            <div class="-ml-2">
+                                                <button mat-icon-button>
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:paper-clip'"></mat-icon>
+                                                </button>
+                                                <button mat-icon-button>
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:link'"></mat-icon>
+                                                </button>
+                                                <button mat-icon-button>
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:emoji-happy'"></mat-icon>
+                                                </button>
+                                                <button mat-icon-button>
+                                                    <mat-icon
+                                                        class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:photograph'"></mat-icon>
+                                                </button>
+                                            </div>
+            
+                                            <div class="flex items-center mt-4 sm:mt-0">
+                                                <button
+                                                    class="order-last sm:order-first ml-3 sm:ml-0"
+                                                    mat-button
+                                                    (click)="discard()">
+                                                    Discard
+                                                </button>
+                                                <button
+                                                    class="sm:ml-3"
+                                                    mat-flat-button
+                                                    [color]="'primary'"
+                                                    (click)="send()">
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container> -->
+        
+                        </div>
+                    </mat-expansion-panel-body>
+                </mat-expansion-panel>
+            </ng-container>
+        </div>
+
+    </ng-container>
+
+    <!-- Select message to read template -->
+    <ng-template #selectMailToRead>
+
+        <div class="flex flex-col flex-auto items-center justify-center bg-gray-100 dark:bg-transparent">
+            <mat-icon
+                class="icon-size-24"
+                [svgIcon]="'iconsmind:mailbox_empty'"></mat-icon>
+            <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Select a mail to read</div>
+        </div>
+
+    </ng-template>
+
+    <ng-template #matMenuContainer let-obj="obj">
+        <!-- Mark as unread -->
+        <button
+            mat-menu-item
+            *ngIf="!obj.data.unread"
+            (click)="toggleUnread(obj.isThread, obj.data.id)">
+            <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
+            <span>Mark as unread</span>
+        </button>
+        <!-- Marks as spam / not span-->
+        <button
+            mat-menu-item
+            *ngIf="!obj.data.labelNames.includes('spam') && !obj.data.labelNames.includes('drafts')"
+            (click)="toggleSpam(obj.isThread, obj.data.id, true)">
+            <mat-icon [svgIcon]="'heroicons_outline:exclamation'"></mat-icon>
+            <span>Spam</span>
+        </button>
+        <button
+            mat-menu-item
+            *ngIf="obj.data.labelNames.includes('spam')"
+            (click)="toggleSpam(obj.isThread, obj.data.id, false)">
+            <mat-icon [svgIcon]="'heroicons_outline:exclamation'"></mat-icon>
+            <span>Not spam</span>
+        </button>
+        <!-- Delete -->
+        <button
+            mat-menu-item
+            *ngIf="!obj.data.labelNames.includes('trash')"
+            (click)="toggleTrash(obj.isThread, obj.data.id, true)">
+            <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+            <span>Delete</span>
+        </button>
+        <button
+            mat-menu-item
+            *ngIf="obj.data.labelNames.includes('trash')"
+            (click)="toggleTrash(obj.isThread, obj.data.id, false)">
+            <mat-icon [svgIcon]="'heroicons_outline:inbox'"></mat-icon>
+            <span>Move to inbox</span>
+        </button>
+    </ng-template>
+
+</div>

@@ -1,0 +1,26 @@
+{
+  "name": "web-procedure-vendor-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/procedure-vendor/feature/src",
+  "prefix": "procedure-vendor",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/procedure-vendor/feature/src/**/*.ts",
+          "libs/web/procedure-vendor/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/procedure-vendor/feature"],
+      "options": {
+        "jestConfig": "libs/web/procedure-vendor/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

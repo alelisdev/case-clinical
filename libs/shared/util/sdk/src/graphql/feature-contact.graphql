@@ -1,0 +1,240 @@
+
+fragment ContactDetails on Contact {
+id
+createdAt
+updatedAt
+name
+honorific
+firstName
+lastName
+suffix
+primaryPhoneNumber
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+notes
+discriminator
+contactKindId
+dateOfBirth
+latitude
+longitude
+avatar
+background
+title
+company
+birthday
+address
+contactKind {
+  id
+  name
+}
+
+
+
+
+
+implants {
+    ...ImplantLists
+  }
+
+tags {
+   ...ContactTagLists
+  }
+
+emails {
+    ...ContactEmailLists
+  }
+
+phoneNumbers {
+    ...ContactPhoneNumberLists
+  }
+
+contactSettings {
+    ...ContactSettingLists
+  }
+}
+
+fragment ContactLists on Contact {
+id
+createdAt
+updatedAt
+name
+honorific
+firstName
+lastName
+suffix
+primaryPhoneNumber
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+notes
+discriminator
+contactKindId
+dateOfBirth
+latitude
+longitude
+avatar
+background
+title
+company
+birthday
+address
+contactKind {
+    id
+    name
+}
+
+
+
+
+
+implants {
+    id
+    name
+  }
+
+
+tags {
+    id
+    name
+  }
+
+
+emails {
+    id
+    name
+  }
+
+
+phoneNumbers {
+    id
+    name
+  }
+
+
+contactSettings {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminContacts($input: AdminListContactInput) {
+  items: adminContacts(input: $input) {
+    ...ContactLists
+  }
+  count: adminCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContacts($input: AdminListContactInput) {
+  count: adminCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContact($contactId: String!) {
+  item: adminContact(contactId: $contactId) {
+    ...ContactDetails
+  }
+}
+mutation AdminCreateContact($input: AdminCreateContactInput!) {
+  created: adminCreateContact(input: $input) {
+    ...ContactDetails
+  }
+}
+mutation AdminUpdateContact($contactId: String!, $input: AdminUpdateContactInput!) {
+  updated: adminUpdateContact(contactId: $contactId, input: $input) {
+    ...ContactDetails
+  }
+}
+mutation AdminDeleteContact($contactId: String!) {
+  deleted: adminDeleteContact(contactId: $contactId) {
+    ...ContactDetails
+  }
+}
+
+query UserContacts($input: UserListContactInput) {
+  items: userContacts(input: $input) {
+    ...ContactLists
+  }
+  count: userCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContacts($input: UserListContactInput) {
+  count: userCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContacts($input: UserListContactInput) {
+  items: userSelectContacts(input: $input) {
+    ...ContactDetails
+  }
+}
+
+query UserContact($contactId: String!) {
+  item: userContact(contactId: $contactId) {
+    ...ContactDetails
+  }
+}
+
+mutation UserCreateContact($input: UserCreateContactInput!) {
+  created: userCreateContact(input: $input) {
+    ...ContactDetails
+  }
+}
+mutation UserUpdateContact($contactId: String!, $input: UserUpdateContactInput!) {
+  updated: userUpdateContact(contactId: $contactId, input: $input) {
+    ...ContactDetails
+  }
+}
+
+mutation UserUpdateContacts($input: UserUpdateContactsInput!) {
+  updated: userUpdateContacts(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContact($contactId: String!) {
+  deleted: userDeleteContact(contactId: $contactId) {
+    ...ContactDetails
+  }
+}
+
+query PublicContacts($input: UserListContactInput) {
+  items: publicContacts(input: $input) {
+    ...ContactLists
+  }
+  count: publicCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContacts($input: UserListContactInput) {
+  count: publicCountContacts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContacts($input: UserListContactInput) {
+  items: publicSelectContacts(input: $input) {
+    ...ContactDetails
+  }
+}
+
+query PublicContact($contactId: String!) {
+  item: publicContact(contactId: $contactId) {
+    ...ContactDetails
+  }
+}

@@ -1,0 +1,176 @@
+
+fragment FeeScheduleDetails on FeeSchedule {
+id
+createdAt
+updatedAt
+name
+organizationId
+specialtyId
+code
+modifier
+description
+medicarePhysicianNonFacilityRate
+physicianNonFacilityFee
+medicarePhysicianFacilityRate
+physicianFacilityFee
+baseUnit
+profCf
+organization {
+  id
+  name
+}
+specialty {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment FeeScheduleLists on FeeSchedule {
+id
+createdAt
+updatedAt
+name
+organizationId
+specialtyId
+code
+modifier
+description
+medicarePhysicianNonFacilityRate
+physicianNonFacilityFee
+medicarePhysicianFacilityRate
+physicianFacilityFee
+baseUnit
+profCf
+organization {
+    id
+    name
+}
+specialty {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminFeeSchedules($input: AdminListFeeScheduleInput) {
+  items: adminFeeSchedules(input: $input) {
+    ...FeeScheduleLists
+  }
+  count: adminCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFeeSchedules($input: AdminListFeeScheduleInput) {
+  count: adminCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFeeSchedule($feeScheduleId: String!) {
+  item: adminFeeSchedule(feeScheduleId: $feeScheduleId) {
+    ...FeeScheduleDetails
+  }
+}
+mutation AdminCreateFeeSchedule($input: AdminCreateFeeScheduleInput!) {
+  created: adminCreateFeeSchedule(input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+mutation AdminUpdateFeeSchedule($feeScheduleId: String!, $input: AdminUpdateFeeScheduleInput!) {
+  updated: adminUpdateFeeSchedule(feeScheduleId: $feeScheduleId, input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+mutation AdminDeleteFeeSchedule($feeScheduleId: String!) {
+  deleted: adminDeleteFeeSchedule(feeScheduleId: $feeScheduleId) {
+    ...FeeScheduleDetails
+  }
+}
+
+query UserFeeSchedules($input: UserListFeeScheduleInput) {
+  items: userFeeSchedules(input: $input) {
+    ...FeeScheduleLists
+  }
+  count: userCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFeeSchedules($input: UserListFeeScheduleInput) {
+  count: userCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFeeSchedules($input: UserListFeeScheduleInput) {
+  items: userSelectFeeSchedules(input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+
+query UserFeeSchedule($feeScheduleId: String!) {
+  item: userFeeSchedule(feeScheduleId: $feeScheduleId) {
+    ...FeeScheduleDetails
+  }
+}
+
+mutation UserCreateFeeSchedule($input: UserCreateFeeScheduleInput!) {
+  created: userCreateFeeSchedule(input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+mutation UserUpdateFeeSchedule($feeScheduleId: String!, $input: UserUpdateFeeScheduleInput!) {
+  updated: userUpdateFeeSchedule(feeScheduleId: $feeScheduleId, input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+
+mutation UserUpdateFeeSchedules($input: UserUpdateFeeSchedulesInput!) {
+  updated: userUpdateFeeSchedules(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteFeeSchedule($feeScheduleId: String!) {
+  deleted: userDeleteFeeSchedule(feeScheduleId: $feeScheduleId) {
+    ...FeeScheduleDetails
+  }
+}
+
+query PublicFeeSchedules($input: UserListFeeScheduleInput) {
+  items: publicFeeSchedules(input: $input) {
+    ...FeeScheduleLists
+  }
+  count: publicCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountFeeSchedules($input: UserListFeeScheduleInput) {
+  count: publicCountFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectFeeSchedules($input: UserListFeeScheduleInput) {
+  items: publicSelectFeeSchedules(input: $input) {
+    ...FeeScheduleDetails
+  }
+}
+
+query PublicFeeSchedule($feeScheduleId: String!) {
+  item: publicFeeSchedule(feeScheduleId: $feeScheduleId) {
+    ...FeeScheduleDetails
+  }
+}

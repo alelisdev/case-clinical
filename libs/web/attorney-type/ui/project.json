@@ -1,0 +1,23 @@
+{
+  "name": "web-attorney-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/attorney-type/ui/src",
+  "prefix": "attorney-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/attorney-type/ui/src/**/*.ts", "libs/web/attorney-type/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/attorney-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/attorney-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

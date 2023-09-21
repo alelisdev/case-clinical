@@ -1,0 +1,23 @@
+{
+  "name": "web-account-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/account/ui/src",
+  "prefix": "account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/account/ui/src/**/*.ts", "libs/web/account/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/account/ui"],
+      "options": {
+        "jestConfig": "libs/web/account/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

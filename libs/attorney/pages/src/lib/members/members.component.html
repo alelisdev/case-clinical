@@ -1,0 +1,15 @@
+
+<ng-container *ngIf="selectedAttorneyId$ | async as attorneyId">
+    <ui-formly-json-form
+      *ngIf="vm$ | async as vm"
+      class="w-full h-full"
+      formName="page_attorney_members"
+      [showSubmitButton]="false"
+      [componentStore]="store"
+      [model]="{ attorneyId }"
+      [formData]="getFormData(vm)"
+      (formIsReady)="this.onResize()"
+    ></ui-formly-json-form>
+  </ng-container>
+  
+  

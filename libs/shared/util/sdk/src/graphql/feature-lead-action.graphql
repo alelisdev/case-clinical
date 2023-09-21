@@ -1,0 +1,148 @@
+
+fragment LeadActionDetails on LeadAction {
+id
+createdAt
+updatedAt
+name
+leadId
+lead {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment LeadActionLists on LeadAction {
+id
+createdAt
+updatedAt
+name
+leadId
+lead {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminLeadActions($input: AdminListLeadActionInput) {
+  items: adminLeadActions(input: $input) {
+    ...LeadActionLists
+  }
+  count: adminCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeadActions($input: AdminListLeadActionInput) {
+  count: adminCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLeadAction($leadActionId: String!) {
+  item: adminLeadAction(leadActionId: $leadActionId) {
+    ...LeadActionDetails
+  }
+}
+mutation AdminCreateLeadAction($input: AdminCreateLeadActionInput!) {
+  created: adminCreateLeadAction(input: $input) {
+    ...LeadActionDetails
+  }
+}
+mutation AdminUpdateLeadAction($leadActionId: String!, $input: AdminUpdateLeadActionInput!) {
+  updated: adminUpdateLeadAction(leadActionId: $leadActionId, input: $input) {
+    ...LeadActionDetails
+  }
+}
+mutation AdminDeleteLeadAction($leadActionId: String!) {
+  deleted: adminDeleteLeadAction(leadActionId: $leadActionId) {
+    ...LeadActionDetails
+  }
+}
+
+query UserLeadActions($input: UserListLeadActionInput) {
+  items: userLeadActions(input: $input) {
+    ...LeadActionLists
+  }
+  count: userCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeadActions($input: UserListLeadActionInput) {
+  count: userCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeadActions($input: UserListLeadActionInput) {
+  items: userSelectLeadActions(input: $input) {
+    ...LeadActionDetails
+  }
+}
+
+query UserLeadAction($leadActionId: String!) {
+  item: userLeadAction(leadActionId: $leadActionId) {
+    ...LeadActionDetails
+  }
+}
+
+mutation UserCreateLeadAction($input: UserCreateLeadActionInput!) {
+  created: userCreateLeadAction(input: $input) {
+    ...LeadActionDetails
+  }
+}
+mutation UserUpdateLeadAction($leadActionId: String!, $input: UserUpdateLeadActionInput!) {
+  updated: userUpdateLeadAction(leadActionId: $leadActionId, input: $input) {
+    ...LeadActionDetails
+  }
+}
+
+mutation UserUpdateLeadActions($input: UserUpdateLeadActionsInput!) {
+  updated: userUpdateLeadActions(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLeadAction($leadActionId: String!) {
+  deleted: userDeleteLeadAction(leadActionId: $leadActionId) {
+    ...LeadActionDetails
+  }
+}
+
+query PublicLeadActions($input: UserListLeadActionInput) {
+  items: publicLeadActions(input: $input) {
+    ...LeadActionLists
+  }
+  count: publicCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeadActions($input: UserListLeadActionInput) {
+  count: publicCountLeadActions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeadActions($input: UserListLeadActionInput) {
+  items: publicSelectLeadActions(input: $input) {
+    ...LeadActionDetails
+  }
+}
+
+query PublicLeadAction($leadActionId: String!) {
+  item: publicLeadAction(leadActionId: $leadActionId) {
+    ...LeadActionDetails
+  }
+}

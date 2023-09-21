@@ -1,0 +1,157 @@
+
+
+fragment AuthorizationDiagnosisCodeDetails on AuthorizationDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+authorizationId
+diagnosis {
+  id
+  name
+}
+authorization {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment AuthorizationDiagnosisCodeLists on AuthorizationDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+authorizationId
+diagnosis {
+    id
+    name
+}
+authorization {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminAuthorizationDiagnosisCodes($input: AdminListAuthorizationDiagnosisCodeInput) {
+  items: adminAuthorizationDiagnosisCodes(input: $input) {
+    ...AuthorizationDiagnosisCodeLists
+  }
+  count: adminCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizationDiagnosisCodes($input: AdminListAuthorizationDiagnosisCodeInput) {
+  count: adminCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!) {
+  item: adminAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminCreateAuthorizationDiagnosisCode($input: AdminCreateAuthorizationDiagnosisCodeInput!) {
+  created: adminCreateAuthorizationDiagnosisCode(input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminUpdateAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!, $input: AdminUpdateAuthorizationDiagnosisCodeInput!) {
+  updated: adminUpdateAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId, input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+mutation AdminDeleteAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!) {
+  deleted: adminDeleteAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+query UserAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  items: userAuthorizationDiagnosisCodes(input: $input) {
+    ...AuthorizationDiagnosisCodeLists
+  }
+  count: userCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  count: userCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  items: userSelectAuthorizationDiagnosisCodes(input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+query UserAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!) {
+  item: userAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+mutation UserCreateAuthorizationDiagnosisCode($input: UserCreateAuthorizationDiagnosisCodeInput!) {
+  created: userCreateAuthorizationDiagnosisCode(input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+mutation UserUpdateAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!, $input: UserUpdateAuthorizationDiagnosisCodeInput!) {
+  updated: userUpdateAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId, input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+mutation UserUpdateAuthorizationDiagnosisCodes($input: UserUpdateAuthorizationDiagnosisCodesInput!) {
+  updated: userUpdateAuthorizationDiagnosisCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!) {
+  deleted: userDeleteAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+query PublicAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  items: publicAuthorizationDiagnosisCodes(input: $input) {
+    ...AuthorizationDiagnosisCodeLists
+  }
+  count: publicCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  count: publicCountAuthorizationDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizationDiagnosisCodes($input: UserListAuthorizationDiagnosisCodeInput) {
+  items: publicSelectAuthorizationDiagnosisCodes(input: $input) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}
+
+query PublicAuthorizationDiagnosisCode($authorizationDiagnosisCodeId: String!) {
+  item: publicAuthorizationDiagnosisCode(authorizationDiagnosisCodeId: $authorizationDiagnosisCodeId) {
+    ...AuthorizationDiagnosisCodeDetails
+  }
+}

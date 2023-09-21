@@ -1,0 +1,54 @@
+<div class="w-full max-w-3xl">
+  <!-- Section -->
+  <ng-container *ngIf="vm$ | async as vm">
+    <form [formGroup]="planBillingForm">
+
+      <!-- Section -->
+      <div class="w-full">
+        <div class="text-xl">Change your plan</div>
+        <div class="text-secondary">Upgrade or downgrade your current plan.</div>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6 w-full mt-8">
+        <!-- Plan -->
+        <div class="sm:col-span-3">
+          <fuse-alert [appearance]="'outline'" [type]="'info'">
+            Changing the plan will take effect immediately. You will be charged for the rest of the current month.
+          </fuse-alert>
+        </div>
+        <mat-radio-group class="invisible absolute w-0 h-0 pointer-events-none" [formControlName]="'plan'"
+          #planRadioGroup="matRadioGroup">
+          <ng-container *ngFor="let plan of vm.plans; trackBy: trackByFn">
+            <mat-radio-button [value]="plan.id"></mat-radio-button>
+          </ng-container>
+        </mat-radio-group>
+        <ng-container *ngFor="let plan of vm.plans; trackBy: trackByFn">
+          <div class="relative flex flex-col items-start justify-start p-6 rounded-md shadow cursor-pointer bg-card"
+            [ngClass]="{'ring ring-inset ring-primary': planRadioGroup.value === plan.id}"
+            (click)="planRadioGroup.value = plan.id">
+            <ng-container *ngIf="planRadioGroup.value === plan.value">
+              <mat-icon class="absolute top-0 right-0 mt-3 mr-3 icon-size-7 text-primary"
+                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+            </ng-container>
+            <div class="font-medium">{{plan.name}}</div>
+            <div class="mt-1 whitespace-normal text-secondary">{{plan.detail}}</div>
+            <div class="flex-auto"></div>
+            <div class="mt-8 text-lg">
+              <span>{{plan.price | currency:'USD':'symbol':'1.0'}}</span>
+              <span class="text-secondary"> / month</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Divider -->
+      <div class="mt-12 mb-10 border-t border-primary/50"></div>
+      <ui-formly-json-form
+        formName="settings_billing"
+        [showSubmitButton]="true"
+        [formData]="{ countries: vm.countries }"
+        [model]="vm.billingInfo ?? {}"
+        (save)="vm.billingInfo ? update($event) : create($event)"
+      ></ui-formly-json-form>
+    </form>
+  </ng-container>
+</div>

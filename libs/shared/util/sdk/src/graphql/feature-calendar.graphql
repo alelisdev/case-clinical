@@ -1,0 +1,92 @@
+
+fragment CalendarDetails on Calendar {
+id
+createdAt
+updatedAt
+name
+title
+color
+visible
+
+
+userCalendars {
+    id
+    name
+  }
+
+
+appointments {
+    ...AppointmentDetails
+  }
+
+}
+query AdminCalendars($input: AdminListCalendarInput) {
+  items: adminCalendars(input: $input) {
+    ...CalendarDetails
+  }
+  count: adminCountCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCalendars($input: AdminListCalendarInput) {
+  count: adminCountCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCalendar($calendarId: String!) {
+  item: adminCalendar(calendarId: $calendarId) {
+    ...CalendarDetails
+  }
+}
+mutation AdminCreateCalendar($input: AdminCreateCalendarInput!) {
+  created: adminCreateCalendar(input: $input) {
+    ...CalendarDetails
+  }
+}
+mutation AdminUpdateCalendar($calendarId: String!, $input: AdminUpdateCalendarInput!) {
+  updated: adminUpdateCalendar(calendarId: $calendarId, input: $input) {
+    ...CalendarDetails
+  }
+}
+mutation AdminDeleteCalendar($calendarId: String!) {
+  deleted: adminDeleteCalendar(calendarId: $calendarId) {
+    ...CalendarDetails
+  }
+}
+
+query UserCalendars($input: UserListCalendarInput) {
+  items: userCalendars(input: $input) {
+    ...CalendarDetails
+  }
+  count: userCountCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCalendars($input: UserListCalendarInput) {
+  count: userCountCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCalendar($calendarId: String!) {
+  item: userCalendar(calendarId: $calendarId) {
+    ...CalendarDetails
+  }
+}
+mutation UserCreateCalendar($input: UserCreateCalendarInput!) {
+  created: userCreateCalendar(input: $input) {
+    ...CalendarDetails
+  }
+}
+mutation UserUpdateCalendar($calendarId: String!, $input: UserUpdateCalendarInput!) {
+  updated: userUpdateCalendar(calendarId: $calendarId, input: $input) {
+    ...CalendarDetails
+  }
+}
+mutation UserDeleteCalendar($calendarId: String!) {
+  deleted: userDeleteCalendar(calendarId: $calendarId) {
+    ...CalendarDetails
+  }
+}

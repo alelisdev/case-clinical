@@ -1,0 +1,148 @@
+
+
+fragment AuthorizationCategoryDetails on AuthorizationCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+}
+
+fragment AuthorizationCategoryLists on AuthorizationCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+
+}
+
+query AdminAuthorizationCategories($input: AdminListAuthorizationCategoryInput) {
+  items: adminAuthorizationCategories(input: $input) {
+    ...AuthorizationCategoryLists
+  }
+  count: adminCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizationCategories($input: AdminListAuthorizationCategoryInput) {
+  count: adminCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorizationCategory($authorizationCategoryId: String!) {
+  item: adminAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId) {
+    ...AuthorizationCategoryDetails
+  }
+}
+mutation AdminCreateAuthorizationCategory($input: AdminCreateAuthorizationCategoryInput!) {
+  created: adminCreateAuthorizationCategory(input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+mutation AdminUpdateAuthorizationCategory($authorizationCategoryId: String!, $input: AdminUpdateAuthorizationCategoryInput!) {
+  updated: adminUpdateAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId, input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+mutation AdminDeleteAuthorizationCategory($authorizationCategoryId: String!) {
+  deleted: adminDeleteAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+query UserAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  items: userAuthorizationCategories(input: $input) {
+    ...AuthorizationCategoryLists
+  }
+  count: userCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  count: userCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  items: userSelectAuthorizationCategories(input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+query UserAuthorizationCategory($authorizationCategoryId: String!) {
+  item: userAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+mutation UserCreateAuthorizationCategory($input: UserCreateAuthorizationCategoryInput!) {
+  created: userCreateAuthorizationCategory(input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+mutation UserUpdateAuthorizationCategory($authorizationCategoryId: String!, $input: UserUpdateAuthorizationCategoryInput!) {
+  updated: userUpdateAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId, input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+mutation UserUpdateAuthorizationCategories($input: UserUpdateAuthorizationCategoriesInput!) {
+  updated: userUpdateAuthorizationCategories(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorizationCategory($authorizationCategoryId: String!) {
+  deleted: userDeleteAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+query PublicAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  items: publicAuthorizationCategories(input: $input) {
+    ...AuthorizationCategoryLists
+  }
+  count: publicCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  count: publicCountAuthorizationCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizationCategories($input: UserListAuthorizationCategoryInput) {
+  items: publicSelectAuthorizationCategories(input: $input) {
+    ...AuthorizationCategoryDetails
+  }
+}
+
+query PublicAuthorizationCategory($authorizationCategoryId: String!) {
+  item: publicAuthorizationCategory(authorizationCategoryId: $authorizationCategoryId) {
+    ...AuthorizationCategoryDetails
+  }
+}

@@ -1,0 +1,158 @@
+
+fragment ClinicalProviderTagDetails on ClinicalProviderTag {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+tagId
+clinicalProvider {
+  id
+  name
+}
+tag {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ClinicalProviderTagLists on ClinicalProviderTag {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+tagId
+clinicalProvider {
+    id
+    name
+}
+tag {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminClinicalProviderTags($input: AdminListClinicalProviderTagInput) {
+  items: adminClinicalProviderTags(input: $input) {
+    ...ClinicalProviderTagLists
+  }
+  count: adminCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviderTags($input: AdminListClinicalProviderTagInput) {
+  count: adminCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClinicalProviderTag($clinicalProviderTagId: String!) {
+  item: adminClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId) {
+    ...ClinicalProviderTagDetails
+  }
+}
+mutation AdminCreateClinicalProviderTag($input: AdminCreateClinicalProviderTagInput!) {
+  created: adminCreateClinicalProviderTag(input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+mutation AdminUpdateClinicalProviderTag($clinicalProviderTagId: String!, $input: AdminUpdateClinicalProviderTagInput!) {
+  updated: adminUpdateClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId, input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+mutation AdminDeleteClinicalProviderTag($clinicalProviderTagId: String!) {
+  deleted: adminDeleteClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+query UserClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  items: userClinicalProviderTags(input: $input) {
+    ...ClinicalProviderTagLists
+  }
+  count: userCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  count: userCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  items: userSelectClinicalProviderTags(input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+query UserClinicalProviderTag($clinicalProviderTagId: String!) {
+  item: userClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+mutation UserCreateClinicalProviderTag($input: UserCreateClinicalProviderTagInput!) {
+  created: userCreateClinicalProviderTag(input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+mutation UserUpdateClinicalProviderTag($clinicalProviderTagId: String!, $input: UserUpdateClinicalProviderTagInput!) {
+  updated: userUpdateClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId, input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+mutation UserUpdateClinicalProviderTags($input: UserUpdateClinicalProviderTagsInput!) {
+  updated: userUpdateClinicalProviderTags(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProviderTag($clinicalProviderTagId: String!) {
+  deleted: userDeleteClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+query PublicClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  items: publicClinicalProviderTags(input: $input) {
+    ...ClinicalProviderTagLists
+  }
+  count: publicCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  count: publicCountClinicalProviderTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviderTags($input: UserListClinicalProviderTagInput) {
+  items: publicSelectClinicalProviderTags(input: $input) {
+    ...ClinicalProviderTagDetails
+  }
+}
+
+query PublicClinicalProviderTag($clinicalProviderTagId: String!) {
+  item: publicClinicalProviderTag(clinicalProviderTagId: $clinicalProviderTagId) {
+    ...ClinicalProviderTagDetails
+  }
+}

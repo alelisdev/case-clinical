@@ -1,0 +1,165 @@
+<ng-template #noTimeTemplate> <div></div> </ng-template>
+
+<ng-template
+  #customCellTemplate
+  let-segment="segment"
+  let-locale="locale"
+  let-segmentHeight="segmentHeight"
+  let-isTimeLabel="isTimeLabel"
+  let-daysInWeek="daysInWeek"
+>
+  <div class="absolute left-0 h-16 w-14 bg-white z-0 border-r-2"></div>
+
+  <div
+    class="z-10 justify-end h-full sticky left-0 -mt-2.5 -ml-14 w-14 pr-2 text-right flex flex-col text-xs leading-5 text-gray-400"
+  >
+    <h1 class="translate-y-1/2" [ngClass]="segment.isStart ? '' : 'hidden'">
+      {{
+        segment.displayDate
+          | calendarDate
+            : (daysInWeek === 1 ? "dayViewHour" : "weekViewHour")
+            : locale
+      }}
+    </h1>
+  </div>
+</ng-template>
+
+<div class="flex-1 min-h-0 flex flex-row inset-0">
+  <div class="flex flex-col w-full md:w-7/12">
+    <div class="md:hidden w-full flex flex-row px-2 justify-between border-b-2">
+      <button (click)="incrementWeek(false)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+
+      <button
+        *ngFor="let day of days"
+        type="button"
+        class="flex flex-col flex-grow items-center p-1 h-full"
+      >
+        <span>{{ format(day.date, "eeeee") }}</span>
+        <div
+          [ngClass]="[
+            'w-full flex flex-col items-center justify-center aspect-square h-full',
+            isSelectedDate(day.date)
+              ? 'bg-blue-400 rounded-full text-white'
+              : day.isToday
+              ? 'text-blue-600'
+              : 'text-black'
+          ]"
+        >
+          <h1 (click)="updateDate(day.date)">
+            {{ format(day.date, "d") }}
+          </h1>
+        </div>
+      </button>
+
+      <button (click)="incrementWeek(true)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="overflow-y-auto">
+      <div class="">
+        <mwl-calendar-day-view
+          [viewDate]="viewDate"
+          [events]="events"
+          [refresh]="refresh"
+          [dayStartHour]="startHour"
+          [dayEndHour]="endHour"
+          [hourSegmentHeight]="60"
+          [hourSegments]="2"
+          [eventTemplate]="eventTemplate"
+        >
+        </mwl-calendar-day-view>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full hidden md:flex md:flex-row md:w-5/12 overflow-y-auto px-4">
+    <div class="flex flex-col min-h-0 flex-1">
+      <div class="w-full filter">
+        <div class="w-full rounded-xl border-2 p-1 my-4">
+          <div class="w-full flex flex-row py-2">
+            <button (click)="incrementMonth(false)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            <h1 class="w-full py-2 text-xl text-center font bold">
+              {{ format(viewDate, "MMMM, yyyy") }}
+            </h1>
+
+            <button (click)="incrementMonth(true)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+          <month-view
+            [viewDate]="viewDate"
+            [refresh]="refresh"
+            [events]="events"
+            [showEvents]="false"
+          ></month-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #eventTemplate let-weekEvent="weekEvent">
+  <ng-container *ngTemplateOutlet="dayViewRef; context: { event: weekEvent.event.extendedProps.extraData ?? null }"></ng-container>
+  <!-- <div (click)="log(weekEvent)">
+    Evento es: {{weekEvent ? weekEvent.event.id : null}}
+  </div> -->
+</ng-template>
+

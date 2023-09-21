@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-implant.input'
+export * from './lib/dto/admin-list-implant.input'
+export * from './lib/dto/admin-update-implant.input'
+export * from './lib/dto/implant.input'
+export * from './lib/dto/user-create-implant.input'
+export * from './lib/dto/user-list-implant.input'
+export * from './lib/dto/user-update-implant.input'
+export * from './lib/dto/user-update-implants.input'
+export * from './lib/models/implant.model'
+export * from './lib/api-implant-data-access.module'
+
+export * from './lib/api-implant-data-access-admin.service'
+export * from './lib/api-implant-data-access-public.service'
+export * from './lib/api-implant-data-access-user.service'

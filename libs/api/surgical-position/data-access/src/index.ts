@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-surgical-position.input'
+export * from './lib/dto/admin-list-surgical-position.input'
+export * from './lib/dto/admin-update-surgical-position.input'
+export * from './lib/dto/surgical-position.input'
+export * from './lib/dto/user-create-surgical-position.input'
+export * from './lib/dto/user-list-surgical-position.input'
+export * from './lib/dto/user-update-surgical-position.input'
+export * from './lib/dto/user-update-surgical-positions.input'
+export * from './lib/models/surgical-position.model'
+export * from './lib/api-surgical-position-data-access.module'
+
+export * from './lib/api-surgical-position-data-access-admin.service'
+export * from './lib/api-surgical-position-data-access-public.service'
+export * from './lib/api-surgical-position-data-access-user.service'

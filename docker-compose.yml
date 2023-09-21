@@ -1,0 +1,21 @@
+version: '2.2'
+services:
+  cube:
+    image: cubejs/cube:latest
+    ports:
+      - 4000:3000
+    environment:
+      - CUBEJS_DEV_MODE=true
+    volumes:
+      - .:/cube/conf
+  sql_server:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Schema2020!
+    ports:
+      - '1433:1433'
+    volumes:
+      - data_dir:/data/db
+volumes:
+  data_dir:

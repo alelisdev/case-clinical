@@ -1,0 +1,26 @@
+{
+  "name": "api-navigation-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/navigation/feature/src",
+  "prefix": "navigation",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/navigation/data-access/src/**/*.ts",
+          "libs/api/navigation/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/navigation/data-access"],
+      "options": {
+        "jestConfig": "libs/api/navigation/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

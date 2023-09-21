@@ -1,0 +1,148 @@
+
+fragment SurgicalPositionDetails on SurgicalPosition {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationRequests {
+    ...PriorAuthorizationRequestLists
+  }
+}
+
+fragment SurgicalPositionLists on SurgicalPosition {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminSurgicalPositions($input: AdminListSurgicalPositionInput) {
+  items: adminSurgicalPositions(input: $input) {
+    ...SurgicalPositionLists
+  }
+  count: adminCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountSurgicalPositions($input: AdminListSurgicalPositionInput) {
+  count: adminCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminSurgicalPosition($surgicalPositionId: String!) {
+  item: adminSurgicalPosition(surgicalPositionId: $surgicalPositionId) {
+    ...SurgicalPositionDetails
+  }
+}
+mutation AdminCreateSurgicalPosition($input: AdminCreateSurgicalPositionInput!) {
+  created: adminCreateSurgicalPosition(input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+mutation AdminUpdateSurgicalPosition($surgicalPositionId: String!, $input: AdminUpdateSurgicalPositionInput!) {
+  updated: adminUpdateSurgicalPosition(surgicalPositionId: $surgicalPositionId, input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+mutation AdminDeleteSurgicalPosition($surgicalPositionId: String!) {
+  deleted: adminDeleteSurgicalPosition(surgicalPositionId: $surgicalPositionId) {
+    ...SurgicalPositionDetails
+  }
+}
+
+query UserSurgicalPositions($input: UserListSurgicalPositionInput) {
+  items: userSurgicalPositions(input: $input) {
+    ...SurgicalPositionLists
+  }
+  count: userCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountSurgicalPositions($input: UserListSurgicalPositionInput) {
+  count: userCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectSurgicalPositions($input: UserListSurgicalPositionInput) {
+  items: userSelectSurgicalPositions(input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+
+query UserSurgicalPosition($surgicalPositionId: String!) {
+  item: userSurgicalPosition(surgicalPositionId: $surgicalPositionId) {
+    ...SurgicalPositionDetails
+  }
+}
+
+mutation UserCreateSurgicalPosition($input: UserCreateSurgicalPositionInput!) {
+  created: userCreateSurgicalPosition(input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+mutation UserUpdateSurgicalPosition($surgicalPositionId: String!, $input: UserUpdateSurgicalPositionInput!) {
+  updated: userUpdateSurgicalPosition(surgicalPositionId: $surgicalPositionId, input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+
+mutation UserUpdateSurgicalPositions($input: UserUpdateSurgicalPositionsInput!) {
+  updated: userUpdateSurgicalPositions(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteSurgicalPosition($surgicalPositionId: String!) {
+  deleted: userDeleteSurgicalPosition(surgicalPositionId: $surgicalPositionId) {
+    ...SurgicalPositionDetails
+  }
+}
+
+query PublicSurgicalPositions($input: UserListSurgicalPositionInput) {
+  items: publicSurgicalPositions(input: $input) {
+    ...SurgicalPositionLists
+  }
+  count: publicCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountSurgicalPositions($input: UserListSurgicalPositionInput) {
+  count: publicCountSurgicalPositions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectSurgicalPositions($input: UserListSurgicalPositionInput) {
+  items: publicSelectSurgicalPositions(input: $input) {
+    ...SurgicalPositionDetails
+  }
+}
+
+query PublicSurgicalPosition($surgicalPositionId: String!) {
+  item: publicSurgicalPosition(surgicalPositionId: $surgicalPositionId) {
+    ...SurgicalPositionDetails
+  }
+}

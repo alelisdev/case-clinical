@@ -1,0 +1,148 @@
+
+fragment DocumentTypeDetails on DocumentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+assignedDocuments {
+    ...AssignedDocumentDetails
+  }
+}
+
+fragment DocumentTypeLists on DocumentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminDocumentTypes($input: AdminListDocumentTypeInput) {
+  items: adminDocumentTypes(input: $input) {
+    ...DocumentTypeLists
+  }
+  count: adminCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountDocumentTypes($input: AdminListDocumentTypeInput) {
+  count: adminCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminDocumentType($documentTypeId: String!) {
+  item: adminDocumentType(documentTypeId: $documentTypeId) {
+    ...DocumentTypeDetails
+  }
+}
+mutation AdminCreateDocumentType($input: AdminCreateDocumentTypeInput!) {
+  created: adminCreateDocumentType(input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+mutation AdminUpdateDocumentType($documentTypeId: String!, $input: AdminUpdateDocumentTypeInput!) {
+  updated: adminUpdateDocumentType(documentTypeId: $documentTypeId, input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+mutation AdminDeleteDocumentType($documentTypeId: String!) {
+  deleted: adminDeleteDocumentType(documentTypeId: $documentTypeId) {
+    ...DocumentTypeDetails
+  }
+}
+
+query UserDocumentTypes($input: UserListDocumentTypeInput) {
+  items: userDocumentTypes(input: $input) {
+    ...DocumentTypeLists
+  }
+  count: userCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountDocumentTypes($input: UserListDocumentTypeInput) {
+  count: userCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectDocumentTypes($input: UserListDocumentTypeInput) {
+  items: userSelectDocumentTypes(input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+
+query UserDocumentType($documentTypeId: String!) {
+  item: userDocumentType(documentTypeId: $documentTypeId) {
+    ...DocumentTypeDetails
+  }
+}
+
+mutation UserCreateDocumentType($input: UserCreateDocumentTypeInput!) {
+  created: userCreateDocumentType(input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+mutation UserUpdateDocumentType($documentTypeId: String!, $input: UserUpdateDocumentTypeInput!) {
+  updated: userUpdateDocumentType(documentTypeId: $documentTypeId, input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+
+mutation UserUpdateDocumentTypes($input: UserUpdateDocumentTypesInput!) {
+  updated: userUpdateDocumentTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteDocumentType($documentTypeId: String!) {
+  deleted: userDeleteDocumentType(documentTypeId: $documentTypeId) {
+    ...DocumentTypeDetails
+  }
+}
+
+query PublicDocumentTypes($input: UserListDocumentTypeInput) {
+  items: publicDocumentTypes(input: $input) {
+    ...DocumentTypeLists
+  }
+  count: publicCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountDocumentTypes($input: UserListDocumentTypeInput) {
+  count: publicCountDocumentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectDocumentTypes($input: UserListDocumentTypeInput) {
+  items: publicSelectDocumentTypes(input: $input) {
+    ...DocumentTypeDetails
+  }
+}
+
+query PublicDocumentType($documentTypeId: String!) {
+  item: publicDocumentType(documentTypeId: $documentTypeId) {
+    ...DocumentTypeDetails
+  }
+}

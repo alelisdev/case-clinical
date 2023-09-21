@@ -1,0 +1,26 @@
+{
+  "name": "web-case-pre-injury-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-pre-injury/feature/src",
+  "prefix": "case-pre-injury",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/case-pre-injury/feature/src/**/*.ts",
+          "libs/web/case-pre-injury/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-pre-injury/feature"],
+      "options": {
+        "jestConfig": "libs/web/case-pre-injury/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

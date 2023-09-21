@@ -1,0 +1,220 @@
+<div *ngIf="vm$ | async as vm" class="relative flex flex-auto w-full bg-card dark:bg-transparent">
+  <mat-drawer-container class="flex-auto h-full" [hasBackdrop]="false">
+    <!-- Drawer -->
+    <mat-drawer
+      class="w-full sm:w-100 lg:border-r lg:shadow-none dark:bg-gray-900"
+      [autoFocus]="false"
+      [(opened)]="drawerOpened"
+      #drawer
+    >
+      <!-- New chat -->
+      <ng-container *ngIf="drawerComponent === 'new-chat'">
+        <chat-new-chat [drawer]="drawer"></chat-new-chat>
+      </ng-container>
+
+      <!-- Profile -->
+      <ng-container *ngIf="drawerComponent === 'profile'">
+        <chat-profile [drawer]="drawer"></chat-profile>
+      </ng-container>
+    </mat-drawer>
+
+    <!-- Drawer content -->
+    <mat-drawer-content class="flex overflow-hidden">
+      <!-- Chats list -->
+      <ng-container *ngIf="isChatListVisible">
+        <div
+          class="relative flex flex-auto flex-col w-full min-w-0 lg:min-w-100 lg:max-w-100 bg-card dark:bg-transparent"
+        >
+          <!-- Loading bar -->
+          <mat-progress-bar class="absolute inset-x-0 top-0 h-0.5" *ngIf="vm.loadingRooms" [mode]="'indeterminate'">
+          </mat-progress-bar>
+
+          <!-- Header -->
+          <div *ngIf="!vm.loadingRooms" class="flex flex-col flex-0 py-4 px-8 border-b bg-gray-50 dark:bg-transparent">
+            <div class="flex items-center">
+              <div class="flex items-center mr-1">
+                <div class="w-10 h-10">
+                  <!-- <ng-container *ngIf="profile.avatar">
+                                        <img
+                                            class="object-cover w-full h-full rounded-full object-cover"
+                                            [src]="profile.avatar"
+                                            alt="Profile avatar"/>
+                                    </ng-container> -->
+                  <ng-container>
+                    <div
+                      class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                    >
+                      {{ profile.name?.charAt(0) }}
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="ml-4 font-medium truncate">{{ profile?.name }}</div>
+              </div>
+              <button class="ml-auto" mat-icon-button (click)="openNewChat()">
+                <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+              </button>
+              <!-- Menu -->
+              <!-- <button
+                                class="ml-1 -mr-4"
+                                mat-icon-button
+                                [matMenuTriggerFor]="chatsHeaderMenu">
+                                <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                                <mat-menu #chatsHeaderMenu>
+                                    <button mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:user-group'"></mat-icon>
+                                        New group
+                                    </button>
+                                    <button mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
+                                        Create a room
+                                    </button>
+                                    <button
+                                        mat-menu-item
+                                        (click)="openProfile()">
+                                        <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+                                        Profile
+                                    </button>
+                                    <button mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:archive'"></mat-icon>
+                                        Archived
+                                    </button>
+                                    <button mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:star'"></mat-icon>
+                                        Starred
+                                    </button>
+                                    <button mat-menu-item>
+                                        <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+                                        Settings
+                                    </button>
+                                </mat-menu>
+                            </button> -->
+            </div>
+            <!-- Search -->
+            <div class="mt-4">
+              <mat-form-field
+                class="fuse-mat-no-subscript fuse-mat-rounded fuse-mat-dense w-full"
+                [floatLabel]="'always'"
+              >
+                <mat-icon matPrefix class="icon-size-5" [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                <input
+                  matInput
+                  [autocomplete]="'off'"
+                  [placeholder]="'Search or start new chat'"
+                  (input)="filterRooms(searchField.value)"
+                  #searchField
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Chats -->
+          <div class="flex-auto overflow-y-auto">
+            <ng-container *ngIf="filteredRooms?.length > 0; else noChats">
+              <ng-container *ngFor="let chat of filteredRooms; trackBy: trackByFn">
+                <div
+                  *ngIf="chat.roomType === 'direct'"
+                  class="z-20 flex items-center py-5 px-8 cursor-pointer border-b"
+                  [ngClass]="{
+                    'hover:bg-gray-100 dark:hover:bg-hover': !activeRoomId || chat.roomId !== activeRoomId,
+                    'bg-primary-50 dark:bg-hover': activeRoomId && chat.roomId === activeRoomId
+                  }"
+                  (click)="openConversation(chat)"
+                >
+                  <!-- [routerLink]="[chat.roomId]"> -->
+                  <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                    <ng-container *ngIf="chat.unreadMessagesCount > 0">
+                      <!-- <div
+                                                class="absolute bottom-0 right-0 flex-0 w-2 h-2 -ml-0.5 rounded-full ring-2 ring-bg-card dark:ring-gray-900 bg-primary dark:bg-primary-500 text-on-primary"
+                                                [class.ring-primary-50]="activeRoomId && chat.roomId === activeRoomId"></div> -->
+                    </ng-container>
+                    <!-- <ng-container *ngIf="chat.contact?.avatar">
+                                            <img
+                                                class="w-full h-full rounded-full object-cover"
+                                                [src]="chat.contact?.avatar"
+                                                alt="Contact avatar"/>
+                                        </ng-container> -->
+                    <ng-container>
+                      <div
+                        class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                      >
+                        {{ chat?.name.charAt(0) }}
+                      </div>
+                    </ng-container>
+                  </div>
+                  <div class="min-w-0 ml-4">
+                    <div class="font-medium leading-5 truncate">{{ chat?.name }}</div>
+                    <div *ngIf="chat.typingMembers.length > 0" class="text-primary">typing...</div>
+                    <div
+                      *ngIf="chat.typingMembers.length === 0"
+                      class="leading-5 truncate text-secondary"
+                      [class.text-primary]="chat.unreadMessagesCount > 0"
+                      [class.dark:text-primary-500]="chat.unreadMessagesCount > 0"
+                    >
+                      {{ chat.lastMessage }}
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-end self-start ml-auto pl-2">
+                    <div
+                      *ngIf="
+                        chat.lastMessageTimeStamp > 0 &&
+                        (currentDate | date: 'MM/dd/yyyy') === (chat.lastMessageAt | date: 'MM/dd/yyyy')
+                      "
+                      class="text-sm leading-5 text-secondary"
+                    >
+                      {{ chat.lastMessageAt | date: 'HH:mm' }}
+                    </div>
+                    <div
+                      *ngIf="
+                        chat.lastMessageTimeStamp > 0 &&
+                        (currentDate | date: 'MM/dd/yyyy') !== (chat.lastMessageAt | date: 'MM/dd/yyyy')
+                      "
+                      class="text-sm leading-5 text-secondary"
+                    >
+                      {{ chat.lastMessageAt | date: 'MM/dd/yyyy' }}
+                    </div>
+                    <!-- Unread Count -->
+                    <ng-container *ngIf="chat.unreadMessagesCount > 0">
+                      <!-- <mat-icon
+                                                class="icon-size-5 text-hint"
+                                                [svgIcon]="'heroicons_solid:volume-off'"></mat-icon> -->
+                      <!-- <mat-icon matBadge="15" matBadgeColor="warn"></mat-icon> -->
+                      <div
+                        class="flex justify-center items-center p-2 h-5 bg-pink-600 text-xs text-white font-semibold rounded-full"
+                      >
+                        {{ chat.unreadMessagesCount }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- No chats template -->
+        <ng-template #noChats>
+          <!-- <div *ngIf="vm.loadingRooms" class="flex flex-auto flex-col items-center justify-center h-full">
+                        <mat-icon
+                            class="icon-size-24"
+                            [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+                        <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Loading...</div>
+                    </div> -->
+          <div
+            *ngIf="!vm.loading || vm.loadingRooms"
+            class="flex flex-auto flex-col items-center justify-center h-full"
+          >
+            <mat-icon class="icon-size-24" [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+            <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">No chats</div>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <!-- Conversation -->
+      <ng-container>
+        <div class="flex-auto border-l" [ngClass]="'z-20 absolute inset-0 lg:static lg:inset-auto flex'">
+          <router-outlet></router-outlet>
+        </div>
+      </ng-container>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

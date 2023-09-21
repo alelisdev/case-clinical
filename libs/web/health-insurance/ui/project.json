@@ -1,0 +1,23 @@
+{
+  "name": "web-health-insurance-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/health-insurance/ui/src",
+  "prefix": "health-insurance",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/health-insurance/ui/src/**/*.ts", "libs/web/health-insurance/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/health-insurance/ui"],
+      "options": {
+        "jestConfig": "libs/web/health-insurance/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

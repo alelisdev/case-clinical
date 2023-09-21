@@ -1,0 +1,23 @@
+{
+  "name": "api-chat-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/chat/feature/src",
+  "prefix": "chat",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/chat/data-access/src/**/*.ts", "libs/api/chat/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/chat/data-access"],
+      "options": {
+        "jestConfig": "libs/api/chat/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

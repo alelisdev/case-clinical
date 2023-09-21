@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-academy-category.input'
+export * from './lib/dto/admin-list-academy-category.input'
+export * from './lib/dto/admin-update-academy-category.input'
+export * from './lib/dto/academy-category.input'
+export * from './lib/dto/user-create-academy-category.input'
+export * from './lib/dto/user-list-academy-category.input'
+export * from './lib/dto/user-update-academy-category.input'
+export * from './lib/models/academy-category.model'
+export * from './lib/dto/user-update-academy-categories.input'
+export * from './lib/api-academy-category-data-access.module'
+
+export * from './lib/api-academy-category-data-access-admin.service'
+export * from './lib/api-academy-category-data-access-public.service'
+export * from './lib/api-academy-category-data-access-user.service'

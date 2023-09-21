@@ -1,0 +1,26 @@
+{
+  "name": "api-write-off-status-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/write-off-status/feature/src",
+  "prefix": "write-off-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/write-off-status/data-access/src/**/*.ts",
+          "libs/api/write-off-status/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/write-off-status/data-access"],
+      "options": {
+        "jestConfig": "libs/api/write-off-status/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

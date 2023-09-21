@@ -1,0 +1,148 @@
+
+fragment PriorMedsToDateStatusDetails on PriorMedsToDateStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorMedsToDates {
+    ...PriorMedsToDateLists
+  }
+}
+
+fragment PriorMedsToDateStatusLists on PriorMedsToDateStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorMedsToDates {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPriorMedsToDateStatuses($input: AdminListPriorMedsToDateStatusInput) {
+  items: adminPriorMedsToDateStatuses(input: $input) {
+    ...PriorMedsToDateStatusLists
+  }
+  count: adminCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorMedsToDateStatuses($input: AdminListPriorMedsToDateStatusInput) {
+  count: adminCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorMedsToDateStatus($priorMedsToDateStatusId: String!) {
+  item: adminPriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+mutation AdminCreatePriorMedsToDateStatus($input: AdminCreatePriorMedsToDateStatusInput!) {
+  created: adminCreatePriorMedsToDateStatus(input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+mutation AdminUpdatePriorMedsToDateStatus($priorMedsToDateStatusId: String!, $input: AdminUpdatePriorMedsToDateStatusInput!) {
+  updated: adminUpdatePriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId, input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+mutation AdminDeletePriorMedsToDateStatus($priorMedsToDateStatusId: String!) {
+  deleted: adminDeletePriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+query UserPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  items: userPriorMedsToDateStatuses(input: $input) {
+    ...PriorMedsToDateStatusLists
+  }
+  count: userCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  count: userCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  items: userSelectPriorMedsToDateStatuses(input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+query UserPriorMedsToDateStatus($priorMedsToDateStatusId: String!) {
+  item: userPriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+mutation UserCreatePriorMedsToDateStatus($input: UserCreatePriorMedsToDateStatusInput!) {
+  created: userCreatePriorMedsToDateStatus(input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+mutation UserUpdatePriorMedsToDateStatus($priorMedsToDateStatusId: String!, $input: UserUpdatePriorMedsToDateStatusInput!) {
+  updated: userUpdatePriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId, input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+mutation UserUpdatePriorMedsToDateStatuses($input: UserUpdatePriorMedsToDateStatusesInput!) {
+  updated: userUpdatePriorMedsToDateStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorMedsToDateStatus($priorMedsToDateStatusId: String!) {
+  deleted: userDeletePriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+query PublicPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  items: publicPriorMedsToDateStatuses(input: $input) {
+    ...PriorMedsToDateStatusLists
+  }
+  count: publicCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  count: publicCountPriorMedsToDateStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorMedsToDateStatuses($input: UserListPriorMedsToDateStatusInput) {
+  items: publicSelectPriorMedsToDateStatuses(input: $input) {
+    ...PriorMedsToDateStatusDetails
+  }
+}
+
+query PublicPriorMedsToDateStatus($priorMedsToDateStatusId: String!) {
+  item: publicPriorMedsToDateStatus(priorMedsToDateStatusId: $priorMedsToDateStatusId) {
+    ...PriorMedsToDateStatusDetails
+  }
+}

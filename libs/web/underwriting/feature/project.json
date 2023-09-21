@@ -1,0 +1,23 @@
+{
+  "name": "web-underwriting-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/underwriting/feature/src",
+  "prefix": "underwriting",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/underwriting/feature/src/**/*.ts", "libs/web/underwriting/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/underwriting/feature"],
+      "options": {
+        "jestConfig": "libs/web/underwriting/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

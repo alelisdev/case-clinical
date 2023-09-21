@@ -1,0 +1,22 @@
+{
+  "name": "api-procedure-status-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/procedure-status/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/procedure-status/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/procedure-status/data-access"],
+      "options": {
+        "jestConfig": "libs/api/procedure-status/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "api-account-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/account/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/account/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/account/feature"],
+      "options": {
+        "jestConfig": "libs/api/account/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

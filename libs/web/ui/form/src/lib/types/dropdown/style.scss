@@ -1,0 +1,41 @@
+ui-form-dropdown .cdk-overlay-container {
+    z-index: 9999;
+}
+
+ui-form-dropdown ui-field-properties mat-form-field{
+      height: auto;
+      .mdc-text-field{
+          height: 100% !important;
+          .mat-mdc-form-field-flex {
+            .mdc-notched-outline div{
+              border-color: #abbbce !important;
+            }
+            .mat-mdc-form-field-infix{
+              padding-top: auto;
+              padding-bottom: auto;
+            }
+          }
+      }
+  }
+
+
+ui-form-dropdown mat-form-field{
+  height: 42px;
+  .mdc-text-field{
+      height: 100% !important;
+      .mat-mdc-form-field-flex {
+        .mdc-notched-outline div{
+          border-color: #abbbce !important;
+        }
+        .mat-mdc-form-field-infix{
+          padding-top: 9px;
+          padding-bottom: 9px;
+        }
+      }
+  }
+}
+
+
+ui-form-dropdown mat-form-field.error .mdc-text-field .mat-mdc-form-field-flex .mdc-notched-outline div{
+  border-color: red !important;
+}

@@ -1,0 +1,154 @@
+
+fragment ExperienceDetails on Experience {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+workplace
+from
+to
+clinicalProvider {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ExperienceLists on Experience {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+workplace
+from
+to
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminExperiences($input: AdminListExperienceInput) {
+  items: adminExperiences(input: $input) {
+    ...ExperienceLists
+  }
+  count: adminCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountExperiences($input: AdminListExperienceInput) {
+  count: adminCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminExperience($experienceId: String!) {
+  item: adminExperience(experienceId: $experienceId) {
+    ...ExperienceDetails
+  }
+}
+mutation AdminCreateExperience($input: AdminCreateExperienceInput!) {
+  created: adminCreateExperience(input: $input) {
+    ...ExperienceDetails
+  }
+}
+mutation AdminUpdateExperience($experienceId: String!, $input: AdminUpdateExperienceInput!) {
+  updated: adminUpdateExperience(experienceId: $experienceId, input: $input) {
+    ...ExperienceDetails
+  }
+}
+mutation AdminDeleteExperience($experienceId: String!) {
+  deleted: adminDeleteExperience(experienceId: $experienceId) {
+    ...ExperienceDetails
+  }
+}
+
+query UserExperiences($input: UserListExperienceInput) {
+  items: userExperiences(input: $input) {
+    ...ExperienceLists
+  }
+  count: userCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountExperiences($input: UserListExperienceInput) {
+  count: userCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectExperiences($input: UserListExperienceInput) {
+  items: userSelectExperiences(input: $input) {
+    ...ExperienceDetails
+  }
+}
+
+query UserExperience($experienceId: String!) {
+  item: userExperience(experienceId: $experienceId) {
+    ...ExperienceDetails
+  }
+}
+
+mutation UserCreateExperience($input: UserCreateExperienceInput!) {
+  created: userCreateExperience(input: $input) {
+    ...ExperienceDetails
+  }
+}
+mutation UserUpdateExperience($experienceId: String!, $input: UserUpdateExperienceInput!) {
+  updated: userUpdateExperience(experienceId: $experienceId, input: $input) {
+    ...ExperienceDetails
+  }
+}
+
+mutation UserUpdateExperiences($input: UserUpdateExperiencesInput!) {
+  updated: userUpdateExperiences(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteExperience($experienceId: String!) {
+  deleted: userDeleteExperience(experienceId: $experienceId) {
+    ...ExperienceDetails
+  }
+}
+
+query PublicExperiences($input: UserListExperienceInput) {
+  items: publicExperiences(input: $input) {
+    ...ExperienceLists
+  }
+  count: publicCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountExperiences($input: UserListExperienceInput) {
+  count: publicCountExperiences(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectExperiences($input: UserListExperienceInput) {
+  items: publicSelectExperiences(input: $input) {
+    ...ExperienceDetails
+  }
+}
+
+query PublicExperience($experienceId: String!) {
+  item: publicExperience(experienceId: $experienceId) {
+    ...ExperienceDetails
+  }
+}

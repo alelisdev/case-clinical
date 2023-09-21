@@ -1,0 +1,162 @@
+
+fragment MedLevelDetails on MedLevel {
+id
+createdAt
+updatedAt
+name
+approvedSiteCosts
+maximumMedicalBillsToDate
+
+
+
+
+
+
+legalCases {
+    ...LegalCaseLists
+  }
+
+requireFields {
+    ...RequiredFieldLists
+  }
+}
+
+fragment MedLevelLists on MedLevel {
+id
+createdAt
+updatedAt
+name
+approvedSiteCosts
+maximumMedicalBillsToDate
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+
+requireFields {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminMedLevels($input: AdminListMedLevelInput) {
+  items: adminMedLevels(input: $input) {
+    ...MedLevelLists
+  }
+  count: adminCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountMedLevels($input: AdminListMedLevelInput) {
+  count: adminCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminMedLevel($medLevelId: String!) {
+  item: adminMedLevel(medLevelId: $medLevelId) {
+    ...MedLevelDetails
+  }
+}
+mutation AdminCreateMedLevel($input: AdminCreateMedLevelInput!) {
+  created: adminCreateMedLevel(input: $input) {
+    ...MedLevelDetails
+  }
+}
+mutation AdminUpdateMedLevel($medLevelId: String!, $input: AdminUpdateMedLevelInput!) {
+  updated: adminUpdateMedLevel(medLevelId: $medLevelId, input: $input) {
+    ...MedLevelDetails
+  }
+}
+mutation AdminDeleteMedLevel($medLevelId: String!) {
+  deleted: adminDeleteMedLevel(medLevelId: $medLevelId) {
+    ...MedLevelDetails
+  }
+}
+
+query UserMedLevels($input: UserListMedLevelInput) {
+  items: userMedLevels(input: $input) {
+    ...MedLevelLists
+  }
+  count: userCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountMedLevels($input: UserListMedLevelInput) {
+  count: userCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectMedLevels($input: UserListMedLevelInput) {
+  items: userSelectMedLevels(input: $input) {
+    ...MedLevelDetails
+  }
+}
+
+query UserMedLevel($medLevelId: String!) {
+  item: userMedLevel(medLevelId: $medLevelId) {
+    ...MedLevelDetails
+  }
+}
+
+mutation UserCreateMedLevel($input: UserCreateMedLevelInput!) {
+  created: userCreateMedLevel(input: $input) {
+    ...MedLevelDetails
+  }
+}
+mutation UserUpdateMedLevel($medLevelId: String!, $input: UserUpdateMedLevelInput!) {
+  updated: userUpdateMedLevel(medLevelId: $medLevelId, input: $input) {
+    ...MedLevelDetails
+  }
+}
+
+mutation UserUpdateMedLevels($input: UserUpdateMedLevelsInput!) {
+  updated: userUpdateMedLevels(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteMedLevel($medLevelId: String!) {
+  deleted: userDeleteMedLevel(medLevelId: $medLevelId) {
+    ...MedLevelDetails
+  }
+}
+
+query PublicMedLevels($input: UserListMedLevelInput) {
+  items: publicMedLevels(input: $input) {
+    ...MedLevelLists
+  }
+  count: publicCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountMedLevels($input: UserListMedLevelInput) {
+  count: publicCountMedLevels(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectMedLevels($input: UserListMedLevelInput) {
+  items: publicSelectMedLevels(input: $input) {
+    ...MedLevelDetails
+  }
+}
+
+query PublicMedLevel($medLevelId: String!) {
+  item: publicMedLevel(medLevelId: $medLevelId) {
+    ...MedLevelDetails
+  }
+}

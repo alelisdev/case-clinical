@@ -1,0 +1,149 @@
+
+fragment TreatmentDetails on Treatment {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment TreatmentLists on Treatment {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminTreatments($input: AdminListTreatmentInput) {
+  items: adminTreatments(input: $input) {
+    ...TreatmentLists
+  }
+  count: adminCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTreatments($input: AdminListTreatmentInput) {
+  count: adminCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTreatment($treatmentId: String!) {
+  item: adminTreatment(treatmentId: $treatmentId) {
+    ...TreatmentDetails
+  }
+}
+mutation AdminCreateTreatment($input: AdminCreateTreatmentInput!) {
+  created: adminCreateTreatment(input: $input) {
+    ...TreatmentDetails
+  }
+}
+mutation AdminUpdateTreatment($treatmentId: String!, $input: AdminUpdateTreatmentInput!) {
+  updated: adminUpdateTreatment(treatmentId: $treatmentId, input: $input) {
+    ...TreatmentDetails
+  }
+}
+mutation AdminDeleteTreatment($treatmentId: String!) {
+  deleted: adminDeleteTreatment(treatmentId: $treatmentId) {
+    ...TreatmentDetails
+  }
+}
+
+query UserTreatments($input: UserListTreatmentInput) {
+  items: userTreatments(input: $input) {
+    ...TreatmentLists
+  }
+  count: userCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTreatments($input: UserListTreatmentInput) {
+  count: userCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTreatments($input: UserListTreatmentInput) {
+  items: userSelectTreatments(input: $input) {
+    ...TreatmentDetails
+  }
+}
+
+query UserTreatment($treatmentId: String!) {
+  item: userTreatment(treatmentId: $treatmentId) {
+    ...TreatmentDetails
+  }
+}
+
+mutation UserCreateTreatment($input: UserCreateTreatmentInput!) {
+  created: userCreateTreatment(input: $input) {
+    ...TreatmentDetails
+  }
+}
+mutation UserUpdateTreatment($treatmentId: String!, $input: UserUpdateTreatmentInput!) {
+  updated: userUpdateTreatment(treatmentId: $treatmentId, input: $input) {
+    ...TreatmentDetails
+  }
+}
+
+mutation UserUpdateTreatments($input: UserUpdateTreatmentsInput!) {
+  updated: userUpdateTreatments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTreatment($treatmentId: String!) {
+  deleted: userDeleteTreatment(treatmentId: $treatmentId) {
+    ...TreatmentDetails
+  }
+}
+
+query PublicTreatments($input: UserListTreatmentInput) {
+  items: publicTreatments(input: $input) {
+    ...TreatmentLists
+  }
+  count: publicCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTreatments($input: UserListTreatmentInput) {
+  count: publicCountTreatments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTreatments($input: UserListTreatmentInput) {
+  items: publicSelectTreatments(input: $input) {
+    ...TreatmentDetails
+  }
+}
+
+query PublicTreatment($treatmentId: String!) {
+  item: publicTreatment(treatmentId: $treatmentId) {
+    ...TreatmentDetails
+  }
+}

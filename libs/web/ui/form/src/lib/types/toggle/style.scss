@@ -1,0 +1,67 @@
+::ng-deep mat-button-toggle-group mat-button-toggle{
+    overflow: visible !important;
+}
+
+::ng-deep .mat-button-toggle-group-appearance-standard .mat-button-toggle-appearance-standard.noText{
+    &:not(.mat-button-toggle-checked){
+        button{
+            background-color: white !important;
+            border: 1px solid #dddddd !important;
+            border-radius:10px;
+            ui-la-icon{
+                color: rgb(107 114 128) !important;
+            }
+
+            &:hover{
+                border: 1px solid #2196f3!important;
+                ui-la-icon{
+                    color: #2196f3!important;
+                }
+            }
+        }
+    }
+    button{
+        background-color: #2196f3!important;
+        border: 1px solid #2196f3!important;
+        width: 44px;
+        height: 44px;
+        ui-la-icon{
+            color: white !important;
+        }
+        .mat-button-toggle-label-content{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    }
+}
+::ng-deep .mat-button-toggle-group{
+    border-radius: 0px !important;
+}
+::ng-deep .mat-button-toggle-group-appearance-standard .mat-button-toggle-appearance-standard{
+    &:not(.mat-button-toggle-checked){
+        border: 1px solid rgb(244 244 245)!important;
+
+        button{
+            background-color: white !important;
+            span span{
+                color: rgb(30 41 59) !important;
+            }
+            &:hover{
+                background-color: white !important;;
+            }
+        }
+    }
+
+    border: 1px solid #2196f3!important;
+    button{
+        background-color: #2196f3!important;
+        
+        span span{
+            color: white !important;
+        }
+        .mat-button-toggle-label-content{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    }
+}

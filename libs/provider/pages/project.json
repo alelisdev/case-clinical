@@ -1,0 +1,17 @@
+{
+  "name": "provider-pages",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/provider/pages/src",
+  "prefix": "case-clinical",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/provider/pages/**/*.ts", "libs/provider/pages/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

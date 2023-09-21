@@ -1,0 +1,22 @@
+{
+  "name": "api-user-role-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/user-role/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/user-role/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/user-role/data-access"],
+      "options": {
+        "jestConfig": "libs/api/user-role/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

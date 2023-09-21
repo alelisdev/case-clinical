@@ -1,0 +1,23 @@
+{
+  "name": "api-firm-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/firm/feature/src",
+  "prefix": "firm",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/firm/data-access/src/**/*.ts", "libs/api/firm/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/firm/data-access"],
+      "options": {
+        "jestConfig": "libs/api/firm/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

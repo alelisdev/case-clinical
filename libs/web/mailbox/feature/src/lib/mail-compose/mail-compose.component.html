@@ -1,0 +1,90 @@
+<div class="flex flex-col max-w-240 md:min-w-160 compose-wrapper max-h-screen -m-6">
+  <!-- Header -->
+  <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+    <div class="text-lg font-medium">{{dialogData?.mailAction ? dialogData.mailAction : 'New Message'}}</div>
+    <button mat-icon-button (click)="cancel()" [tabIndex]="-1">
+      <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+    </button>
+  </div>
+  <mat-progress-bar class="h-0.5 z-20" *ngIf="mailComposeService.mailComposeLoading | async" [mode]="'indeterminate'"></mat-progress-bar>
+
+  <!-- Compose form -->
+  <form
+    class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+    [formGroup]="composeForm"
+    enctype="multipart/form-data"
+  >
+
+    <!-- To -->
+    <mailbox-email-input
+      [templateOption]="templateOption.to"
+      [formControl]="composeForm.controls['to']"
+      (onCopyFieldChanged)="onCopyFieldChanged($event)"
+    ></mailbox-email-input>
+
+    <!-- CC -->
+    <mailbox-email-input
+      [templateOption]="templateOption.cc"
+      [formControl]="composeForm.controls['cc']"
+      *ngIf="copyFields.cc"
+    ></mailbox-email-input>
+
+    <!-- BCC -->
+    <mailbox-email-input
+      [templateOption]="templateOption.bcc"
+      [formControl]="composeForm.controls['bcc']"
+      *ngIf="copyFields.bcc"
+    ></mailbox-email-input>
+
+    <!-- Subject -->
+    <mat-form-field class="subject-field">
+      <mat-label>Subject</mat-label>
+      <input matInput [formControlName]="'subject'" />
+    </mat-form-field>
+
+    <!-- Body -->
+    <quill-editor class="mt-2" [formControlName]="'body'" [bounds]="'self'" [modules]="quillModules"></quill-editor>
+
+    <!-- Legal Case -->
+    <div class="mt-5 legal-case-dropdown" *ngIf="isDisplayLegalCaseField">
+      <mat-label>Legal Case</mat-label>
+      <ng-select 
+        [formControlName]="'legalCaseId'" 
+        [items]="items" 
+        [class]="classNames"
+        [clearable]="true"
+        bindLabel="name" 
+        bindValue="id"
+        #dropdown>
+      </ng-select>
+    </div>
+
+    <!-- file -->
+    <div class="flex my-auto mt-2">
+      <div>
+        <file-upload-mail-input
+          [formControl]="formControl"
+          [draftFiles$]="draftFiles$"
+          (fChanged)="fChanged($event)"
+          (draftFileDeleteEvent)="draftFileDeleteEvent($event)"
+          [removedFileEvent]="removedFileEvent$"
+          [multiple]="true"
+        ></file-upload-mail-input>
+      </div>
+    </div>
+    
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+      <div class="flex items-center mt-4 sm:mt-0">
+        <!-- Discard -->
+        <button class="ml-auto sm:ml-0" mat-stroked-button (click)="discard()" *ngIf="isEditDraft">Discard</button>
+        <!-- Save as draft -->
+        <button class="sm:mx-3" mat-stroked-button (click)="saveDraftAndClose()" *ngIf="!this.dialogData?.mailAction" [disabled]="!isEditDraft && !isFormHavingValue">
+          <span>{{ isEditDraft ? 'Update Draft' : 'Save as draft' }}</span>
+        </button>
+        <button class="order-first sm:order-last" mat-flat-button [color]="'primary'" (click)="sendMailOrDraft()">Send</button>
+      </div>
+    </div>
+  </form>
+</div>

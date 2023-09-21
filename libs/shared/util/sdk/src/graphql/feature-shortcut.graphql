@@ -1,0 +1,92 @@
+
+fragment ShortcutDetails on Shortcut {
+id
+createdAt
+updatedAt
+name
+label
+description
+icon
+link
+useRouter
+userId
+user {
+    id
+    name
+}
+
+
+
+
+
+}
+query AdminShortcuts($input: AdminListShortcutInput) {
+  items: adminShortcuts(input: $input) {
+    ...ShortcutDetails
+  }
+  count: adminCountShortcuts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountShortcuts($input: AdminListShortcutInput) {
+  count: adminCountShortcuts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminShortcut($shortcutId: String!) {
+  item: adminShortcut(shortcutId: $shortcutId) {
+    ...ShortcutDetails
+  }
+}
+mutation AdminCreateShortcut($input: AdminCreateShortcutInput!) {
+  created: adminCreateShortcut(input: $input) {
+    ...ShortcutDetails
+  }
+}
+mutation AdminUpdateShortcut($shortcutId: String!, $input: AdminUpdateShortcutInput!) {
+  updated: adminUpdateShortcut(shortcutId: $shortcutId, input: $input) {
+    ...ShortcutDetails
+  }
+}
+mutation AdminDeleteShortcut($shortcutId: String!) {
+  deleted: adminDeleteShortcut(shortcutId: $shortcutId) {
+    ...ShortcutDetails
+  }
+}
+
+query UserShortcuts($input: UserListShortcutInput) {
+  items: userShortcuts(input: $input) {
+    ...ShortcutDetails
+  }
+  count: userCountShortcuts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountShortcuts($input: UserListShortcutInput) {
+  count: userCountShortcuts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserShortcut($shortcutId: String!) {
+  item: userShortcut(shortcutId: $shortcutId) {
+    ...ShortcutDetails
+  }
+}
+mutation UserCreateShortcut($input: UserCreateShortcutInput!) {
+  created: userCreateShortcut(input: $input) {
+    ...ShortcutDetails
+  }
+}
+mutation UserUpdateShortcut($shortcutId: String!, $input: UserUpdateShortcutInput!) {
+  updated: userUpdateShortcut(shortcutId: $shortcutId, input: $input) {
+    ...ShortcutDetails
+  }
+}
+mutation UserDeleteShortcut($shortcutId: String!) {
+  deleted: userDeleteShortcut(shortcutId: $shortcutId) {
+    ...ShortcutDetails
+  }
+}

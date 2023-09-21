@@ -1,0 +1,240 @@
+
+
+fragment ClaimProcedureDetails on ClaimProcedure {
+id
+createdAt
+updatedAt
+name
+claimProcedureCodeId
+procedureCodeId
+claimId
+fromDateOfService
+toDateOfService
+placeOfServiceId
+nationalDrugCode
+drugUnit
+drugQuantity
+quantity
+billedAmount
+approvedAmount
+adjustmentAmount
+netPaymentAmount
+paymentMethod
+internalMemo
+explainationOfBenefitsComment
+claimStatusId
+reason
+procedureCode
+diagnosisPointer
+modifier1
+modifier2
+modifier3
+modifier4
+appointmentId
+procedureId
+placeOfService {
+  id
+  name
+}
+claimStatus {
+  id
+  name
+}
+claim {
+  id
+  name
+}
+appointment {
+  id
+  name
+}
+procedure {
+  id
+  name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+}
+
+fragment ClaimProcedureLists on ClaimProcedure {
+id
+createdAt
+updatedAt
+name
+claimProcedureCodeId
+procedureCodeId
+claimId
+fromDateOfService
+toDateOfService
+placeOfServiceId
+nationalDrugCode
+drugUnit
+drugQuantity
+quantity
+billedAmount
+approvedAmount
+adjustmentAmount
+netPaymentAmount
+paymentMethod
+internalMemo
+explainationOfBenefitsComment
+claimStatusId
+reason
+procedureCode
+diagnosisPointer
+modifier1
+modifier2
+modifier3
+modifier4
+appointmentId
+procedureId
+placeOfService {
+    id
+    name
+}
+claimStatus {
+    id
+    name
+}
+claim {
+    id
+    name
+}
+appointment {
+    id
+    name
+}
+procedure {
+    id
+    name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+query AdminClaimProcedures($input: AdminListClaimProcedureInput) {
+  items: adminClaimProcedures(input: $input) {
+    ...ClaimProcedureLists
+  }
+  count: adminCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClaimProcedures($input: AdminListClaimProcedureInput) {
+  count: adminCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClaimProcedure($claimProcedureId: String!) {
+  item: adminClaimProcedure(claimProcedureId: $claimProcedureId) {
+    ...ClaimProcedureDetails
+  }
+}
+mutation AdminCreateClaimProcedure($input: AdminCreateClaimProcedureInput!) {
+  created: adminCreateClaimProcedure(input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+mutation AdminUpdateClaimProcedure($claimProcedureId: String!, $input: AdminUpdateClaimProcedureInput!) {
+  updated: adminUpdateClaimProcedure(claimProcedureId: $claimProcedureId, input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+mutation AdminDeleteClaimProcedure($claimProcedureId: String!) {
+  deleted: adminDeleteClaimProcedure(claimProcedureId: $claimProcedureId) {
+    ...ClaimProcedureDetails
+  }
+}
+
+query UserClaimProcedures($input: UserListClaimProcedureInput) {
+  items: userClaimProcedures(input: $input) {
+    ...ClaimProcedureLists
+  }
+  count: userCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClaimProcedures($input: UserListClaimProcedureInput) {
+  count: userCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClaimProcedures($input: UserListClaimProcedureInput) {
+  items: userSelectClaimProcedures(input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+
+query UserClaimProcedure($claimProcedureId: String!) {
+  item: userClaimProcedure(claimProcedureId: $claimProcedureId) {
+    ...ClaimProcedureDetails
+  }
+}
+
+mutation UserCreateClaimProcedure($input: UserCreateClaimProcedureInput!) {
+  created: userCreateClaimProcedure(input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+mutation UserUpdateClaimProcedure($claimProcedureId: String!, $input: UserUpdateClaimProcedureInput!) {
+  updated: userUpdateClaimProcedure(claimProcedureId: $claimProcedureId, input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+
+mutation UserUpdateClaimProcedures($input: UserUpdateClaimProceduresInput!) {
+  updated: userUpdateClaimProcedures(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClaimProcedure($claimProcedureId: String!) {
+  deleted: userDeleteClaimProcedure(claimProcedureId: $claimProcedureId) {
+    ...ClaimProcedureDetails
+  }
+}
+
+query PublicClaimProcedures($input: UserListClaimProcedureInput) {
+  items: publicClaimProcedures(input: $input) {
+    ...ClaimProcedureLists
+  }
+  count: publicCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClaimProcedures($input: UserListClaimProcedureInput) {
+  count: publicCountClaimProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClaimProcedures($input: UserListClaimProcedureInput) {
+  items: publicSelectClaimProcedures(input: $input) {
+    ...ClaimProcedureDetails
+  }
+}
+
+query PublicClaimProcedure($claimProcedureId: String!) {
+  item: publicClaimProcedure(claimProcedureId: $claimProcedureId) {
+    ...ClaimProcedureDetails
+  }
+}

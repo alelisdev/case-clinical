@@ -1,0 +1,16 @@
+FROM node:18.13.0-alpine as build-step
+WORKDIR /app
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+RUN yarn global add @nrwl/cli
+ENV NODE_OPTIONS=--max-old-space-size=64000
+
+COPY . .
+# RUN yarn build:web-uat --verbose
+
+# nginx by default export port 80 and we don't need to expose another port
+FROM nginx:1.20-alpine
+COPY .htaccess /usr/share/nginx/html
+COPY --from=build-step /app/artifacts/web-uat /usr/share/nginx/html
+COPY /nginx-custom.conf /etc/nginx/conf.d/default.conf

@@ -1,0 +1,19 @@
+<nav class="-mb-px flex">
+  <a *ngFor="let tab of tabs | visible" role="presentation" (click)="!tab.disabled && !tab.hidden && select(tab)">
+    <div
+      class="whitespace-no-wrap ml-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300"
+      [class.border-blue-500]="tab.active && !tab.disabled && !tab.hidden"
+      [class.font-medium]="tab.active && !tab.disabled && !tab.hidden"
+      [class.text-sm]="tab.active && !tab.disabled && !tab.hidden"
+      [class.leading-5]="tab.active && !tab.disabled && !tab.hidden"
+      [class.text-blue-600]="tab.active && !tab.disabled && !tab.hidden"
+      [class.border-blue-700]="tab.active && !tab.disabled && !tab.hidden"
+      [class.text-gray-500]="tab.disabled"
+    >
+      {{ tab.title }}
+    </div>
+  </a>
+</nav>
+<div class="content" [ngClass]="{ empty: visibleCount === 0 }">
+  <ng-content></ng-content>
+</div>

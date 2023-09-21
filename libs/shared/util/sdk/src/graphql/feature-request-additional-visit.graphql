@@ -1,0 +1,161 @@
+
+
+fragment RequestAdditionalVisitDetails on RequestAdditionalVisit {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+numberOfVisitsBeingRequested
+patient {
+  id
+  name
+}
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RequestAdditionalVisitLists on RequestAdditionalVisit {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+numberOfVisitsBeingRequested
+patient {
+    id
+    name
+}
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminRequestAdditionalVisits($input: AdminListRequestAdditionalVisitInput) {
+  items: adminRequestAdditionalVisits(input: $input) {
+    ...RequestAdditionalVisitLists
+  }
+  count: adminCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRequestAdditionalVisits($input: AdminListRequestAdditionalVisitInput) {
+  count: adminCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRequestAdditionalVisit($requestAdditionalVisitId: String!) {
+  item: adminRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+mutation AdminCreateRequestAdditionalVisit($input: AdminCreateRequestAdditionalVisitInput!) {
+  created: adminCreateRequestAdditionalVisit(input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+mutation AdminUpdateRequestAdditionalVisit($requestAdditionalVisitId: String!, $input: AdminUpdateRequestAdditionalVisitInput!) {
+  updated: adminUpdateRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId, input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+mutation AdminDeleteRequestAdditionalVisit($requestAdditionalVisitId: String!) {
+  deleted: adminDeleteRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+query UserRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  items: userRequestAdditionalVisits(input: $input) {
+    ...RequestAdditionalVisitLists
+  }
+  count: userCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  count: userCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  items: userSelectRequestAdditionalVisits(input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+query UserRequestAdditionalVisit($requestAdditionalVisitId: String!) {
+  item: userRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+mutation UserCreateRequestAdditionalVisit($input: UserCreateRequestAdditionalVisitInput!) {
+  created: userCreateRequestAdditionalVisit(input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+mutation UserUpdateRequestAdditionalVisit($requestAdditionalVisitId: String!, $input: UserUpdateRequestAdditionalVisitInput!) {
+  updated: userUpdateRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId, input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+mutation UserUpdateRequestAdditionalVisits($input: UserUpdateRequestAdditionalVisitsInput!) {
+  updated: userUpdateRequestAdditionalVisits(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRequestAdditionalVisit($requestAdditionalVisitId: String!) {
+  deleted: userDeleteRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+query PublicRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  items: publicRequestAdditionalVisits(input: $input) {
+    ...RequestAdditionalVisitLists
+  }
+  count: publicCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  count: publicCountRequestAdditionalVisits(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRequestAdditionalVisits($input: UserListRequestAdditionalVisitInput) {
+  items: publicSelectRequestAdditionalVisits(input: $input) {
+    ...RequestAdditionalVisitDetails
+  }
+}
+
+query PublicRequestAdditionalVisit($requestAdditionalVisitId: String!) {
+  item: publicRequestAdditionalVisit(requestAdditionalVisitId: $requestAdditionalVisitId) {
+    ...RequestAdditionalVisitDetails
+  }
+}

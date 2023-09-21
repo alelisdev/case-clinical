@@ -1,0 +1,170 @@
+
+fragment PriorAuthorizationProcedureCodeDetails on PriorAuthorizationProcedureCode {
+procedureId
+priorAuthorizationRequestId
+id
+createdAt
+updatedAt
+name
+costCategoryId
+estimatedCost
+costCategory {
+  id
+  name
+}
+procedure {
+  id
+  name
+}
+priorAuthorizationRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthorizationProcedureCodeLists on PriorAuthorizationProcedureCode {
+procedureId
+priorAuthorizationRequestId
+id
+createdAt
+updatedAt
+name
+costCategoryId
+estimatedCost
+costCategory {
+    id
+    name
+}
+procedure {
+    id
+    name
+}
+priorAuthorizationRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPriorAuthorizationProcedureCodes($input: AdminListPriorAuthorizationProcedureCodeInput) {
+  items: adminPriorAuthorizationProcedureCodes(input: $input) {
+    ...PriorAuthorizationProcedureCodeLists
+  }
+  count: adminCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthorizationProcedureCodes($input: AdminListPriorAuthorizationProcedureCodeInput) {
+  count: adminCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!) {
+  item: adminPriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+mutation AdminCreatePriorAuthorizationProcedureCode($input: AdminCreatePriorAuthorizationProcedureCodeInput!) {
+  created: adminCreatePriorAuthorizationProcedureCode(input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+mutation AdminUpdatePriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!, $input: AdminUpdatePriorAuthorizationProcedureCodeInput!) {
+  updated: adminUpdatePriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId, input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+mutation AdminDeletePriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!) {
+  deleted: adminDeletePriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+query UserPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  items: userPriorAuthorizationProcedureCodes(input: $input) {
+    ...PriorAuthorizationProcedureCodeLists
+  }
+  count: userCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  count: userCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  items: userSelectPriorAuthorizationProcedureCodes(input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+query UserPriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!) {
+  item: userPriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+mutation UserCreatePriorAuthorizationProcedureCode($input: UserCreatePriorAuthorizationProcedureCodeInput!) {
+  created: userCreatePriorAuthorizationProcedureCode(input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+mutation UserUpdatePriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!, $input: UserUpdatePriorAuthorizationProcedureCodeInput!) {
+  updated: userUpdatePriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId, input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+mutation UserUpdatePriorAuthorizationProcedureCodes($input: UserUpdatePriorAuthorizationProcedureCodesInput!) {
+  updated: userUpdatePriorAuthorizationProcedureCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!) {
+  deleted: userDeletePriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+query PublicPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  items: publicPriorAuthorizationProcedureCodes(input: $input) {
+    ...PriorAuthorizationProcedureCodeLists
+  }
+  count: publicCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  count: publicCountPriorAuthorizationProcedureCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthorizationProcedureCodes($input: UserListPriorAuthorizationProcedureCodeInput) {
+  items: publicSelectPriorAuthorizationProcedureCodes(input: $input) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+query PublicPriorAuthorizationProcedureCode($priorAuthorizationProcedureCodeId: String!) {
+  item: publicPriorAuthorizationProcedureCode(priorAuthorizationProcedureCodeId: $priorAuthorizationProcedureCodeId) {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}

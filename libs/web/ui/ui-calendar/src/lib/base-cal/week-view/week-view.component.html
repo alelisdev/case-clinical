@@ -1,0 +1,64 @@
+<ng-template #noTimeTemplate> <div>
+</div> </ng-template>
+
+<ng-template
+  #defaultTemplate
+  let-days="days"
+  let-locale="locale"
+  let-dayHeaderClicked="dayHeaderClicked"
+  let-eventDropped="eventDropped"
+  let-trackByWeekDayHeaderDate="trackByWeekDayHeaderDate"
+  let-dragEnter="dragEnter"
+>
+  <div class="cal-day-headers" role="row">
+    <button
+      class="cal-header transition duration-200"
+      *ngFor="let day of days; trackBy: trackByWeekDayHeaderDate"
+      [class.cal-past]="day.isPast"
+      [class.cal-today]="day.isToday"
+      [class.cal-future]="day.isFuture"
+      [class.cal-weekend]="day.isWeekend"
+      [ngClass]="day.cssClass"
+      (mwlClick)="headerClicked(day.date)"
+      mwlDroppable
+      dragOverClass="cal-drag-over"
+      (drop)="
+        eventDropped.emit({
+          event: $event.dropData.event,
+          newStart: day.date
+        })
+      "
+      (dragEnter)="dragEnter.emit({ date: day.date })"
+      tabindex="0"
+      role="columnheader"
+    >
+      <b>{{ day.date | calendarDate: "weekViewColumnHeader":locale }}</b
+      ><br />
+      <span>{{
+        day.date | calendarDate: "weekViewColumnSubHeader":locale
+      }}</span>
+    </button>
+  </div>
+</ng-template>
+
+<mwl-calendar-week-view
+  [viewDate]="viewDate"
+  [events]="events"
+  [refresh]="refresh"
+  (eventClicked)="handleEvent('Clicked', $event.event)"
+  [dayStartHour]="startHour"
+  [dayEndHour]="endHour"
+  [hourSegments]="2"
+  [currentTimeMarkerTemplate]="noTimeTemplate"
+  [headerTemplate]="defaultTemplate"
+  [eventTemplate]="eventTemplate"
+>
+</mwl-calendar-week-view>
+
+<ng-template #eventTemplate let-weekEvent="weekEvent">
+  <ng-container *ngTemplateOutlet="weekViewRef; context: {event:addStatAndEndField(weekEvent)} "></ng-container>
+  <!-- <ng-container *ngTemplateOutlet="weekViewRef; context: { event: weekEvent.event.extendedProps.extraData ?? null }"></ng-container> -->
+  <!-- <div (click)="log(weekEvent)">
+    Evento es: {{weekEvent ? weekEvent.event.id : null}}
+  </div> -->
+</ng-template>

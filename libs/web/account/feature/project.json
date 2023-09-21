@@ -1,0 +1,23 @@
+{
+  "name": "web-account-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/account/feature/src",
+  "prefix": "account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/account/feature/src/**/*.ts", "libs/web/account/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/account/feature"],
+      "options": {
+        "jestConfig": "libs/web/account/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

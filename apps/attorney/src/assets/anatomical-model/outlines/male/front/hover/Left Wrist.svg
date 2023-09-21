@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="22px" viewBox="0 0 26 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Left Wrist</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.25">
+        <g id="Male/Front/Hover" transform="translate(-186.000000, -282.000000)" fill="#A0AEC0" stroke="#A0AEC0" stroke-width="2">
+            <path d="M188.406244,283.659976 C187.464537,289.763031 186.729079,295.757642 187.358275,301.782467 C200.749413,301.782467 207.523192,302.297958 207.523192,302.297958 C207.523192,302.297958 209.092885,292.135046 210.130925,283.179497 C202.60923,284.126819 195.623473,284.415407 188.406244,283.659976 Z" id="Left-Wrist" transform="translate(198.627408, 292.738728) scale(-1, 1) translate(-198.627408, -292.738728) "></path>
+        </g>
+    </g>
+</svg>

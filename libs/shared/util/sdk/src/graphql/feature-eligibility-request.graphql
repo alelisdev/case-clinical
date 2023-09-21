@@ -1,0 +1,161 @@
+
+
+fragment EligibilityRequestDetails on EligibilityRequest {
+id
+createdAt
+updatedAt
+name
+providerId
+specialtyId
+locationId
+visitTypeId
+taxID
+dateOfBirth
+memberRegistrationNumber
+eligibilityStatusId
+elegibilityStatus {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment EligibilityRequestLists on EligibilityRequest {
+id
+createdAt
+updatedAt
+name
+providerId
+specialtyId
+locationId
+visitTypeId
+taxID
+dateOfBirth
+memberRegistrationNumber
+eligibilityStatusId
+elegibilityStatus {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminEligibilityRequests($input: AdminListEligibilityRequestInput) {
+  items: adminEligibilityRequests(input: $input) {
+    ...EligibilityRequestLists
+  }
+  count: adminCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEligibilityRequests($input: AdminListEligibilityRequestInput) {
+  count: adminCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminEligibilityRequest($eligibilityRequestId: String!) {
+  item: adminEligibilityRequest(eligibilityRequestId: $eligibilityRequestId) {
+    ...EligibilityRequestDetails
+  }
+}
+mutation AdminCreateEligibilityRequest($input: AdminCreateEligibilityRequestInput!) {
+  created: adminCreateEligibilityRequest(input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+mutation AdminUpdateEligibilityRequest($eligibilityRequestId: String!, $input: AdminUpdateEligibilityRequestInput!) {
+  updated: adminUpdateEligibilityRequest(eligibilityRequestId: $eligibilityRequestId, input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+mutation AdminDeleteEligibilityRequest($eligibilityRequestId: String!) {
+  deleted: adminDeleteEligibilityRequest(eligibilityRequestId: $eligibilityRequestId) {
+    ...EligibilityRequestDetails
+  }
+}
+
+query UserEligibilityRequests($input: UserListEligibilityRequestInput) {
+  items: userEligibilityRequests(input: $input) {
+    ...EligibilityRequestLists
+  }
+  count: userCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEligibilityRequests($input: UserListEligibilityRequestInput) {
+  count: userCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectEligibilityRequests($input: UserListEligibilityRequestInput) {
+  items: userSelectEligibilityRequests(input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+
+query UserEligibilityRequest($eligibilityRequestId: String!) {
+  item: userEligibilityRequest(eligibilityRequestId: $eligibilityRequestId) {
+    ...EligibilityRequestDetails
+  }
+}
+
+mutation UserCreateEligibilityRequest($input: UserCreateEligibilityRequestInput!) {
+  created: userCreateEligibilityRequest(input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+mutation UserUpdateEligibilityRequest($eligibilityRequestId: String!, $input: UserUpdateEligibilityRequestInput!) {
+  updated: userUpdateEligibilityRequest(eligibilityRequestId: $eligibilityRequestId, input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+
+mutation UserUpdateEligibilityRequests($input: UserUpdateEligibilityRequestsInput!) {
+  updated: userUpdateEligibilityRequests(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteEligibilityRequest($eligibilityRequestId: String!) {
+  deleted: userDeleteEligibilityRequest(eligibilityRequestId: $eligibilityRequestId) {
+    ...EligibilityRequestDetails
+  }
+}
+
+query PublicEligibilityRequests($input: UserListEligibilityRequestInput) {
+  items: publicEligibilityRequests(input: $input) {
+    ...EligibilityRequestLists
+  }
+  count: publicCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountEligibilityRequests($input: UserListEligibilityRequestInput) {
+  count: publicCountEligibilityRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectEligibilityRequests($input: UserListEligibilityRequestInput) {
+  items: publicSelectEligibilityRequests(input: $input) {
+    ...EligibilityRequestDetails
+  }
+}
+
+query PublicEligibilityRequest($eligibilityRequestId: String!) {
+  item: publicEligibilityRequest(eligibilityRequestId: $eligibilityRequestId) {
+    ...EligibilityRequestDetails
+  }
+}

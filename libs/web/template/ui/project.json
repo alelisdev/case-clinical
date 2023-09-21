@@ -1,0 +1,23 @@
+{
+  "name": "web-template-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/template/ui/src",
+  "prefix": "template",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/template/ui/src/**/*.ts", "libs/web/template/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/template/ui"],
+      "options": {
+        "jestConfig": "libs/web/template/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

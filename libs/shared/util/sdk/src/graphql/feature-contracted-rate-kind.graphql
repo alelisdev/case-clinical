@@ -1,0 +1,152 @@
+
+fragment ContractedRateKindDetails on ContractedRateKind {
+id
+createdAt
+updatedAt
+name
+code
+value
+
+
+
+
+
+
+contractedRates {
+   ...ContractedRateLists
+  }
+}
+
+fragment ContractedRateKindLists on ContractedRateKind {
+id
+createdAt
+updatedAt
+name
+code
+value
+
+
+
+
+
+
+contractedRates {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminContractedRateKinds($input: AdminListContractedRateKindInput) {
+  items: adminContractedRateKinds(input: $input) {
+    ...ContractedRateKindLists
+  }
+  count: adminCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContractedRateKinds($input: AdminListContractedRateKindInput) {
+  count: adminCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContractedRateKind($contractedRateKindId: String!) {
+  item: adminContractedRateKind(contractedRateKindId: $contractedRateKindId) {
+    ...ContractedRateKindDetails
+  }
+}
+mutation AdminCreateContractedRateKind($input: AdminCreateContractedRateKindInput!) {
+  created: adminCreateContractedRateKind(input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+mutation AdminUpdateContractedRateKind($contractedRateKindId: String!, $input: AdminUpdateContractedRateKindInput!) {
+  updated: adminUpdateContractedRateKind(contractedRateKindId: $contractedRateKindId, input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+mutation AdminDeleteContractedRateKind($contractedRateKindId: String!) {
+  deleted: adminDeleteContractedRateKind(contractedRateKindId: $contractedRateKindId) {
+    ...ContractedRateKindDetails
+  }
+}
+
+query UserContractedRateKinds($input: UserListContractedRateKindInput) {
+  items: userContractedRateKinds(input: $input) {
+    ...ContractedRateKindLists
+  }
+  count: userCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContractedRateKinds($input: UserListContractedRateKindInput) {
+  count: userCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContractedRateKinds($input: UserListContractedRateKindInput) {
+  items: userSelectContractedRateKinds(input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+
+query UserContractedRateKind($contractedRateKindId: String!) {
+  item: userContractedRateKind(contractedRateKindId: $contractedRateKindId) {
+    ...ContractedRateKindDetails
+  }
+}
+
+mutation UserCreateContractedRateKind($input: UserCreateContractedRateKindInput!) {
+  created: userCreateContractedRateKind(input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+mutation UserUpdateContractedRateKind($contractedRateKindId: String!, $input: UserUpdateContractedRateKindInput!) {
+  updated: userUpdateContractedRateKind(contractedRateKindId: $contractedRateKindId, input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+
+mutation UserUpdateContractedRateKinds($input: UserUpdateContractedRateKindsInput!) {
+  updated: userUpdateContractedRateKinds(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContractedRateKind($contractedRateKindId: String!) {
+  deleted: userDeleteContractedRateKind(contractedRateKindId: $contractedRateKindId) {
+    ...ContractedRateKindDetails
+  }
+}
+
+query PublicContractedRateKinds($input: UserListContractedRateKindInput) {
+  items: publicContractedRateKinds(input: $input) {
+    ...ContractedRateKindLists
+  }
+  count: publicCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContractedRateKinds($input: UserListContractedRateKindInput) {
+  count: publicCountContractedRateKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContractedRateKinds($input: UserListContractedRateKindInput) {
+  items: publicSelectContractedRateKinds(input: $input) {
+    ...ContractedRateKindDetails
+  }
+}
+
+query PublicContractedRateKind($contractedRateKindId: String!) {
+  item: publicContractedRateKind(contractedRateKindId: $contractedRateKindId) {
+    ...ContractedRateKindDetails
+  }
+}

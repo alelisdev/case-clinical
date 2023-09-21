@@ -1,0 +1,200 @@
+
+fragment ReviewDetails on Review {
+id
+createdAt
+updatedAt
+name
+patientId
+clinicalProviderId
+comment
+rating
+reivewDateAndTime
+parentId
+
+clinicalProvider {
+  id
+  name
+}
+
+
+patient {
+  id
+  name
+  firstName
+  lastName
+}
+
+childrenReviews {
+  id
+  name
+  reivewDateAndTime
+  comment
+  rating
+
+patient {
+  id
+  name
+  firstName
+  lastName
+}
+}
+
+
+
+}
+
+fragment ReviewLists on Review {
+id
+createdAt
+updatedAt
+name
+patientId
+clinicalProviderId
+comment
+rating
+reivewDateAndTime
+parentId
+clinicalProvider {
+    id
+    name
+}
+
+patient {
+  id
+  name
+  firstName
+  lastName
+}
+
+childrenReviews {
+  id
+  name
+  reivewDateAndTime
+  comment
+  rating
+
+patient {
+  id
+  name
+  firstName
+  lastName
+}
+}
+
+
+
+}
+
+
+
+query AdminReviews($input: AdminListReviewInput) {
+  items: adminReviews(input: $input) {
+    ...ReviewLists
+  }
+  count: adminCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountReviews($input: AdminListReviewInput) {
+  count: adminCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminReview($reviewId: String!) {
+  item: adminReview(reviewId: $reviewId) {
+    ...ReviewDetails
+  }
+}
+mutation AdminCreateReview($input: AdminCreateReviewInput!) {
+  created: adminCreateReview(input: $input) {
+    ...ReviewDetails
+  }
+}
+mutation AdminUpdateReview($reviewId: String!, $input: AdminUpdateReviewInput!) {
+  updated: adminUpdateReview(reviewId: $reviewId, input: $input) {
+    ...ReviewDetails
+  }
+}
+mutation AdminDeleteReview($reviewId: String!) {
+  deleted: adminDeleteReview(reviewId: $reviewId) {
+    ...ReviewDetails
+  }
+}
+
+query UserReviews($input: UserListReviewInput) {
+  items: userReviews(input: $input) {
+    ...ReviewLists
+  }
+  count: userCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountReviews($input: UserListReviewInput) {
+  count: userCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectReviews($input: UserListReviewInput) {
+  items: userSelectReviews(input: $input) {
+    ...ReviewDetails
+  }
+}
+
+query UserReview($reviewId: String!) {
+  item: userReview(reviewId: $reviewId) {
+    ...ReviewDetails
+  }
+}
+
+mutation UserCreateReview($input: UserCreateReviewInput!) {
+  created: userCreateReview(input: $input) {
+    ...ReviewDetails
+  }
+}
+mutation UserUpdateReview($reviewId: String!, $input: UserUpdateReviewInput!) {
+  updated: userUpdateReview(reviewId: $reviewId, input: $input) {
+    ...ReviewDetails
+  }
+}
+
+mutation UserUpdateReviews($input: UserUpdateReviewsInput!) {
+  updated: userUpdateReviews(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteReview($reviewId: String!) {
+  deleted: userDeleteReview(reviewId: $reviewId) {
+    ...ReviewDetails
+  }
+}
+
+query PublicReviews($input: UserListReviewInput) {
+  items: publicReviews(input: $input) {
+    ...ReviewLists
+  }
+  count: publicCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountReviews($input: UserListReviewInput) {
+  count: publicCountReviews(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectReviews($input: UserListReviewInput) {
+  items: publicSelectReviews(input: $input) {
+    ...ReviewDetails
+  }
+}
+
+query PublicReview($reviewId: String!) {
+  item: publicReview(reviewId: $reviewId) {
+    ...ReviewDetails
+  }
+}

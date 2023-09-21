@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-contact-tag.input'
+export * from './lib/dto/admin-list-contact-tag.input'
+export * from './lib/dto/admin-update-contact-tag.input'
+export * from './lib/dto/contact-tag.input'
+export * from './lib/dto/user-create-contact-tag.input'
+export * from './lib/dto/user-list-contact-tag.input'
+export * from './lib/dto/user-update-contact-tag.input'
+export * from './lib/dto/user-update-contact-tags.input'
+export * from './lib/models/contact-tag.model'
+export * from './lib/api-contact-tag-data-access.module'
+
+export * from './lib/api-contact-tag-data-access-admin.service'
+export * from './lib/api-contact-tag-data-access-public.service'
+export * from './lib/api-contact-tag-data-access-user.service'

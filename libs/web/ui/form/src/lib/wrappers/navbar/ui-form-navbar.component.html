@@ -1,0 +1,106 @@
+<section class=" bg-gray-50 shadow shadow-gray-300" style="margin-bottom: 0.5px">
+  <nav class="flex justify-between py-4 px-4">
+    <div class="flex justify-between items-center w-full">
+      <div class="w-auto">
+        <a class="block max-w-max" href="/home">
+          <img class="w-48" src="assets/images/logo/logo.png" alt="">
+        </a>
+      </div>
+      <div class="hidden xl:block w-auto">
+        <!-- <ui-navs [showIcon]="to.showIcon" [dark]="to.dark" direction="Horizontal" [data]="to.data"></ui-navs> -->
+      </div>
+      <div class="hidden xl:block w-auto">
+        <!-- <div class="flex items-center justify-end">
+          <a class="inline-block py-2 px-4 mr-2 leading-5 text-white hover:text-gray-300 bg-transparent font-medium rounded-md" href="/sign-in">Log In</a>
+          <a class="inline-block py-2 px-4 text-sm leading-5 text-green-50 bg-green-500 hover:bg-green-600 font-medium focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md" href="/sign-up">Sign Up</a>
+        </div> -->
+      </div>
+    </div>
+
+  <!-- <notification-center-component
+    *ngIf="subscriberId"
+    [subscriberId]="subscriberId"
+    [applicationIdentifier]="applicationIdentifier"
+    [sessionLoaded]="sessionLoaded"
+    >
+    </notification-center-component> -->
+    <div class="flex justify-right items-center">
+      <button mat-icon-button routerLink="/notifications" class = "mr-2">
+        <!-- <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" color="#828299"></svg> -->
+        <mat-icon [svgIcon]="'heroicons_outline:bell'"></mat-icon>
+        <!-- <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" color="#828299" class="w-full h-full"><path d="M21.6667 10.8C21.6667 8.99653 20.9643 7.26692 19.714 5.99167C18.4638 4.71643 16.7681 4 15 4C13.2319 4 11.5362 4.71643 10.286 5.99167C9.03571 7.26692 8.33333 8.99653 8.33333 10.8C8.33333 18.7333 5 21 5 21H25C25 21 21.6667 18.7333 21.6667 10.8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17.7295 24C17.4521 24.6072 17.0539 25.1113 16.5748 25.4617C16.0956 25.812 15.5524 25.9965 14.9995 25.9965C14.4466 25.9965 13.9034 25.812 13.4243 25.4617C12.9452 25.1113 12.547 24.6072 12.2695 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> -->
+      </button>
+
+      <button type="button" class="navbar-burger self-center lg:hidden ml-4" (click)="showMenuDrawer=true">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" [ngClass]="{'text-sky-700': to.dark, 'text-sky-800': !to.dark}">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+      <!-- start avatar -->
+      <ng-container *ngIf="vm$ | async as vm">
+        <button mat-icon-button [matMenuTriggerFor]="userActions">
+          <span class="relative">
+            <img class="rounded-full" style="width: 24px; height:24px" *ngIf="showAvatar && vm.user?.avatarUrl" [src]="vm.user?.avatarUrl" />
+            <mat-icon *ngIf="!showAvatar || !vm.user?.avatarUrl" [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+            <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full" [ngClass]="{
+                      'mr-px mb-px': !showAvatar || !vm.user?.avatarUrl,
+                      'bg-green-500': vm.user?.status === 'online',
+                      'bg-amber-500': vm.user?.status === 'away',
+                      'bg-red-500': vm.user?.status === 'busy',
+                      'bg-gray-400': vm.user?.status === 'not-visible'
+                  }"></span>
+          </span>
+        </button>
+        <mat-menu [xPosition]="'before'" #userActions="matMenu">
+          <button mat-menu-item>
+            <span class="flex flex-row leading-none p-2">
+              <img class="rounded-full w-7 h-7 mt-1" *ngIf="showAvatar && vm.user?.avatarUrl" [src]="vm.user?.avatarUrl" />
+              <span class="flex flex-col leading-none ml-3">
+                <span class="mt-1.5 text-md font-medium">{{ vm.user?.firstName }} {{ vm.user?.lastName }}</span>
+                <span class="mt-1.5 text-md font-medium">{{ vm.user?.emails?.at(0).email }}</span>
+              </span>
+            </span>
+          </button>
+          <mat-divider class="my-2"></mat-divider>
+          <button mat-menu-item (click)="viewProfile()">
+            <span class="flex flex-row leading-none p-2">
+              <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+              <span class="mt-1">View Profile</span>
+            </span>
+          </button>
+          <mat-divider class="my-2"></mat-divider>
+          <button mat-menu-item (click)="signOut()">
+            <span class="flex flex-row leading-none p-2">
+              <mat-icon [svgIcon]="'heroicons_outline:logout'"></mat-icon>
+              <span class="mt-1">Log Out</span>
+            </span>
+          </button>
+        </mat-menu>
+      </ng-container>
+      <!-- end avatar -->
+    </div>
+  </nav>
+  <div class="navbar-menu fixed top-0 left-0 z-50 w-full h-full bg-gray-900 bg-opacity-50" [ngClass]="{'hidden': !showMenuDrawer}">
+    <div class="fixed inset-0" (click)="showMenuDrawer=false">
+    </div>
+    <div class="fixed top-0 left-0 bottom-0 w-4/6 max-w-xs bg-sky-800">
+      <nav class="relative p-6 h-full overflow-y-auto">
+        <div class="flex flex-col h-full vertical-navbar-buttons">
+          <a class="inline-blok max-w-max" href="/home">
+            <img class="h-8" src="assets/images/logo/logo.png" alt="">
+          </a>
+          <ui-navs [dark]="to.dark" [showIcon]="to.showIcon" direction="Vertical" [data]="to.data"></ui-navs>
+          <div class="flex-1"></div>
+          <!-- <div class="flex flex-wrap">
+            <div class="w-full mb-2">
+              <a class="inline-block py-2 px-4 w-full text-sm leading-5 text-white hover:text-gray-300 bg-transparent font-medium text-center rounded-md" href="/sign-in">Log In</a>
+            </div>
+            <div class="w-full">
+              <a class="inline-block py-2 px-4 w-full text-sm leading-5 text-white bg-green-500 hover:bg-green-600 font-medium text-center focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md" href="/sign-up">Sign Up</a>
+            </div>
+          </div> -->
+        </div>
+      </nav>
+    </div>
+  </div>
+</section>

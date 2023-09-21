@@ -1,0 +1,22 @@
+{
+  "name": "api-appointment-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/appointment-status/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/appointment-status/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/appointment-status/feature"],
+      "options": {
+        "jestConfig": "libs/api/appointment-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

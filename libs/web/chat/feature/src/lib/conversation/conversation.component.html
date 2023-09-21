@@ -1,0 +1,330 @@
+<div *ngIf="vm$ | async as vm"
+    class="absolute inset-0 flex flex-col flex-auto overflow-y-auto lg:overflow-hidden bg-card dark:bg-default">
+    <ng-container *ngIf="selectedFiles$ | async as selectedFiles">
+        <ng-container>
+
+            <mat-drawer-container class="flex-auto h-full" [hasBackdrop]="false">
+
+                <!-- Drawer -->
+                <mat-drawer class="w-full sm:w-100 lg:border-l lg:shadow-none dark:bg-gray-900" [autoFocus]="false"
+                    [mode]="drawerMode" [position]="'end'" [(opened)]="drawerOpened" #drawer>
+
+                    <!-- Group info -->
+                    <chat-group-info [drawer]="drawer" [room]="room"></chat-group-info>
+                </mat-drawer>
+
+                <!-- Drawer content -->
+                <mat-drawer-content class="flex flex-col overflow-hidden relative">
+
+                    <!-- Header -->
+                    <div class="relative flex flex-0 items-center h-18 px-4 md:px-6 border-b bg-gray-50 dark:bg-transparent">
+
+                        <!-- Loading bar -->
+                        <mat-progress-bar
+                            class="absolute inset-x-0 top-0 h-0.5"
+                            *ngIf="vm.loadingRoom"
+                            [mode]="'indeterminate'">
+                        </mat-progress-bar>
+
+                        <!-- Back button -->
+                        <a class="lg:hidden md:-ml-2" mat-icon-button [routerLink]="['./']" (click)="resetChat()">
+                            <mat-icon [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                        </a>
+
+                        <!-- Group info -->
+                        <div class="flex items-center ml-2 lg:ml-0 mr-2" style="width: 90%;">
+                            <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                                <!-- <ng-container *ngIf="group?.avatar">
+                                <img
+                                    class="w-full h-full rounded-full object-cover"
+                                    [src]="group?.avatar"
+                                    alt="Group avatar"/>
+                            </ng-container> -->
+                                <ng-container>
+                                    <div
+                                        class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                        <!-- {{anotherUsers.length === 1 ? anotherUsers[0]?.name.charAt(0) : room?.name.charAt(0)}} -->
+                                        {{room?.name?.charAt(0)}}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="ml-4 text-lg font-medium leading-5 truncate">{{room?.name}}</div>
+                            <!-- <div class="ml-4 text-lg font-medium leading-5 truncate">{{anotherUsers.length === 1 ? anotherUsers[0]?.name : room?.name}}</div> -->
+                        </div>
+
+                        <button *ngIf="roomType !== 'direct'" class="ml-auto" mat-icon-button [matMenuTriggerFor]="conversationHeaderMenu">
+                            <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                            <mat-menu #conversationHeaderMenu>
+                                <button mat-menu-item (click)="openGroupInfo()">
+                                    <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+                                    Group info
+                                </button>
+                                <!-- <button mat-menu-item>
+                                    <mat-icon [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
+                                    Select messages
+                                </button>
+                                <button mat-menu-item (click)="toggleMuteNotifications()">
+                                    <ng-container *ngIf="!muted">
+                                        <mat-icon [svgIcon]="'heroicons_outline:volume-off'"></mat-icon>
+                                        Mute notifications
+                                    </ng-container>
+                                    <ng-container *ngIf="muted">
+                                        <mat-icon [svgIcon]="'heroicons_outline:volume-up'"></mat-icon>
+                                        Unmute notifications
+                                    </ng-container>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon [svgIcon]="'heroicons_outline:backspace'"></mat-icon>
+                                    Clear messages
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                                    Delete chat
+                                </button> -->
+                            </mat-menu>
+                        </button>
+
+                    </div>
+
+                    <!-- Conversation -->
+                    <div class="flex overflow-y-auto h-full flex-col-reverse" (scroll)="scrollHandler()" #conversationContainer>
+                        <div *ngIf="messages?.length > 0; else noConversation" class="flex flex-col flex-auto shrink p-6 bg-card dark:bg-transparent">
+                            <ng-container
+                                *ngFor="let message of messages; let i = index; let first = first; let last = last; trackBy: trackByFn">
+                                <!-- Start of the day -->
+                                <ng-container
+                                    *ngIf="first || (messages[i - 1].createdAt | date:'d') !== (message.createdAt | date:'d')">
+                                    <div class="flex items-center justify-center my-3 -mx-6">
+                                        <div class="flex-auto border-b"></div>
+                                        <div *ngIf="(message.createdAt | date: 'shortDate') === (currentDate | date: 'shortDate')"
+                                            class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
+                                            {{'Today'}}
+                                        </div>
+                                        <div *ngIf="(message.createdAt | date: 'shortDate') !== (currentDate | date: 'shortDate')"
+                                            class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
+                                            {{message.createdAt | date: 'longDate'}}
+                                        </div>
+                                        <div class="flex-auto border-b"></div>
+                                    </div>
+                                </ng-container>
+
+                                <!-- Membership change -->
+                                <ng-container
+                                    *ngIf="message.type === 'm.room.member'">
+                                    <div class="flex items-center justify-center">
+                                        <!-- <div class="flex-auto border-b"></div> -->
+                                        <div *ngIf="message.message" class="flex-0 mx-4 my-3 text-sm font-medium leading-5 text-secondary">
+                                            {{message.message}}
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <div *ngIf="message.type !== 'm.room.member'" class="flex flex-col" [ngClass]="{'items-end': message.sender.userId === myMatrixUserId,
+                                        'items-start': message.sender.userId !== myMatrixUserId,
+                                        'mt-0.5': i > 0 && messages[i - 1].sender.userId === message.sender.userId,
+                                        'mt-3': i > 0 && messages[i - 1].sender.userId !== message.sender.userId}">
+                                    
+                                    <!-- Sender -->
+                                    <ng-container *ngIf="roomType !== 'direct'
+                                    && (message?.sender.userId !== myMatrixUserId)
+                                    && ((messages[i - 1]?.sender.userId !== message.sender.userId)
+                                    || (messages[i-1]?.type === 'm.room.member')
+                                    || ((messages[i - 1].createdAt | date: 'MM/dd/yyyy') !== (message.createdAt | date: 'MM/dd/yyyy')))">
+                                        <div class="my-0.5 text-sm font-medium text-secondary">
+                                            {{message.sender.name}}
+                                        </div>
+                                    </ng-container>
+                                    
+                                    <!-- Bubble -->
+                                    <div class="relative max-w-3/4 px-3 py-2 rounded-lg" [ngClass]="{'bg-blue-500 text-blue-50': message.sender.userId === myMatrixUserId,
+                                                'bg-gray-500 text-gray-50': message.sender.userId !== myMatrixUserId}" style="overflow-wrap: anywhere;">
+                                        <!-- Speech bubble tail -->
+                                        <ng-container *ngIf="last || messages[i + 1].sender.userId !== message.sender.userId">
+                                            <div class="absolute bottom-0 w-3"
+                                                [ngClass]="{'text-blue-500 -right-1 -mr-px mb-px': message.sender.userId === myMatrixUserId,
+                                                        'text-gray-500 -left-1 -ml-px mb-px -scale-x-1': message.sender.userId !== myMatrixUserId}">
+                                                <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
+                                        </ng-container>
+                                        <!-- Deleted Message -->
+                                        <div *ngIf="!message.type" class="min-w-4 leading-5 text-slate-500 italic"
+                                            [innerHTML]="'Message has been deleted'">
+                                        </div>
+
+                                        <!-- Message -->
+                                        <div *ngIf="message.type === 'm.text'" class="whitespace-pre-wrap min-w-4 leading-5"
+                                            [innerText]="message?.message">
+                                        </div>
+
+                                        <!-- Link -->
+                                        <div *ngIf="message.type === 'm.link'" class="whitespace-pre-wrap min-w-4 leading-5">
+                                            <a [href]="message?.message" target="_blank">{{message?.message}}</a>
+                                        </div>
+                                        
+                                        <!-- File -->
+                                        <a [download]="message?.file?.name" (click)="openDocument(message?.file)"
+                                            #tooltip="matTooltip" [matTooltip]="message?.file?.name"
+                                            *ngIf="message?.type === 'm.file'">
+                                            <div class="flex items-center cursor-pointer">
+                                                <div
+                                                    class="flex items-center justify-center w-10 h-10 rounded-md overflow-hidden bg-white shrink-0">
+                                                    <div
+                                                        class="flex items-center justify-center text-xs font-semibold text-gray-500">
+                                                        {{(message.file.extension && message.file.name.split('.').at(-1).toUpperCase()) || 'FILE'}}
+                                                    </div>
+                                                </div>
+                                                <div class="ml-3 truncate">
+                                                    <div class="text-md font-medium truncate">
+                                                        {{message.file.name}}
+                                                    </div>
+                                                    <div *ngIf="message.file.size / 1000 < 1024" class="text-xs font-medium truncate">
+                                                        {{message.file.size / 1000 | number:'1.0-2'}} KB
+                                                    </div>
+                                                    <div *ngIf="message.file.size / 1000 >= 1024" class="text-xs font-medium truncate">
+                                                        {{message.file.size / (1000 * 1000) | number:'1.0-2'}} MB
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- Time -->
+                                    <ng-container *ngIf="(message.status == null) && (last
+                                    || messages[i + 1].status !== null
+                                    || messages[i + 1].sender.userId !== message.sender.userId
+                                    || (messages[i + 1].createdAt | date: 'MM/dd/yyyy HH:mm') !== (message.createdAt | date: 'MM/dd/yyyy HH:mm'))">
+                                        <div class="my-0.5 text-sm font-medium text-secondary"> 
+                                        <!-- [ngClass]="{'mr-3': message.sender.userId === myMatrixUserId,
+                                                    'ml-3': message.sender.userId !== myMatrixUserId}"> -->
+                                            {{message.createdAt | date:'HH:mm'}}
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="message.status === 'sending'">
+                                        <div class="my-0.5 text-sm font-medium text-secondary" [ngClass]="{'mr-3': message.sender.userId === myMatrixUserId,
+                                                    'ml-3': message.sender.userId !== myMatrixUserId}">
+                                            Sending...
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="message.status === 'queued'">
+                                        <div class="my-0.5 text-sm font-medium text-secondary" [ngClass]="{'mr-3': message.sender.userId === myMatrixUserId,
+                                                    'ml-3': message.sender.userId !== myMatrixUserId}">
+                                            Queued
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <!-- No conversation template -->
+                        <ng-template #noConversation>
+                            <div class="flex flex-auto flex-col items-center justify-center h-full">
+                                <mat-icon
+                                    class="icon-size-24"
+                                    [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+                                <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">No conversation</div>
+                            </div>
+                        </ng-template>
+
+                    </div>
+
+                    <div *ngIf="typingMembers.length > 1" class="text-sm font-medium text-primary bg-white pl-3 pb-1">{{ typingMembers.join(',') }} are typing...</div>
+                    <div *ngIf="typingMembers.length === 1" class="text-sm font-medium text-primary bg-white pl-3 pb-1">{{ typingMembers.join(',') }} is typing...</div>
+
+                    <!-- Message field -->
+                    <div *ngIf="room?.selfMembership !== 'leave' && room?.selfMembership !== 'invite'" class="flex items-end p-4 border-t bg-gray-50 dark:bg-transparent">
+                        <div class="flex items-center h-11 my-px">
+                            <file-upload-chat-input [formControl]="formControl" (fChanged)="fChanged($event)"
+                                [multiple]="true"></file-upload-chat-input>
+
+                        </div>
+
+                        <!-- text message -->
+                        <mat-form-field *ngIf="selectedFiles.length == 0; else fileUpload"
+                            class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded fuse-mat-bold w-full ml-4">
+                            <textarea class="min-h-5 my-0 resize-none"
+                                style="margin: 11px 0 !important; padding: 0 !important; max-height: 100px !important;"
+                                [rows]="1" [maxLength]="5000" [(ngModel)]="messageInputValue" 
+                                (focus)="onFocus()" (blur)="onBlur()"
+                                (keydown)="onKeyDown($event)"
+                                (keydown.enter)="sendMessage($event)" matInput #messageInput>
+                            </textarea>
+                        </mat-form-field>
+
+                        <!-- file upload -->
+                        <ng-template #fileUpload>
+                            <div class="border-2 bg-white px-4 w-full ml-4 my-0"
+                                style="min-height: 46px !important; padding: 11px 16px !important; border-radius: 20px !important; border-color: rgb(203 213 225) !important">
+                                <div class="flex flex-wrap gap-2" #messageInput
+                                    style="min-height: 20px !important; max-height: 100px !important; overflow-y: auto !important;">
+                                    <div *ngFor="let file of selectedFiles; let i=index"
+                                        class="rounded-xl p-2.5 bg-stone-200">
+                                        <div class="flex flex-row justify-between items-center gap-4">
+                                            <a webUiFormFieldFile ngDefaultControl
+                                                class="text-blue-500 no-underline hover:cursor-pointer break-all"
+                                                [download]="file?.name" [formControl]="formControl"
+                                                [formlyAttributes]="field" (click)="openDocument(file)"
+                                                #tooltip="matTooltip" [matTooltip]="file?.name">{{
+                                                getAbbrName(file?.name) }}
+                                            </a>
+                                            <svg *ngIf="!formControl.disabled" xmlns="http://www.w3.org/2000/svg"
+                                                class="h-6 w-6 min-w-6 hover:cursor-pointer" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor"
+                                                (click)="!formControl.disabled ? fileDeleted(file,i) : null">
+                                                <path class="text-red-500 w-5 h-5" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <div class="flex items-center h-11 my-px ml-4">
+                            <button (click)="sendMessage($event)" [disabled]="vm.loading || !(messageInputValue.trim() || selectedFiles.length > 0)"
+                                mat-icon-button>
+                                <mat-icon class="rotate-90" [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="room?.selfMembership === 'leave'" class="flex justify-center items-center text-secondary p-6 border-t bg-gray-50 dark:bg-transparent">
+                        <div>You cannot send messages because you are no longer part of this conversation</div>
+                    </div>
+
+                    <div *ngIf="room?.selfMembership === 'invite'" class="flex justify-center items-center text-secondary p-6 border-t bg-gray-50 dark:bg-transparent">
+                        <div>Please accept the invite before you can start sending messages</div>
+                    </div>
+
+                </mat-drawer-content>
+
+            </mat-drawer-container>
+
+        </ng-container>
+
+        <!-- Select chat or start new template -->
+        <ng-template #selectChatOrStartNew>
+            <div class="flex flex-col flex-auto items-center justify-center bg-gray-100 dark:bg-transparent">
+                <mat-icon class="icon-size-24" [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+                <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">Select a conversation or start a
+                    new chat</div>
+            </div>
+        </ng-template>
+
+        <!-- Speech bubble tail SVG -->
+        <!-- @formatter:off -->
+        <ng-template #speechBubbleExtension>
+            <svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <path
+                        d="M1.01522827,0.516204834 C-8.83532715,54.3062744 61.7609863,70.5215302 64.8009949,64.3061218 C68.8074951,54.8859711 30.1663208,52.9997559 37.5036011,0.516204834 L1.01522827,0.516204834 Z"
+                        fill="currentColor" fill-rule="nonzero"></path>
+                </g>
+            </svg>
+        </ng-template>
+        <!-- @formatter:on -->
+
+        <ng-container #filePreviewTpl>
+            <ui-file-preview #filePreview [isDownloadable]="true"></ui-file-preview>
+        </ng-container>
+    </ng-container>
+</div>

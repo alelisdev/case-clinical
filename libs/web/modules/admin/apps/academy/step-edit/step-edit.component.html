@@ -1,0 +1,8 @@
+<ng-container class="flex flex-col flex-grow">
+  <div class="w-full h-full">
+    <ui-form *transloco="let t" [form]="form" [fields]="fields" [model]="model" [options]="options" (submitForm)="onSubmit($event)">
+      <ui-button [disabled]="!form.valid" [label]="t('save')" type="submit" class="mr-2"></ui-button>
+      <ui-button [label]="t('discard')" type="button" (click)="send.emit()"></ui-button>
+    </ui-form>
+  </div>
+</ng-container>

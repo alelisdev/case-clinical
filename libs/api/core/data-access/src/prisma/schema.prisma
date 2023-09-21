@@ -1,0 +1,3654 @@
+datasource db {
+  provider          = "sqlserver"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+model FormLayout {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+  name      String?
+  config    String?   @db.Text
+  type      Int       @default(0)
+  previewImage   String?
+  title String?
+  testData    String?   @db.Text
+  modelData    String?   @db.Text
+  parentId String?
+  order    Int?
+
+  parentFormLayout FormLayout? @relation(name: "ParentFormLayout_ChildrenFormLayouts", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children FormLayout[] @relation("ParentFormLayout_ChildrenFormLayouts")
+}
+
+model Appointment {
+  id                     String    @id @default(cuid())
+  createdAt              DateTime? @default(now())
+  updatedAt              DateTime? @default(now()) @updatedAt
+  name                   String?
+  appointmentDateAndTime DateTime?
+  appointmentStatusId    String?
+  checkedIn              Boolean?
+  checkedInDateTime      DateTime?
+  duration               Int?
+  calendarId             String?
+  legalCaseId            String?
+  notes                  String?
+  recurringEventId       String?
+  isFirstInstance        Boolean?
+  description            String?
+  start                  String?
+  end                    String?
+  allDay                 Boolean?
+  recurrence             String?
+  finalVisitApproved     Boolean?
+
+  medicalReportId String?
+  billId          String?
+  imagingId       String?
+  miscellaneousId       String?
+
+	medicalReport		Document?     @relation(name: "Appointment_medicalReports", fields: [medicalReportId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	bill		Document?     @relation(name: "Appointment_bills", fields: [billId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	imaging		Document?     @relation(name: "Appointment_imagings", fields: [imagingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	miscellaneous		Document?     @relation(name: "Appointment_miscellaneouses", fields: [miscellaneousId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  locationId String?
+  visitKindId String?
+
+  patientId  String?
+
+  clinicalProviderId String?
+  clinicalProvider ClinicalProvider? @relation(name: "ClinicalProvider_appointments", fields: [clinicalProviderId] , references: [id], onDelete: NoAction,onUpdate: NoAction)
+
+  appointmentStatus AppointmentStatus? @relation(name: "AppointmentStatus_appointments", fields: [appointmentStatusId], references: [id])
+  calendar          Calendar?          @relation(name: "Calendar_appointments", fields: [calendarId], references: [id])
+
+  location        Location?        @relation(name: "Appointment_location", fields: [locationId], references: [id])
+  visitKind        VisitKind?        @relation(name: "Appointment_VisitKind", fields: [visitKindId], references: [id])
+
+  patient         Patient?         @relation(name: "Appointment_patient", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  legalCase       LegalCase?       @relation(name: "Appointment_legalCase", fields: [legalCaseId], references: [id])
+  claimProcedures ClaimProcedure[] @relation("ClaimProcedure_appointment")
+  caseProcedures CaseProcedure[]  @relation("Appointment_caseProcedures")
+  notifications Notification[]  @relation("Appointment_notifications")
+  novuNotifications NovuNotification[]  @relation("Appointment_novunotifications")
+
+ 	assignedToId String?
+  	assignedTo		User?     @relation(name: "Appointment_assignedTo", fields: [assignedToId], references: [id])
+	medicalRecordStatusId String?
+	medicalRecordStatus		MedicalRecordStatus?     @relation(name: "Appointment_medicalRecordStatus", fields: [medicalRecordStatusId], references: [id])
+}
+
+
+
+model MedicalRecordStatus {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	appointments		Appointment[]     @relation("Appointment_medicalRecordStatus")
+
+
+}
+
+model AppointmentStatus {
+  id           String        @id @default(cuid())
+  createdAt    DateTime?     @default(now())
+  updatedAt    DateTime?     @default(now()) @updatedAt
+  name         String?
+  appointments Appointment[] @relation(name: "AppointmentStatus_appointments")
+}
+
+model AssignedDocument {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  expirationDate DateTime?
+  entityName     String?
+  entityId       String?
+  documentId     String?
+  templateId     String?
+  documentTypeId String?
+  userId         String?
+  vendorId         String?
+
+  document     Document?     @relation(name: "Document_assignedDocuments", fields: [documentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  template     Template?     @relation(name: "Template_assignedDocuments", fields: [templateId], references: [id])
+  documentType DocumentType? @relation(name: "DocumentType_assignedDocuments", fields: [documentTypeId], references: [id])
+  user         User?         @relation(name: "User_assignedDocuments", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  vendor       Vendor?       @relation(name: "Vendor_assignedDocuments", fields: [vendorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Calendar {
+  id            String         @id @default(cuid())
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @default(now()) @updatedAt
+  name          String?
+  title         String?
+  color         String?
+  visible       Boolean?
+  userCalendars UserCalendar[] @relation(name: "Calendar_userCalendars")
+  appointments  Appointment[]  @relation(name: "Calendar_appointments")
+}
+
+model CalendarType {
+  id            String         @id @default(cuid())
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @default(now()) @updatedAt
+  name          String?
+  userCalendars UserCalendar[] @relation(name: "CalendarType_userCalendars")
+}
+
+model CalendarWeekday {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  abbr      String?
+  label     String?
+  value     String?
+}
+
+model Chat {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  userId        String?
+  unreadCount   Int?
+  muted         Boolean?
+  lastMessage   String?
+  lastMessageAt String?
+  messages      Message[] @relation(name: "Chat_messages")
+
+  user User? @relation(name: "User_chats", fields: [userId], references: [id])
+}
+
+model Contact {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  firstName String?
+  lastName  String?
+  suffix    String?
+
+  avatar     String?
+  background String?
+  title      String?
+  company    String?
+  birthday   String?
+  address    String?
+
+  primaryPhoneNumber            String?
+  primaryEmailAddress           String?
+  primaryAddressLine1           String?
+  primaryAddressLine2           String?
+  primaryAddressCity            String?
+  primaryAddressStateOrProvince String?
+  primaryAddressPostalCode      String?
+  notes                         String?
+  intake                        String?
+  insured                       String?
+  adjuster                      String?
+  dateOfBirth                   DateTime?
+  honorific                     String?
+  discriminator                 String?
+  contactKindId                 String?
+  latitude                      Float?
+  longitude                     Float?
+
+  implants        Implant[]            @relation("Implant_salesRepresentative")
+  emails          ContactEmail[]       @relation("ContactEmail_contact")
+  phoneNumbers    ContactPhoneNumber[] @relation("ContactPhoneNumber_contact")
+  contactSettings ContactSetting[]     @relation("ContactSetting_contact")
+  tags            ContactTag[]         @relation("ContactTag_contact")
+
+  contactKind ContactKind? @relation("ContactKind_contact", fields: [contactKindId], references: [id])
+}
+
+model ContactKind {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  contacts Contact[] @relation("ContactKind_contact")
+}
+
+model Document {
+  id         String    @id @default(cuid())
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now()) @updatedAt
+  name       String?
+  attachment String?
+  encoding   String?
+  extension  String?
+
+  userId   String?
+  parentId String?
+
+  assignedDocuments AssignedDocument[] @relation(name: "Document_assignedDocuments")
+
+  contractId        String?
+  patientId         String?
+  providerId        String?
+  patientStudyId    String?
+  procedureVendorId String?
+  medicalConditionProviderId String?
+  locationId        String?
+  miscellaneousId String?
+  propertyDamageId String?
+  cardId  String?
+
+
+  contract     Contract?     @relation(name: "Contract_documents", fields: [contractId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patient      Patient?      @relation(name: "Patient_documents", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patientStudy PatientStudy? @relation(name: "PatientStudy_documents", fields: [patientStudyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  procedureVendor ProcedureVendor? @relation(name:"ProcedureVendor_documents", fields: [procedureVendorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  medicalConditionProvider MedicalConditionProvider? @relation("Document_medicalConditionProvider", fields: [medicalConditionProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  location                         Location?    @relation("Document_locationImages", fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  miscellaneous                         LegalCase?    @relation("Document_miscellaneousDocuments", fields: [miscellaneousId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  propertyDamage                         LegalCase?    @relation("Document_propertyDamages", fields: [propertyDamageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  card                         BoardCard?    @relation("Document_boardCardImages", fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  user User? @relation(name: "User_documents", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  eulas                                  Firm[]                      @relation("Firm_EULA")
+  priorAuthorizationRequestPrescriptions PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_prescription")
+  bills                                  Appointment[] @relation("Appointment_bills")
+  medicalReports                         Appointment[] @relation("Appointment_medicalReports")
+  imagings                               Appointment[] @relation("Appointment_imagings")
+  appointmentMiscellaneouses             Appointment[] @relation("Appointment_miscellaneouses")
+  subpoenas                              Patient[] @relation("Patient_subpoenas")
+
+  prescriptions                          Prescription[]              @relation(name: "Prescription_documents")
+  medicalRecords                         MedicalRecord[]              @relation(name: "MedicalRecord_documents")
+
+  profileImages                          ClinicalProvider[]   @relation("ClinicalProviderProfile_ProfileImages")
+  specialtyIcons                          Specialty[]   @relation("SpecialtyIcon_Documents")
+  claims                                Claim[]   @relation("Document_claims")
+  explanationOfPayments                 Claim[]   @relation("Document_explanationOfPayments")
+  invoices                              Invoice[]   @relation("Document_invoices")
+  statements  BalanceRequest[] @relation("BalanceRequest_statement")
+
+  driversLicenses Lead[] @relation("Lead_driversLicense")
+  phoneRecordings Lead[] @relation("Lead_phoneRecording")
+  policeReportAttachments Lead[] @relation("Lead_policeReportAttachment")
+}
+
+model DocumentType {
+  id                String             @id @default(cuid())
+  createdAt         DateTime?          @default(now())
+  updatedAt         DateTime?          @default(now()) @updatedAt
+  name              String?
+  assignedDocuments AssignedDocument[] @relation(name: "DocumentType_assignedDocuments")
+}
+
+model Email {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  email         String?
+  isPublic      Boolean?
+  primary       Boolean?
+  verified      Boolean?
+  verifyToken   String?
+  verifyExpires DateTime?
+  ownerId       String?
+
+  owner User? @relation(name: "User_emails", fields: [ownerId], references: [id])
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  image       String?
+  title       String?
+  description String?
+  link        String?
+  useRouter   Boolean?
+  time        DateTime?
+  read        Boolean?
+  isMine      Boolean?
+  userId      String?
+  chatId      String?
+
+  user User? @relation(name: "User_messages", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  chat Chat? @relation(name: "Chat_messages", fields: [chatId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Navigation {
+  id        String       @id @default(cuid())
+  createdAt DateTime?    @default(now())
+  updatedAt DateTime?    @default(now()) @updatedAt
+  name      String?
+  title     String?
+  subtitle  String?
+  type      String?
+  icon      String?
+  link      String?
+  userId    String?
+  parentId  String?
+  children  Navigation[] @relation(name: "Navigation_children")
+  featureId String?
+  user      User?        @relation(name: "User_navigations", fields: [userId], references: [id])
+  parent    Navigation?  @relation(name: "Navigation_children", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  title       String?
+  description String?
+  type        String?
+  icon        String?
+  image       String?
+  link        String?
+  useRouter   Boolean?
+  time        DateTime?
+  read        Boolean?
+  userId      String?
+  appointmentId      String?
+
+  user User? @relation(name: "User_notifications", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  appointment Appointment? @relation(name: "Appointment_notifications", fields: [appointmentId], references: [id])
+}
+
+model NovuNotification {
+  id          String    @id @default(cuid())
+  name        String?
+  description String?
+  isAdmin     Boolean?  @default(false)
+  tag         String?
+  redirectLink String?
+  userId      String?
+  read        Boolean?
+
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now())
+  user User? @relation(name: "User_novuNotifications", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  appointmentId String?
+  appointment Appointment? @relation(name: "Appointment_novunotifications", fields: [appointmentId], references: [id])
+}
+
+model Role {
+  id              String           @id @default(cuid())
+  createdAt       DateTime?        @default(now())
+  updatedAt       DateTime?        @default(now()) @updatedAt
+  name            String?
+  userRoles       UserRole[]       @relation(name: "Role_userRoles")
+  roleFeatures    RoleFeature[]    @relation(name: "Role_roleFeatures")
+
+  roleFeaturePermissions RoleFeaturePermission[] @relation("RoleFeaturePermission_role")
+  roleNavigations RoleNavigation[] @relation(name: "Role_navigations")
+}
+
+model RoleNavigation {
+  id        String           @id @default(cuid())
+  createdAt DateTime?        @default(now())
+  updatedAt DateTime?        @default(now()) @updatedAt
+  name      String?
+  title     String?
+  subtitle  String?
+  type      String?
+  icon      String?
+  link      String?
+  roleId    String?
+  parentId  String?
+  children  RoleNavigation[] @relation(name: "RoleNavigation_children")
+  featureId String?
+  feature   Feature?         @relation(name: "Feature_roleNavigations", fields: [featureId], references: [id])
+  role      Role?            @relation(name: "Role_navigations", fields: [roleId], references: [id])
+  parent    RoleNavigation?  @relation(name: "RoleNavigation_children", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model RoleFeature {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  featureId String?
+  roleId    String?
+  role      Role?     @relation(name: "Role_roleFeatures", fields: [roleId], references: [id])
+  feature   Feature?  @relation(name: "Feature_roleFeatures", fields: [featureId], references: [id])
+}
+
+model Setting {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  value       String?   @db.Text
+  dateFormat  String?
+  timeFormat  String?
+  startWeekOn String?
+  userId      String?
+
+  user User? @relation(name: "User_settings", fields: [userId], references: [id])
+}
+
+model Shortcut {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  label       String?
+  description String?
+  icon        String?
+  link        String?
+  useRouter   Boolean?
+  userId      String?
+
+  user User? @relation(name: "User_shortcuts", fields: [userId], references: [id])
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  taskTags  TaskTag[] @relation(name: "Tag_taskTags")
+  clinicalProviderTags ClinicalProviderTag[] @relation("ClinicalProviderTag_tag")
+}
+
+model TaskItem {
+  type         String?
+  id           String    @id @default(cuid())
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @default(now()) @updatedAt
+  name         String?
+  notes        String?
+  legalCaseId  String?
+  order        Int?
+  priority     Int?
+  assignedToId String?
+  title        String?
+  dueDate      DateTime?
+  assignedDate DateTime?
+  completedOn  DateTime?
+  completed    Boolean?
+  taskTags     TaskTag[] @relation(name: "TaskItem_taskTags")
+
+  legalCase           LegalCase?           @relation(name: "LegalCase_TaskItems", fields: [legalCaseId], references: [id])
+  assignedTo User? @relation(name: "User_tasks", fields: [assignedToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model TaskTag {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  taskId    String?
+  tagId     String?
+
+  task TaskItem? @relation(name: "TaskItem_taskTags", fields: [taskId], references: [id])
+  tag  Tag?      @relation(name: "Tag_taskTags", fields: [tagId], references: [id])
+}
+
+model Team {
+  id            String         @id @default(cuid())
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @default(now()) @updatedAt
+  name          String?
+  teamUsers     TeamUser[]     @relation(name: "Team_teamUsers")
+  userCalendars UserCalendar[] @relation("UserCalendar_team")
+}
+
+model TeamRole {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  teamUsers TeamUser[] @relation(name: "TeamRole_teamUsers")
+}
+
+model TeamUser {
+  id         String    @id @default(cuid())
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now()) @updatedAt
+  name       String?
+  teamId     String?
+  userId     String?
+  teamRoleId String?
+
+  team     Team?     @relation(name: "Team_teamUsers", fields: [teamId], references: [id])
+  user     User?     @relation(name: "User_teamUsers", fields: [userId], references: [id])
+  teamRole TeamRole? @relation(name: "TeamRole_teamUsers", fields: [teamRoleId], references: [id])
+}
+
+model Template {
+  id                String             @id @default(cuid())
+  createdAt         DateTime?          @default(now())
+  updatedAt         DateTime?          @default(now()) @updatedAt
+  name              String?            @unique
+  attachment        String?
+  encoding          String?
+  signatureFileType String?
+  code              String? @db.NVarChar(Max)
+  contracts         Contract[]         @relation(name: "Template_contracts")
+  assignedDocuments AssignedDocument[] @relation(name: "Template_assignedDocuments")
+}
+
+model TimeEntry {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  legalCaseId String?
+  date        DateTime?
+  rate        Float?
+  hours       Float?
+  description String?
+  isBilled    Boolean?
+}
+
+model User {
+  id         String    @id @default(cuid())
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now()) @updatedAt
+  developer  Boolean?
+  username   String?
+  password   String?
+  name       String?
+  firstName  String?
+  lastName   String?
+  avatarUrl  String?   @db.Text
+  line1      String?
+  line2      String?
+  city       String?
+  state      String?
+  postalCode String?
+  phone      String?
+  bio        String?
+  status     String?
+  slug       String?
+  officeName String?
+
+  dateOfBirth       DateTime?
+  cellPhone         String?
+  education         String?
+  planId            String?            @default("")
+
+	attorneyId String?
+	vendorId String?
+	patientId String?
+
+
+	patient		Patient?     @relation(name: "User_patient", fields: [patientId], references: [id], onDelete: NoAction,onUpdate: NoAction)
+	vendor		Vendor?     @relation(name: "Vendor_users", fields: [vendorId], references: [id])
+	attorney		Attorney?     @relation(name: "User_attorney", fields: [attorneyId], references: [id], onDelete: NoAction,onUpdate: NoAction)
+
+
+  emails            Email[]            @relation(name: "User_emails")
+  settings          Setting[]          @relation(name: "User_settings")
+  userRoles         UserRole[]         @relation(name: "User_userRoles")
+  userCalendars     UserCalendar[]     @relation(name: "User_userCalendars")
+  assignedDocuments AssignedDocument[] @relation(name: "User_assignedDocuments")
+  messages          Message[]          @relation(name: "User_messages")
+  navigations       Navigation[]       @relation(name: "User_navigations")
+  notifications     Notification[]     @relation(name: "User_notifications")
+  novuNotifications     NovuNotification[]     @relation(name: "User_novuNotifications")
+  shortcuts         Shortcut[]         @relation(name: "User_shortcuts")
+  teamUsers         TeamUser[]         @relation(name: "User_teamUsers")
+  tasks             TaskItem[]         @relation(name: "User_tasks")
+  chats             Chat[]             @relation("User_chats")
+
+  agentAssignedAccounts   CaseAccount[]        @relation(name: "User_agentAssignedAccounts")
+  attorneysCreated        Attorney[]           @relation(name: "User_attorneysCreated")
+  agentForTheseLegalCases LegalCase[]          @relation(name: "User_agentForTheseLegalCases")
+  courseProgresses        UserCourseProgress[] @relation(name: "User_courseProgresses")
+
+  userFeatures           UserFeature[]           @relation(name: "User_userFeatures")
+  userFeaturePermissions UserFeaturePermission[] @relation(name: "User_userFeaturePermissions")
+  documents              Document[]              @relation("User_documents")
+
+	favoriteProviders		FavoriteProvider[]     @relation("FavoriteProvider_user")
+  leads             Lead[]                 @relation("Lead_submittedBy")
+
+  customerId        String             @default("")
+  signupStatus      Int                @default(0)
+  verified          Boolean            @default(false)
+  chatUsers ChatUsers[] @relation("chatUsers_User") //added for chat users
+
+  users BoardCard[] @relation("card_users")
+  appointments  Appointment[] @relation("Appointment_assignedTo")
+}
+
+model FeatureNavigation {
+  id        String              @id @default(cuid())
+  createdAt DateTime?           @default(now())
+  updatedAt DateTime?           @default(now()) @updatedAt
+  name      String?
+  title     String?
+  subtitle  String?
+  type      String?
+  icon      String?
+  link      String?
+  parentId  String?
+  children  FeatureNavigation[] @relation(name: "FeatureNavigation_children")
+  featureId String?
+  parent    FeatureNavigation?  @relation(name: "FeatureNavigation_children", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model UserFeature {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  featureId String?
+  userId    String?
+
+  user    User?    @relation(name: "User_userFeatures", fields: [userId], references: [id])
+  feature Feature? @relation(name: "Feature_userFeatures", fields: [featureId], references: [id])
+}
+
+model UserFeaturePermission {
+  id                  String    @id @default(cuid())
+  createdAt           DateTime? @default(now())
+  updatedAt           DateTime? @default(now()) @updatedAt
+  name                String?
+  featurePermissionId String?
+  userId              String?
+
+  user User? @relation(name: "User_userFeaturePermissions", fields: [userId], references: [id])
+
+  featurePermission FeaturePermission? @relation(name: "UserFeaturePermission_featurePermission", fields: [featurePermissionId], references: [id])
+}
+
+model Permission {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  featurePermissions FeaturePermission[] @relation(name: "FeaturePermission_permission")
+  rolePermissions RolePermission[] @relation(name: "RolePermission_permission")
+}
+
+model Feature {
+  id                 String              @id @default(cuid())
+  createdAt          DateTime?           @default(now())
+  updatedAt          DateTime?           @default(now()) @updatedAt
+  name               String?
+  priceId            String?
+  userFeatures       UserFeature[]       @relation(name: "Feature_userFeatures")
+  roleFeatures       RoleFeature[]       @relation(name: "Feature_roleFeatures")
+  featurePermissions FeaturePermission[] @relation(name: "Feature_featurePermissions")
+  roleNavigations    RoleNavigation[]    @relation(name: "Feature_roleNavigations")
+}
+
+model FeaturePermission {
+  id                     String                  @id @default(cuid())
+  createdAt              DateTime?               @default(now())
+  updatedAt              DateTime?               @default(now()) @updatedAt
+  name                   String?
+  featureId              String?
+  permissionId           String?
+  permission             Permission?             @relation(name: "FeaturePermission_permission", fields: [permissionId], references: [id])
+  feature                Feature?                @relation(name: "Feature_featurePermissions", fields: [featureId], references: [id])
+  userFeaturePermissions UserFeaturePermission[] @relation("UserFeaturePermission_featurePermission")
+  roleFeaturePermissions RoleFeaturePermission[] @relation("RoleFeaturePermission_featurePermission")
+}
+
+model RoleFeaturePermission {
+  id                  String             @id @default(cuid())
+  createdAt           DateTime?          @default(now())
+  updatedAt           DateTime?          @default(now()) @updatedAt
+  featurePermissionId String?
+  roleId              String?
+  name                String?
+  featurePermission   FeaturePermission? @relation(name: "RoleFeaturePermission_featurePermission", fields: [featurePermissionId], references: [id])
+  role Role? @relation(name: "RoleFeaturePermission_role", fields: [roleId], references: [id])
+}
+
+model Country {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	iso String?
+	code String?
+	flagImagePos String?
+
+
+  contactPhoneNumbers ContactPhoneNumber[] @relation("ContactPhoneNumber_country")
+
+}
+
+model RolePermission {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	roleId String?
+	permissionId String?
+
+
+	permission		Permission?     @relation(name: "RolePermission_permission", fields: [permissionId], references: [id])
+
+
+}
+
+
+model UserCalendar {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  calendarTypeId String?
+  userId         String?
+  teamId         String?
+  calendarId     String?
+
+  calendarType CalendarType? @relation(name: "CalendarType_userCalendars", fields: [calendarTypeId], references: [id])
+  user         User?         @relation(name: "User_userCalendars", fields: [userId], references: [id])
+  team         Team?         @relation(name: "UserCalendar_team", fields: [teamId], references: [id])
+  calendar     Calendar?     @relation(name: "Calendar_userCalendars", fields: [calendarId], references: [id])
+}
+
+model UserRole {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  roleId    String?
+  userId    String?
+
+  role Role? @relation(name: "Role_userRoles", fields: [roleId], references: [id])
+  user User? @relation(name: "User_userRoles", fields: [userId], references: [id])
+}
+
+model AcademyCategory {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  slug      String?
+  title     String?
+  courses   Course[]  @relation(name: "AcademyCategory_courses")
+}
+
+model AccidentType {
+  id             String          @id @default(cuid())
+  createdAt      DateTime?       @default(now())
+  updatedAt      DateTime?       @default(now()) @updatedAt
+  name           String?
+  legalCases     LegalCase[]     @relation(name: "AccidentType_legalCases")
+  requiredFields RequiredField[] @relation(name: "RequiredField_accidentType")
+  leads Lead[] @relation(name: "Lead_accidentType")
+}
+
+model AccountStatus {
+  id        String        @id @default(cuid())
+  createdAt DateTime?     @default(now())
+  updatedAt DateTime?     @default(now()) @updatedAt
+  name      String?
+  caseAccounts  CaseAccount[] @relation(name: "AccountStatus_caseAccounts")
+}
+
+model AdverseInsuranceStatus {
+  id         String      @id @default(cuid())
+  createdAt  DateTime?   @default(now())
+  updatedAt  DateTime?   @default(now()) @updatedAt
+  name       String?
+  legalCases LegalCase[] @relation(name: "AdverseInsuranceStatus_legalCases")
+}
+
+model AgreementType {
+  id        String        @id @default(cuid())
+  createdAt DateTime?     @default(now())
+  updatedAt DateTime?     @default(now()) @updatedAt
+  name      String?
+  caseAccounts  CaseAccount[] @relation(name: "AgreementType_caseAccounts")
+}
+
+model Attorney {
+  id                 String      @id @default(cuid())
+  createdAt          DateTime?   @default(now())
+  updatedAt          DateTime?   @default(now()) @updatedAt
+  name               String?
+  firmId             String?
+  attorneyStatusId   String?
+  attorneyTypeId     String?
+  title              String?
+  firstName          String?
+  lastName           String?
+  address            String?
+  city               String?
+  state              String?
+  zip                String?
+  email              String?
+  direct             String?
+  fax                String?
+  cellPhone          String?
+  barNumber          String?
+  barState           String?
+  doNotDisturb       Boolean?
+  temp               String?
+
+  dateCreated        DateTime?
+  removed            Boolean?
+  migSource          String?
+  entity             String?
+  firmNolongerNeeded Boolean?
+
+  totalSiteCostAllocated  Float?
+  totalSiteCostReturned   Float?
+  totalBilledCharges      Float?
+  collectedOfBilled       Float?
+  openCases               Int?
+  totalCasesReturned      Int   @default(0)
+  totalCasesWrittenOff    Int   @default(0)
+
+  legalCases         LegalCase[] @relation(name: "Attorney_legalCases")
+
+  user   User[]   @relation(name: "User_attorney")
+
+  firm           Firm?           @relation(name: "Firm_attorneys", fields: [firmId], references: [id])
+  attorneyStatus AttorneyStatus? @relation(name: "AttorneyStatus_attorneys", fields: [attorneyStatusId], references: [id])
+  attorneyType   AttorneyType?   @relation(name: "AttorneyType_attorneys", fields: [attorneyTypeId], references: [id])
+
+  createdById        String?
+  createdBy      User?           @relation(name: "User_attorneysCreated", fields: [createdById], references: [id])
+}
+
+model AttorneyStatus {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  attorneys Attorney[] @relation(name: "AttorneyStatus_attorneys")
+}
+
+model AttorneyType {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  attorneys Attorney[] @relation(name: "AttorneyType_attorneys")
+}
+
+model CalculationBasisType {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  contracts Contract[] @relation(name: "CalculationBasisType_contracts")
+}
+
+model CaseAccount {
+  id                        String     @id @default(cuid())
+  createdAt                 DateTime?  @default(now())
+  updatedAt                 DateTime?  @default(now()) @updatedAt
+	name String?
+	legalCaseId String?
+	locationId String?
+	vendorId String?
+	accountStatusId String?
+	procedureTypeId String?
+	agreementTypeId String?
+	accountAgentId String?
+	claimProcedureId String?
+	invoiceDetailId String?
+	contractId String?
+	portfolioId String?
+	thirdPartyFunderName String?
+	originalDueDate DateTime?
+	accountTerm Int?
+	serviceDate DateTime?
+	quantity Int?
+	originalDebt Float?
+	cost Float?
+	balance Float?
+	lastBalance Float?
+	reduction Float?
+	treatmentState String?
+	accountNumber String?
+	servicesPerformed String?
+	cptCodes String?
+	treatingPhysician String?
+	referringPhysician String?
+	collectionsDate DateTime?
+	deemedWriteOffDate DateTime?
+	expensedBadDebtDate DateTime?
+	paidDate DateTime?
+	ghostAccount Boolean?
+	ghostedDate DateTime?
+	ghostedBy String?
+	unGhostedDate DateTime?
+	unGhostedBy String?
+	additionalPayment Boolean?
+	missingBill Boolean?
+	missingLien Boolean?
+	missingMedicalRecords Boolean?
+	assignedTo String?
+	resubmitted DateTime?
+	treatmentCity String?
+	origination Int?
+	thresholdProviderRate Float?
+	thresholdLocationRate Float?
+	teamLeaderRateSource String?
+	checkNumber String?
+	accountDateReceived DateTime?
+	dateApplied DateTime?
+	amountApplied Float?
+	description String?
+	note String?
+	medicareRate Float?
+	providerPercentOfMedicare Float?
+	contractedAmount Float?
+	markupPercent Float?
+	reimbursedTotal Float?
+	initialRevenue Float?
+	factor Float?
+	retailBill Float?
+	estMargin Float?
+	roi Float?
+	attorneyPaid Float?
+	percentOfRetail Float?
+	reimbursedFromPCR Float?
+	ingredientCost Float?
+	dispensingCost Float?
+	administrativeCost Float?
+	coPay Float?
+	totalCost Float?
+	averageWholesalePrice Float?
+	weightedAverageCost Float?
+	averageSalePrice Float?
+	invoiceCost Float?
+	usualAndCustomary Float?
+	nationalDrugCode String?
+	procedureVendorId String?
+  //accounts CaseAccount[]   @relation(name: "CaseAccount_Accounts")
+  writeOffs                 WriteOff[] @relation(name: "CaseAccount_writeOffs")
+  claimProcedure          ClaimProcedure?            @relation(name: "ClaimProcedure_caseAccounts", fields: [claimProcedureId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  legalCase           LegalCase?           @relation(name: "LegalCase_caseAccounts", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  location            Location?            @relation(name: "Location_caseAccounts", fields: [locationId], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  vendor              Vendor?              @relation(name: "Vendor_caseAccounts", fields: [vendorId], references: [id])
+  accountStatus       AccountStatus?       @relation(name: "AccountStatus_caseAccounts", fields: [accountStatusId], references: [id])
+  procedureType       ProcedureType?       @relation(name: "ProcedureType_caseAccounts", fields: [procedureTypeId], references: [id])
+  agreementType       AgreementType?       @relation(name: "AgreementType_caseAccounts", fields: [agreementTypeId], references: [id])
+  accountAgent        User?                @relation(name: "User_agentAssignedAccounts", fields: [accountAgentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  contract            Contract?            @relation(name: "Contract_caseAccounts", fields: [contractId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  portfolio           Portfolio?           @relation(name: "Portfolio_caseAccounts", fields: [portfolioId], references: [id])
+  procedureVendor     ProcedureVendor?     @relation(name: "ProcedureVendor_caseAccounts", fields: [procedureVendorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  caseAccountPayments CaseAccountPayment[] @relation("CaseAccountPayment_caseAccount")
+  journalEntries      JournalEntry[]       @relation("JournalEntry_caseAccount")
+  journalEntryTemplates      JournalEntryTemplate[]       @relation("JournalEntryTemplate_caseAccount")
+
+	invoiceDetail		InvoiceDetail?     @relation(name: "CaseAccount_invoiceDetail", fields: [invoiceDetailId], references: [id])
+}
+
+model Invoice {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	invoiceNumber String?
+	amount Float?
+	paid Float?
+	due Float?
+	organizationId String?
+	legalCaseId String?
+	clinicalProviderId String?
+  invoiceId String?
+
+	details		InvoiceDetail[]     @relation("InvoiceDetail_invoice")
+  legalCase           LegalCase?           @relation(name: "LegalCase_invoices", fields: [legalCaseId], references: [id])
+  clinicalProvider    ClinicalProvider?    @relation(name: "ClinicalProvider_invoices", fields: [clinicalProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  billingOrganization Organization?   @relation(name: "Organization_invoices", fields: [organizationId], references: [id])
+  invoice             Document?       @relation(name: "Document_invoices", fields: [invoiceId], references: [id])
+}
+
+model InvoiceDetail {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	invoiceId String?
+	dateOfService DateTime?
+	providerName String?
+	procedureDescription String?
+	quantity Int?
+	charges Float?
+	lineTotal Float?
+
+
+	invoice		Invoice?     @relation(name: "InvoiceDetail_invoice", fields: [invoiceId], references: [id])
+	caseAccounts		CaseAccount[]     @relation("CaseAccount_invoiceDetail")
+
+
+}
+
+model CasePreAccident {
+  id           String    @id @default(cuid())
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @default(now()) @updatedAt
+  name         String?
+  legalCaseId  String?
+  accidentDate String?
+  injuries     String?
+  symptoms     String?
+  dateCreated  DateTime?
+  removed      Boolean?
+
+  legalCase LegalCase? @relation(name: "LegalCase_casePreAccidents", fields: [legalCaseId], references: [id])
+}
+
+model CasePreInjury {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  legalCaseId   String?
+  affectsInjury Boolean?
+  injuryDate    String?
+  injured       String?
+  anatomic      String?
+  dateCreated   DateTime?
+  removed       Boolean?
+
+  legalCase LegalCase? @relation(name: "LegalCase_casePreInjuries", fields: [legalCaseId], references: [id])
+}
+
+model CasePreProblem {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  legalCaseId String?
+  sameRegion  Boolean?
+  problemDate DateTime?
+  duration    String?
+  symptoms    String?
+  regions     String?
+  removed     Boolean?
+
+  legalCase LegalCase? @relation(name: "LegalCase_casePreProblems", fields: [legalCaseId], references: [id])
+}
+
+model CasePreProcedure {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  legalCaseId   String?
+  procedureType String?
+  procedureDate DateTime?
+  dateCreated   DateTime?
+  removed       Boolean?
+
+  legalCase LegalCase? @relation(name: "LegalCase_casePreProcedures", fields: [legalCaseId], references: [id])
+}
+
+model CaseProcedure {
+  id                  String            @id @default(cuid())
+  createdAt           DateTime?         @default(now())
+  updatedAt           DateTime?         @default(now()) @updatedAt
+  name                String?
+  legalCaseId         String?
+  locationId          String?
+  procedureDate       DateTime?
+  cost                Float?
+  notes               String?
+  createdBy           String?
+  dateCreated         DateTime?
+  removed             Boolean?
+  approvedDate        DateTime?
+  procedureReasonName String?
+  decisionDate        DateTime?
+  nextActionDate      DateTime?
+  procedureVendors    ProcedureVendor[] @relation(name: "CaseProcedure_procedureVendors")
+  appointmentId       String?
+  procedureStatusId   String?
+  procedureTypeId   String?
+
+  procedureStatus ProcedureStatus? @relation(name: "ProcedureStatus_caseProcedures", fields: [procedureStatusId], references: [id])
+  procedureType ProcedureType? @relation(name: "ProcedureType_caseProcedures", fields: [procedureTypeId], references: [id])
+  legalCase                  LegalCase?                  @relation(name: "LegalCase_caseProcedures", fields: [legalCaseId], references: [id])
+  location                   Location?                   @relation(name: "Location_caseProcedures", fields: [locationId], references: [id])
+  appointment                Appointment?                @relation(name: "Appointment_caseProcedures", fields: [appointmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("CaseProcedure_priorAuthorizationRequests")
+}
+
+
+model ProcedureVendorStatus {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	procedureVendors ProcedureVendor[]   @relation(name: "ProcedureVendorStatus_procedureVendors")
+}
+
+
+model CaseProgressStatus {
+  id         String      @id @default(cuid())
+  createdAt  DateTime?   @default(now())
+  updatedAt  DateTime?   @default(now()) @updatedAt
+  name       String?
+  legalCases LegalCase[] @relation(name: "CaseProgressStatus_legalCases")
+}
+
+model CaseStatus {
+  id            String      @id @default(cuid())
+  createdAt     DateTime?   @default(now())
+  updatedAt     DateTime?   @default(now()) @updatedAt
+  name          String?
+  orderIndex    Int?
+  color         String?
+  isDefault     Boolean?
+  tickerDate    Int?
+  maxTickerDate Int?
+  moveDocs      Boolean?
+  dateCreated   DateTime?
+  removed       Boolean?
+  createdBy     String?
+  migSource     String?
+  entity        String?
+  temp          String?
+  legalCases    LegalCase[] @relation(name: "CaseStatus_legalCases")
+}
+
+model CaseType {
+  id          String      @id @default(cuid())
+  createdAt   DateTime?   @default(now())
+  updatedAt   DateTime?   @default(now()) @updatedAt
+  name        String?
+  orderIndex  Int?
+  dateCreated DateTime?
+  removed     Boolean?
+  migSource   String?
+  entity      String?
+  temp        String?
+  legalCases  LegalCase[] @relation(name: "CaseType_legalCases")
+}
+
+model Claim {
+  id                        String           @id @default(cuid())
+  createdAt                 DateTime?        @default(now())
+  updatedAt                 DateTime?        @default(now()) @updatedAt
+  name                      String?
+  originalRecordDate        DateTime?
+  receivedDate              DateTime?
+  dueDate                   DateTime?
+  patientName               String?
+  patientPhoneNumber        String?
+  patientDob                String?
+  patientAddressLine1       String?
+  patientAddressCity        String?
+  patientAddressState       String?
+  patientAddressPostalCode  String?
+  carrierName               String?
+  carrierLine1              String?
+  carrierLine2              String?
+  carrierCity               String?
+  carrierState              String?
+  carrierPostalCode         String?
+  insuredIdNumber String?
+	insuredDob String?
+	insuredPhoneNumber String?
+  insuredName               String?
+  insuredLine1              String?
+  insuredCity               String?
+  insuredState              String?
+  insuredPostalCode         String?
+  patientSignature          String?
+  diagnosisCode1            String?
+  diagnosisCode2            String?
+  diagnosisCode3            String?
+  diagnosisCode4            String?
+  diagnosisCode5            String?
+  diagnosisCode6            String?
+  diagnosisCode7            String?
+  diagnosisCode8            String?
+  federalTaxId              String?
+  totalCharges              Float?
+  amountPaid                Float?
+  physicianSignature        String?
+  physicianSignedOn         String?
+  serviceFacility           String?
+  serviceFacilityLine1      String?
+  serviceFacilityCity       String?
+  serviceFacilityState      String?
+  serviceFacilityPostalCode String?
+  serviceFacilityNpi        String?
+  billingFacility           String?
+  billingLine1              String?
+  billingCity               String?
+  billingState              String?
+  billingPostalCode         String?
+  billingNpi                String?
+  billingPhoneNumber        String?
+  billingOther              String?
+  sessionNotes              String?
+  referringProvider         String?
+  referringProviderNpi      String?
+  additionalClaimInfo       String?
+  accountNumber             String?
+  referenceNumber           String?
+  facility                  String?
+  priorAuthorizationNumber  String?
+  providerName              String?
+  providerNumber            String?
+  vendor                    String?
+  vendorLine1               String?
+  vendorCSZ                 String?
+  vendorTaxId               String?
+  totalApprovedAmount       Float?
+  totalBilledAmount         Float?
+  totalNetPayAmount         Float?
+  notes                     String?
+  patientId                 String?
+  procedures                ClaimProcedure[] @relation(name: "Claim_claimProcedures")
+
+  priorAuthorizationRequestId String?
+  patient                     Patient?                   @relation(name: "Patient_claims", fields: [patientId], references: [id])
+
+  claimId                     String?
+  claim Document? @relation(name: "Document_claims", fields: [claimId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  explanationOfPaymentId                     String?
+  explanationOfPayment Document? @relation(name: "Document_explanationOfPayments", fields: [explanationOfPaymentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+
+  priorAuthorizationRequest   PriorAuthorizationRequest? @relation(name: "Claim_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+
+
+model ClaimProcedure {
+  id                            String    @id @default(cuid())
+  createdAt                     DateTime? @default(now())
+  updatedAt                     DateTime? @default(now()) @updatedAt
+  name                          String?
+  claimProcedureCodeId          String?
+  procedureCodeId               String?
+  claimId                       String?
+  fromDateOfService             DateTime?
+  toDateOfService               DateTime?
+  placeOfServiceId              String?
+  nationalDrugCode              String?
+  drugUnit                      String?
+  drugQuantity                  String?
+  quantity                      Int?
+  billedAmount                  Float?
+  approvedAmount                Float?
+  adjustmentAmount              Float?
+  netPaymentAmount              Float?
+  paymentMethod                 String?
+  internalMemo                  String?
+  explainationOfBenefitsComment String?
+  claimStatusId                 String?
+  reason                        String?
+  procedureCode                 String?
+  diagnosisPointer              String?
+  modifier1                     String?
+  modifier2                     String?
+  modifier3                     String?
+  modifier4                     String?
+  appointmentId                 String?
+
+  appointment    Appointment?    @relation("ClaimProcedure_appointment", fields: [appointmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  procedure    Procedure?    @relation("ClaimProcedure_procedure", fields: [procedureCodeId], references: [id])
+
+  placeOfService PlaceOfService? @relation(name: "PlaceOfService_claimProcedures", fields: [placeOfServiceId], references: [id])
+  claimStatus    ClaimStatus?    @relation(name: "ClaimStatus_claimProcedures", fields: [claimStatusId], references: [id])
+  claim          Claim?          @relation(name: "Claim_claimProcedures", fields: [claimId], references: [id])
+  caseAccounts  CaseAccount[]   @relation("ClaimProcedure_caseAccounts")
+}
+
+model ClaimStatus {
+  id              String           @id @default(cuid())
+  createdAt       DateTime?        @default(now())
+  updatedAt       DateTime?        @default(now()) @updatedAt
+  name            String?
+  claimProcedures ClaimProcedure[] @relation(name: "ClaimStatus_claimProcedures")
+}
+
+model Contract {
+  id                           String           @id @default(cuid())
+  createdAt                    DateTime?        @default(now())
+  updatedAt                    DateTime?        @default(now()) @updatedAt
+  name                         String?
+  organizationId               String?
+  billingOrganizationId        String?
+  templateId                   String?
+  billOnBehalf                 Boolean?
+  billRate                     String?
+  vendorId                     String?
+  contractDate                 DateTime?
+  maturityDate                 DateTime?
+  requiresTpaMedicalNecessity  Boolean?
+  requiresTpaMedicareAllowable Boolean?
+  reconciliationPeriodTypeId   String?
+  calculationBasisTypeId       String?
+  signed                       Boolean?
+  processId                    String?
+  documents                    Document[]       @relation(name: "Contract_documents")
+  contractedRates              ContractedRate[] @relation(name: "Contract_contractedRates")
+  caseAccounts                     CaseAccount[]    @relation(name: "Contract_caseAccounts")
+  contractTerms                ContractTerm[]   @relation(name: "Contract_contractTerms")
+
+  organization             Organization?             @relation(name: "Organization_contracts", fields: [organizationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  billingOrganization      Organization?             @relation(name: "Organization_liensHeld", fields: [billingOrganizationId], references: [id])
+  template                 Template?                 @relation(name: "Template_contracts", fields: [templateId], references: [id])
+  vendor                   Vendor?                   @relation(name: "Vendor_contracts", fields: [vendorId], references: [id])
+  reconciliationPeriodType ReconciliationPeriodType? @relation(name: "ReconciliationPeriodType_contracts", fields: [reconciliationPeriodTypeId], references: [id])
+  calculationBasisType     CalculationBasisType?     @relation(name: "CalculationBasisType_contracts", fields: [calculationBasisTypeId], references: [id])
+  process                  Process?                  @relation(name: "Process_contracts", fields: [processId], references: [id])
+
+  procedureVendors ProcedureVendor[] @relation("ProcedureVendor_contract")
+}
+
+model ContractedRate {
+  id                   String    @id @default(cuid())
+  createdAt            DateTime? @default(now())
+  updatedAt            DateTime? @default(now()) @updatedAt
+  name                 String?
+  amount               Float?
+  percentage           Float?
+  reimbursedRate       Float?
+  billOnBehalf         Boolean?
+  contractId           String?
+  contractedRateKindId String?
+  contractKindId       String?
+  visitKindId          String?
+
+  contract           Contract?           @relation(name: "Contract_contractedRates", fields: [contractId], references: [id])
+  contractedRateKind ContractedRateKind? @relation(name: "ContractedRateKind_contractedRates", fields: [contractedRateKindId], references: [id])
+  contractKind       ContractKind?       @relation(name: "ContractKind_contractedRates", fields: [contractKindId], references: [id])
+  visitKind          VisitKind?          @relation(name: "VisitKind_contractedRates", fields: [visitKindId], references: [id])
+	clinicalProviderId String?
+	specialtyId String?
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "ContractedRate_clinicalProvider", fields: [clinicalProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	specialty		Specialty?     @relation(name: "ContractedRate_specialty", fields: [specialtyId], references: [id])
+
+}
+
+model ContractedRateKind {
+  id              String           @id @default(cuid())
+  createdAt       DateTime?        @default(now())
+  updatedAt       DateTime?        @default(now()) @updatedAt
+  name            String?
+  code            String?
+  value           Int?
+  contractedRates ContractedRate[] @relation(name: "ContractedRateKind_contractedRates")
+}
+
+model ContractKind {
+  id              String           @id @default(cuid())
+  createdAt       DateTime?        @default(now())
+  updatedAt       DateTime?        @default(now()) @updatedAt
+  name            String?
+  contractedRates ContractedRate[] @relation(name: "ContractKind_contractedRates")
+}
+
+model ContractTerm {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  maxApproved    Float?
+  numberIncluded Int?
+  factor         Float?
+  contractTermId String?
+
+  contract Contract? @relation(name: "Contract_contractTerms", fields: [contractTermId], references: [id])
+}
+
+model Course {
+  id                  String            @id @default(cuid())
+  createdAt           DateTime?         @default(now())
+  updatedAt           DateTime?         @default(now())
+  name                String?
+  slug                String?
+  title               String?
+  description         String?
+  duration            Float?            @default(0)
+  totalSteps          Int?              @default(0)
+  featured            Boolean?
+  content             String?
+  categoryId          String
+  category            AcademyCategory @relation(name: "AcademyCategory_courses", fields: [categoryId], references: [id])
+  courseProgresses    UserCourseProgress[]  @relation(name: "courseProgresses")
+  steps               Step[]     @relation(name: "Course_Steps")
+}
+
+model FacilityFeeSchedule {
+  id                   String    @id @default(cuid())
+  createdAt            DateTime? @default(now())
+  updatedAt            DateTime? @default(now()) @updatedAt
+  name                 String?
+  organizationId       String?
+  specialtyId          String?
+  code                 String?
+  modifier             String?
+  description          String?
+  medicareFacilityRate Float?
+  facilityFee          Float?
+  baseUnit             Float?
+  profCf               Float?
+
+  organization Organization? @relation(name: "Organization_facilityFeeSchedules", fields: [organizationId], references: [id])
+  specialty    Specialty?    @relation(name: "Specialty_facilityFeeSchedules", fields: [specialtyId], references: [id])
+}
+
+model FeeSchedule {
+  id                               String    @id @default(cuid())
+  createdAt                        DateTime? @default(now())
+  updatedAt                        DateTime? @default(now()) @updatedAt
+  name                             String?
+  organizationId                   String?
+  specialtyId                      String?
+  code                             String?
+  modifier                         String?
+  description                      String?
+  medicarePhysicianNonFacilityRate Float?
+  physicianNonFacilityFee          Float?
+  medicarePhysicianFacilityRate    Float?
+  physicianFacilityFee             Float?
+  baseUnit                         String?
+  profCf                           String?
+
+  organization Organization? @relation(name: "Organization_feeSchedules", fields: [organizationId], references: [id])
+  specialty    Specialty?    @relation(name: "Specialty_feeSchedules", fields: [specialtyId], references: [id])
+}
+
+model Firm {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  firmStatusNote String?   @db.Text
+  firmStatusId   String?
+  firmName       String?
+  address        String?
+  address2       String?
+  city           String?
+  state          String?
+  zip            String?
+  country        String?
+  office         String?
+  fax            String?
+  webAddress     String?
+  email          String?
+  rating         Float?
+  notes          String?
+  doNotDisturb   Boolean?
+  invoiceOnly    Boolean?
+  reductionNotes String?
+  deceased       Boolean?
+  createdBy      String?
+  dateCreated    DateTime?
+
+  openCases              Int?
+  totalSiteCostReturned  Float?
+  collectedOfBilled      Float?
+  totalCasesReturned     Int   @default(0)
+  totalSiteCostAllocated Float?
+  totalBilledCharges     Float?
+  averageTimeOut         Float?
+
+  eulaId String?
+
+  attorneys  Attorney[]  @relation(name: "Firm_attorneys")
+  legalCases LegalCase[] @relation(name: "Firm_legalCases")
+
+  firmStatus FirmStatus? @relation(name: "FirmStatus_firms", fields: [firmStatusId], references: [id])
+  eula       Document?   @relation(name: "Firm_EULA", fields: [eulaId], references: [id])
+}
+
+model FirmStatus {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  blackListed Boolean?
+  active      Boolean?
+  statusColor String?
+  firms       Firm[]    @relation(name: "FirmStatus_firms")
+}
+
+model Gender {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?   @unique
+  code      String?
+  value     Int?
+  patients  Patient[] @relation(name: "Gender_patients")
+}
+
+model HealthInsurance {
+  id                        String    @id @default(cuid())
+  createdAt                 DateTime? @default(now())
+  updatedAt                 DateTime? @default(now()) @updatedAt
+  name                      String?
+  healthInsuranceKind       String?
+  identificationGroupNumber String?
+  mediCalNumber             String?
+  medicareNumber            String?
+  policyNumber              String?
+  legalCaseId               String?
+
+  legalCase LegalCase? @relation(name: "HealthInsurance_legalCase", fields: [legalCaseId], references: [id])
+}
+
+model Insurance {
+  id                    String    @id @default(cuid())
+  createdAt             DateTime? @default(now())
+  updatedAt             DateTime? @default(now()) @updatedAt
+  name                  String?
+  legalCaseId           String?
+  insuranceTypeId       String?
+  insuranceSectorId     String?
+  policyNumber          String?
+  insuranceCompany      String?
+  minimumCoverageAmount Float?
+  maximumCoverageAmount Float?
+  isStackable           Boolean?
+  adjuster              String?
+  leadId                String?
+
+  legalCase       LegalCase?       @relation(name: "LegalCase_insurances", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  insuranceType   InsuranceType?   @relation(name: "InsuranceType_insurances", fields: [insuranceTypeId], references: [id])
+  insuranceSector InsuranceSector? @relation(name: "InsuranceSector_insurances", fields: [insuranceSectorId], references: [id])
+  lead    Lead?        @relation(name: "Lead_insurances", fields: [leadId], references: [id])
+}
+
+model InsuranceSector {
+  id         String      @id @default(cuid())
+  createdAt  DateTime?   @default(now())
+  updatedAt  DateTime?   @default(now()) @updatedAt
+  name       String?
+  insurances Insurance[] @relation(name: "InsuranceSector_insurances")
+}
+
+model InsuranceType {
+  id         String      @id @default(cuid())
+  createdAt  DateTime?   @default(now())
+  updatedAt  DateTime?   @default(now()) @updatedAt
+  name       String?
+  insurances Insurance[] @relation(name: "InsuranceType_insurances")
+}
+
+model Language {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?   @unique
+  patients  Patient[] @relation(name: "Language_patients")
+}
+
+model LegalCase {
+  id                                    String    @id @default(cuid())
+  createdAt                             DateTime? @default(now())
+  updatedAt                             DateTime? @default(now()) @updatedAt
+  name                                  String?
+  patientId                             String?
+  medLevelId                            String?
+  accidentTypeId                        String?
+  firmId                                String?
+  attorneyId                            String?
+  agentId                               String?
+  caseStatusId                          String?
+  caseTypeId                            String?
+  patientTreatmentStatusId              String?
+  dateOfLoss                            DateTime?
+  caseStatusDate                        DateTime?
+  caseStatusOther                       String?
+  paralegal                             String?
+  paralegalContact                      String?
+  caseNoteSummary                       String?
+  policyLimit                           Float?
+  attorneyFee                           Float?
+  referringPhysician                    String?
+  noMoreTreatment                       Boolean?
+  medpay                                Boolean?
+  fileNumber                            String?
+  caseNumber                            String?
+  accidentState                         String?
+  assignedTo                            String?
+  attorneyPaid                          Boolean?
+  attorneySentDate                      DateTime?
+  writeOff                              Boolean?
+  noMRI                                 Boolean?
+  noPT                                  Boolean?
+  noFirstAppointment                    Boolean?
+  hot                                   Boolean?
+  documentsUploaded                     Boolean?
+  attorneyReview                        Boolean?
+  escalatedReview                       Boolean?
+  inActive                              Boolean?
+  criteria1712                          Boolean?
+  documentUploadedDate                  DateTime?
+  patientDischargedGatheringRecordsDate DateTime?
+  resubmitted                           DateTime?
+  caseProgressStatusId                  String?
+  firmCaseManager                       String?
+  adverseInsuranceStatusId              String?
+  createdBy                             String?
+  renegotiatePayOffDate                 DateTime?
+  groupChatRoomId                             String? //to store group chat Id
+
+	medicalRecordNumber String?
+	pharmacyControlNumber String?
+	pchGroupNumber String?
+
+  caseAccounts         CaseAccount[]     @relation(name: "LegalCase_caseAccounts")
+  casePreAccidents CasePreAccident[] @relation(name: "LegalCase_casePreAccidents")
+  casePreInjuries  CasePreInjury[]   @relation(name: "LegalCase_casePreInjuries")
+  casePreProblems  CasePreProblem[]  @relation(name: "LegalCase_casePreProblems")
+  insurances       Insurance[]       @relation(name: "LegalCase_insurances")
+
+  healthInsurances  HealthInsurance[]  @relation("HealthInsurance_legalCase")
+  casePreProcedures CasePreProcedure[] @relation(name: "LegalCase_casePreProcedures")
+  caseProcedures    CaseProcedure[]    @relation(name: "LegalCase_caseProcedures")
+  priorMedsToDates  PriorMedsToDate[]  @relation(name: "LegalCase_priorMedsToDates")
+  appointments      Appointment[]      @relation("Appointment_legalCase")
+  balanceRequests   BalanceRequest[]  @relation("BalanceRequest_legalCase")
+  referralRequests  ReferralRequest[]  @relation("ReferralRequest_legalCase")
+  requestAdditionalVisits RequestAdditionalVisit[]  @relation("RequestAdditionalVisit_legalCase")
+  procedureRequests ProcedureOrTreatmentRequest[] @relation("ProcedureOrTreatmentRequest_legalCase")
+  recommendedOrders RecommendedOrder[] @relation("RecommendedOrder_legalCase")
+  taskItems   TaskItem[]  @relation("LegalCase_TaskItems")
+  invoices    Invoice[]   @relation(name: "LegalCase_invoices")
+  propertyDamages    Document[]   @relation(name: "Document_propertyDamages")
+  miscellaneousDocuments    Document[]   @relation(name: "Document_miscellaneousDocuments")
+
+
+  leads    Lead[]   @relation(name: "LegalCase_leads")
+
+
+  underwriting_dateCreated                                                     DateTime?
+  underwriting_lastUpdateDate                                                  DateTime?
+  underwriting_timeSensitive                                                   Boolean?
+  underwriting_needsMoreInfo                                                   Int?
+  underwriting_billsAttached                                                   Boolean?
+  underwriting_completedMedRecs                                                Boolean?
+  underwriting_balance                                                         Float?
+  underwriting_signedLien                                                      Boolean?
+  underwriting_procedureRequested                                              String?
+  underwriting_medBills                                                        String?
+  underwriting_estimate                                                        Boolean?
+  underwriting_plaintiff                                                       String?
+  underwriting_covered                                                         String?
+  underwriting_remarks                                                         String?
+  accidentInformation_accidentTypeId                                           String?
+  accidentInformation_accidentDescription                                      String?
+  accidentInformation_dateOfLoss                                               DateTime?
+  accidentInformation_review                                                   String?
+  accidentInformation_initialEvaluation                                        String?
+  accidentInformation_evaluation                                               String?
+  accidentInformation_evaluationAfterHowLong                                   String?
+  accidentInformation_evaluatedIn                                              String?
+  accidentInformation_complaints                                               String?
+  accidentInformation_previousHistory                                          Boolean?
+  accidentInformation_gapInCare                                                Boolean?
+  accidentInformation_gapInCareWhen                                            String?
+  accidentInformation_preExistingProblems                                      String?
+  accidentInformation_priorInjuries                                            String?
+  accidentInformation_otherInjuriesSince                                       String?
+  motorVehicleAccident_mvaDriver                                               Boolean?
+  motorVehicleAccident_mvaPassenger                                            Boolean?
+  motorVehicleAccident_mvaVehicle                                              String?
+  motorVehicleAccident_mvaClaimants                                            String?
+  motorVehicleAccident_mvaOperable                                             String?
+  motorVehicleAccident_mvaTar                                                  String?
+  motorVehicleAccident_mvaDamage                                               String?
+  motorVehicleAccident_mvaLess                                                 String?
+  motorVehicleAccident_mvaGreater                                              String?
+  motorVehicleAccident_mvaAmount                                               String?
+  premiseAccident_clientHasObtainedPlaintiffAdvance                            Boolean?
+  premiseAccident_advanceAmount                                                Float?
+  premiseAccident_lossOfEarningsIsBeingFiled                                   Boolean?
+  premiseAccident_doYouAnticipateAdditionalMedicalTreatmentOnDifferentBodyPart Boolean?
+  premiseAccident_explain                                                      String?
+  premiseAccident_clientHasCriminalHistory                                     Boolean?
+  premiseAccident_criminalHistory                                              String?
+  premiseAccident_locationOfIncident                                           String?
+  productLiability_product                                                     String?
+  productLiability_whereDidItHappen                                            String?
+  productLiability_proofOfLiability                                            String?
+  productLiability_productWasRecalled                                          Boolean?
+  workRelated_selfInsuredWorkComp                                              Boolean?
+  workRelated_workCompCaseIsOpenClosed                                         String?
+  workRelated_workCompCaseSettledAmount                                        Float?
+  workRelated_workCompCaseSettlementIncludesFutureMedicals                     Boolean?
+  workRelated_reasonNotFiledUnderWorkComp                                      String?
+
+  accidentType           AccidentType?           @relation("AccidentType_legalCases", fields: [accidentTypeId], references: [id])
+  patient                Patient?                @relation(name: "Patient_legalCases", fields: [patientId], references: [id])
+  medLevel               MedLevel?               @relation(name: "MedLevel_legalCases", fields: [medLevelId], references: [id])
+  firm                   Firm?                   @relation(name: "Firm_legalCases", fields: [firmId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  attorney               Attorney?               @relation(name: "Attorney_legalCases", fields: [attorneyId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  agent                  User?                   @relation(name: "User_agentForTheseLegalCases", fields: [agentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  caseStatus             CaseStatus?             @relation(name: "CaseStatus_legalCases", fields: [caseStatusId], references: [id])
+  caseType               CaseType?               @relation(name: "CaseType_legalCases", fields: [caseTypeId], references: [id])
+  patientTreatmentStatus PatientTreatmentStatus? @relation(name: "PatientTreatmentStatus_legalCases", fields: [patientTreatmentStatusId], references: [id])
+  caseProgressStatus     CaseProgressStatus?     @relation(name: "CaseProgressStatus_legalCases", fields: [caseProgressStatusId], references: [id])
+  adverseInsuranceStatus AdverseInsuranceStatus? @relation(name: "AdverseInsuranceStatus_legalCases", fields: [adverseInsuranceStatusId], references: [id])
+}
+
+model PriorMedsToDate {
+  id                      String    @id @default(cuid())
+  createdAt               DateTime? @default(now())
+  updatedAt               DateTime? @default(now()) @updatedAt
+  name                    String?
+  legalCaseId             String?
+  priorMedsToDateStatusId String?
+  specialtyId             String?
+  visitKindId             String?
+
+  quantity                Int?
+  amount                  Float?
+
+  legalCase             LegalCase?             @relation(name: "LegalCase_priorMedsToDates", fields: [legalCaseId], references: [id])
+  specialty             Specialty?             @relation(name: "Specialty_priorMedsToDates", fields: [specialtyId], references: [id])
+  visitKind             VisitKind?             @relation(name: "VisitKind_priorMedsToDates", fields: [visitKindId], references: [id])
+
+  priorMedsToDateStatus PriorMedsToDateStatus? @relation(name: "PriorMedsToDate_priorMedsToDateStatus", fields: [priorMedsToDateStatusId], references: [id])
+
+}
+
+model PriorMedsToDateStatus {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorMedsToDates PriorMedsToDate[] @relation("PriorMedsToDate_priorMedsToDateStatus")
+}
+
+model MedLevel {
+  id                        String          @id @default(cuid())
+  createdAt                 DateTime?       @default(now())
+  updatedAt                 DateTime?       @default(now()) @updatedAt
+  name                      String?
+  approvedSiteCosts         Float?
+  maximumMedicalBillsToDate Float?
+  legalCases                LegalCase[]     @relation(name: "MedLevel_legalCases")
+  requiredFields            RequiredField[] @relation(name: "MedLevel_requiredFields")
+}
+
+model RequiredField {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  entityName     String?
+  accidentTypeId String?
+  medLevelId     String?
+
+  accidentType AccidentType? @relation(name: "RequiredField_accidentType", fields: [accidentTypeId], references: [id])
+  medLevel     MedLevel?     @relation(name: "MedLevel_requiredFields", fields: [medLevelId], references: [id])
+}
+
+model Organization {
+  id                   String                @id @default(cuid())
+  createdAt            DateTime?             @default(now())
+  updatedAt            DateTime?             @default(now()) @updatedAt
+  name                 String?
+
+  feeSchedules         FeeSchedule[]         @relation(name: "Organization_feeSchedules")
+  facilityFeeSchedules FacilityFeeSchedule[] @relation(name: "Organization_facilityFeeSchedules")
+  contracts            Contract[]            @relation(name: "Organization_contracts")
+  liensHeld            Contract[]            @relation(name: "Organization_liensHeld")
+  invoices             Invoice[]             @relation(name: "Organization_invoices")
+}
+
+model Patient {
+  id                            String         @id @default(cuid())
+  createdAt                     DateTime?      @default(now())
+  updatedAt                     DateTime?      @default(now()) @updatedAt
+  name                          String?
+  firstName                     String?
+  middleName                    String?
+  lastName                      String?
+  suffix                        String?
+  genderId                      String?
+  nickname                      String?
+  height                        String?
+  weight                        String?
+  dateOfBirth                   DateTime?
+  primaryPhoneNumber            String?
+  isPrimaryPhoneMobile          Boolean?
+  secondaryPhoneNumber          String?
+  isSecondaryPhoneMobile        Boolean?
+  memberRegistrationNumber      String?
+  ethnicityId                   String?
+  languageId                    String?
+  requiresTranslator            Boolean?
+  socialSecurityNumber          String?
+  honorific                     String?
+  primaryEmailAddress           String?
+  primaryAddressLine1           String?
+  primaryAddressLine2           String?
+  primaryAddressCity            String?
+  primaryAddressStateOrProvince String?
+  primaryAddressPostalCode      String?
+
+  workEmailAddress           String?
+  workAddress     String?     @db.Text
+  homeAddress     String?     @db.Text
+
+  workAddressLine1           String?
+  workAddressLine2           String?
+  workAddressCity            String?
+  workAddressStateOrProvince String?
+  workAddressPostalCode      String?
+
+  notes                         String?
+  latitude                      Float?
+  longitude                     Float?
+
+  workLatitude                      Float?
+  workLongitude                     Float?
+
+  emergencyContactId            String?
+  homePhoneNumber               String?
+  mobileNumber                  String?
+  bmi                           String?
+  occupation                    String?
+  debtorRemarks                 String?
+  subpoenaId                   String?
+
+  users   User[]   @relation(name: "User_patient")
+
+  prescriptions                 Prescription[] @relation(name: "Patient_prescriptions")
+  documents                     Document[]     @relation(name: "Patient_documents")
+  patientStudies                PatientStudy[] @relation(name: "Patient_patientStudies")
+  claims                        Claim[]        @relation(name: "Patient_claims")
+  legalCases                    LegalCase[]    @relation(name: "Patient_legalCases")
+
+  medicalRecords		MedicalRecord[]     @relation("MedicalRecord_patient")
+  appointments Appointment[] @relation("Appointment_patient")
+
+  gender   Gender?   @relation(name: "Gender_patients", fields: [genderId], references: [id])
+  language Language? @relation(name: "Language_patients", fields: [languageId], references: [id])
+  ethnicity Ethnicity? @relation(name: "Ethnicity_patients", fields: [ethnicityId], references: [id])
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_patient")
+  procedureRequests ProcedureOrTreatmentRequest[] @relation("ProcedureOrTreatmentRequest_patient")
+  recommendedOrders RecommendedOrder[] @relation("RecommendedOrder_patient")
+  reviews		Review[]     @relation("Review_Patient")
+  referralRequests ReferralRequest[] @relation("ReferralRequest_patient")
+  requestAdditionalVisit RequestAdditionalVisit[] @relation("RequestAdditionalVisit_patient")
+	subpoena		Document?     @relation(name: "Patient_subpoenas", fields: [subpoenaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+}
+
+
+model Ethnicity {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?    @unique
+
+  patients Patient[] @relation("Ethnicity_patients")
+}
+model PatientStudy {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  patientId String?
+  documents Document[] @relation(name: "PatientStudy_documents")
+
+  patient Patient? @relation(name: "Patient_patientStudies", fields: [patientId], references: [id])
+}
+
+model PatientTreatmentStatus {
+  id         String      @id @default(cuid())
+  createdAt  DateTime?   @default(now())
+  updatedAt  DateTime?   @default(now()) @updatedAt
+  name       String?
+  legalCases LegalCase[] @relation(name: "PatientTreatmentStatus_legalCases")
+}
+
+model Portfolio {
+  id        String        @id @default(cuid())
+  createdAt DateTime?     @default(now())
+  updatedAt DateTime?     @default(now()) @updatedAt
+  name      String?
+  caseAccounts  CaseAccount[] @relation(name: "Portfolio_caseAccounts")
+}
+
+model Prescription {
+  id              String    @id @default(cuid())
+  createdAt       DateTime? @default(now())
+  updatedAt       DateTime? @default(now()) @updatedAt
+  name            String?
+  medicalProvider String?
+  dateWritten     DateTime?
+  days            String?
+  note            String?
+  category        String?
+  kind            String?
+  quantity        Float?
+  refills         String?
+  rxNumber        String?
+  sig             String?
+  strength        String?
+  unit            String?
+  patientId       String?
+  documentId      String?
+
+  patient  Patient?  @relation(name: "Patient_prescriptions", fields: [patientId], references: [id])
+  document Document? @relation(name: "Prescription_documents", fields: [documentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model ProcedureType {
+  id          String        @id @default(cuid())
+  createdAt   DateTime?     @default(now())
+  updatedAt   DateTime?     @default(now()) @updatedAt
+  name        String?
+  orderIndex  String?
+  dateCreated DateTime?
+  isSystem    Boolean?
+  removed     Boolean?
+  modality    String?
+
+  caseAccounts    CaseAccount[] @relation(name: "ProcedureType_caseAccounts")
+  caseProcedures    CaseProcedure[] @relation(name: "ProcedureType_caseProcedures")
+  procedureRequests    ProcedureOrTreatmentRequest[] @relation(name: "ProcedureOrTreatmentRequest_procedureType")
+}
+
+model ProcedureVendor {
+  id              String        @id @default(cuid())
+  createdAt       DateTime?     @default(now())
+  updatedAt       DateTime?     @default(now()) @updatedAt
+  name            String?
+  procedureId     String?
+  contractId      String?
+  vendorId        String?
+  statusId String?
+
+  estimate        Float?
+  fundingApproved Boolean?
+  caseAccounts    CaseAccount[] @relation(name: "ProcedureVendor_caseAccounts")
+  documents       Document[] @relation(name: "ProcedureVendor_documents")
+
+  procedure CaseProcedure? @relation(name: "CaseProcedure_procedureVendors", fields: [procedureId], references: [id])
+  contract  Contract?      @relation(name: "ProcedureVendor_contract", fields: [contractId], references: [id])
+  vendor    Vendor?        @relation(name: "Vendor_procedureVendors", fields: [vendorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  status ProcedureVendorStatus? @relation(name: "ProcedureVendorStatus_procedureVendors", fields: [statusId], references: [id])
+}
+
+
+model Process {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  contracts Contract[] @relation(name: "Process_contracts")
+}
+
+model ReconciliationPeriodType {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  contracts Contract[] @relation(name: "ReconciliationPeriodType_contracts")
+}
+
+model Step {
+    id          String        @id @default(cuid())
+    order       Int
+    title       String?
+    subtitle    String?
+    content     String?     @db.Text
+    courseId    String?
+    course      Course?      @relation(name: "Course_Steps", fields: [courseId], references: [id])
+}
+model Specialty {
+  id                   String                @id @default(cuid())
+  createdAt            DateTime?             @default(now())
+  updatedAt            DateTime?             @default(now()) @updatedAt
+  name                 String?
+  active               Boolean?
+  iconId               String?
+
+  feeSchedules         FeeSchedule[]         @relation(name: "Specialty_feeSchedules")
+	favoriteProviders		FavoriteProvider[]     @relation("FavoriteProvider_specialty")
+	priorMedsToDates		PriorMedsToDate[]     @relation("Specialty_priorMedsToDates")
+
+  icon                Document?   @relation(name: "SpecialtyIcon_Documents", fields: [iconId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  facilityFeeSchedules FacilityFeeSchedule[] @relation(name: "Specialty_facilityFeeSchedules")
+  clinicalProviderSpecialties ClinicalProviderSpecialty[] @relation("ClinicalProviderSpecialty_Specialty")
+  contractedRates     ContractedRate[]     @relation(name: "ContractedRate_specialty")
+  whereDoesItHurtSpecialty    WhereDoesItHurtSpecialty[]    @relation(name: "WhereDoesItHurtSpecialty_specialty")
+}
+
+model UserCourseProgress {
+  id             String     @id @default(cuid())
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @default(now())
+  name           String?
+  userId         String
+  courseId       String
+  currentStep    Int?       @default(1)
+  completed      Int?       @default(0)
+  user           User       @relation(name: "User_courseProgresses", fields: [userId], references: [id])
+  course         Course     @relation(name: "courseProgresses", fields: [courseId], references: [id])
+}
+
+model Translation {
+  id String @id @default(cuid()) //key
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name String? //in English
+  languageCode String? //en, fr, etc.
+  translation String? //Result
+}
+
+model Vendor {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	taxId String?
+	line1 String?
+	city String?
+	state String?
+	postalCode String?
+	emailAddress String?
+	phoneNumber String?
+	fax String?
+	mailingAddress String?
+	vendorTypeId String?
+	line2 String?
+	country String?
+	office String?
+	email String?
+	website String?
+	contactPerson String?
+	owner String?
+	bankRoutingNumber String?
+	bankAccountNumber String?
+	bankName String?
+	bankCity String?
+	bankState String?
+	bankZip String?
+	notes String?
+	agreementDetails String?
+	providerSearchNameDisplayType String?
+	driversLicenseId String?
+	logoId String?
+	cellphone String?
+	achCheckOrWire String?
+	reductionNotes String?
+	latitude Float?
+	longitude Float?
+	businessCentralName String?
+
+
+	vendorType		VendorType?     @relation(name: "VendorType_vendors", fields: [vendorTypeId], references: [id])
+	assignedDocuments		AssignedDocument[]     @relation("Vendor_assignedDocuments")
+	caseAccounts		CaseAccount[]     @relation("Vendor_caseAccounts")
+	clinicalProviders		ClinicalProvider[]     @relation("ClinicalProvider_vendor")
+	contracts		Contract[]     @relation("Vendor_contracts")
+	durableMedicalEquipments		DurableMedicalEquipment[]     @relation("DurableMedicalEquipment_vendor")
+	procedureVendors		ProcedureVendor[]     @relation("Vendor_procedureVendors")
+	vendorLocations		VendorLocation[]     @relation("VendorLocation_vendor")
+  user   User[]   @relation(name: "Vendor_users")
+
+authorizations  Authorization[]  @relation(name: "Vendor_authorizations")
+}
+
+model VendorType {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  vendors   Vendor[]  @relation(name: "VendorType_vendors")
+}
+
+model WriteOff {
+  id               String    @id @default(cuid())
+  createdAt        DateTime? @default(now())
+  updatedAt        DateTime? @default(now()) @updatedAt
+  name             String?
+  accountId        String?
+  writeOffStatusId String?
+  amount           Float?
+  createdBy        String?
+  dateCreated      DateTime?
+
+  account        CaseAccount?    @relation(name: "CaseAccount_writeOffs", fields: [accountId], references: [id])
+  writeOffStatus WriteOffStatus? @relation(name: "WriteOffStatus_writeOffs", fields: [writeOffStatusId], references: [id])
+}
+
+model WriteOffStatus {
+  id        String     @id @default(cuid())
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @default(now()) @updatedAt
+  name      String?
+  writeOffs WriteOff[] @relation(name: "WriteOffStatus_writeOffs")
+}
+
+model AuthorizationKind {
+  id         String    @id @default(cuid())
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @default(now()) @updatedAt
+  name       String?
+  categoryId String?
+
+  category                   Category?                   @relation(name: "AuthorizationKind_category", fields: [categoryId], references: [id])
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_authorizationKind")
+}
+
+model AuthorizationStatus {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_authorizationStatus")
+}
+
+model Bank {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  payments Payment[] @relation("Payment_bank")
+}
+
+model BatchControl {
+  id             String    @id @default(cuid())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @default(now()) @updatedAt
+  name           String?
+  trackingNumber String?
+  batchTotal     Float?
+  defaultGLCode  String?
+  posted         Boolean?
+
+  payments Payment[] @relation("Payment_batchControl")
+}
+
+model CaseAccountPayment {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  amountApplied Float?
+  paymentId     String?
+  caseAccountId String?
+
+  payment     Payment?     @relation(name: "CaseAccountPayment_payment", fields: [paymentId], references: [id])
+  caseAccount CaseAccount? @relation(name: "CaseAccountPayment_caseAccount", fields: [caseAccountId], references: [id])
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  authorizationKinds AuthorizationKind[] @relation("AuthorizationKind_category")
+}
+
+model CostCategory {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthorizationProcedureCodes PriorAuthorizationProcedureCode[] @relation("PriorAuthorizationProcedureCode_costCategory")
+}
+
+model DiagnosisCode {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	authorizationDiagnosisCodes		AuthorizationDiagnosisCode[]     @relation("AuthorizationDiagnosisCode_diagnosis")
+	priorAuthorizationDiagnosisCodes		PriorAuthorizationDiagnosisCode[]     @relation("PriorAuthorizationDiagnosisCode_diagnosis")
+	procedureOrTreatmentRequestDiagnosisCodes		ProcedureOrTreatmentRequestDiagnosisCode[]     @relation("ProcedureOrTreatmentRequestDiagnosisCode_diagnosis")
+	recommendedOrderDiagnosisCodes		RecommendedOrderDiagnosisCode[]     @relation("RecommendedOrderDiagnosisCode_diagnosis")
+
+
+}
+
+model DurableMedicalEquipment {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  itemCode      String?
+  size          String?
+  brand         String?
+  itemURL       String?
+  estimatedCost Float?
+  vendorId      String?
+
+  vendor        Vendor?        @relation(name: "DurableMedicalEquipment_vendor", fields: [vendorId], references: [id])
+  priorAuthDmes PriorAuthDme[] @relation("PriorAuthDme_durableMedicalEquipment")
+}
+
+model Equipment {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthorizationEquipments PriorAuthorizationEquipment[] @relation("PriorAuthorizationEquipment_equipment")
+}
+
+model Guideline {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthGuidelines PriorAuthGuideline[] @relation("PriorAuthGuideline_guideline")
+}
+
+model GuidelineUsed {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_guidelineUsed")
+}
+
+model Implant {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  estimatedCost Float?
+  categoryId    String?
+  photoUrl      String?
+  sku           String?
+
+  salesRepresentativeId String?
+  implantCategoryId     String?
+  manufacturerId        String?
+
+  implantCategory            ImplantCategory?            @relation(name: "Implant_implantCategory", fields: [implantCategoryId], references: [id])
+  salesRepresentative        Contact?                    @relation(name: "Implant_salesRepresentative", fields: [salesRepresentativeId], references: [id])
+  manufacturer               Manufacturer?               @relation(name: "Implant_manufacturer", fields: [manufacturerId], references: [id])
+  priorAuthorizationImplants PriorAuthorizationImplant[] @relation("PriorAuthorizationImplant_implant")
+}
+
+model ImplantCategory {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  implants Implant[] @relation(name: "Implant_implantCategory")
+}
+
+model JournalEntry {
+  id                      String    @id @default(cuid())
+  createdAt               DateTime? @default(now())
+  updatedAt               DateTime? @default(now()) @updatedAt
+  name                    String?
+  locationName            String?
+  fromTo                  String?
+  frequency               String?
+  autoOrManual            String?
+  process                 String?
+  perAccountOrAggregateJE String?
+  costRate                Float?
+  accountType             String?
+  accountNumber           String?
+  costCenter              String?
+  appliesToDocumentNumber String?
+  caseAccountId           String?
+  postingDate               DateTime?
+  documentDate              DateTime?
+  dueDate                   DateTime?
+  amount                    Float?
+
+  caseAccount CaseAccount? @relation(name: "JournalEntry_caseAccount", fields: [caseAccountId], references: [id])
+}
+
+model Manufacturer {
+  id                            String    @id @default(cuid())
+  createdAt                     DateTime? @default(now())
+  updatedAt                     DateTime? @default(now()) @updatedAt
+  name                          String?
+  primaryPhoneNumber            String?
+  primaryEmailAddress           String?
+  primaryAddressLine1           String?
+  primaryAddressLine2           String?
+  primaryAddressCity            String?
+  primaryAddressStateOrProvince String?
+  primaryAddressPostalCode      String?
+  notes                         String?
+
+  implants Implant[] @relation("Implant_manufacturer")
+}
+
+model Payment {
+  id                  String    @id @default(cuid())
+  createdAt           DateTime? @default(now())
+  updatedAt           DateTime? @default(now()) @updatedAt
+  paidOn              DateTime?
+  name                String?
+  amount              Float?
+  collected           Float?
+  dac                 Float?
+  isPartial           Boolean?
+  dateReceived        DateTime?
+  memo                String?
+  createdBy           String?
+  dateCreated         DateTime?
+  securitizationGroup String?
+
+  batchControlId             String?
+  bankId                     String?
+  payorTypeId                String?
+  paymentTypeId              String?
+  paymentApplicationMethodId String?
+
+  batchControl             BatchControl?             @relation(name: "Payment_batchControl", fields: [batchControlId], references: [id])
+  bank                     Bank?                     @relation(name: "Payment_bank", fields: [bankId], references: [id])
+  payorType                PayorType?                @relation(name: "Payment_payorType", fields: [payorTypeId], references: [id])
+  paymentType              PaymentType?              @relation(name: "Payment_paymentType", fields: [paymentTypeId], references: [id])
+  paymentApplicationMethod PaymentApplicationMethod? @relation(name: "Payment_paymentApplicationMethod", fields: [paymentApplicationMethodId], references: [id])
+  caseAccountPayments      CaseAccountPayment[]      @relation("CaseAccountPayment_payment")
+}
+
+model PaymentApplicationMethod {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  payments Payment[] @relation("Payment_paymentApplicationMethod")
+}
+
+model PaymentType {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  payments Payment[] @relation("Payment_paymentType")
+}
+
+model PayorType {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  payments Payment[] @relation("Payment_payorType")
+}
+
+model PriorAuthDme {
+  id                        String    @id @default(cuid())
+  createdAt                 DateTime? @default(now())
+  updatedAt                 DateTime? @default(now()) @updatedAt
+  name                      String?
+  estimatedCost             Float?
+  durableMedicalEquipmentId String?
+
+  priorAuthId               String?
+  priorAuthorizationRequest PriorAuthorizationRequest? @relation(name: "PriorAuthDme_priorAuthorizationRequest", fields: [priorAuthId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  durableMedicalEquipment   DurableMedicalEquipment?   @relation(name: "PriorAuthDme_durableMedicalEquipment", fields: [durableMedicalEquipmentId], references: [id])
+}
+
+model PriorAuthGuideline {
+  id                          String    @id @default(cuid())
+  createdAt                   DateTime? @default(now())
+  updatedAt                   DateTime? @default(now()) @updatedAt
+  name                        String?
+  guidelineId                 String?
+  priorAuthorizationRequestId String?
+
+  guideline                 Guideline?                 @relation(name: "PriorAuthGuideline_guideline", fields: [guidelineId], references: [id])
+  priorAuthorizationRequest PriorAuthorizationRequest? @relation(name: "PriorAuthGuideline_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id])
+}
+
+model PriorAuthorizationDiagnosisCode {
+  id                          String                     @id @default(cuid())
+  createdAt                   DateTime?                  @default(now())
+  updatedAt                   DateTime?                  @default(now()) @updatedAt
+  name                        String?
+  diagnosisCodeId             String?
+  priorAuthorizationRequestId String?
+  diagnosis                   DiagnosisCode?             @relation(name: "PriorAuthorizationDiagnosisCode_diagnosis", fields: [diagnosisCodeId], references: [id])
+  priorAuthorizationRequest   PriorAuthorizationRequest? @relation(name: "PriorAuthorizationDiagnosisCode_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id])
+}
+
+model PriorAuthorizationEquipment {
+  id                          String                     @id @default(cuid())
+  createdAt                   DateTime?                  @default(now())
+  updatedAt                   DateTime?                  @default(now()) @updatedAt
+  name                        String?
+  estimatedCost               Float?
+  equipmentId                 String?
+  priorAuthorizationRequestId String?
+  equipment                   Equipment?                 @relation(name: "PriorAuthorizationEquipment_equipment", fields: [equipmentId], references: [id])
+  priorAuthorizationRequest   PriorAuthorizationRequest? @relation(name: "PriorAuthorizationEquipment_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id])
+}
+
+model PriorAuthorizationImplant {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  estimatedCost Float?
+
+  priorAuthorizationRequestId String?
+  implantId                   String?
+
+  implant                   Implant?                   @relation(name: "PriorAuthorizationImplant_implant", fields: [implantId], references: [id])
+  priorAuthorizationRequest PriorAuthorizationRequest? @relation(name: "PriorAuthorizationImplant_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id])
+}
+
+model PriorAuthorizationProcedureCode {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  estimatedCost Float?
+
+  procedureId                 String?
+  costCategoryId              String?
+  priorAuthorizationRequestId String?
+  costCategory                CostCategory?              @relation(name: "PriorAuthorizationProcedureCode_costCategory", fields: [costCategoryId], references: [id])
+  procedure                   Procedure?                 @relation(name: "PriorAuthorizationProcedureCode_procedure", fields: [procedureId], references: [id])
+  priorAuthorizationRequest   PriorAuthorizationRequest? @relation(name: "PriorAuthorizationProcedureCode_priorAuthorizationRequest", fields: [priorAuthorizationRequestId], references: [id])
+}
+
+model PriorAuthorizationRequest {
+  id                       String    @id @default(cuid())
+  createdAt                DateTime? @default(now())
+  updatedAt                DateTime? @default(now()) @updatedAt
+  name                     String?
+  referredOn               DateTime?
+  approvedOn               DateTime?
+  effectiveAsOf            DateTime?
+  expiresOn                DateTime?
+  duration                 Float?
+  procedureDescription     String?
+  remarks                  String?
+  underwritingApproved     Boolean?
+  tpaApproved              Boolean?
+  requiresMedicalDirector  Boolean?
+  reviewedOn               DateTime?
+  priorAuthorizationNumber String?
+  caseManager              String?
+  memberNumber             String?
+  medicalDirector          String?
+  tpaApprover              String?
+  underwriter              String?
+  guidelineRequires        String?
+
+  patientId             String?
+  procedureSiteId       String?
+  surgicalPositionId    String?
+
+  treatingProviderId     String?
+  referredToId          String?
+
+  prescriptionId        String?
+  visitKindId           String?
+  guidelineUsedId       String?
+  authorizationKindId   String?
+  authorizationStatusId String?
+  billId                String?
+  medicalReportId       String?
+
+  procedureSite       ProcedureSite?       @relation(name: "PriorAuthorizationRequest_procedureSite", fields: [procedureSiteId], references: [id])
+  surgicalPosition    SurgicalPosition?    @relation(name: "PriorAuthorizationRequest_surgicalPosition", fields: [surgicalPositionId], references: [id])
+  treatingProvider     ClinicalProvider?                @relation(name: "PriorAuthorizationRequest_treatingProvider", fields: [treatingProviderId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  referredTo          ClinicalProvider?                @relation(name: "PriorAuthorizationRequest_referredToProvider", fields: [referredToId], references: [id])
+  prescription        Document?            @relation(name: "PriorAuthorizationRequest_prescription", fields: [prescriptionId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  visitKind           VisitKind?           @relation(name: "PriorAuthorizationRequest_visitKind", fields: [visitKindId], references: [id])
+  guidelineUsed       GuidelineUsed?       @relation(name: "PriorAuthorizationRequest_guidelineUsed", fields: [guidelineUsedId], references: [id])
+  authorizationKind   AuthorizationKind?   @relation(name: "PriorAuthorizationRequest_authorizationKind", fields: [authorizationKindId], references: [id])
+  authorizationStatus AuthorizationStatus? @relation(name: "PriorAuthorizationRequest_authorizationStatus", fields: [authorizationStatusId], references: [id])
+
+  patient             Patient?             @relation(name: "PriorAuthorizationRequest_patient", fields: [patientId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+
+  caseProcedureId                  String?
+  caseProcedure                   CaseProcedure?                   @relation("CaseProcedure_priorAuthorizationRequests", fields: [caseProcedureId], references: [id])
+  claims                           Claim[]                           @relation("Claim_priorAuthorizationRequest")
+  priorAuthDmes                    PriorAuthDme[]                    @relation("PriorAuthDme_priorAuthorizationRequest")
+  priorAuthGuidelines  PriorAuthGuideline[]              @relation("PriorAuthGuideline_priorAuthorizationRequest")
+  priorAuthorizationDiagnosisCodes PriorAuthorizationDiagnosisCode[] @relation("PriorAuthorizationDiagnosisCode_priorAuthorizationRequest")
+  priorAuthorizationEquipments     PriorAuthorizationEquipment[]     @relation("PriorAuthorizationEquipment_priorAuthorizationRequest")
+  priorAuthorizationImplants       PriorAuthorizationImplant[]       @relation("PriorAuthorizationImplant_priorAuthorizationRequest")
+  priorAuthorizationProcedureCodes PriorAuthorizationProcedureCode[] @relation("PriorAuthorizationProcedureCode_priorAuthorizationRequest")
+}
+
+model Procedure {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  code      String?
+
+  authorizations  Authorization[]  @relation(name: "Procedure_authorizations")
+  claimProcedures ClaimProcedure[] @relation("ClaimProcedure_procedure")
+
+  priorAuthorizationProcedureCodes PriorAuthorizationProcedureCode[] @relation("PriorAuthorizationProcedureCode_procedure")
+}
+
+model ProcedureSite {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  code      String?
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_procedureSite")
+}
+
+model ProcedureStatus {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  caseProcedures CaseProcedure[] @relation("ProcedureStatus_caseProcedures")
+}
+
+model SurgicalPosition {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_surgicalPosition")
+}
+
+model VisitKind {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  code      String?
+
+  priorAuthorizationRequests PriorAuthorizationRequest[] @relation("PriorAuthorizationRequest_visitKind")
+  contractedRates            ContractedRate[]            @relation(name: "VisitKind_contractedRates")
+	priorMedsToDates		PriorMedsToDate[]     @relation("VisitKind_priorMedsToDates")
+	appointments		Appointment[]     @relation("Appointment_VisitKind")
+
+
+}
+
+model Tenant {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String?
+  country   String?
+  phone     String?
+  logo_url  String?
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+}
+
+model Plan {
+  id        String    @id @default(cuid())
+  name      String
+  detail    String
+  price     Float
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+}
+
+model ContactEmail {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  email     String?
+  name      String?
+  contactId String?
+
+  contact Contact? @relation(name: "ContactEmail_contact", fields: [contactId], references: [id])
+}
+
+model ContactPhoneNumber {
+  id          String    @id @default(cuid())
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now()) @updatedAt
+  name        String?
+  countryId   String?
+  phoneNumber String?
+  label       String?
+  contactId   String?
+
+  contact Contact? @relation(name: "ContactPhoneNumber_contact", fields: [contactId], references: [id])
+  country Country? @relation(name: "ContactPhoneNumber_country", fields: [countryId], references: [id])
+
+}
+
+model ContactSetting {
+  id            String    @id @default(cuid())
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt
+  name          String?
+  value         String?
+  iconUrl       String?
+  properties    String?
+  contactId     String?
+  integrationId String?
+
+  contact     Contact?     @relation(name: "ContactSetting_contact", fields: [contactId], references: [id])
+  integration Integration? @relation(name: "ContactSetting_integration", fields: [integrationId], references: [id])
+}
+
+model ContactTag {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+  contactId String?
+
+  contact Contact? @relation(name: "ContactTag_contact", fields: [contactId], references: [id])
+}
+
+model Integration {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  contactSettings ContactSetting[] @relation("ContactSetting_integration")
+}
+
+model ChatUsers {
+  id           String    @id @default(cuid())
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime? @default(now()) @updatedAt
+  matrixUserId String
+  userId       String
+  name         String?
+  user         User      @relation("chatUsers_User", fields: [userId], references: [id])
+}
+
+model ChatUserMapping {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  from      String
+  to        String
+  roomId    String
+}
+
+
+model ClinicalProviderLocationAvailability {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	day String?
+	startTime String?
+	endTime String?
+	clinicalProviderLocationId String?
+
+
+	clinicalProviderLocation		ClinicalProviderLocation?     @relation(name: "ClinicalProviderLocationAvailability_clinicalProviderLocation", fields: [clinicalProviderLocationId], references: [id])
+
+}
+
+
+model ClinicalProviderSpecialty {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+  npi String?
+  
+	clinicalProviderId String?
+	specialtyId String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "ClinicalProviderSpecialty_clinicalProvider", fields: [clinicalProviderId], references: [id])
+  specialty         Specialty?            @relation(name: "ClinicalProviderSpecialty_Specialty", fields: [specialtyId], references: [id])
+}
+
+model ClinicalProviderTag {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	tagId String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "ClinicalProviderTag_clinicalProvider", fields: [clinicalProviderId], references: [id])
+	tag		Tag?     @relation(name: "ClinicalProviderTag_tag", fields: [tagId], references: [id])
+
+
+}
+
+model FavoriteProvider {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	userId String?
+	specialtyId String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "FavoriteProvider_clinicalProvider", fields: [clinicalProviderId], references: [id])
+	specialty		Specialty?     @relation(name: "FavoriteProvider_specialty", fields: [specialtyId], references: [id])
+	user		User?     @relation(name: "FavoriteProvider_user", fields: [userId], references: [id],  onDelete: NoAction, onUpdate: NoAction)
+
+
+}
+
+model MedicalConditionProvider {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	medicalConditionId String?
+	clinicalProviderId String?
+  documentId      String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "MedicalConditionProvider_clinicalProvider", fields: [clinicalProviderId], references: [id])
+  medicalCondition  MedicalCondition? @relation(name: "MedicalConditionProvider_medicalCondition",  fields: [medicalConditionId], references: [id])
+	medicalRecords		Document[]     @relation("Document_medicalConditionProvider")
+
+
+}
+
+
+model MedicalCondition {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+  medicalConditionProviders  MedicalConditionProvider[] @relation(name: "MedicalConditionProvider_medicalCondition")
+}
+
+model MedicalRecord {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+  patientId String?
+  documentId String?
+
+  description String? @db.Text
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "MedicalRecord_clinicalProvider", fields: [clinicalProviderId], references: [id])
+	patient		Patient?     @relation(name: "MedicalRecord_patient", fields: [patientId], references: [id])
+  document Document? @relation(name: "MedicalRecord_documents", fields: [documentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+}
+
+model PchProvider {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "PchProvider_clinicalProvider", fields: [clinicalProviderId], references: [id])
+
+
+}
+
+
+
+
+model ClinicalProvider {
+
+	id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	vendorId String?
+	expertId String?
+	npi String?
+  stateLicenseNumber String?
+	caqhNumber String?
+	honorific String?
+	firstName String?
+	lastName String?
+	suffix String?
+	phoneNumber String?
+	emailAddress String?
+	profilePictureId String?
+	compressProfilePictureId String?
+  hourlyRate  Float? @default(0)
+  bio   String? @db.Text
+  profileImage Document? @relation(name: "ClinicalProviderProfile_ProfileImages", fields: [profilePictureId], references: [id])
+
+	vendor		Vendor?     @relation(name: "ClinicalProvider_vendor", fields: [vendorId], references: [id])
+	appointments		Appointment[]     @relation("ClinicalProvider_appointments")
+	clinicalProviderLocations		ClinicalProviderLocation[]     @relation("ClinicalProviderLocation_clinicalProvider")
+	clinicalProviderSpecialties		ClinicalProviderSpecialty[]     @relation("ClinicalProviderSpecialty_clinicalProvider")
+	clinicalProviderTags		ClinicalProviderTag[]     @relation("ClinicalProviderTag_clinicalProvider")
+	favoriteProviders		FavoriteProvider[]     @relation("FavoriteProvider_clinicalProvider")
+	medicalConditionProviders		MedicalConditionProvider[]     @relation("MedicalConditionProvider_clinicalProvider")
+	medicalRecords		MedicalRecord[]     @relation("MedicalRecord_clinicalProvider")
+	pchProviders		PchProvider[]     @relation("PchProvider_clinicalProvider")
+	invoices		Invoice[]     @relation("ClinicalProvider_invoices")
+
+	awards		Award[]     @relation("Award_clinicalProvider")
+	services		ClinicalProviderService[]     @relation("ClinicalProviderService_clinicalProvider")
+	educations		Education[]     @relation("Education_clinicalProvider")
+	experiences		Experience[]     @relation("Experience_clinicalProvider")
+	reviews		Review[]     @relation("Review_clinicalProvider")
+
+  procedureRequests ProcedureOrTreatmentRequest[] @relation(name: "ProcedureOrTreatmentRequest_requestingProvider")
+  recommededOrders RecommendedOrder[] @relation(name: "RecommendedOrder_clinicalProvider")
+
+  requestingProviders ReferralRequest[] @relation(name: "ReferralRequest_requestingProvider")
+  referredToProviders ReferralRequest[] @relation(name: "ReferralRequest_referredTo")
+
+  contractedRates ContractedRate[] @relation(name: "ContractedRate_clinicalProvider")
+  treatingProviderPriorAuthorizationRequests PriorAuthorizationRequest[] @relation(name: "PriorAuthorizationRequest_treatingProvider")
+  referedToPriorAuthorizationRequests PriorAuthorizationRequest[] @relation(name: "PriorAuthorizationRequest_referredToProvider")
+
+}
+
+model ClinicalProviderLocation {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	locationId String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "ClinicalProviderLocation_clinicalProvider", fields: [clinicalProviderId], references: [id])
+	location		Location?     @relation(name: "ClinicalProviderLocation_location", fields: [locationId], references: [id])
+	clinicalProviderLocationAvailabilities		ClinicalProviderLocationAvailability[]     @relation("ClinicalProviderLocationAvailability_clinicalProviderLocation")
+  referredToLocations ReferralRequest[] @relation(name: "ReferralRequest_referredToLocation")
+}
+
+
+model Location {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	locationName String?
+	line1 String?
+	line2 String?
+	city String?
+	state String?
+	postalCode String?
+	latitude Float?
+	longitude Float?
+	abbrev String?
+	division String?
+	country String?
+	officePhone String?
+	fax String?
+	attentionTo String?
+	placeOfServiceId String?
+	vendorLocationId String?
+
+	placeOfService		PlaceOfService?     @relation(name: "Location_placeOfService", fields: [placeOfServiceId], references: [id])
+	appointments		Appointment[]     @relation("Appointment_location")
+	caseAccounts		CaseAccount[]     @relation("Location_caseAccounts")
+	caseProcedures		CaseProcedure[]     @relation("Location_caseProcedures")
+	providerLocations		ClinicalProviderLocation[]     @relation("ClinicalProviderLocation_location")
+	vendorLocation		VendorLocation?    @relation(name: "VendorLocation_locations", fields: [vendorLocationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  locationImages    Document[] @relation(name: "Document_locationImages")
+
+}
+
+model PlaceOfService {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	isFacility Boolean?
+
+
+	claimProcedures		ClaimProcedure[]     @relation("PlaceOfService_claimProcedures")
+	locations		Location[]     @relation("Location_placeOfService")
+
+
+}
+
+
+
+
+model Award {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	school String?
+	awardedAt DateTime?
+	note String?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "Award_clinicalProvider", fields: [clinicalProviderId], references: [id])
+
+
+}
+
+
+model ClinicalProviderService {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	serviceId String?
+	clinicalProviderId String?
+
+
+	service		Service?     @relation(name: "ClinicalProviderService_service", fields: [serviceId], references: [id])
+	clinicalProvider		ClinicalProvider?     @relation(name: "ClinicalProviderService_clinicalProvider", fields: [clinicalProviderId], references: [id])
+
+
+}
+
+model Education {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	school String?
+	degree String?
+	from DateTime?
+	to DateTime?
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "Education_clinicalProvider", fields: [clinicalProviderId], references: [id])
+}
+
+model Experience {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	clinicalProviderId String?
+	workplace String?
+	from DateTime?
+	to DateTime?
+
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "Experience_clinicalProvider", fields: [clinicalProviderId], references: [id])
+
+
+}
+
+model Review {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	patientId String?
+	clinicalProviderId String?
+	comment String?
+	rating Float?   @default(0)
+	reivewDateAndTime DateTime?
+	parentId String?
+
+  parentReview Review? @relation(name: "ParentReview_ChildrenReviews", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  childrenReviews Review[] @relation("ParentReview_ChildrenReviews")
+
+	clinicalProvider		ClinicalProvider?     @relation(name: "Review_clinicalProvider", fields: [clinicalProviderId], references: [id])
+	patient		Patient?     @relation(name: "Review_Patient", fields: [patientId], references: [id])
+
+}
+
+model Service {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	clinicalProviderServices		ClinicalProviderService[]     @relation("ClinicalProviderService_service")
+
+
+}
+
+
+
+
+model VendorLocation {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	vendorId String?
+	vendor		Vendor?     @relation(name: "VendorLocation_vendor", fields: [vendorId], references: [id])
+  locations Location[]  @relation(name: "VendorLocation_locations")
+}
+
+model BalanceRequest {
+	id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+  name String? @unique
+	requestedOn DateTime?
+	repliedOn DateTime?
+	status String?
+	statementId String?
+	type String?
+	balanceAmount Float?
+  legalCaseId String?
+
+	statement		Document?     @relation(name: "BalanceRequest_statement", fields: [statementId], references: [id])
+  legalCase   LegalCase?   @relation(name: "BalanceRequest_legalCase", fields: [legalCaseId], references: [id])
+}
+
+
+model BodyPartLead {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	leadId String?
+	bodyPartId String?
+
+	lead		Lead?     @relation(name: "BodyPartLead_lead", fields: [leadId], references: [id])
+  bodyPart BodyPart? @relation(name: "BodyPart_bodyPartLeads", fields: [bodyPartId], references: [id])
+}
+
+
+
+model Lead {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	firstName String?
+  middleName String?
+	lastName String?
+	address String?
+	city String?
+	state String?
+	postalCode String?
+	dateOfBirth DateTime?
+	dateOfLoss DateTime?
+  dateOfRetention DateTime?
+	phoneNumber String?
+	emailAddress String?
+	priorRepresentation String?
+	accidentTypeId String?
+	driversLicenseId String?
+	driversLicenseNumber String?
+	driversLicenseState String?
+	severeInjury Boolean?
+	emergencyContactId String?
+	allowedToContactEmergencyContact Boolean?
+	policeReport Boolean?
+	policeReportAttachmentId String?
+	phoneRecordingId String?
+	leadStatusId String?
+	leadSpecialistId String?
+	leadSourceId String?
+  submittedById String?
+
+	legalCaseId String?
+  legalCase LegalCase? @relation("LegalCase_leads", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+	treatments LeadTreatment[]   @relation(name: "Lead_leadTreatments")
+
+  submittedBy     User?             @relation(name: "Lead_submittedBy", fields: [submittedById], references: [id])
+	accidentType		AccidentType?     @relation(name: "Lead_accidentType", fields: [accidentTypeId], references: [id])
+	driversLicense		Document?     @relation(name: "Lead_driversLicense", fields: [driversLicenseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	policeReportAttachment		Document?     @relation(name: "Lead_policeReportAttachment", fields: [policeReportAttachmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	phoneRecording		Document?     @relation(name: "Lead_phoneRecording", fields: [phoneRecordingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	status		LeadStatus?     @relation(name: "Lead_status", fields: [leadStatusId], references: [id])
+	sourceOfLead		LeadSource?     @relation(name: "Lead_sourceOfLead", fields: [leadSourceId], references: [id])
+	bodyPartsInjured		BodyPartLead[]     @relation("BodyPartLead_lead")
+	insurances		Insurance[]     @relation("Lead_insurances")
+	leadActions		LeadAction[]     @relation("Lead_leadActions")
+	injuries		LeadInjury[]     @relation("LeadInjury_lead")
+
+}
+
+model LeadTreatment {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	leadId String?
+	treatmentId String?
+
+
+	lead		Lead?     @relation(name: "Lead_leadTreatments", fields: [leadId], references: [id])
+	treatment		Treatment?     @relation(name: "Treatment_leadTreatments", fields: [treatmentId], references: [id])
+
+
+}
+
+model LeadInjury {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	leadId String?
+	bodyPartId String?
+	severityId String?
+	injuries Injury[]   @relation(name: "LeadInjury_injuries")
+
+
+	lead		Lead?     @relation(name: "LeadInjury_lead", fields: [leadId], references: [id])
+	severity		Severity?     @relation(name: "LeadInjury_severity", fields: [severityId], references: [id])
+
+
+}
+
+model Injury {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+	leads LeadInjury[]   @relation(name: "LeadInjury_injuries")
+
+}
+
+model Treatment {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+  leads LeadTreatment[]   @relation(name: "Treatment_leadTreatments")
+
+
+}
+
+model LeadAction {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	leadId String?
+  lead Lead? @relation(name: "Lead_leadActions", fields: [leadId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+
+model LeadSource {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	leads		Lead[]     @relation("Lead_sourceOfLead")
+
+
+}
+
+model LeadStatus {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	leads		Lead[]     @relation("Lead_status")
+
+
+}
+
+model Severity {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	leads		LeadInjury[]     @relation("LeadInjury_severity")
+
+
+}
+model BodyPart {
+  	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+  leads BodyPartLead[] @relation(name: "BodyPart_bodyPartLeads")
+  whereDoesItHurts WhereDoesItHurt[]  @relation("BodyPart_whereDoesItHurts")
+}
+
+model WhereDoesItHurt {
+  id                         String                     @id @default(cuid())
+  createdAt                  DateTime?                  @default(now())
+  updatedAt                  DateTime?                  @default(now()) @updatedAt
+  name                       String?
+  sideId                     String?
+  bodyPartId                 String?
+  whereDoesItHurtSpecialties WhereDoesItHurtSpecialty[] @relation(name: "WhereDoesItHurt_WhereDoesItHurtSpecialties")
+
+  bodyPart BodyPart? @relation(name: "BodyPart_whereDoesItHurts", fields: [bodyPartId], references: [id])
+  side     Side?     @relation(name: "Side_whereDoesItHurts", fields: [sideId], references: [id])
+}
+
+model WhereDoesItHurtSpecialty {
+  id                String    @id @default(cuid())
+  createdAt         DateTime? @default(now())
+  updatedAt         DateTime? @default(now()) @updatedAt
+  name              String?
+  whereDoesItHurtId String?
+  specialtyId       String?
+  ordinal           Int?
+
+  whereDoesItHurt WhereDoesItHurt? @relation(name: "WhereDoesItHurt_WhereDoesItHurtSpecialties", fields: [whereDoesItHurtId], references: [id])
+  specialty       Specialty?       @relation(name: "WhereDoesItHurtSpecialty_specialty", fields: [specialtyId], references: [id])
+}
+
+model Side {
+  id        String    @id @default(cuid())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  name      String?
+
+  whereDoesItHurts WhereDoesItHurt[] @relation(name: "Side_whereDoesItHurts")
+}
+
+model Authorization {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	vendorId String?
+	authorizationCategoryId String?
+	authorizationTypeId String?
+	requestDescription String?
+	durationOrQuantity Float?
+	unit String?
+	cptCode String?
+	procedureId String?
+
+
+  procedure Procedure? @relation(name: "Procedure_authorizations", fields: [procedureId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  vendor    Vendor?     @relation(name: "Vendor_authorizations", fields: [vendorId], references: [id])
+
+	authorizationCategory		AuthorizationCategory?     @relation(name: "Authorization_authorizationCategory", fields: [authorizationCategoryId], references: [id])
+	authorizationType		AuthorizationType?     @relation(name: "Authorization_authorizationType", fields: [authorizationTypeId], references: [id])
+	authorizations		AuthorizationDiagnosisCode[]     @relation("AuthorizationDiagnosisCode_authorization")
+	procedureOrTreatmentRequestAuthorizations		ProcedureOrTreatmentRequestAuthorization[]     @relation("ProcedureOrTreatmentRequestAuthorization_authorization")
+	recommendedOrderAuthorizations		RecommendedOrderAuthorization[]     @relation("RecommendedOrderAuthorization_authorization")
+}
+
+model AuthorizationCategory {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	authorizations		Authorization[]     @relation("Authorization_authorizationCategory")
+
+
+}
+
+model AuthorizationDiagnosisCode {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	diagnosisCodeId String?
+	authorizationId String?
+
+
+	diagnosis		DiagnosisCode?     @relation(name: "AuthorizationDiagnosisCode_diagnosis", fields: [diagnosisCodeId], references: [id])
+	authorization		Authorization?     @relation(name: "AuthorizationDiagnosisCode_authorization", fields: [authorizationId], references: [id])
+
+
+}
+
+model AuthorizationType {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	authorizations		Authorization[]     @relation("Authorization_authorizationType")
+
+
+}
+
+
+model ProcedureOrTreatmentRequest {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	patientId String?
+	legalCaseId String?
+	facilityVendorId String?
+	facilityContractId String?
+	anesthesiaVendorId String?
+	anesthesiaVendorContractId String?
+	requestingProviderId String?
+	procedureTypeId String?
+	status String?
+
+  requestingProvider		 ClinicalProvider?     @relation(name: "ProcedureOrTreatmentRequest_requestingProvider", fields: [requestingProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  patient		Patient?     @relation(name: "ProcedureOrTreatmentRequest_patient", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  legalCase		LegalCase?  @relation(name: "ProcedureOrTreatmentRequest_legalCase", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  procedureType		ProcedureType?  @relation(name: "ProcedureOrTreatmentRequest_procedureType", fields: [procedureTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  authorizations		ProcedureOrTreatmentRequestAuthorization[]     @relation("ProcedureOrTreatmentRequestAuthorization_procedureOrTreatmentRequest")
+	diagnosisCodes		ProcedureOrTreatmentRequestDiagnosisCode[]     @relation("ProcedureOrTreatmentRequestDiagnosisCode_procedureOrTreatmentRequest")
+}
+
+model ProcedureOrTreatmentRequestAuthorization {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	authorizationId String?
+	procedureOrTreatmentRequestId String?
+
+
+	authorization		Authorization?     @relation(name: "ProcedureOrTreatmentRequestAuthorization_authorization", fields: [authorizationId], references: [id])
+	procedureOrTreatmentRequest		ProcedureOrTreatmentRequest?     @relation(name: "ProcedureOrTreatmentRequestAuthorization_procedureOrTreatmentRequest", fields: [procedureOrTreatmentRequestId], references: [id])
+
+
+}
+
+model ProcedureOrTreatmentRequestDiagnosisCode {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	diagnosisCodeId String?
+	procedureOrTreatmentRequestId String?
+
+
+	diagnosis		DiagnosisCode?     @relation(name: "ProcedureOrTreatmentRequestDiagnosisCode_diagnosis", fields: [diagnosisCodeId], references: [id])
+	procedureOrTreatmentRequest		ProcedureOrTreatmentRequest?     @relation(name: "ProcedureOrTreatmentRequestDiagnosisCode_procedureOrTreatmentRequest", fields: [procedureOrTreatmentRequestId], references: [id])
+
+
+}
+
+model RecommendedOrder {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	patientId String?
+	legalCaseId String?
+	requestingProviderId String?
+	status String?
+
+  patient		Patient?  @relation(name: "RecommendedOrder_patient", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  legalCase		LegalCase?  @relation(name: "RecommendedOrder_legalCase", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  requestingProvider		ClinicalProvider?  @relation(name: "RecommendedOrder_clinicalProvider", fields: [requestingProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+
+	authorizations		RecommendedOrderAuthorization[]     @relation("RecommendedOrderAuthorization_recommendedOrder")
+	diagnosisCodes		RecommendedOrderDiagnosisCode[]     @relation("RecommendedOrderDiagnosisCode_recommendedOrder")
+
+
+}
+
+model RecommendedOrderAuthorization {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	authorizationId String?
+	recommendedOrderId String?
+
+
+	authorization		Authorization?     @relation(name: "RecommendedOrderAuthorization_authorization", fields: [authorizationId], references: [id])
+	recommendedOrder		RecommendedOrder?     @relation(name: "RecommendedOrderAuthorization_recommendedOrder", fields: [recommendedOrderId], references: [id])
+
+
+}
+
+model RecommendedOrderDiagnosisCode {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	diagnosisCodeId String?
+	recommendedOrderId String?
+
+
+	diagnosis		DiagnosisCode?     @relation(name: "RecommendedOrderDiagnosisCode_diagnosis", fields: [diagnosisCodeId], references: [id])
+	recommendedOrder		RecommendedOrder?     @relation(name: "RecommendedOrderDiagnosisCode_recommendedOrder", fields: [recommendedOrderId], references: [id])
+
+
+}
+
+model ReferralRequest {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	patientId String?
+	legalCaseId String?
+	requestingProviderId String?
+	referredToId String?
+	clinicalProviderLocationId String?
+	status String?
+
+
+	patient		Patient?     @relation(name: "ReferralRequest_patient", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	legalCase		LegalCase?     @relation(name: "ReferralRequest_legalCase", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	requestingProvider		ClinicalProvider?     @relation(name: "ReferralRequest_requestingProvider", fields: [requestingProviderId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	referredTo		ClinicalProvider?     @relation(name: "ReferralRequest_referredTo", fields: [referredToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	referredToLocation		ClinicalProviderLocation?     @relation(name: "ReferralRequest_referredToLocation", fields: [clinicalProviderLocationId], references: [id])
+
+
+}
+
+model RequestAdditionalVisit {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	patientId String?
+	legalCaseId String?
+	requestingProviderId String?
+	numberOfVisitsBeingRequested Int?
+
+
+	patient		Patient?     @relation(name: "RequestAdditionalVisit_patient", fields: [patientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	legalCase		LegalCase?     @relation(name: "RequestAdditionalVisit_legalCase", fields: [legalCaseId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+
+}
+
+
+model EligibilityRequest {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	providerId String?
+	specialtyId String?
+	locationId String?
+	visitTypeId String?
+	taxID String?
+	dateOfBirth DateTime?
+	memberRegistrationNumber String?
+	eligibilityStatusId String?
+
+
+	elegibilityStatus		EligibilityStatus?     @relation(name: "EligibilityRequest_elegibilityStatus", fields: [eligibilityStatusId], references: [id])
+
+
+}
+
+model EligibilityStatus {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+
+
+	eligibilityRequests		EligibilityRequest[]     @relation("EligibilityRequest_elegibilityStatus")
+
+
+}
+
+
+model Board {
+  id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	title String?
+  description String?
+  icon  String?
+  lastActivity String?
+
+  labels BoardLabel[] @relation("board_labels")
+  lists BoardList[] @relation("board_lists")
+}
+
+model BoardLabel {
+  id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+  title  String?
+  boardId String?
+  board		Board?     @relation(name: "board_labels", fields: [boardId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  cards BoardCard[] @relation("label_cards")
+}
+
+model BoardList {
+  id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+  title String?
+  position Int?
+  boardId String?
+
+  board		Board?     @relation(name: "board_lists", fields: [boardId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cards   BoardCard[] @relation("boardlist_cards")
+}
+
+model BoardCard {
+   id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+  title String?
+  position Int?
+  description String?
+  dueDate DateTime?
+
+  boardListId String?
+
+  users User[] @relation("card_users")
+
+  labels BoardLabel[] @relation("label_cards")
+  documents Document[] @relation("Document_boardCardImages")
+
+  boardList		BoardList?     @relation(name: "boardlist_cards", fields: [boardListId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model JournalEntryTemplate {
+
+	 id String   @id @default(cuid())
+	createdAt DateTime?       @default(now())
+	updatedAt DateTime?        @default(now()) @updatedAt
+	name String?
+	locationName String?
+	fromTo String?
+	frequency String?
+	autoOrManual String?
+	process String?
+	perAccountOrAggregateJE String?
+	costRate Float?
+	postingDate DateTime?
+	documentDate DateTime?
+	dueDate DateTime?
+	amount Float?
+	accountType String?
+	accountNumber String?
+	costCenter String?
+	appliesToDocumentNumber String?
+	ordinal Int?
+	scenario String?
+	caseAccountId String?
+
+
+	caseAccount		CaseAccount?     @relation(name: "JournalEntryTemplate_caseAccount", fields: [caseAccountId], references: [id])
+
+
+}

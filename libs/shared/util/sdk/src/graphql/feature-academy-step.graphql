@@ -1,0 +1,31 @@
+fragment StepDetails on Step {
+    id
+    title
+    order
+    subtitle
+    content
+    courseId
+}
+
+mutation UserCreateStep($input: UserCreateStepInput!) {
+  created: userCreateStep(input: $input) {
+    id
+    title
+    order
+    subtitle
+    content
+    courseId
+  }
+}
+
+mutation UserUpdateStep($stepId: String!, $input: UserUpdateStepInput!) {
+  updated: userUpdateStep(StepId: $stepId, input: $input) {
+    ...StepDetails
+  }
+}
+
+mutation UserUpdateStepOrder($stepId: String!, $order: Float!) {
+  result: userUpdateStepOrder(stepId: $stepId, order: $order) {
+    ...StepDetails
+  }
+}

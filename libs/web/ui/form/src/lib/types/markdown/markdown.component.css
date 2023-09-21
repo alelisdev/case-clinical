@@ -1,0 +1,7 @@
+::ng-deep textarea.md-input, ::ng-deep .md-preview {
+  color: black;
+}
+
+::ng-deep .btn.btn-primary {
+  background-color: rgb(40, 96, 144);
+}

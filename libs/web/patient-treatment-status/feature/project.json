@@ -1,0 +1,26 @@
+{
+  "name": "web-patient-treatment-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/patient-treatment-status/feature/src",
+  "prefix": "patient-treatment-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/patient-treatment-status/feature/src/**/*.ts",
+          "libs/web/patient-treatment-status/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/patient-treatment-status/feature"],
+      "options": {
+        "jestConfig": "libs/web/patient-treatment-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

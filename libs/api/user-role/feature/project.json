@@ -1,0 +1,22 @@
+{
+  "name": "api-user-role-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/user-role/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/user-role/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/user-role/feature"],
+      "options": {
+        "jestConfig": "libs/api/user-role/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

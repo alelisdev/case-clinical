@@ -1,0 +1,23 @@
+{
+  "name": "web-case-account-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-account/feature/src",
+  "prefix": "case-account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/case-account/feature/src/**/*.ts", "libs/web/case-account/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-account/feature"],
+      "options": {
+        "jestConfig": "libs/web/case-account/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

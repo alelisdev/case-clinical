@@ -1,0 +1,16 @@
+
+export * from './lib/dto/admin-create-document.input'
+export * from './lib/dto/admin-list-document.input'
+export * from './lib/dto/admin-update-document.input'
+export * from './lib/dto/document.input'
+export * from './lib/dto/user-create-document.input'
+export * from './lib/dto/user-list-document.input'
+export * from './lib/dto/user-update-document.input'
+export * from './lib/dto/user-update-documents.input'
+export * from './lib/models/file-manager-document.model'
+export * from './lib/models/document.model'
+export * from './lib/api-document-data-access.module'
+
+export * from './lib/api-document-data-access-admin.service'
+export * from './lib/api-document-data-access-public.service'
+export * from './lib/api-document-data-access-user.service'

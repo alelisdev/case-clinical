@@ -1,0 +1,148 @@
+
+fragment EthnicityDetails on Ethnicity {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+patients {
+    ...PatientLists
+  }
+}
+
+fragment EthnicityLists on Ethnicity {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+patients {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminEthnicities($input: AdminListEthnicityInput) {
+  items: adminEthnicities(input: $input) {
+    ...EthnicityLists
+  }
+  count: adminCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEthnicities($input: AdminListEthnicityInput) {
+  count: adminCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminEthnicity($ethnicityId: String!) {
+  item: adminEthnicity(ethnicityId: $ethnicityId) {
+    ...EthnicityDetails
+  }
+}
+mutation AdminCreateEthnicity($input: AdminCreateEthnicityInput!) {
+  created: adminCreateEthnicity(input: $input) {
+    ...EthnicityDetails
+  }
+}
+mutation AdminUpdateEthnicity($ethnicityId: String!, $input: AdminUpdateEthnicityInput!) {
+  updated: adminUpdateEthnicity(ethnicityId: $ethnicityId, input: $input) {
+    ...EthnicityDetails
+  }
+}
+mutation AdminDeleteEthnicity($ethnicityId: String!) {
+  deleted: adminDeleteEthnicity(ethnicityId: $ethnicityId) {
+    ...EthnicityDetails
+  }
+}
+
+query UserEthnicities($input: UserListEthnicityInput) {
+  items: userEthnicities(input: $input) {
+    ...EthnicityLists
+  }
+  count: userCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEthnicities($input: UserListEthnicityInput) {
+  count: userCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectEthnicities($input: UserListEthnicityInput) {
+  items: userSelectEthnicities(input: $input) {
+    ...EthnicityDetails
+  }
+}
+
+query UserEthnicity($ethnicityId: String!) {
+  item: userEthnicity(ethnicityId: $ethnicityId) {
+    ...EthnicityDetails
+  }
+}
+
+mutation UserCreateEthnicity($input: UserCreateEthnicityInput!) {
+  created: userCreateEthnicity(input: $input) {
+    ...EthnicityDetails
+  }
+}
+mutation UserUpdateEthnicity($ethnicityId: String!, $input: UserUpdateEthnicityInput!) {
+  updated: userUpdateEthnicity(ethnicityId: $ethnicityId, input: $input) {
+    ...EthnicityDetails
+  }
+}
+
+mutation UserUpdateEthnicities($input: UserUpdateEthnicitiesInput!) {
+  updated: userUpdateEthnicities(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteEthnicity($ethnicityId: String!) {
+  deleted: userDeleteEthnicity(ethnicityId: $ethnicityId) {
+    ...EthnicityDetails
+  }
+}
+
+query PublicEthnicities($input: UserListEthnicityInput) {
+  items: publicEthnicities(input: $input) {
+    ...EthnicityLists
+  }
+  count: publicCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountEthnicities($input: UserListEthnicityInput) {
+  count: publicCountEthnicities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectEthnicities($input: UserListEthnicityInput) {
+  items: publicSelectEthnicities(input: $input) {
+    ...EthnicityDetails
+  }
+}
+
+query PublicEthnicity($ethnicityId: String!) {
+  item: publicEthnicity(ethnicityId: $ethnicityId) {
+    ...EthnicityDetails
+  }
+}

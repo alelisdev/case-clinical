@@ -1,0 +1,23 @@
+{
+  "name": "web-auth-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/auth/data-access/src",
+  "prefix": "auth",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/auth/data-access/src/**/*.ts", "libs/web/auth/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/auth/data-access"],
+      "options": {
+        "jestConfig": "libs/web/auth/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

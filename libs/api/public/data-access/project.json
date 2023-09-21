@@ -1,0 +1,22 @@
+{
+  "name": "api-public-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/public/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/public/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/public/data-access"],
+      "options": {
+        "jestConfig": "libs/api/public/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

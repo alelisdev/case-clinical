@@ -1,0 +1,148 @@
+
+fragment AppointmentStatusDetails on AppointmentStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+appointments {
+   ...AppointmentLists
+  }
+}
+
+fragment AppointmentStatusLists on AppointmentStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+appointments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAppointmentStatuses($input: AdminListAppointmentStatusInput) {
+  items: adminAppointmentStatuses(input: $input) {
+    ...AppointmentStatusLists
+  }
+  count: adminCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAppointmentStatuses($input: AdminListAppointmentStatusInput) {
+  count: adminCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAppointmentStatus($appointmentStatusId: String!) {
+  item: adminAppointmentStatus(appointmentStatusId: $appointmentStatusId) {
+    ...AppointmentStatusDetails
+  }
+}
+mutation AdminCreateAppointmentStatus($input: AdminCreateAppointmentStatusInput!) {
+  created: adminCreateAppointmentStatus(input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+mutation AdminUpdateAppointmentStatus($appointmentStatusId: String!, $input: AdminUpdateAppointmentStatusInput!) {
+  updated: adminUpdateAppointmentStatus(appointmentStatusId: $appointmentStatusId, input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+mutation AdminDeleteAppointmentStatus($appointmentStatusId: String!) {
+  deleted: adminDeleteAppointmentStatus(appointmentStatusId: $appointmentStatusId) {
+    ...AppointmentStatusDetails
+  }
+}
+
+query UserAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  items: userAppointmentStatuses(input: $input) {
+    ...AppointmentStatusLists
+  }
+  count: userCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  count: userCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  items: userSelectAppointmentStatuses(input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+
+query UserAppointmentStatus($appointmentStatusId: String!) {
+  item: userAppointmentStatus(appointmentStatusId: $appointmentStatusId) {
+    ...AppointmentStatusDetails
+  }
+}
+
+mutation UserCreateAppointmentStatus($input: UserCreateAppointmentStatusInput!) {
+  created: userCreateAppointmentStatus(input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+mutation UserUpdateAppointmentStatus($appointmentStatusId: String!, $input: UserUpdateAppointmentStatusInput!) {
+  updated: userUpdateAppointmentStatus(appointmentStatusId: $appointmentStatusId, input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+
+mutation UserUpdateAppointmentStatuses($input: UserUpdateAppointmentStatusesInput!) {
+  updated: userUpdateAppointmentStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAppointmentStatus($appointmentStatusId: String!) {
+  deleted: userDeleteAppointmentStatus(appointmentStatusId: $appointmentStatusId) {
+    ...AppointmentStatusDetails
+  }
+}
+
+query PublicAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  items: publicAppointmentStatuses(input: $input) {
+    ...AppointmentStatusLists
+  }
+  count: publicCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  count: publicCountAppointmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAppointmentStatuses($input: UserListAppointmentStatusInput) {
+  items: publicSelectAppointmentStatuses(input: $input) {
+    ...AppointmentStatusDetails
+  }
+}
+
+query PublicAppointmentStatus($appointmentStatusId: String!) {
+  item: publicAppointmentStatus(appointmentStatusId: $appointmentStatusId) {
+    ...AppointmentStatusDetails
+  }
+}

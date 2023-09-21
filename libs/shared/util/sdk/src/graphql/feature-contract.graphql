@@ -1,0 +1,270 @@
+
+fragment ContractDetails on Contract {
+id
+createdAt
+updatedAt
+name
+organizationId
+billingOrganizationId
+templateId
+billOnBehalf
+billRate
+vendorId
+contractDate
+maturityDate
+requiresTpaMedicalNecessity
+requiresTpaMedicareAllowable
+reconciliationPeriodTypeId
+calculationBasisTypeId
+signed
+processId
+organization {
+  id
+  name
+}
+billingOrganization {
+  id
+  name
+}
+template {
+  id
+  name
+}
+vendor {
+  id
+  name
+}
+reconciliationPeriodType {
+  id
+  name
+}
+calculationBasisType {
+  id
+  name
+}
+process {
+  id
+  name
+}
+
+
+
+
+
+documents {
+   ...DocumentLists
+  }
+
+contractedRates {
+    ...ContractedRateLists
+  }
+
+caseAccounts {
+   ...CaseAccountLists
+  }
+
+contractTerms {
+    ...ContractTermLists
+  }
+
+procedureVendors {
+    ...ProcedureVendorLists
+  }
+}
+
+fragment ContractLists on Contract {
+id
+createdAt
+updatedAt
+name
+organizationId
+billingOrganizationId
+templateId
+billOnBehalf
+billRate
+vendorId
+contractDate
+maturityDate
+requiresTpaMedicalNecessity
+requiresTpaMedicareAllowable
+reconciliationPeriodTypeId
+calculationBasisTypeId
+signed
+processId
+organization {
+    id
+    name
+}
+billingOrganization {
+    id
+    name
+}
+template {
+    id
+    name
+}
+vendor {
+    id
+    name
+}
+reconciliationPeriodType {
+    id
+    name
+}
+calculationBasisType {
+    id
+    name
+}
+process {
+    id
+    name
+}
+
+
+
+
+
+documents {
+    id
+    name
+  }
+
+
+contractedRates {
+    id
+    name
+  }
+
+
+caseAccounts {
+    id
+    name
+  }
+
+
+contractTerms {
+    id
+    name
+  }
+
+
+procedureVendors {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminContracts($input: AdminListContractInput) {
+  items: adminContracts(input: $input) {
+    ...ContractLists
+  }
+  count: adminCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContracts($input: AdminListContractInput) {
+  count: adminCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContract($contractId: String!) {
+  item: adminContract(contractId: $contractId) {
+    ...ContractDetails
+  }
+}
+mutation AdminCreateContract($input: AdminCreateContractInput!) {
+  created: adminCreateContract(input: $input) {
+    ...ContractDetails
+  }
+}
+mutation AdminUpdateContract($contractId: String!, $input: AdminUpdateContractInput!) {
+  updated: adminUpdateContract(contractId: $contractId, input: $input) {
+    ...ContractDetails
+  }
+}
+mutation AdminDeleteContract($contractId: String!) {
+  deleted: adminDeleteContract(contractId: $contractId) {
+    ...ContractDetails
+  }
+}
+
+query UserContracts($input: UserListContractInput) {
+  items: userContracts(input: $input) {
+    ...ContractLists
+  }
+  count: userCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContracts($input: UserListContractInput) {
+  count: userCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContracts($input: UserListContractInput) {
+  items: userSelectContracts(input: $input) {
+    ...ContractDetails
+  }
+}
+
+query UserContract($contractId: String!) {
+  item: userContract(contractId: $contractId) {
+    ...ContractDetails
+  }
+}
+
+mutation UserCreateContract($input: UserCreateContractInput!) {
+  created: userCreateContract(input: $input) {
+    ...ContractDetails
+  }
+}
+mutation UserUpdateContract($contractId: String!, $input: UserUpdateContractInput!) {
+  updated: userUpdateContract(contractId: $contractId, input: $input) {
+    ...ContractDetails
+  }
+}
+
+mutation UserUpdateContracts($input: UserUpdateContractsInput!) {
+  updated: userUpdateContracts(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContract($contractId: String!) {
+  deleted: userDeleteContract(contractId: $contractId) {
+    ...ContractDetails
+  }
+}
+
+query PublicContracts($input: UserListContractInput) {
+  items: publicContracts(input: $input) {
+    ...ContractLists
+  }
+  count: publicCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContracts($input: UserListContractInput) {
+  count: publicCountContracts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContracts($input: UserListContractInput) {
+  items: publicSelectContracts(input: $input) {
+    ...ContractDetails
+  }
+}
+
+query PublicContract($contractId: String!) {
+  item: publicContract(contractId: $contractId) {
+    ...ContractDetails
+  }
+}

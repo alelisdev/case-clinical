@@ -1,0 +1,160 @@
+
+fragment PriorAuthorizationImplantDetails on PriorAuthorizationImplant {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+implantId
+priorAuthorizationRequestId
+implant {
+  id
+  name
+}
+priorAuthorizationRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthorizationImplantLists on PriorAuthorizationImplant {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+implantId
+priorAuthorizationRequestId
+implant {
+    id
+    name
+}
+priorAuthorizationRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPriorAuthorizationImplants($input: AdminListPriorAuthorizationImplantInput) {
+  items: adminPriorAuthorizationImplants(input: $input) {
+    ...PriorAuthorizationImplantLists
+  }
+  count: adminCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthorizationImplants($input: AdminListPriorAuthorizationImplantInput) {
+  count: adminCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthorizationImplant($priorAuthorizationImplantId: String!) {
+  item: adminPriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+mutation AdminCreatePriorAuthorizationImplant($input: AdminCreatePriorAuthorizationImplantInput!) {
+  created: adminCreatePriorAuthorizationImplant(input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+mutation AdminUpdatePriorAuthorizationImplant($priorAuthorizationImplantId: String!, $input: AdminUpdatePriorAuthorizationImplantInput!) {
+  updated: adminUpdatePriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId, input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+mutation AdminDeletePriorAuthorizationImplant($priorAuthorizationImplantId: String!) {
+  deleted: adminDeletePriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+query UserPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  items: userPriorAuthorizationImplants(input: $input) {
+    ...PriorAuthorizationImplantLists
+  }
+  count: userCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  count: userCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  items: userSelectPriorAuthorizationImplants(input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+query UserPriorAuthorizationImplant($priorAuthorizationImplantId: String!) {
+  item: userPriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+mutation UserCreatePriorAuthorizationImplant($input: UserCreatePriorAuthorizationImplantInput!) {
+  created: userCreatePriorAuthorizationImplant(input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+mutation UserUpdatePriorAuthorizationImplant($priorAuthorizationImplantId: String!, $input: UserUpdatePriorAuthorizationImplantInput!) {
+  updated: userUpdatePriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId, input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+mutation UserUpdatePriorAuthorizationImplants($input: UserUpdatePriorAuthorizationImplantsInput!) {
+  updated: userUpdatePriorAuthorizationImplants(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthorizationImplant($priorAuthorizationImplantId: String!) {
+  deleted: userDeletePriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+query PublicPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  items: publicPriorAuthorizationImplants(input: $input) {
+    ...PriorAuthorizationImplantLists
+  }
+  count: publicCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  count: publicCountPriorAuthorizationImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthorizationImplants($input: UserListPriorAuthorizationImplantInput) {
+  items: publicSelectPriorAuthorizationImplants(input: $input) {
+    ...PriorAuthorizationImplantDetails
+  }
+}
+
+query PublicPriorAuthorizationImplant($priorAuthorizationImplantId: String!) {
+  item: publicPriorAuthorizationImplant(priorAuthorizationImplantId: $priorAuthorizationImplantId) {
+    ...PriorAuthorizationImplantDetails
+  }
+}

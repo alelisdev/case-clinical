@@ -1,0 +1,23 @@
+{
+  "name": "web-firm-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/firm-status/feature/src",
+  "prefix": "firm-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/firm-status/feature/src/**/*.ts", "libs/web/firm-status/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/firm-status/feature"],
+      "options": {
+        "jestConfig": "libs/web/firm-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

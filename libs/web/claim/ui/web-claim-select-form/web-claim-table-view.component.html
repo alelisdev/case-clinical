@@ -1,0 +1,1123 @@
+
+<ng-container>
+        <div class="bg-white md:rounded-lg md:shadow dark:bg-gray-800" >
+          <div class="p-4 sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-xl font-semibold text-gray-900">Claims</h1>
+            </div>
+            <div class="sm:ml-16 sm:flex-none" *ngIf="claims?.length > 0">
+              <a
+                type="button"
+                (click)="openDialog(createClaimTpl, {claim: {}})"
+                class="flex rounded-full border-2 border-blue-500 p-2 text-blue-500 cursor-pointer hover:bg-gray-100 hover:border-blue-600 hover:text-blue-600 hover:shadow-lg hover:scale-105 transition duration-200"
+              >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+              </a>
+            </div>
+          </div>
+
+          <ng-template #createClaimTpl let-ref>
+          <div class="flex-grow flex flex-col">
+            <div class="text-lg font-semibold tracking-wider px-4 py-3 flex space-x-4 items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <ui-icon icon="table"></ui-icon>
+                <div>Create Claim</div>
+              </div>
+            </div>
+            <div class="flex-grow">
+              <ui-claim-form (send)="this.createClaim($event); ref.close()" [claim]="ref.data?.claim">
+              </ui-claim-form>
+            </div>
+          </div>
+        </ng-template>
+
+            
+    <div class="overflow-x-auto">
+      <div *ngIf="claims?.length > 0; else noData" class="flex flex-col justify-between">
+        <div class="overflow-x-auto">
+          <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Name
+                          </th>
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Original Record Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Received Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Due Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Dob
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Address Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Address City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Address State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Address Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier Line 2
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Carrier Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Insured Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Insured Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Insured City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Insured State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Insured Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient Signature
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 2
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 3
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 4
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 5
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 6
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 7
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Diagnosis Code 8
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Federal Tax Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Total Charges
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Amount Paid
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Physician Signature
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Physician Signed on
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Facility Npi
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Facility
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Npi
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Phone Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Billing Other
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Session Notes
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Referring Provider
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Referring Provider Npi
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Additional Claim Info
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reference Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Facility
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Prior Authorization Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Prior Authorization Request
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Provider Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Provider Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor CSZ
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor Tax Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Total Approved Amount
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Total Billed Amount
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Total Net Pay Amount
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Notes
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Patient
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Procedures
+                          </th>
+
+                    </tr>
+                    </thead>
+                 <tbody class="bg-grey-light max-h-48 w-full divide-y divide-gray-200 overflow-y-scroll">
+                  <tr
+                    [routerLink]="['../../claims', row.id, 'details', 'overview']"
+                    *ngFor="let row of claims"
+                    class="w-full transition duration-200 hover:cursor-pointer hover:bg-blue-50"
+                  >
+                        
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.name }}
+                          </td>
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.originalRecordDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.receivedDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.dueDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientDob }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientAddressLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientAddressCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientAddressState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientAddressPostalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierLine2 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.carrierPostalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insuredName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insuredLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insuredCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insuredState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insuredPostalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.patientSignature }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode2 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode3 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode4 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode5 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode6 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode7 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.diagnosisCode8 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.federalTaxId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.totalCharges }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.amountPaid }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.physicianSignature }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.physicianSignedOn }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacility }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacilityLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacilityCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacilityState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacilityPostalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceFacilityNpi }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingFacility }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingPostalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingNpi }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingPhoneNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billingOther }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.sessionNotes }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.referringProvider }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.referringProviderNpi }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.additionalClaimInfo }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.accountNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.referenceNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.facility }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.priorAuthorizationNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.providerName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.providerNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.vendor }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.vendorLine1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.vendorCSZ }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.vendorTaxId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.totalApprovedAmount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.totalBilledAmount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.totalNetPayAmount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.notes }}
+                          </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+        <div
+          class="flex h-full w-full items-center justify-end rounded-b-lg border-t-2 border-gray-200 bg-gray-50 p-3 text-gray-800"
+        >
+          <h1 class="mr-2 font-bold">Total Claims:</h1>
+          <h1 class="">{{this.claims | getTotal:'amount'}}</h1>
+    </div>
+</div>
+
+
+                  <ng-template #noData>
+              <div class="h-full w-full flex flex-col items-center justify-center py-6">
+                <h1 class="py-2 font-bold">No Claim</h1>
+              <button
+                type="button"
+                (click)="openDialog(createClaimTpl, {claim: {}})"
+                class="text-white bg-primary hover:bg-opacity-90 transition duration-300 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
+        >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Add New Claim
+              </button>
+              </div>
+            </ng-template>
+        </div>
+    </div>
+  </ng-container>

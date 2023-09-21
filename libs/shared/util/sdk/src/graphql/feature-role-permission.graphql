@@ -1,0 +1,150 @@
+
+fragment RolePermissionDetails on RolePermission {
+id
+createdAt
+updatedAt
+name
+roleId
+permissionId
+permission {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RolePermissionLists on RolePermission {
+id
+createdAt
+updatedAt
+name
+roleId
+permissionId
+permission {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminRolePermissions($input: AdminListRolePermissionInput) {
+  items: adminRolePermissions(input: $input) {
+    ...RolePermissionLists
+  }
+  count: adminCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRolePermissions($input: AdminListRolePermissionInput) {
+  count: adminCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRolePermission($rolePermissionId: String!) {
+  item: adminRolePermission(rolePermissionId: $rolePermissionId) {
+    ...RolePermissionDetails
+  }
+}
+mutation AdminCreateRolePermission($input: AdminCreateRolePermissionInput!) {
+  created: adminCreateRolePermission(input: $input) {
+    ...RolePermissionDetails
+  }
+}
+mutation AdminUpdateRolePermission($rolePermissionId: String!, $input: AdminUpdateRolePermissionInput!) {
+  updated: adminUpdateRolePermission(rolePermissionId: $rolePermissionId, input: $input) {
+    ...RolePermissionDetails
+  }
+}
+mutation AdminDeleteRolePermission($rolePermissionId: String!) {
+  deleted: adminDeleteRolePermission(rolePermissionId: $rolePermissionId) {
+    ...RolePermissionDetails
+  }
+}
+
+query UserRolePermissions($input: UserListRolePermissionInput) {
+  items: userRolePermissions(input: $input) {
+    ...RolePermissionLists
+  }
+  count: userCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRolePermissions($input: UserListRolePermissionInput) {
+  count: userCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRolePermissions($input: UserListRolePermissionInput) {
+  items: userSelectRolePermissions(input: $input) {
+    ...RolePermissionDetails
+  }
+}
+
+query UserRolePermission($rolePermissionId: String!) {
+  item: userRolePermission(rolePermissionId: $rolePermissionId) {
+    ...RolePermissionDetails
+  }
+}
+
+mutation UserCreateRolePermission($input: UserCreateRolePermissionInput!) {
+  created: userCreateRolePermission(input: $input) {
+    ...RolePermissionDetails
+  }
+}
+mutation UserUpdateRolePermission($rolePermissionId: String!, $input: UserUpdateRolePermissionInput!) {
+  updated: userUpdateRolePermission(rolePermissionId: $rolePermissionId, input: $input) {
+    ...RolePermissionDetails
+  }
+}
+
+mutation UserUpdateRolePermissions($input: UserUpdateRolePermissionsInput!) {
+  updated: userUpdateRolePermissions(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRolePermission($rolePermissionId: String!) {
+  deleted: userDeleteRolePermission(rolePermissionId: $rolePermissionId) {
+    ...RolePermissionDetails
+  }
+}
+
+query PublicRolePermissions($input: UserListRolePermissionInput) {
+  items: publicRolePermissions(input: $input) {
+    ...RolePermissionLists
+  }
+  count: publicCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRolePermissions($input: UserListRolePermissionInput) {
+  count: publicCountRolePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRolePermissions($input: UserListRolePermissionInput) {
+  items: publicSelectRolePermissions(input: $input) {
+    ...RolePermissionDetails
+  }
+}
+
+query PublicRolePermission($rolePermissionId: String!) {
+  item: publicRolePermission(rolePermissionId: $rolePermissionId) {
+    ...RolePermissionDetails
+  }
+}

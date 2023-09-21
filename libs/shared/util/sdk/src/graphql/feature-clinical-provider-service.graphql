@@ -1,0 +1,158 @@
+
+fragment ClinicalProviderServiceDetails on ClinicalProviderService {
+id
+createdAt
+updatedAt
+name
+serviceId
+clinicalProviderId
+service {
+  id
+  name
+}
+clinicalProvider {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ClinicalProviderServiceLists on ClinicalProviderService {
+id
+createdAt
+updatedAt
+name
+serviceId
+clinicalProviderId
+service {
+    id
+    name
+}
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminClinicalProviderServices($input: AdminListClinicalProviderServiceInput) {
+  items: adminClinicalProviderServices(input: $input) {
+    ...ClinicalProviderServiceLists
+  }
+  count: adminCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviderServices($input: AdminListClinicalProviderServiceInput) {
+  count: adminCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClinicalProviderService($clinicalProviderServiceId: String!) {
+  item: adminClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+mutation AdminCreateClinicalProviderService($input: AdminCreateClinicalProviderServiceInput!) {
+  created: adminCreateClinicalProviderService(input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+mutation AdminUpdateClinicalProviderService($clinicalProviderServiceId: String!, $input: AdminUpdateClinicalProviderServiceInput!) {
+  updated: adminUpdateClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId, input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+mutation AdminDeleteClinicalProviderService($clinicalProviderServiceId: String!) {
+  deleted: adminDeleteClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+query UserClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  items: userClinicalProviderServices(input: $input) {
+    ...ClinicalProviderServiceLists
+  }
+  count: userCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  count: userCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  items: userSelectClinicalProviderServices(input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+query UserClinicalProviderService($clinicalProviderServiceId: String!) {
+  item: userClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+mutation UserCreateClinicalProviderService($input: UserCreateClinicalProviderServiceInput!) {
+  created: userCreateClinicalProviderService(input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+mutation UserUpdateClinicalProviderService($clinicalProviderServiceId: String!, $input: UserUpdateClinicalProviderServiceInput!) {
+  updated: userUpdateClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId, input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+mutation UserUpdateClinicalProviderServices($input: UserUpdateClinicalProviderServicesInput!) {
+  updated: userUpdateClinicalProviderServices(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProviderService($clinicalProviderServiceId: String!) {
+  deleted: userDeleteClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+query PublicClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  items: publicClinicalProviderServices(input: $input) {
+    ...ClinicalProviderServiceLists
+  }
+  count: publicCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  count: publicCountClinicalProviderServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviderServices($input: UserListClinicalProviderServiceInput) {
+  items: publicSelectClinicalProviderServices(input: $input) {
+    ...ClinicalProviderServiceDetails
+  }
+}
+
+query PublicClinicalProviderService($clinicalProviderServiceId: String!) {
+  item: publicClinicalProviderService(clinicalProviderServiceId: $clinicalProviderServiceId) {
+    ...ClinicalProviderServiceDetails
+  }
+}

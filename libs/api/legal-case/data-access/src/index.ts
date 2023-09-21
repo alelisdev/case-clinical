@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-legal-case.input'
+export * from './lib/dto/admin-list-legal-case.input'
+export * from './lib/dto/admin-update-legal-case.input'
+export * from './lib/dto/legal-case.input'
+export * from './lib/dto/user-create-legal-case.input'
+export * from './lib/dto/user-list-legal-case.input'
+export * from './lib/dto/user-update-legal-case.input'
+export * from './lib/dto/user-update-legal-cases.input'
+export * from './lib/models/legal-case.model'
+export * from './lib/api-legal-case-data-access.module'
+
+export * from './lib/api-legal-case-data-access-admin.service'
+export * from './lib/api-legal-case-data-access-public.service'
+export * from './lib/api-legal-case-data-access-user.service'

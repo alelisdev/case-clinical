@@ -1,0 +1,168 @@
+
+fragment BalanceRequestDetails on BalanceRequest {
+id
+createdAt
+updatedAt
+name
+requestedOn
+repliedOn
+status
+statementId
+type
+balanceAmount
+legalCaseId
+statement {
+  id
+  name
+}
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment BalanceRequestLists on BalanceRequest {
+id
+createdAt
+updatedAt
+name
+requestedOn
+repliedOn
+status
+statementId
+type
+balanceAmount
+legalCaseId
+statement {
+    id
+    name
+}
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminBalanceRequests($input: AdminListBalanceRequestInput) {
+  items: adminBalanceRequests(input: $input) {
+    ...BalanceRequestLists
+  }
+  count: adminCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountBalanceRequests($input: AdminListBalanceRequestInput) {
+  count: adminCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminBalanceRequest($balanceRequestId: String!) {
+  item: adminBalanceRequest(balanceRequestId: $balanceRequestId) {
+    ...BalanceRequestDetails
+  }
+}
+mutation AdminCreateBalanceRequest($input: AdminCreateBalanceRequestInput!) {
+  created: adminCreateBalanceRequest(input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+mutation AdminUpdateBalanceRequest($balanceRequestId: String!, $input: AdminUpdateBalanceRequestInput!) {
+  updated: adminUpdateBalanceRequest(balanceRequestId: $balanceRequestId, input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+mutation AdminDeleteBalanceRequest($balanceRequestId: String!) {
+  deleted: adminDeleteBalanceRequest(balanceRequestId: $balanceRequestId) {
+    ...BalanceRequestDetails
+  }
+}
+
+query UserBalanceRequests($input: UserListBalanceRequestInput) {
+  items: userBalanceRequests(input: $input) {
+    ...BalanceRequestLists
+  }
+  count: userCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountBalanceRequests($input: UserListBalanceRequestInput) {
+  count: userCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectBalanceRequests($input: UserListBalanceRequestInput) {
+  items: userSelectBalanceRequests(input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+
+query UserBalanceRequest($balanceRequestId: String!) {
+  item: userBalanceRequest(balanceRequestId: $balanceRequestId) {
+    ...BalanceRequestDetails
+  }
+}
+
+mutation UserCreateBalanceRequest($input: UserCreateBalanceRequestInput!) {
+  created: userCreateBalanceRequest(input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+mutation UserUpdateBalanceRequest($balanceRequestId: String!, $input: UserUpdateBalanceRequestInput!) {
+  updated: userUpdateBalanceRequest(balanceRequestId: $balanceRequestId, input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+
+mutation UserUpdateBalanceRequests($input: UserUpdateBalanceRequestsInput!) {
+  updated: userUpdateBalanceRequests(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteBalanceRequest($balanceRequestId: String!) {
+  deleted: userDeleteBalanceRequest(balanceRequestId: $balanceRequestId) {
+    ...BalanceRequestDetails
+  }
+}
+
+query PublicBalanceRequests($input: UserListBalanceRequestInput) {
+  items: publicBalanceRequests(input: $input) {
+    ...BalanceRequestLists
+  }
+  count: publicCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountBalanceRequests($input: UserListBalanceRequestInput) {
+  count: publicCountBalanceRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectBalanceRequests($input: UserListBalanceRequestInput) {
+  items: publicSelectBalanceRequests(input: $input) {
+    ...BalanceRequestDetails
+  }
+}
+
+query PublicBalanceRequest($balanceRequestId: String!) {
+  item: publicBalanceRequest(balanceRequestId: $balanceRequestId) {
+    ...BalanceRequestDetails
+  }
+}

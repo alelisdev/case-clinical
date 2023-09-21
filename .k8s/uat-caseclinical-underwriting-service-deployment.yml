@@ -1,0 +1,211 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caseclinical-underwriting-service
+  namespace: pch
+  labels:
+    app: caseclinical-underwriting-service
+    tags.datadoghq.com/env: UAT
+    tags.datadoghq.com/service: caseclinical-underwriting-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caseclinical-underwriting-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      annotations:
+        admission.datadoghq.com/js-lib.version: latest
+      name: caseclinical-underwriting-service
+      labels:
+        app: caseclinical-underwriting-service
+        admission.datadoghq.com/enabled: "true"
+        tags.datadoghq.com/env: UAT
+        tags.datadoghq.com/service: caseclinical-underwriting-service
+    spec:
+      initContainers:
+        - name: migration
+          image: caseclinicaluat.azurecr.io/caseclinical-underwriting-migration
+          imagePullPolicy: IfNotPresent
+          env:
+            #### SECRETS ####
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: underwriting-secrets
+                  key: DATABASE_URL
+      containers:
+      - name: caseclinical-underwriting-service
+        image: caseclinicaluat.azurecr.io/caseclinical-underwriting-service
+        imagePullPolicy: IfNotPresent
+        env:
+         ##### CONFIGS #####
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        - name: DD_LOGS_INJECTION
+          value: "true"
+        - name: DD_TRACE_STARTUP_LOGS
+          value: "true"
+        - name: AZURE_STORAGE_ACCOUNT
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: AZURE_STORAGE_ACCOUNT_NAME
+        - name: AZURE_CONTAINER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: AZURE_STORAGE_ACCOUNT_CONTAINER_NAME
+        - name: MATRIX_CHAT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: MATRIX_CHAT_URL
+        - name: WEB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: WEB_URL
+        - name: WSS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: WSS_URL
+        - name: SCHEMA_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: SCHEMA_VERSION
+        - name: GRAPHQL_INTROSPECTION
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: GRAPHQL_INTROSPECTION
+        - name: MEDICAL_RECORDS_TOKEN_VALIDITY
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: MEDICAL_RECORDS_TOKEN_VALIDITY
+        - name: CUBEJS_DB_SSL
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: CUBEJS_DB_SSL
+        - name: CUBEJS_DB_TYPE
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: CUBEJS_DB_TYPE
+        - name: CUBEJS_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: underwriting-configs
+              key: CUBEJS_DB_NAME
+        ##### SECRETS #####
+        - name: AZURE_STORAGE_CONNECTIONSTRING
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: AZURE_STORAGE_ACCOUNT_CONNECTION_STRING
+        - name: AZURE_STORAGE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: AZURE_STORAGE_ACCOUNT_KEY
+        - name: AZURE_STORAGE_URL
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: AZURE_STORAGE_ACCOUNT_URL
+        - name: AZURE_STORAGE_SAS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: AZURE_STORAGE_ACCOUNT_SAS_KEY
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: DATABASE_URL
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: JWT_SECRET
+        - name: INNGEST_SOURCE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: INNGEST_SOURCE_API_KEY
+        - name: INNGEST_EVENT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: INNGEST_EVENT_KEY
+        - name: INNGEST_SIGNING_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: INNGEST_SIGNING_KEY
+        - name: CUBEJS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: CUBEJS_TOKEN
+        - name: CUBEJS_API_URL
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: CUBEJS_API_URL
+        - name: CUBEJS_DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: CUBEJS_DB_HOST
+        - name: CUBEJS_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: CUBEJS_DB_USER
+        - name: CUBEJS_DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: CUBEJS_DB_PASS
+        - name: NOVU_SUBSCRIBER_ID
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: NOVU_SUBSCRIBER_ID
+        - name: NOVU_APPLICATION_IDENTIFIER
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: NOVU_APPLICATION_IDENTIFIER
+        - name: NOVU_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: NOVU_API_KEY
+        - name: STRIPE_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: underwriting-secrets
+              key: STRIPE_SECRET_KEY
+        resources:
+          requests:
+            cpu: 50m
+            memory: 350Mi 
+          limits:
+            cpu: 250m
+            memory: 700Mi
+        ports:
+        - containerPort: 3000

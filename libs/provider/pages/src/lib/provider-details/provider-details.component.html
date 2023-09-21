@@ -1,0 +1,9 @@
+<ui-formly-json-form
+*ngIf="vm$ | async as vm"
+class="w-full h-full"
+formName="page_provider_provider_details"
+[showSubmitButton]="false"
+[componentStore]="store"
+[formData]="getFormData(vm)"
+(formIsReady)="this.onResize()"
+></ui-formly-json-form>

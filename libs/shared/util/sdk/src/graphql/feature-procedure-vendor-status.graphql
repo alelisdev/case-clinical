@@ -1,0 +1,148 @@
+
+
+fragment ProcedureVendorStatusDetails on ProcedureVendorStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+procedureVendors {
+    id
+    name
+  }
+}
+
+fragment ProcedureVendorStatusLists on ProcedureVendorStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+procedureVendors {
+    id
+    name
+  }
+
+}
+
+query AdminProcedureVendorStatuses($input: AdminListProcedureVendorStatusInput) {
+  items: adminProcedureVendorStatuses(input: $input) {
+    ...ProcedureVendorStatusLists
+  }
+  count: adminCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureVendorStatuses($input: AdminListProcedureVendorStatusInput) {
+  count: adminCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureVendorStatus($procedureVendorStatusId: String!) {
+  item: adminProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+mutation AdminCreateProcedureVendorStatus($input: AdminCreateProcedureVendorStatusInput!) {
+  created: adminCreateProcedureVendorStatus(input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+mutation AdminUpdateProcedureVendorStatus($procedureVendorStatusId: String!, $input: AdminUpdateProcedureVendorStatusInput!) {
+  updated: adminUpdateProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId, input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+mutation AdminDeleteProcedureVendorStatus($procedureVendorStatusId: String!) {
+  deleted: adminDeleteProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+query UserProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  items: userProcedureVendorStatuses(input: $input) {
+    ...ProcedureVendorStatusLists
+  }
+  count: userCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  count: userCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  items: userSelectProcedureVendorStatuses(input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+query UserProcedureVendorStatus($procedureVendorStatusId: String!) {
+  item: userProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+mutation UserCreateProcedureVendorStatus($input: UserCreateProcedureVendorStatusInput!) {
+  created: userCreateProcedureVendorStatus(input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+mutation UserUpdateProcedureVendorStatus($procedureVendorStatusId: String!, $input: UserUpdateProcedureVendorStatusInput!) {
+  updated: userUpdateProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId, input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+mutation UserUpdateProcedureVendorStatuses($input: UserUpdateProcedureVendorStatusesInput!) {
+  updated: userUpdateProcedureVendorStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureVendorStatus($procedureVendorStatusId: String!) {
+  deleted: userDeleteProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+query PublicProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  items: publicProcedureVendorStatuses(input: $input) {
+    ...ProcedureVendorStatusLists
+  }
+  count: publicCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  count: publicCountProcedureVendorStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureVendorStatuses($input: UserListProcedureVendorStatusInput) {
+  items: publicSelectProcedureVendorStatuses(input: $input) {
+    ...ProcedureVendorStatusDetails
+  }
+}
+
+query PublicProcedureVendorStatus($procedureVendorStatusId: String!) {
+  item: publicProcedureVendorStatus(procedureVendorStatusId: $procedureVendorStatusId) {
+    ...ProcedureVendorStatusDetails
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "api-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps\\api-e2e\\src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/api-e2e/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:lint",
+      "options": {
+        "linter": "eslint",
+        "tsConfig": ["apps/api-e2e/tsconfig.spec.json"],
+        "exclude": ["**/node_modules/**", "!apps/api-e2e/**/*"]
+      }
+    }
+  }
+}

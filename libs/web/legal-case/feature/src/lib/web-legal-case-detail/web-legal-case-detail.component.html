@@ -1,0 +1,46 @@
+
+<div class="flex flex-col w-full overflow-hidden">
+
+  <mat-drawer-container class="flex-auto h-full">
+
+      <!-- Drawer -->
+      <mat-drawer
+          class="w-60 dark:bg-gray-900"
+          [autoFocus]="false"
+          [mode]="drawerMode"
+          [opened]="drawerOpened"
+          #matDrawer>
+
+            <fuse-vertical-navigation
+                [navigation]="menuData"
+                [inner]="true"
+                [mode]="'side'"
+                [name]="'docs-guides-navigation'"
+                [opened]="true"
+            >
+          </fuse-vertical-navigation>
+          <button *ngIf="drawerOpened" class="ml-4 absolute left-4 top-0 sm:left-1" style="z-index: 201;" mat-icon-button (click)="matDrawer.toggle()">
+            <mat-icon [svgIcon]="'heroicons_outline:chevron-double-left'"></mat-icon>
+          </button>
+      </mat-drawer>
+
+      <!-- Drawer content -->
+      <mat-drawer-content
+          class="flex flex-col"
+          fuseScrollReset>
+
+          <!-- Main -->
+          <div class="flex-auto flex flex-col">
+              <router-outlet></router-outlet>
+          </div>
+
+          <button *ngIf="!matDrawer.opened" class="ml-4 absolute left-4 top-0 sm:left-1" style="z-index: 201;" mat-icon-button (click)="matDrawer.toggle()">
+            <mat-icon [svgIcon]="'heroicons_outline:chevron-double-right'"></mat-icon>
+          </button>
+      </mat-drawer-content>
+
+  </mat-drawer-container>
+
+</div>
+
+

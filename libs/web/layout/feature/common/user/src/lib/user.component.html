@@ -1,0 +1,70 @@
+<!-- Button -->
+<ng-container *ngIf="vm$ | async as vm">
+  <button mat-icon-button [matMenuTriggerFor]="userActions">
+    <span class="relative">
+      <img class="rounded-full w-7 h-7" *ngIf="showAvatar && vm.user?.avatarUrl" [src]="vm.user?.avatarUrl" />
+      <mat-icon *ngIf="!showAvatar || !vm.user?.avatarUrl" [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+      <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full" [ngClass]="{
+                'mr-px mb-px': !showAvatar || !vm.user?.avatarUrl,
+                'bg-green-500': vm.user?.status === 'online',
+                'bg-amber-500': vm.user?.status === 'away',
+                'bg-red-500': vm.user?.status === 'busy',
+                'bg-gray-400': vm.user?.status === 'not-visible'
+            }"></span>
+    </span>
+  </button>
+
+  <mat-menu [xPosition]="'before'" #userActions="matMenu">
+    <button mat-menu-item>
+      <span class="flex flex-col leading-none">
+        <span>Signed in as</span>
+        <span class="mt-1.5 text-md font-medium">{{ vm.user?.username }}</span>
+      </span>
+    </button>
+    <mat-divider class="my-2"></mat-divider>
+    <button mat-menu-item>
+      <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/settings'">
+      <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+      <span>Settings</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="userStatus">
+      <mat-icon [svgIcon]="'heroicons_outline:dots-circle-horizontal'"></mat-icon>
+      <span>Status</span>
+    </button>
+    <mat-divider class="my-2"></mat-divider>
+    <button mat-menu-item (click)="signOut()">
+      <mat-icon [svgIcon]="'heroicons_outline:logout'"></mat-icon>
+      <span>Sign out</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu class="user-status-menu" #userStatus="matMenu">
+    <button mat-menu-item (click)="updateUserStatus('online')">
+      <div class="flex">
+        <span class="w-4 h-4 mr-3 bg-green-500 rounded-full"></span>
+        <span>Online</span>
+      </div>
+    </button>
+    <button mat-menu-item (click)="updateUserStatus('away')">
+      <div class="flex">
+        <div class="w-4 h-4 mr-3 rounded-full bg-amber-500"></div>
+        <span>Away</span>
+      </div>
+    </button>
+    <button mat-menu-item (click)="updateUserStatus('busy')">
+      <div class="flex">
+        <div class="w-4 h-4 mr-3 bg-red-500 rounded-full"></div>
+        <span>Busy</span>
+      </div>
+    </button>
+    <button mat-menu-item (click)="updateUserStatus('not-visible')">
+      <div class="flex">
+        <div class="w-4 h-4 mr-3 bg-gray-400 rounded-full"></div>
+        <span>Invisible</span>
+      </div>
+    </button>
+  </mat-menu>
+</ng-container>

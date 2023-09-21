@@ -1,0 +1,15 @@
+<ng-container *ngIf="model$ | async as model">
+  <ng-container *ngIf="vm$ | async as vm">
+    <ui-formly-json-form
+      class="w-full h-full"
+      formName="page_patient_profile"
+      [model]="model"
+      [showSubmitButton]="false"
+      [componentStore]="store"
+      [formData]="getFormData(vm)"
+      (save)="this.store.updateUserProfileEffect($event)"
+      (formIsReady)="this.onResize()"
+      [resetForm]="false"
+    ></ui-formly-json-form>
+  </ng-container>
+</ng-container>

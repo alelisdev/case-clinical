@@ -1,0 +1,1 @@
+export { FormlyWrapperTabComponent } from './tab'

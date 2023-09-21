@@ -1,0 +1,178 @@
+
+fragment JournalEntryDetails on JournalEntry {
+id
+createdAt
+updatedAt
+name
+locationName
+fromTo
+frequency
+autoOrManual
+process
+perAccountOrAggregateJE
+costRate
+postingDate
+documentDate
+dueDate
+amount
+accountType
+accountNumber
+costCenter
+appliesToDocumentNumber
+caseAccountId
+caseAccount {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment JournalEntryLists on JournalEntry {
+id
+createdAt
+updatedAt
+name
+locationName
+fromTo
+frequency
+autoOrManual
+process
+perAccountOrAggregateJE
+costRate
+postingDate
+documentDate
+dueDate
+amount
+accountType
+accountNumber
+costCenter
+appliesToDocumentNumber
+caseAccountId
+caseAccount {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminJournalEntries($input: AdminListJournalEntryInput) {
+  items: adminJournalEntries(input: $input) {
+    ...JournalEntryLists
+  }
+  count: adminCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountJournalEntries($input: AdminListJournalEntryInput) {
+  count: adminCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminJournalEntry($journalEntryId: String!) {
+  item: adminJournalEntry(journalEntryId: $journalEntryId) {
+    ...JournalEntryDetails
+  }
+}
+mutation AdminCreateJournalEntry($input: AdminCreateJournalEntryInput!) {
+  created: adminCreateJournalEntry(input: $input) {
+    ...JournalEntryDetails
+  }
+}
+mutation AdminUpdateJournalEntry($journalEntryId: String!, $input: AdminUpdateJournalEntryInput!) {
+  updated: adminUpdateJournalEntry(journalEntryId: $journalEntryId, input: $input) {
+    ...JournalEntryDetails
+  }
+}
+mutation AdminDeleteJournalEntry($journalEntryId: String!) {
+  deleted: adminDeleteJournalEntry(journalEntryId: $journalEntryId) {
+    ...JournalEntryDetails
+  }
+}
+
+query UserJournalEntries($input: UserListJournalEntryInput) {
+  items: userJournalEntries(input: $input) {
+    ...JournalEntryLists
+  }
+  count: userCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountJournalEntries($input: UserListJournalEntryInput) {
+  count: userCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectJournalEntries($input: UserListJournalEntryInput) {
+  items: userSelectJournalEntries(input: $input) {
+    ...JournalEntryDetails
+  }
+}
+
+query UserJournalEntry($journalEntryId: String!) {
+  item: userJournalEntry(journalEntryId: $journalEntryId) {
+    ...JournalEntryDetails
+  }
+}
+
+mutation UserCreateJournalEntry($input: UserCreateJournalEntryInput!) {
+  created: userCreateJournalEntry(input: $input) {
+    ...JournalEntryDetails
+  }
+}
+mutation UserUpdateJournalEntry($journalEntryId: String!, $input: UserUpdateJournalEntryInput!) {
+  updated: userUpdateJournalEntry(journalEntryId: $journalEntryId, input: $input) {
+    ...JournalEntryDetails
+  }
+}
+
+mutation UserUpdateJournalEntries($input: UserUpdateJournalEntriesInput!) {
+  updated: userUpdateJournalEntries(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteJournalEntry($journalEntryId: String!) {
+  deleted: userDeleteJournalEntry(journalEntryId: $journalEntryId) {
+    ...JournalEntryDetails
+  }
+}
+
+query PublicJournalEntries($input: UserListJournalEntryInput) {
+  items: publicJournalEntries(input: $input) {
+    ...JournalEntryLists
+  }
+  count: publicCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountJournalEntries($input: UserListJournalEntryInput) {
+  count: publicCountJournalEntries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectJournalEntries($input: UserListJournalEntryInput) {
+  items: publicSelectJournalEntries(input: $input) {
+    ...JournalEntryDetails
+  }
+}
+
+query PublicJournalEntry($journalEntryId: String!) {
+  item: publicJournalEntry(journalEntryId: $journalEntryId) {
+    ...JournalEntryDetails
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/configuration/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/configuration"],
+      "options": {
+        "project": "libs/configuration/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/configuration/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/configuration/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/configuration"],
+      "options": {
+        "jestConfig": "libs/configuration/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/configuration/**/*.ts", "libs/configuration/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-configuration"
+}

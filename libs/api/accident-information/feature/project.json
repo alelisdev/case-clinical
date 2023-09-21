@@ -1,0 +1,26 @@
+{
+  "name": "api-accident-information-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/accident-information/feature/src",
+  "prefix": "accident-information",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/accident-information/data-access/src/**/*.ts",
+          "libs/api/accident-information/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/accident-information/data-access"],
+      "options": {
+        "jestConfig": "libs/api/accident-information/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

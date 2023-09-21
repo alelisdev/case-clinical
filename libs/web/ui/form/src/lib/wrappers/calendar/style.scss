@@ -1,0 +1,18 @@
+::ng-deep .cal-event-container{
+    ng-component,a,formly-group,ng-component div{
+        height: 100%;
+        display: block;
+    }
+
+    .cal-starts-within-day .cal-ends-within-day {
+        min-height: 120px !important;
+    }
+}
+
+::ng-deep .cal-month-view .cal-day-cell {
+  min-height: 0;
+}
+
+::ng-deep .cal-month-view .cal-day-cell {
+  min-height: 0;
+}

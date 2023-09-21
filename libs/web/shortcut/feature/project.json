@@ -1,0 +1,23 @@
+{
+  "name": "web-shortcut-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/shortcut/feature/src",
+  "prefix": "shortcut",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/shortcut/feature/src/**/*.ts", "libs/web/shortcut/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/shortcut/feature"],
+      "options": {
+        "jestConfig": "libs/web/shortcut/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

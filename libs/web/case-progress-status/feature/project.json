@@ -1,0 +1,26 @@
+{
+  "name": "web-case-progress-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-progress-status/feature/src",
+  "prefix": "case-progress-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/case-progress-status/feature/src/**/*.ts",
+          "libs/web/case-progress-status/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-progress-status/feature"],
+      "options": {
+        "jestConfig": "libs/web/case-progress-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

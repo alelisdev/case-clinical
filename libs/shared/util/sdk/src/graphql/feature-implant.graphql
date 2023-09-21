@@ -1,0 +1,182 @@
+
+fragment ImplantDetails on Implant {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+implantCategoryId
+manufacturerId
+photoUrl
+salesRepresentativeId
+sku
+implantCategory {
+  id
+  name
+}
+salesRepresentative {
+  id
+  name
+}
+manufacturer {
+  id
+  name
+}
+
+
+
+
+
+priorAuthorizationImplants {
+   ...PriorAuthorizationImplantLists
+  }
+}
+
+fragment ImplantLists on Implant {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+implantCategoryId
+manufacturerId
+photoUrl
+salesRepresentativeId
+sku
+implantCategory {
+    id
+    name
+}
+salesRepresentative {
+    id
+    name
+}
+manufacturer {
+    id
+    name
+}
+
+
+
+
+
+priorAuthorizationImplants {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminImplants($input: AdminListImplantInput) {
+  items: adminImplants(input: $input) {
+    ...ImplantLists
+  }
+  count: adminCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountImplants($input: AdminListImplantInput) {
+  count: adminCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminImplant($implantId: String!) {
+  item: adminImplant(implantId: $implantId) {
+    ...ImplantDetails
+  }
+}
+mutation AdminCreateImplant($input: AdminCreateImplantInput!) {
+  created: adminCreateImplant(input: $input) {
+    ...ImplantDetails
+  }
+}
+mutation AdminUpdateImplant($implantId: String!, $input: AdminUpdateImplantInput!) {
+  updated: adminUpdateImplant(implantId: $implantId, input: $input) {
+    ...ImplantDetails
+  }
+}
+mutation AdminDeleteImplant($implantId: String!) {
+  deleted: adminDeleteImplant(implantId: $implantId) {
+    ...ImplantDetails
+  }
+}
+
+query UserImplants($input: UserListImplantInput) {
+  items: userImplants(input: $input) {
+    ...ImplantLists
+  }
+  count: userCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountImplants($input: UserListImplantInput) {
+  count: userCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectImplants($input: UserListImplantInput) {
+  items: userSelectImplants(input: $input) {
+    ...ImplantDetails
+  }
+}
+
+query UserImplant($implantId: String!) {
+  item: userImplant(implantId: $implantId) {
+    ...ImplantDetails
+  }
+}
+
+mutation UserCreateImplant($input: UserCreateImplantInput!) {
+  created: userCreateImplant(input: $input) {
+    ...ImplantDetails
+  }
+}
+mutation UserUpdateImplant($implantId: String!, $input: UserUpdateImplantInput!) {
+  updated: userUpdateImplant(implantId: $implantId, input: $input) {
+    ...ImplantDetails
+  }
+}
+
+mutation UserUpdateImplants($input: UserUpdateImplantsInput!) {
+  updated: userUpdateImplants(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteImplant($implantId: String!) {
+  deleted: userDeleteImplant(implantId: $implantId) {
+    ...ImplantDetails
+  }
+}
+
+query PublicImplants($input: UserListImplantInput) {
+  items: publicImplants(input: $input) {
+    ...ImplantLists
+  }
+  count: publicCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountImplants($input: UserListImplantInput) {
+  count: publicCountImplants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectImplants($input: UserListImplantInput) {
+  items: publicSelectImplants(input: $input) {
+    ...ImplantDetails
+  }
+}
+
+query PublicImplant($implantId: String!) {
+  item: publicImplant(implantId: $implantId) {
+    ...ImplantDetails
+  }
+}

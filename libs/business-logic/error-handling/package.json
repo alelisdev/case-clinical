@@ -1,0 +1,35 @@
+{
+  "name": "@schema-driven/error-handling",
+  "version": "14.3.1",
+  "description": "A custom library part of the schema-driven framework. Use to implement enterprise and CLEAN architecture.",
+  "keywords": [
+    "schema-driven",
+    "Nx",
+    "Angular",
+    "angularlicious",
+    "matt vaughn",
+    "angular architecture",
+    "TypeScript"
+  ],
+  "author": {
+    "name": "Matt Vaughn",
+    "email": "Michael.Buller@schemadriven.com",
+    "url": "https://www.schema-driven.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schema-driven/schema-driven.git"
+  },
+  "homepage": "https://github.com/schema-driven/schema-driven#readme",
+  "bugs": {
+    "email": "Michael.Buller@schemadriven.com",
+    "url": "https://github.com/schema-driven/schema-driven/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "~14.0.0 || <15.0.0",
+    "@angular/core": "~14.0.0 || <15.0.0"
+  },
+  "dependencies": {
+    "tslib": "~2.3.0"
+  }
+}

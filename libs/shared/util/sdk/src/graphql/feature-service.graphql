@@ -1,0 +1,149 @@
+
+fragment ServiceDetails on Service {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+clinicalProviderServices {
+    id
+    name
+  }
+}
+
+fragment ServiceLists on Service {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+clinicalProviderServices {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminServices($input: AdminListServiceInput) {
+  items: adminServices(input: $input) {
+    ...ServiceLists
+  }
+  count: adminCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountServices($input: AdminListServiceInput) {
+  count: adminCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminService($serviceId: String!) {
+  item: adminService(serviceId: $serviceId) {
+    ...ServiceDetails
+  }
+}
+mutation AdminCreateService($input: AdminCreateServiceInput!) {
+  created: adminCreateService(input: $input) {
+    ...ServiceDetails
+  }
+}
+mutation AdminUpdateService($serviceId: String!, $input: AdminUpdateServiceInput!) {
+  updated: adminUpdateService(serviceId: $serviceId, input: $input) {
+    ...ServiceDetails
+  }
+}
+mutation AdminDeleteService($serviceId: String!) {
+  deleted: adminDeleteService(serviceId: $serviceId) {
+    ...ServiceDetails
+  }
+}
+
+query UserServices($input: UserListServiceInput) {
+  items: userServices(input: $input) {
+    ...ServiceLists
+  }
+  count: userCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountServices($input: UserListServiceInput) {
+  count: userCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectServices($input: UserListServiceInput) {
+  items: userSelectServices(input: $input) {
+    ...ServiceDetails
+  }
+}
+
+query UserService($serviceId: String!) {
+  item: userService(serviceId: $serviceId) {
+    ...ServiceDetails
+  }
+}
+
+mutation UserCreateService($input: UserCreateServiceInput!) {
+  created: userCreateService(input: $input) {
+    ...ServiceDetails
+  }
+}
+mutation UserUpdateService($serviceId: String!, $input: UserUpdateServiceInput!) {
+  updated: userUpdateService(serviceId: $serviceId, input: $input) {
+    ...ServiceDetails
+  }
+}
+
+mutation UserUpdateServices($input: UserUpdateServicesInput!) {
+  updated: userUpdateServices(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteService($serviceId: String!) {
+  deleted: userDeleteService(serviceId: $serviceId) {
+    ...ServiceDetails
+  }
+}
+
+query PublicServices($input: UserListServiceInput) {
+  items: publicServices(input: $input) {
+    ...ServiceLists
+  }
+  count: publicCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountServices($input: UserListServiceInput) {
+  count: publicCountServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectServices($input: UserListServiceInput) {
+  items: publicSelectServices(input: $input) {
+    ...ServiceDetails
+  }
+}
+
+query PublicService($serviceId: String!) {
+  item: publicService(serviceId: $serviceId) {
+    ...ServiceDetails
+  }
+}

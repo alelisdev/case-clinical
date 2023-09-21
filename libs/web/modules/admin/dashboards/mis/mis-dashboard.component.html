@@ -1,0 +1,28 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="flex flex-col">
+    <ui-formly-json-form
+      class="w-full h-auto"
+      formName="mis-dashboard"
+      [showSubmitButton]="false"
+      [formData]="vm"
+      [componentStore]="store"
+      [model]="model"
+    >
+    </ui-formly-json-form>
+      <ag-grid-angular
+      *ngIf="agGridClassName | async as agGridClassName"
+        #agGrid
+        style="width: 100%;"
+        [ngClass]="agGridClassName"
+        [modules]="modules"
+        domLayout="autoHeight"
+        [detailRowAutoHeight]="true"
+        [columnDefs]="recommendedOrderColumnDefs"
+        [defaultColDef]="defaultColDef"
+        [masterDetail]="true"
+        [detailCellRendererParams]="detailCellRendererParams"
+        [rowData]="vm.recommendedOrders"
+        (gridReady)="onGridReady($event)"
+      ></ag-grid-angular>
+  </div>
+</ng-container>

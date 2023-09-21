@@ -1,0 +1,95 @@
+fragment WhereDoesItHurtDetails on WhereDoesItHurt {
+  id
+  createdAt
+  updatedAt
+  name
+  sideId
+  bodyPartId
+  side {
+    id
+    name
+  }
+  bodyPart {
+    id
+    name
+  }
+
+  whereDoesItHurtSpecialties {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+query AdminWhereDoesItHurts($input: AdminListWhereDoesItHurtInput) {
+  items: adminWhereDoesItHurts(input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+  count: adminCountWhereDoesItHurts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountWhereDoesItHurts($input: AdminListWhereDoesItHurtInput) {
+  count: adminCountWhereDoesItHurts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminWhereDoesItHurt($whereDoesItHurtId: String!) {
+  item: adminWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation AdminCreateWhereDoesItHurt($input: AdminCreateWhereDoesItHurtInput!) {
+  created: adminCreateWhereDoesItHurt(input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation AdminUpdateWhereDoesItHurt($whereDoesItHurtId: String!, $input: AdminUpdateWhereDoesItHurtInput!) {
+  updated: adminUpdateWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId, input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation AdminDeleteWhereDoesItHurt($whereDoesItHurtId: String!) {
+  deleted: adminDeleteWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId) {
+    ...WhereDoesItHurtDetails
+  }
+}
+
+query UserWhereDoesItHurts($input: UserListWhereDoesItHurtInput) {
+  items: userWhereDoesItHurts(input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+  count: userCountWhereDoesItHurts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountWhereDoesItHurts($input: UserListWhereDoesItHurtInput) {
+  count: userCountWhereDoesItHurts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectWhereDoesItHurts($input: UserListWhereDoesItHurtInput) {
+  items: userSelectWhereDoesItHurts(input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+}
+
+query UserWhereDoesItHurt($whereDoesItHurtId: String!) {
+  item: userWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation UserCreateWhereDoesItHurt($input: UserCreateWhereDoesItHurtInput!) {
+  created: userCreateWhereDoesItHurt(input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation UserUpdateWhereDoesItHurt($whereDoesItHurtId: String!, $input: UserUpdateWhereDoesItHurtInput!) {
+  updated: userUpdateWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId, input: $input) {
+    ...WhereDoesItHurtDetails
+  }
+}
+mutation UserDeleteWhereDoesItHurt($whereDoesItHurtId: String!) {
+  deleted: userDeleteWhereDoesItHurt(whereDoesItHurtId: $whereDoesItHurtId) {
+    ...WhereDoesItHurtDetails
+  }
+}

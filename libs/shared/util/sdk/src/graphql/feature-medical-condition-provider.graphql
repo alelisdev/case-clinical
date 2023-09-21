@@ -1,0 +1,154 @@
+
+fragment MedicalConditionProviderDetails on MedicalConditionProvider {
+id
+createdAt
+updatedAt
+name
+medicalConditionId
+clinicalProviderId
+clinicalProvider {
+  id
+  name
+}
+
+medicalRecords {
+    ...DocumentDetails
+  }
+}
+
+fragment MedicalConditionProviderLists on MedicalConditionProvider {
+id
+createdAt
+updatedAt
+name
+medicalConditionId
+clinicalProviderId
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+medicalRecords {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminMedicalConditionProviders($input: AdminListMedicalConditionProviderInput) {
+  items: adminMedicalConditionProviders(input: $input) {
+    ...MedicalConditionProviderLists
+  }
+  count: adminCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountMedicalConditionProviders($input: AdminListMedicalConditionProviderInput) {
+  count: adminCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminMedicalConditionProvider($medicalConditionProviderId: String!) {
+  item: adminMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId) {
+    ...MedicalConditionProviderDetails
+  }
+}
+mutation AdminCreateMedicalConditionProvider($input: AdminCreateMedicalConditionProviderInput!) {
+  created: adminCreateMedicalConditionProvider(input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+mutation AdminUpdateMedicalConditionProvider($medicalConditionProviderId: String!, $input: AdminUpdateMedicalConditionProviderInput!) {
+  updated: adminUpdateMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId, input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+mutation AdminDeleteMedicalConditionProvider($medicalConditionProviderId: String!) {
+  deleted: adminDeleteMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+query UserMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  items: userMedicalConditionProviders(input: $input) {
+    ...MedicalConditionProviderLists
+  }
+  count: userCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  count: userCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  items: userSelectMedicalConditionProviders(input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+query UserMedicalConditionProvider($medicalConditionProviderId: String!) {
+  item: userMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+mutation UserCreateMedicalConditionProvider($input: UserCreateMedicalConditionProviderInput!) {
+  created: userCreateMedicalConditionProvider(input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+mutation UserUpdateMedicalConditionProvider($medicalConditionProviderId: String!, $input: UserUpdateMedicalConditionProviderInput!) {
+  updated: userUpdateMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId, input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+mutation UserUpdateMedicalConditionProviders($input: UserUpdateMedicalConditionProvidersInput!) {
+  updated: userUpdateMedicalConditionProviders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteMedicalConditionProvider($medicalConditionProviderId: String!) {
+  deleted: userDeleteMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+query PublicMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  items: publicMedicalConditionProviders(input: $input) {
+    ...MedicalConditionProviderLists
+  }
+  count: publicCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  count: publicCountMedicalConditionProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectMedicalConditionProviders($input: UserListMedicalConditionProviderInput) {
+  items: publicSelectMedicalConditionProviders(input: $input) {
+    ...MedicalConditionProviderDetails
+  }
+}
+
+query PublicMedicalConditionProvider($medicalConditionProviderId: String!) {
+  item: publicMedicalConditionProvider(medicalConditionProviderId: $medicalConditionProviderId) {
+    ...MedicalConditionProviderDetails
+  }
+}

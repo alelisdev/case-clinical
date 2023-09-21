@@ -1,0 +1,36 @@
+{
+  "name": "@schema-driven/common",
+  "version": "14.3.1",
+  "peerDependencies": {
+    "@angular/common": "~14.0.0 || <15.0.0",
+    "@angular/core": "~14.0.0 || <15.0.0",
+    "@angular/forms": "~14.0.0 || <15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "description": "A custom library part of the schema-driven framework. Use to implement enterprise and CLEAN architecture.",
+  "keywords": [
+    "schema-driven",
+    "Nx",
+    "Angular",
+    "angularlicious",
+    "Michael Buller",
+    "angular architecture",
+    "TypeScript"
+  ],
+  "author": {
+    "name": "Michael Buller",
+    "email": "Michael.Buller@schemadriven.com",
+    "url": "https://www.schema-driven.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schema-driven/schema-driven.git"
+  },
+  "homepage": "https://github.com/schema-driven/schema-driven#readme",
+  "bugs": {
+    "email": "Michael.Buller@schemadriven.com",
+    "url": "https://github.com/schema-driven/schema-driven/issues"
+  }
+}

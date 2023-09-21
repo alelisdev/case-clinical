@@ -1,0 +1,23 @@
+{
+  "name": "api-course-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/course/feature/src",
+  "prefix": "course",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/course/data-access/src/**/*.ts", "libs/api/course/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/course/data-access"],
+      "options": {
+        "jestConfig": "libs/api/course/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

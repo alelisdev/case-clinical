@@ -1,0 +1,160 @@
+
+fragment RequiredFieldDetails on RequiredField {
+id
+createdAt
+updatedAt
+name
+entityName
+accidentTypeId
+medLevelId
+accidentType {
+  id
+  name
+}
+medLevel {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RequiredFieldLists on RequiredField {
+id
+createdAt
+updatedAt
+name
+entityName
+accidentTypeId
+medLevelId
+accidentType {
+    id
+    name
+}
+medLevel {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminRequiredFields($input: AdminListRequiredFieldInput) {
+  items: adminRequiredFields(input: $input) {
+    ...RequiredFieldLists
+  }
+  count: adminCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRequiredFields($input: AdminListRequiredFieldInput) {
+  count: adminCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRequiredField($requiredFieldId: String!) {
+  item: adminRequiredField(requiredFieldId: $requiredFieldId) {
+    ...RequiredFieldDetails
+  }
+}
+mutation AdminCreateRequiredField($input: AdminCreateRequiredFieldInput!) {
+  created: adminCreateRequiredField(input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+mutation AdminUpdateRequiredField($requiredFieldId: String!, $input: AdminUpdateRequiredFieldInput!) {
+  updated: adminUpdateRequiredField(requiredFieldId: $requiredFieldId, input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+mutation AdminDeleteRequiredField($requiredFieldId: String!) {
+  deleted: adminDeleteRequiredField(requiredFieldId: $requiredFieldId) {
+    ...RequiredFieldDetails
+  }
+}
+
+query UserRequiredFields($input: UserListRequiredFieldInput) {
+  items: userRequiredFields(input: $input) {
+    ...RequiredFieldLists
+  }
+  count: userCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRequiredFields($input: UserListRequiredFieldInput) {
+  count: userCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRequiredFields($input: UserListRequiredFieldInput) {
+  items: userSelectRequiredFields(input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+
+query UserRequiredField($requiredFieldId: String!) {
+  item: userRequiredField(requiredFieldId: $requiredFieldId) {
+    ...RequiredFieldDetails
+  }
+}
+
+mutation UserCreateRequiredField($input: UserCreateRequiredFieldInput!) {
+  created: userCreateRequiredField(input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+mutation UserUpdateRequiredField($requiredFieldId: String!, $input: UserUpdateRequiredFieldInput!) {
+  updated: userUpdateRequiredField(requiredFieldId: $requiredFieldId, input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+
+mutation UserUpdateRequiredFields($input: UserUpdateRequiredFieldsInput!) {
+  updated: userUpdateRequiredFields(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRequiredField($requiredFieldId: String!) {
+  deleted: userDeleteRequiredField(requiredFieldId: $requiredFieldId) {
+    ...RequiredFieldDetails
+  }
+}
+
+query PublicRequiredFields($input: UserListRequiredFieldInput) {
+  items: publicRequiredFields(input: $input) {
+    ...RequiredFieldLists
+  }
+  count: publicCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRequiredFields($input: UserListRequiredFieldInput) {
+  count: publicCountRequiredFields(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRequiredFields($input: UserListRequiredFieldInput) {
+  items: publicSelectRequiredFields(input: $input) {
+    ...RequiredFieldDetails
+  }
+}
+
+query PublicRequiredField($requiredFieldId: String!) {
+  item: publicRequiredField(requiredFieldId: $requiredFieldId) {
+    ...RequiredFieldDetails
+  }
+}

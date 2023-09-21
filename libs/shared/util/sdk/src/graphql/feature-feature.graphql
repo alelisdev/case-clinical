@@ -1,0 +1,101 @@
+
+fragment FeatureDetails on Feature {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+userFeatures {
+    id
+    name
+  }
+
+
+featurePermissions {
+    id
+    name
+  }
+
+}
+query AdminFeatures($input: AdminListFeatureInput) {
+  items: adminFeatures(input: $input) {
+    ...FeatureDetails
+  }
+  count: adminCountFeatures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFeatures($input: AdminListFeatureInput) {
+  count: adminCountFeatures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFeature($featureId: String!) {
+  item: adminFeature(featureId: $featureId) {
+    ...FeatureDetails
+  }
+}
+mutation AdminCreateFeature($input: AdminCreateFeatureInput!) {
+  created: adminCreateFeature(input: $input) {
+    ...FeatureDetails
+  }
+}
+mutation AdminUpdateFeature($featureId: String!, $input: AdminUpdateFeatureInput!) {
+  updated: adminUpdateFeature(featureId: $featureId, input: $input) {
+    ...FeatureDetails
+  }
+}
+mutation AdminDeleteFeature($featureId: String!) {
+  deleted: adminDeleteFeature(featureId: $featureId) {
+    ...FeatureDetails
+  }
+}
+
+query UserFeatures($input: UserListFeatureInput) {
+  items: userFeatures(input: $input) {
+    ...FeatureDetails
+  }
+  count: userCountFeatures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFeatures($input: UserListFeatureInput) {
+  count: userCountFeatures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFeatures($input: UserListFeatureInput) {
+  items: userSelectFeatures(input: $input) {
+    ...FeatureDetails
+  }
+}
+
+query UserFeature($featureId: String!) {
+  item: userFeature(featureId: $featureId) {
+    ...FeatureDetails
+  }
+}
+mutation UserCreateFeature($input: UserCreateFeatureInput!) {
+  created: userCreateFeature(input: $input) {
+    ...FeatureDetails
+  }
+}
+mutation UserUpdateFeature($featureId: String!, $input: UserUpdateFeatureInput!) {
+  updated: userUpdateFeature(featureId: $featureId, input: $input) {
+    ...FeatureDetails
+  }
+}
+mutation UserDeleteFeature($featureId: String!) {
+  deleted: userDeleteFeature(featureId: $featureId) {
+    ...FeatureDetails
+  }
+}

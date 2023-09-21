@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-treatment.input'
+export * from './lib/dto/admin-list-treatment.input'
+export * from './lib/dto/admin-update-treatment.input'
+export * from './lib/dto/treatment.input'
+export * from './lib/dto/user-create-treatment.input'
+export * from './lib/dto/user-list-treatment.input'
+export * from './lib/dto/user-update-treatment.input'
+export * from './lib/dto/user-update-treatments.input'
+export * from './lib/models/treatment.model'
+export * from './lib/api-treatment-data-access.module'
+
+export * from './lib/api-treatment-data-access-admin.service'
+export * from './lib/api-treatment-data-access-public.service'
+export * from './lib/api-treatment-data-access-user.service'

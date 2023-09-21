@@ -1,0 +1,148 @@
+
+fragment CostCategoryDetails on CostCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationProcedureCodes {
+   ...PriorAuthorizationProcedureCodeLists
+  }
+}
+
+fragment CostCategoryLists on CostCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationProcedureCodes {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCostCategories($input: AdminListCostCategoryInput) {
+  items: adminCostCategories(input: $input) {
+    ...CostCategoryLists
+  }
+  count: adminCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCostCategories($input: AdminListCostCategoryInput) {
+  count: adminCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCostCategory($costCategoryId: String!) {
+  item: adminCostCategory(costCategoryId: $costCategoryId) {
+    ...CostCategoryDetails
+  }
+}
+mutation AdminCreateCostCategory($input: AdminCreateCostCategoryInput!) {
+  created: adminCreateCostCategory(input: $input) {
+    ...CostCategoryDetails
+  }
+}
+mutation AdminUpdateCostCategory($costCategoryId: String!, $input: AdminUpdateCostCategoryInput!) {
+  updated: adminUpdateCostCategory(costCategoryId: $costCategoryId, input: $input) {
+    ...CostCategoryDetails
+  }
+}
+mutation AdminDeleteCostCategory($costCategoryId: String!) {
+  deleted: adminDeleteCostCategory(costCategoryId: $costCategoryId) {
+    ...CostCategoryDetails
+  }
+}
+
+query UserCostCategories($input: UserListCostCategoryInput) {
+  items: userCostCategories(input: $input) {
+    ...CostCategoryLists
+  }
+  count: userCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCostCategories($input: UserListCostCategoryInput) {
+  count: userCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCostCategories($input: UserListCostCategoryInput) {
+  items: userSelectCostCategories(input: $input) {
+    ...CostCategoryDetails
+  }
+}
+
+query UserCostCategory($costCategoryId: String!) {
+  item: userCostCategory(costCategoryId: $costCategoryId) {
+    ...CostCategoryDetails
+  }
+}
+
+mutation UserCreateCostCategory($input: UserCreateCostCategoryInput!) {
+  created: userCreateCostCategory(input: $input) {
+    ...CostCategoryDetails
+  }
+}
+mutation UserUpdateCostCategory($costCategoryId: String!, $input: UserUpdateCostCategoryInput!) {
+  updated: userUpdateCostCategory(costCategoryId: $costCategoryId, input: $input) {
+    ...CostCategoryDetails
+  }
+}
+
+mutation UserUpdateCostCategories($input: UserUpdateCostCategoriesInput!) {
+  updated: userUpdateCostCategories(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCostCategory($costCategoryId: String!) {
+  deleted: userDeleteCostCategory(costCategoryId: $costCategoryId) {
+    ...CostCategoryDetails
+  }
+}
+
+query PublicCostCategories($input: UserListCostCategoryInput) {
+  items: publicCostCategories(input: $input) {
+    ...CostCategoryLists
+  }
+  count: publicCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCostCategories($input: UserListCostCategoryInput) {
+  count: publicCountCostCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCostCategories($input: UserListCostCategoryInput) {
+  items: publicSelectCostCategories(input: $input) {
+    ...CostCategoryDetails
+  }
+}
+
+query PublicCostCategory($costCategoryId: String!) {
+  item: publicCostCategory(costCategoryId: $costCategoryId) {
+    ...CostCategoryDetails
+  }
+}

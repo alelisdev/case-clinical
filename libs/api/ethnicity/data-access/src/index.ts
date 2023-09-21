@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-ethnicity.input'
+export * from './lib/dto/admin-list-ethnicity.input'
+export * from './lib/dto/admin-update-ethnicity.input'
+export * from './lib/dto/ethnicity.input'
+export * from './lib/dto/user-create-ethnicity.input'
+export * from './lib/dto/user-list-ethnicity.input'
+export * from './lib/dto/user-update-ethnicity.input'
+export * from './lib/dto/user-update-ethnicities.input'
+export * from './lib/models/ethnicity.model'
+export * from './lib/api-ethnicity-data-access.module'
+
+export * from './lib/api-ethnicity-data-access-admin.service'
+export * from './lib/api-ethnicity-data-access-public.service'
+export * from './lib/api-ethnicity-data-access-user.service'

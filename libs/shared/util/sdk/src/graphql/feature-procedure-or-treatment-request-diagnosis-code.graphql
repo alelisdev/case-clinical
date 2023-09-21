@@ -1,0 +1,157 @@
+
+
+fragment ProcedureOrTreatmentRequestDiagnosisCodeDetails on ProcedureOrTreatmentRequestDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+procedureOrTreatmentRequestId
+diagnosis {
+  id
+  name
+}
+procedureOrTreatmentRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ProcedureOrTreatmentRequestDiagnosisCodeLists on ProcedureOrTreatmentRequestDiagnosisCode {
+id
+createdAt
+updatedAt
+name
+diagnosisCodeId
+procedureOrTreatmentRequestId
+diagnosis {
+    id
+    name
+}
+procedureOrTreatmentRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminProcedureOrTreatmentRequestDiagnosisCodes($input: AdminListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  items: adminProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeLists
+  }
+  count: adminCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureOrTreatmentRequestDiagnosisCodes($input: AdminListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  count: adminCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!) {
+  item: adminProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+mutation AdminCreateProcedureOrTreatmentRequestDiagnosisCode($input: AdminCreateProcedureOrTreatmentRequestDiagnosisCodeInput!) {
+  created: adminCreateProcedureOrTreatmentRequestDiagnosisCode(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+mutation AdminUpdateProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!, $input: AdminUpdateProcedureOrTreatmentRequestDiagnosisCodeInput!) {
+  updated: adminUpdateProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId, input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+mutation AdminDeleteProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!) {
+  deleted: adminDeleteProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  items: userProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeLists
+  }
+  count: userCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  count: userCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  items: userSelectProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!) {
+  item: userProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+mutation UserCreateProcedureOrTreatmentRequestDiagnosisCode($input: UserCreateProcedureOrTreatmentRequestDiagnosisCodeInput!) {
+  created: userCreateProcedureOrTreatmentRequestDiagnosisCode(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+mutation UserUpdateProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!, $input: UserUpdateProcedureOrTreatmentRequestDiagnosisCodeInput!) {
+  updated: userUpdateProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId, input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+mutation UserUpdateProcedureOrTreatmentRequestDiagnosisCodes($input: UserUpdateProcedureOrTreatmentRequestDiagnosisCodesInput!) {
+  updated: userUpdateProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!) {
+  deleted: userDeleteProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  items: publicProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeLists
+  }
+  count: publicCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  count: publicCountProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureOrTreatmentRequestDiagnosisCodes($input: UserListProcedureOrTreatmentRequestDiagnosisCodeInput) {
+  items: publicSelectProcedureOrTreatmentRequestDiagnosisCodes(input: $input) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequestDiagnosisCode($procedureOrTreatmentRequestDiagnosisCodeId: String!) {
+  item: publicProcedureOrTreatmentRequestDiagnosisCode(procedureOrTreatmentRequestDiagnosisCodeId: $procedureOrTreatmentRequestDiagnosisCodeId) {
+    ...ProcedureOrTreatmentRequestDiagnosisCodeDetails
+  }
+}

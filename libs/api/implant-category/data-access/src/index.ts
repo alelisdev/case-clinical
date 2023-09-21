@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-implant-category.input'
+export * from './lib/dto/admin-list-implant-category.input'
+export * from './lib/dto/admin-update-implant-category.input'
+export * from './lib/dto/implant-category.input'
+export * from './lib/dto/user-create-implant-category.input'
+export * from './lib/dto/user-list-implant-category.input'
+export * from './lib/dto/user-update-implant-category.input'
+export * from './lib/dto/user-update-implant-categories.input'
+export * from './lib/models/implant-category.model'
+export * from './lib/api-implant-category-data-access.module'
+
+export * from './lib/api-implant-category-data-access-admin.service'
+export * from './lib/api-implant-category-data-access-public.service'
+export * from './lib/api-implant-category-data-access-user.service'

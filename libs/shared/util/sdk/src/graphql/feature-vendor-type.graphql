@@ -1,0 +1,148 @@
+
+fragment VendorTypeDetails on VendorType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+vendors {
+      ...VendorLists
+  }
+}
+
+fragment VendorTypeLists on VendorType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+vendors {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminVendorTypes($input: AdminListVendorTypeInput) {
+  items: adminVendorTypes(input: $input) {
+    ...VendorTypeLists
+  }
+  count: adminCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountVendorTypes($input: AdminListVendorTypeInput) {
+  count: adminCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminVendorType($vendorTypeId: String!) {
+  item: adminVendorType(vendorTypeId: $vendorTypeId) {
+    ...VendorTypeDetails
+  }
+}
+mutation AdminCreateVendorType($input: AdminCreateVendorTypeInput!) {
+  created: adminCreateVendorType(input: $input) {
+    ...VendorTypeDetails
+  }
+}
+mutation AdminUpdateVendorType($vendorTypeId: String!, $input: AdminUpdateVendorTypeInput!) {
+  updated: adminUpdateVendorType(vendorTypeId: $vendorTypeId, input: $input) {
+    ...VendorTypeDetails
+  }
+}
+mutation AdminDeleteVendorType($vendorTypeId: String!) {
+  deleted: adminDeleteVendorType(vendorTypeId: $vendorTypeId) {
+    ...VendorTypeDetails
+  }
+}
+
+query UserVendorTypes($input: UserListVendorTypeInput) {
+  items: userVendorTypes(input: $input) {
+    ...VendorTypeLists
+  }
+  count: userCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountVendorTypes($input: UserListVendorTypeInput) {
+  count: userCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectVendorTypes($input: UserListVendorTypeInput) {
+  items: userSelectVendorTypes(input: $input) {
+    ...VendorTypeDetails
+  }
+}
+
+query UserVendorType($vendorTypeId: String!) {
+  item: userVendorType(vendorTypeId: $vendorTypeId) {
+    ...VendorTypeDetails
+  }
+}
+
+mutation UserCreateVendorType($input: UserCreateVendorTypeInput!) {
+  created: userCreateVendorType(input: $input) {
+    ...VendorTypeDetails
+  }
+}
+mutation UserUpdateVendorType($vendorTypeId: String!, $input: UserUpdateVendorTypeInput!) {
+  updated: userUpdateVendorType(vendorTypeId: $vendorTypeId, input: $input) {
+    ...VendorTypeDetails
+  }
+}
+
+mutation UserUpdateVendorTypes($input: UserUpdateVendorTypesInput!) {
+  updated: userUpdateVendorTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteVendorType($vendorTypeId: String!) {
+  deleted: userDeleteVendorType(vendorTypeId: $vendorTypeId) {
+    ...VendorTypeDetails
+  }
+}
+
+query PublicVendorTypes($input: UserListVendorTypeInput) {
+  items: publicVendorTypes(input: $input) {
+    ...VendorTypeLists
+  }
+  count: publicCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountVendorTypes($input: UserListVendorTypeInput) {
+  count: publicCountVendorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectVendorTypes($input: UserListVendorTypeInput) {
+  items: publicSelectVendorTypes(input: $input) {
+    ...VendorTypeDetails
+  }
+}
+
+query PublicVendorType($vendorTypeId: String!) {
+  item: publicVendorType(vendorTypeId: $vendorTypeId) {
+    ...VendorTypeDetails
+  }
+}

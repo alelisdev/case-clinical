@@ -1,0 +1,8 @@
+::ng-deep formly-field {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+::ng-deep formly-field > ng-component {
+  flex: 1;
+}

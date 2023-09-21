@@ -1,0 +1,35 @@
+fragment RoleFeatureDetails on RoleFeature {
+  id
+  featureId
+  roleId
+}
+
+fragment RoleFeaturePermissionUpdateResultDetails on RoleFeaturePermissionUpdateResult {
+  added
+  removed
+}
+
+query AdminRoleFeatures($input: AdminListRoleFeatureInput!) {
+  roleFeatures: adminRoleFeatures(input: $input) {
+    ...RoleFeatureDetails
+  }
+}
+
+mutation AdminCreateRoleFeature($input: AdminCreateRoleFeatureInput !) {
+  roleFeatures: adminCreateRoleFeature(input: $input) {
+    ...RoleFeatureDetails
+  }
+}
+
+query AdminRoleFeaturePermissionsCore($input: AdminListRoleFeaturePermissionInput  !) {
+  roleFeatures: adminRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+
+mutation adminRoleFeaturePermissionsUpdate($roleId: String!,$input: AdminRoleFeaturePermissionUpdateInput!) {
+  result: adminRoleFeaturePermissionsUpdate(roleId: $roleId, input: $input) {
+    ...RoleFeaturePermissionUpdateResultDetails
+  }
+}

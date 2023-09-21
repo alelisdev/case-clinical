@@ -1,0 +1,326 @@
+
+fragment ClaimDetails on Claim {
+id
+createdAt
+updatedAt
+name
+originalRecordDate
+receivedDate
+dueDate
+patientName
+patientPhoneNumber
+patientDob
+patientAddressLine1
+patientAddressCity
+patientAddressState
+patientAddressPostalCode
+carrierName
+carrierLine1
+carrierLine2
+carrierCity
+carrierState
+carrierPostalCode
+insuredName
+insuredLine1
+insuredCity
+insuredState
+insuredPostalCode
+insuredIdNumber
+insuredDob
+insuredPhoneNumber
+patientSignature
+diagnosisCode1
+diagnosisCode2
+diagnosisCode3
+diagnosisCode4
+diagnosisCode5
+diagnosisCode6
+diagnosisCode7
+diagnosisCode8
+federalTaxId
+totalCharges
+amountPaid
+physicianSignature
+physicianSignedOn
+serviceFacility
+serviceFacilityLine1
+serviceFacilityCity
+serviceFacilityState
+serviceFacilityPostalCode
+serviceFacilityNpi
+billingFacility
+billingLine1
+billingCity
+billingState
+billingPostalCode
+billingNpi
+billingPhoneNumber
+billingOther
+sessionNotes
+referringProvider
+referringProviderNpi
+additionalClaimInfo
+accountNumber
+referenceNumber
+facility
+priorAuthorizationNumber
+priorAuthorizationRequestId
+providerName
+providerNumber
+vendor
+vendorLine1
+vendorCSZ
+vendorTaxId
+totalApprovedAmount
+totalBilledAmount
+totalNetPayAmount
+notes
+claimId
+explanationOfPaymentId
+patientId
+priorAuthorizationRequest {
+  id
+  name
+}
+claim {
+  id
+  name
+}
+explanationOfPayment {
+  id
+  name
+}
+patient {
+  id
+  name
+}
+
+
+
+
+
+procedures {
+    ...ClaimProcedureDetails
+  }
+}
+
+fragment ClaimLists on Claim {
+id
+createdAt
+updatedAt
+name
+originalRecordDate
+receivedDate
+dueDate
+patientName
+patientPhoneNumber
+patientDob
+patientAddressLine1
+patientAddressCity
+patientAddressState
+patientAddressPostalCode
+carrierName
+carrierLine1
+carrierLine2
+carrierCity
+carrierState
+carrierPostalCode
+insuredName
+insuredLine1
+insuredCity
+insuredState
+insuredPostalCode
+insuredIdNumber
+insuredDob
+insuredPhoneNumber
+patientSignature
+diagnosisCode1
+diagnosisCode2
+diagnosisCode3
+diagnosisCode4
+diagnosisCode5
+diagnosisCode6
+diagnosisCode7
+diagnosisCode8
+federalTaxId
+totalCharges
+amountPaid
+physicianSignature
+physicianSignedOn
+serviceFacility
+serviceFacilityLine1
+serviceFacilityCity
+serviceFacilityState
+serviceFacilityPostalCode
+serviceFacilityNpi
+billingFacility
+billingLine1
+billingCity
+billingState
+billingPostalCode
+billingNpi
+billingPhoneNumber
+billingOther
+sessionNotes
+referringProvider
+referringProviderNpi
+additionalClaimInfo
+accountNumber
+referenceNumber
+facility
+priorAuthorizationNumber
+priorAuthorizationRequestId
+providerName
+providerNumber
+vendor
+vendorLine1
+vendorCSZ
+vendorTaxId
+totalApprovedAmount
+totalBilledAmount
+totalNetPayAmount
+notes
+claimId
+explanationOfPaymentId
+patientId
+priorAuthorizationRequest {
+    id
+    name
+}
+claim {
+    id
+    name
+}
+explanationOfPayment {
+    id
+    name
+}
+patient {
+    id
+    name
+}
+
+
+
+
+
+procedures {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminClaims($input: AdminListClaimInput) {
+  items: adminClaims(input: $input) {
+    ...ClaimLists
+  }
+  count: adminCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClaims($input: AdminListClaimInput) {
+  count: adminCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClaim($claimId: String!) {
+  item: adminClaim(claimId: $claimId) {
+    ...ClaimDetails
+  }
+}
+mutation AdminCreateClaim($input: AdminCreateClaimInput!) {
+  created: adminCreateClaim(input: $input) {
+    ...ClaimDetails
+  }
+}
+mutation AdminUpdateClaim($claimId: String!, $input: AdminUpdateClaimInput!) {
+  updated: adminUpdateClaim(claimId: $claimId, input: $input) {
+    ...ClaimDetails
+  }
+}
+mutation AdminDeleteClaim($claimId: String!) {
+  deleted: adminDeleteClaim(claimId: $claimId) {
+    ...ClaimDetails
+  }
+}
+
+query UserClaims($input: UserListClaimInput) {
+  items: userClaims(input: $input) {
+    ...ClaimLists
+  }
+  count: userCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClaims($input: UserListClaimInput) {
+  count: userCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClaims($input: UserListClaimInput) {
+  items: userSelectClaims(input: $input) {
+    ...ClaimDetails
+  }
+}
+
+query UserClaim($claimId: String!) {
+  item: userClaim(claimId: $claimId) {
+    ...ClaimDetails
+  }
+}
+
+mutation UserCreateClaim($input: UserCreateClaimInput!) {
+  created: userCreateClaim(input: $input) {
+    ...ClaimDetails
+  }
+}
+mutation UserUpdateClaim($claimId: String!, $input: UserUpdateClaimInput!) {
+  updated: userUpdateClaim(claimId: $claimId, input: $input) {
+    ...ClaimDetails
+  }
+}
+
+mutation UserUpdateClaims($input: UserUpdateClaimsInput!) {
+  updated: userUpdateClaims(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClaim($claimId: String!) {
+  deleted: userDeleteClaim(claimId: $claimId) {
+    ...ClaimDetails
+  }
+}
+
+query PublicClaims($input: UserListClaimInput) {
+  items: publicClaims(input: $input) {
+    ...ClaimLists
+  }
+  count: publicCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClaims($input: UserListClaimInput) {
+  count: publicCountClaims(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClaims($input: UserListClaimInput) {
+  items: publicSelectClaims(input: $input) {
+    ...ClaimDetails
+  }
+}
+
+query PublicClaim($claimId: String!) {
+  item: publicClaim(claimId: $claimId) {
+    ...ClaimDetails
+  }
+}

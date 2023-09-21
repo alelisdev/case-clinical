@@ -1,0 +1,193 @@
+
+fragment MedicalRecordDetails on MedicalRecord {
+id
+createdAt
+updatedAt
+name
+description
+clinicalProviderId
+clinicalProvider {
+  id
+  createdAt
+  updatedAt
+  name
+  vendorId
+  expertId
+  npi
+  honorific
+  firstName
+  lastName
+  profileImage {
+    ...DocumentOverview
+  }
+
+  clinicalProviderSpecialties {
+    ...ClinicalProviderSpecialtyLists
+  }
+}
+
+document {
+...DocumentOverview
+}
+
+patient {
+  id
+  name
+}
+
+}
+
+fragment MedicalRecordLists on MedicalRecord {
+id
+createdAt
+updatedAt
+name
+description
+clinicalProviderId
+clinicalProvider {
+  id
+  createdAt
+  updatedAt
+  name
+  vendorId
+  expertId
+  npi
+  honorific
+  firstName
+  lastName
+  profileImage {
+    ...DocumentOverview
+  }
+
+  clinicalProviderSpecialties {
+    ...ClinicalProviderSpecialtyLists
+  }
+}
+
+
+
+document {
+id
+name
+}
+
+patient {
+  id
+  name
+}
+
+}
+
+
+
+query AdminMedicalRecords($input: AdminListMedicalRecordInput) {
+  items: adminMedicalRecords(input: $input) {
+    ...MedicalRecordLists
+  }
+  count: adminCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountMedicalRecords($input: AdminListMedicalRecordInput) {
+  count: adminCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminMedicalRecord($medicalRecordId: String!) {
+  item: adminMedicalRecord(medicalRecordId: $medicalRecordId) {
+    ...MedicalRecordDetails
+  }
+}
+mutation AdminCreateMedicalRecord($input: AdminCreateMedicalRecordInput!) {
+  created: adminCreateMedicalRecord(input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+mutation AdminUpdateMedicalRecord($medicalRecordId: String!, $input: AdminUpdateMedicalRecordInput!) {
+  updated: adminUpdateMedicalRecord(medicalRecordId: $medicalRecordId, input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+mutation AdminDeleteMedicalRecord($medicalRecordId: String!) {
+  deleted: adminDeleteMedicalRecord(medicalRecordId: $medicalRecordId) {
+    ...MedicalRecordDetails
+  }
+}
+
+query UserMedicalRecords($input: UserListMedicalRecordInput) {
+  items: userMedicalRecords(input: $input) {
+    ...MedicalRecordLists
+  }
+  count: userCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountMedicalRecords($input: UserListMedicalRecordInput) {
+  count: userCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectMedicalRecords($input: UserListMedicalRecordInput) {
+  items: userSelectMedicalRecords(input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+
+query UserMedicalRecord($medicalRecordId: String!) {
+  item: userMedicalRecord(medicalRecordId: $medicalRecordId) {
+    ...MedicalRecordDetails
+  }
+}
+
+mutation UserCreateMedicalRecord($input: UserCreateMedicalRecordInput!) {
+  created: userCreateMedicalRecord(input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+mutation UserUpdateMedicalRecord($medicalRecordId: String!, $input: UserUpdateMedicalRecordInput!) {
+  updated: userUpdateMedicalRecord(medicalRecordId: $medicalRecordId, input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+
+mutation UserUpdateMedicalRecords($input: UserUpdateMedicalRecordsInput!) {
+  updated: userUpdateMedicalRecords(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteMedicalRecord($medicalRecordId: String!) {
+  deleted: userDeleteMedicalRecord(medicalRecordId: $medicalRecordId) {
+    ...MedicalRecordDetails
+  }
+}
+
+query PublicMedicalRecords($input: UserListMedicalRecordInput) {
+  items: publicMedicalRecords(input: $input) {
+    ...MedicalRecordLists
+  }
+  count: publicCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountMedicalRecords($input: UserListMedicalRecordInput) {
+  count: publicCountMedicalRecords(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectMedicalRecords($input: UserListMedicalRecordInput) {
+  items: publicSelectMedicalRecords(input: $input) {
+    ...MedicalRecordDetails
+  }
+}
+
+query PublicMedicalRecord($medicalRecordId: String!) {
+  item: publicMedicalRecord(medicalRecordId: $medicalRecordId) {
+    ...MedicalRecordDetails
+  }
+}

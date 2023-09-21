@@ -1,0 +1,12 @@
+<agm-map [style]="getStyle()" [latitude]="defaultLatitude" [longitude]="defaultLongitude" [zoom]="7" [scrollwheel]="true" [usePanning]="true" (mapReady)="onMapReady($event)" >
+  <agm-marker *ngFor="let datum of data; let i = index;" [latitude]="datum[latitudeProp]"
+    [iconUrl]="iconUrl" [markerDraggable]="false" (dragEnd)="markerDragEnd($event)"
+    [longitude]="datum[longitudeProp]" (markerClick)="onMarkerClick(infoWindow)">
+
+    <agm-info-window [disableAutoPan]="false" #infoWindow>
+      <ui-context-provider class="flex" [data]="datum">
+        <formly-field [field]="windowField"></formly-field>
+      </ui-context-provider>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

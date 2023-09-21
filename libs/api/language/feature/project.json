@@ -1,0 +1,23 @@
+{
+  "name": "api-language-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/language/feature/src",
+  "prefix": "language",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/language/data-access/src/**/*.ts", "libs/api/language/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/language/data-access"],
+      "options": {
+        "jestConfig": "libs/api/language/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

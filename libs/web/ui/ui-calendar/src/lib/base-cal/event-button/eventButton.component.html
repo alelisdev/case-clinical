@@ -1,0 +1,210 @@
+<ng-template #noTimeTemplate> <div></div> </ng-template>
+
+<ng-template
+  #customCellTemplate
+  let-segment="segment"
+  let-locale="locale"
+  let-segmentHeight="segmentHeight"
+  let-isTimeLabel="isTimeLabel"
+  let-daysInWeek="daysInWeek"
+>
+  <div class="absolute left-0 h-16 w-14 bg-white z-0 border-r-2"></div>
+
+  <div
+    class="z-10 justify-end h-full sticky left-0 -mt-2.5 -ml-14 w-14 pr-2 text-right flex flex-col text-xs leading-5 text-gray-400"
+  >
+    <h1 class="translate-y-1/2" [ngClass]="segment.isStart ? '' : 'hidden'">
+      {{
+        segment.displayDate
+          | calendarDate
+            : (daysInWeek === 1 ? "dayViewHour" : "weekViewHour")
+            : locale
+      }}
+    </h1>
+  </div>
+</ng-template>
+
+<div class="flex-1 min-h-0 flex flex-row inset-0">
+  <div class="flex flex-col w-full md:w-7/12 overflow-y-auto">
+    <div
+      *ngFor="let event of events"
+      class="flex flex-col w-full p-2 border-b-2"
+    >
+      <li class="relative flex space-x-6 py-6 xl:static">
+        <div class="flex-auto">
+          <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">
+            {{ event.title }}
+          </h3>
+          <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
+            <div class="flex items-start space-x-3">
+              <dt class="mt-0.5">
+                <span class="sr-only">{{
+                  format(event.start, "MMM ddd, yyyy at hh:mm")
+                }}</span>
+                <!-- Heroicon name: solid/calendar -->
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </dt>
+              <dd>
+                <time datetime="2022-01-10T17:00">{{
+                  format(event.start, "MMM d, yyyy 'at' hh:mm a")
+                }}</time>
+              </dd>
+            </div>
+            <!-- <div
+              class="mt-2 flex items-start space-x-3 xl:mt-0 xl:ml-3.5 xl:border-l xl:border-gray-400 xl:border-opacity-50 xl:pl-3.5"
+            >
+              <dt class="mt-0.5">
+                <span class="sr-only">Location</span>
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </dt>
+              <dd>Starbucks</dd>
+            </div> -->
+          </dl>
+        </div>
+        <div
+          class="absolute top-6 right-0 xl:relative xl:top-auto xl:right-auto xl:self-center"
+        >
+          <div>
+            <button
+              type="button"
+              class="-m-2 flex items-center rounded-full p-2 text-gray-500 hover:text-gray-600"
+              id="menu-0-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              (click)="openMenuItem(event.id)"
+            >
+              <span class="sr-only">Open options</span>
+              <!-- Heroicon name: solid/dots-horizontal -->
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <!--
+                Dropdown menu, show/hide based on menu state.
+    
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+              -->
+          <div
+            class="focus:outline-none absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-0-button"
+            tabindex="-1"
+            *ngIf="event.id && openMenu === event.id"
+          >
+            <div class="py-1" role="none" *ngFor="let action of event.actions">
+              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+              <div
+                href="#"
+                class="text-gray-700 block px-4 py-2 text-sm"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-0-item-0"
+                [innerHTML]="action.label"
+              ></div>
+              <a
+                href="#"
+                class="text-gray-700 block px-4 py-2 text-sm"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-0-item-1"
+                >Cancel</a
+              >
+            </div>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+
+  <div class="w-full hidden md:flex md:flex-row md:w-5/12 overflow-y-auto px-4">
+    <div class="flex flex-col min-h-0 flex-1">
+      <div class="w-full filter p-4">
+        <div class="w-full rounded-xl border-2 p-1">
+          <div class="w-full flex flex-row py-2">
+            <button (click)="incrementMonth(false)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <h1 class="w-full py-2 text-xl text-center font bold">
+              {{ format(viewDate, "MMMM, yyyy") }}
+            </h1>
+            <button (click)="incrementMonth(true)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 hover:bg-gray-50 hover:scale-110 transition duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
+          <month-view
+            [viewDate]="viewDate"
+            [refresh]="refresh"
+            [events]="events"
+            [showEvents]="false"
+          ></month-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

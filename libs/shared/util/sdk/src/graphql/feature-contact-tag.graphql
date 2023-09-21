@@ -1,0 +1,148 @@
+
+fragment ContactTagDetails on ContactTag {
+id
+createdAt
+updatedAt
+name
+contactId
+contact {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContactTagLists on ContactTag {
+id
+createdAt
+updatedAt
+name
+contactId
+contact {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContactTags($input: AdminListContactTagInput) {
+  items: adminContactTags(input: $input) {
+    ...ContactTagLists
+  }
+  count: adminCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContactTags($input: AdminListContactTagInput) {
+  count: adminCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContactTag($contactTagId: String!) {
+  item: adminContactTag(contactTagId: $contactTagId) {
+    ...ContactTagDetails
+  }
+}
+mutation AdminCreateContactTag($input: AdminCreateContactTagInput!) {
+  created: adminCreateContactTag(input: $input) {
+    ...ContactTagDetails
+  }
+}
+mutation AdminUpdateContactTag($contactTagId: String!, $input: AdminUpdateContactTagInput!) {
+  updated: adminUpdateContactTag(contactTagId: $contactTagId, input: $input) {
+    ...ContactTagDetails
+  }
+}
+mutation AdminDeleteContactTag($contactTagId: String!) {
+  deleted: adminDeleteContactTag(contactTagId: $contactTagId) {
+    ...ContactTagDetails
+  }
+}
+
+query UserContactTags($input: UserListContactTagInput) {
+  items: userContactTags(input: $input) {
+    ...ContactTagLists
+  }
+  count: userCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContactTags($input: UserListContactTagInput) {
+  count: userCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContactTags($input: UserListContactTagInput) {
+  items: userSelectContactTags(input: $input) {
+    ...ContactTagDetails
+  }
+}
+
+query UserContactTag($contactTagId: String!) {
+  item: userContactTag(contactTagId: $contactTagId) {
+    ...ContactTagDetails
+  }
+}
+
+mutation UserCreateContactTag($input: UserCreateContactTagInput!) {
+  created: userCreateContactTag(input: $input) {
+    ...ContactTagDetails
+  }
+}
+mutation UserUpdateContactTag($contactTagId: String!, $input: UserUpdateContactTagInput!) {
+  updated: userUpdateContactTag(contactTagId: $contactTagId, input: $input) {
+    ...ContactTagDetails
+  }
+}
+
+mutation UserUpdateContactTags($input: UserUpdateContactTagsInput!) {
+  updated: userUpdateContactTags(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContactTag($contactTagId: String!) {
+  deleted: userDeleteContactTag(contactTagId: $contactTagId) {
+    ...ContactTagDetails
+  }
+}
+
+query PublicContactTags($input: UserListContactTagInput) {
+  items: publicContactTags(input: $input) {
+    ...ContactTagLists
+  }
+  count: publicCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContactTags($input: UserListContactTagInput) {
+  count: publicCountContactTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContactTags($input: UserListContactTagInput) {
+  items: publicSelectContactTags(input: $input) {
+    ...ContactTagDetails
+  }
+}
+
+query PublicContactTag($contactTagId: String!) {
+  item: publicContactTag(contactTagId: $contactTagId) {
+    ...ContactTagDetails
+  }
+}

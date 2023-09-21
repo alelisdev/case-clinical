@@ -1,0 +1,194 @@
+fragment InvoiceDetails on Invoice {
+  id
+  createdAt
+  updatedAt
+  name
+  invoiceNumber
+  amount
+  paid
+  due
+  organizationId
+  legalCaseId
+  invoiceId
+  billingOrganization {
+    id
+    name
+  }
+  legalCase {
+    id
+    name
+    patient {
+      id
+      name
+      documents {
+        id
+        name
+      }
+    }
+  }
+  invoice{
+    id
+    name
+  }
+  clinicalProviderId
+  clinicalProvider {
+    id
+    name
+  }
+  details {
+    ...InvoiceDetailDetails
+  }
+}
+
+fragment InvoiceLists on Invoice {
+  id
+  createdAt
+  updatedAt
+  name
+  invoiceNumber
+  amount
+  paid
+  due
+  organizationId
+  legalCaseId
+  invoiceId
+  clinicalProviderId
+  clinicalProvider {
+    id
+    name
+  }
+  billingOrganization {
+    id
+    name
+  }
+  legalCase {
+    id
+    name
+    patient {
+      id
+      name
+      documents {
+        id
+        name
+      }
+    }
+  }
+  invoice{
+    id
+    name
+  }
+  details {
+    id
+    name
+  }
+}
+
+query AdminInvoices($input: AdminListInvoiceInput) {
+  items: adminInvoices(input: $input) {
+    ...InvoiceLists
+  }
+  count: adminCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountInvoices($input: AdminListInvoiceInput) {
+  count: adminCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminInvoice($invoiceId: String!) {
+  item: adminInvoice(invoiceId: $invoiceId) {
+    ...InvoiceDetails
+  }
+}
+mutation AdminCreateInvoice($input: AdminCreateInvoiceInput!) {
+  created: adminCreateInvoice(input: $input) {
+    ...InvoiceDetails
+  }
+}
+mutation AdminUpdateInvoice($invoiceId: String!, $input: AdminUpdateInvoiceInput!) {
+  updated: adminUpdateInvoice(invoiceId: $invoiceId, input: $input) {
+    ...InvoiceDetails
+  }
+}
+mutation AdminDeleteInvoice($invoiceId: String!) {
+  deleted: adminDeleteInvoice(invoiceId: $invoiceId) {
+    ...InvoiceDetails
+  }
+}
+
+query UserInvoices($input: UserListInvoiceInput) {
+  items: userInvoices(input: $input) {
+    ...InvoiceLists
+  }
+  count: userCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountInvoices($input: UserListInvoiceInput) {
+  count: userCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectInvoices($input: UserListInvoiceInput) {
+  items: userSelectInvoices(input: $input) {
+    ...InvoiceDetails
+  }
+}
+
+query UserInvoice($invoiceId: String!) {
+  item: userInvoice(invoiceId: $invoiceId) {
+    ...InvoiceDetails
+  }
+}
+
+mutation UserCreateInvoice($input: UserCreateInvoiceInput!) {
+  created: userCreateInvoice(input: $input) {
+    ...InvoiceDetails
+  }
+}
+mutation UserUpdateInvoice($invoiceId: String!, $input: UserUpdateInvoiceInput!) {
+  updated: userUpdateInvoice(invoiceId: $invoiceId, input: $input) {
+    ...InvoiceDetails
+  }
+}
+
+mutation UserUpdateInvoices($input: UserUpdateInvoicesInput!) {
+  updated: userUpdateInvoices(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteInvoice($invoiceId: String!) {
+  deleted: userDeleteInvoice(invoiceId: $invoiceId) {
+    ...InvoiceDetails
+  }
+}
+
+query PublicInvoices($input: UserListInvoiceInput) {
+  items: publicInvoices(input: $input) {
+    ...InvoiceLists
+  }
+  count: publicCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountInvoices($input: UserListInvoiceInput) {
+  count: publicCountInvoices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectInvoices($input: UserListInvoiceInput) {
+  items: publicSelectInvoices(input: $input) {
+    ...InvoiceDetails
+  }
+}
+
+query PublicInvoice($invoiceId: String!) {
+  item: publicInvoice(invoiceId: $invoiceId) {
+    ...InvoiceDetails
+  }
+}

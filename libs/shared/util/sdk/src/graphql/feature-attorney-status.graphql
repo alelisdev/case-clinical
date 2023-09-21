@@ -1,0 +1,148 @@
+
+fragment AttorneyStatusDetails on AttorneyStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+attorneys {
+   ...AttorneyLists
+  }
+}
+
+fragment AttorneyStatusLists on AttorneyStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+attorneys {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAttorneyStatuses($input: AdminListAttorneyStatusInput) {
+  items: adminAttorneyStatuses(input: $input) {
+    ...AttorneyStatusLists
+  }
+  count: adminCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAttorneyStatuses($input: AdminListAttorneyStatusInput) {
+  count: adminCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAttorneyStatus($attorneyStatusId: String!) {
+  item: adminAttorneyStatus(attorneyStatusId: $attorneyStatusId) {
+    ...AttorneyStatusDetails
+  }
+}
+mutation AdminCreateAttorneyStatus($input: AdminCreateAttorneyStatusInput!) {
+  created: adminCreateAttorneyStatus(input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+mutation AdminUpdateAttorneyStatus($attorneyStatusId: String!, $input: AdminUpdateAttorneyStatusInput!) {
+  updated: adminUpdateAttorneyStatus(attorneyStatusId: $attorneyStatusId, input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+mutation AdminDeleteAttorneyStatus($attorneyStatusId: String!) {
+  deleted: adminDeleteAttorneyStatus(attorneyStatusId: $attorneyStatusId) {
+    ...AttorneyStatusDetails
+  }
+}
+
+query UserAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  items: userAttorneyStatuses(input: $input) {
+    ...AttorneyStatusLists
+  }
+  count: userCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  count: userCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  items: userSelectAttorneyStatuses(input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+
+query UserAttorneyStatus($attorneyStatusId: String!) {
+  item: userAttorneyStatus(attorneyStatusId: $attorneyStatusId) {
+    ...AttorneyStatusDetails
+  }
+}
+
+mutation UserCreateAttorneyStatus($input: UserCreateAttorneyStatusInput!) {
+  created: userCreateAttorneyStatus(input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+mutation UserUpdateAttorneyStatus($attorneyStatusId: String!, $input: UserUpdateAttorneyStatusInput!) {
+  updated: userUpdateAttorneyStatus(attorneyStatusId: $attorneyStatusId, input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+
+mutation UserUpdateAttorneyStatuses($input: UserUpdateAttorneyStatusesInput!) {
+  updated: userUpdateAttorneyStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAttorneyStatus($attorneyStatusId: String!) {
+  deleted: userDeleteAttorneyStatus(attorneyStatusId: $attorneyStatusId) {
+    ...AttorneyStatusDetails
+  }
+}
+
+query PublicAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  items: publicAttorneyStatuses(input: $input) {
+    ...AttorneyStatusLists
+  }
+  count: publicCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  count: publicCountAttorneyStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAttorneyStatuses($input: UserListAttorneyStatusInput) {
+  items: publicSelectAttorneyStatuses(input: $input) {
+    ...AttorneyStatusDetails
+  }
+}
+
+query PublicAttorneyStatus($attorneyStatusId: String!) {
+  item: publicAttorneyStatus(attorneyStatusId: $attorneyStatusId) {
+    ...AttorneyStatusDetails
+  }
+}

@@ -1,0 +1,297 @@
+fragment VenodorStatsDetails on VendorStats {
+  totalPatientCount
+  todayPatientCount
+  appointmentCount
+      totalPatientPercent
+    todayPatientPercent
+    appointmentsPercent
+}
+
+fragment VendorDetails on Vendor {
+id
+createdAt
+updatedAt
+name
+taxId
+line1
+city
+state
+postalCode
+emailAddress
+phoneNumber
+fax
+mailingAddress
+vendorTypeId
+line2
+country
+office
+email
+website
+contactPerson
+owner
+bankRoutingNumber
+bankAccountNumber
+bankName
+bankCity
+bankState
+bankZip
+notes
+agreementDetails
+providerSearchNameDisplayType
+driversLicenseId
+logoId
+cellphone
+achCheckOrWire
+reductionNotes
+latitude
+longitude
+businessCentralName
+vendorType {
+  id
+  name
+}
+
+
+
+
+
+contracts {
+    ...ContractLists
+  }
+
+assignedDocuments {
+    id
+    name
+  }
+
+caseAccounts {
+   ...CaseAccountLists
+  }
+
+procedureVendors {
+    ...ProcedureVendorLists
+  }
+
+durableMedicalEquipments {
+   ...DurableMedicalEquipmentLists
+  }
+
+vendorLocations {
+    ...VendorLocationLists
+  }
+
+clinicalProviders {
+   ...ClinicalProviderLists
+  }
+}
+
+fragment VendorLists on Vendor {
+id
+createdAt
+updatedAt
+name
+taxId
+line1
+city
+state
+postalCode
+emailAddress
+phoneNumber
+fax
+mailingAddress
+vendorTypeId
+line2
+country
+office
+email
+website
+contactPerson
+owner
+bankRoutingNumber
+bankAccountNumber
+bankName
+bankCity
+bankState
+bankZip
+notes
+agreementDetails
+providerSearchNameDisplayType
+driversLicenseId
+logoId
+cellphone
+achCheckOrWire
+reductionNotes
+latitude
+longitude
+businessCentralName
+vendorType {
+    id
+    name
+}
+
+
+
+
+
+contracts {
+    id
+    name
+  }
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+
+caseAccounts {
+    id
+    name
+  }
+
+
+procedureVendors {
+    id
+    name
+  }
+
+
+durableMedicalEquipments {
+    id
+    name
+  }
+
+
+vendorLocations {
+    id
+    name
+  }
+
+
+clinicalProviders {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminVendors($input: AdminListVendorInput) {
+  items: adminVendors(input: $input) {
+    ...VendorLists
+  }
+  count: adminCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountVendors($input: AdminListVendorInput) {
+  count: adminCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminVendor($vendorId: String!) {
+  item: adminVendor(vendorId: $vendorId) {
+    ...VendorDetails
+  }
+}
+mutation AdminCreateVendor($input: AdminCreateVendorInput!) {
+  created: adminCreateVendor(input: $input) {
+    ...VendorDetails
+  }
+}
+mutation AdminUpdateVendor($vendorId: String!, $input: AdminUpdateVendorInput!) {
+  updated: adminUpdateVendor(vendorId: $vendorId, input: $input) {
+    ...VendorDetails
+  }
+}
+mutation AdminDeleteVendor($vendorId: String!) {
+  deleted: adminDeleteVendor(vendorId: $vendorId) {
+    ...VendorDetails
+  }
+}
+
+query UserVendors($input: UserListVendorInput) {
+  items: userVendors(input: $input) {
+    ...VendorLists
+  }
+  count: userCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountVendors($input: UserListVendorInput) {
+  count: userCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectVendors($input: UserListVendorInput) {
+  items: userSelectVendors(input: $input) {
+    ...VendorDetails
+  }
+}
+
+query UserVendor($vendorId: String!) {
+  item: userVendor(vendorId: $vendorId) {
+    ...VendorDetails
+  }
+}
+
+mutation UserCreateVendor($input: UserCreateVendorInput!) {
+  created: userCreateVendor(input: $input) {
+    ...VendorDetails
+  }
+}
+mutation UserUpdateVendor($vendorId: String!, $input: UserUpdateVendorInput!) {
+  updated: userUpdateVendor(vendorId: $vendorId, input: $input) {
+    ...VendorDetails
+  }
+}
+
+mutation UserUpdateVendors($input: UserUpdateVendorsInput!) {
+  updated: userUpdateVendors(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteVendor($vendorId: String!) {
+  deleted: userDeleteVendor(vendorId: $vendorId) {
+    ...VendorDetails
+  }
+}
+
+query PublicVendors($input: UserListVendorInput) {
+  items: publicVendors(input: $input) {
+    ...VendorLists
+  }
+  count: publicCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountVendors($input: UserListVendorInput) {
+  count: publicCountVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectVendors($input: UserListVendorInput) {
+  items: publicSelectVendors(input: $input) {
+    ...VendorDetails
+  }
+}
+
+query PublicVendor($vendorId: String!) {
+  item: publicVendor(vendorId: $vendorId) {
+    ...VendorDetails
+  }
+}
+
+query UserVendorStats($providorId: String!) {
+  stats: userVendorStats(providorId: $providorId) {
+		...VenodorStatsDetails
+  }
+}

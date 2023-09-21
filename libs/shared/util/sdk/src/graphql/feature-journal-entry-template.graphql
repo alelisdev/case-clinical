@@ -1,0 +1,181 @@
+
+
+fragment JournalEntryTemplateDetails on JournalEntryTemplate {
+id
+createdAt
+updatedAt
+name
+locationName
+fromTo
+frequency
+autoOrManual
+process
+perAccountOrAggregateJE
+costRate
+postingDate
+documentDate
+dueDate
+amount
+accountType
+accountNumber
+costCenter
+appliesToDocumentNumber
+ordinal
+scenario
+caseAccountId
+caseAccount {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment JournalEntryTemplateLists on JournalEntryTemplate {
+id
+createdAt
+updatedAt
+name
+locationName
+fromTo
+frequency
+autoOrManual
+process
+perAccountOrAggregateJE
+costRate
+postingDate
+documentDate
+dueDate
+amount
+accountType
+accountNumber
+costCenter
+appliesToDocumentNumber
+ordinal
+scenario
+caseAccountId
+caseAccount {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminJournalEntryTemplates($input: AdminListJournalEntryTemplateInput) {
+  items: adminJournalEntryTemplates(input: $input) {
+    ...JournalEntryTemplateLists
+  }
+  count: adminCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountJournalEntryTemplates($input: AdminListJournalEntryTemplateInput) {
+  count: adminCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminJournalEntryTemplate($journalEntryTemplateId: String!) {
+  item: adminJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId) {
+    ...JournalEntryTemplateDetails
+  }
+}
+mutation AdminCreateJournalEntryTemplate($input: AdminCreateJournalEntryTemplateInput!) {
+  created: adminCreateJournalEntryTemplate(input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+mutation AdminUpdateJournalEntryTemplate($journalEntryTemplateId: String!, $input: AdminUpdateJournalEntryTemplateInput!) {
+  updated: adminUpdateJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId, input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+mutation AdminDeleteJournalEntryTemplate($journalEntryTemplateId: String!) {
+  deleted: adminDeleteJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+query UserJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  items: userJournalEntryTemplates(input: $input) {
+    ...JournalEntryTemplateLists
+  }
+  count: userCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  count: userCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  items: userSelectJournalEntryTemplates(input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+query UserJournalEntryTemplate($journalEntryTemplateId: String!) {
+  item: userJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+mutation UserCreateJournalEntryTemplate($input: UserCreateJournalEntryTemplateInput!) {
+  created: userCreateJournalEntryTemplate(input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+mutation UserUpdateJournalEntryTemplate($journalEntryTemplateId: String!, $input: UserUpdateJournalEntryTemplateInput!) {
+  updated: userUpdateJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId, input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+mutation UserUpdateJournalEntryTemplates($input: UserUpdateJournalEntryTemplatesInput!) {
+  updated: userUpdateJournalEntryTemplates(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteJournalEntryTemplate($journalEntryTemplateId: String!) {
+  deleted: userDeleteJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+query PublicJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  items: publicJournalEntryTemplates(input: $input) {
+    ...JournalEntryTemplateLists
+  }
+  count: publicCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  count: publicCountJournalEntryTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectJournalEntryTemplates($input: UserListJournalEntryTemplateInput) {
+  items: publicSelectJournalEntryTemplates(input: $input) {
+    ...JournalEntryTemplateDetails
+  }
+}
+
+query PublicJournalEntryTemplate($journalEntryTemplateId: String!) {
+  item: publicJournalEntryTemplate(journalEntryTemplateId: $journalEntryTemplateId) {
+    ...JournalEntryTemplateDetails
+  }
+}

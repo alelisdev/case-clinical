@@ -1,0 +1,157 @@
+
+
+fragment ProcedureOrTreatmentRequestAuthorizationDetails on ProcedureOrTreatmentRequestAuthorization {
+id
+createdAt
+updatedAt
+name
+authorizationId
+procedureOrTreatmentRequestId
+authorization {
+  id
+  name
+}
+procedureOrTreatmentRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ProcedureOrTreatmentRequestAuthorizationLists on ProcedureOrTreatmentRequestAuthorization {
+id
+createdAt
+updatedAt
+name
+authorizationId
+procedureOrTreatmentRequestId
+authorization {
+    id
+    name
+}
+procedureOrTreatmentRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminProcedureOrTreatmentRequestAuthorizations($input: AdminListProcedureOrTreatmentRequestAuthorizationInput) {
+  items: adminProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationLists
+  }
+  count: adminCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureOrTreatmentRequestAuthorizations($input: AdminListProcedureOrTreatmentRequestAuthorizationInput) {
+  count: adminCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!) {
+  item: adminProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+mutation AdminCreateProcedureOrTreatmentRequestAuthorization($input: AdminCreateProcedureOrTreatmentRequestAuthorizationInput!) {
+  created: adminCreateProcedureOrTreatmentRequestAuthorization(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+mutation AdminUpdateProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!, $input: AdminUpdateProcedureOrTreatmentRequestAuthorizationInput!) {
+  updated: adminUpdateProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId, input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+mutation AdminDeleteProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!) {
+  deleted: adminDeleteProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  items: userProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationLists
+  }
+  count: userCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  count: userCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  items: userSelectProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!) {
+  item: userProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+mutation UserCreateProcedureOrTreatmentRequestAuthorization($input: UserCreateProcedureOrTreatmentRequestAuthorizationInput!) {
+  created: userCreateProcedureOrTreatmentRequestAuthorization(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+mutation UserUpdateProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!, $input: UserUpdateProcedureOrTreatmentRequestAuthorizationInput!) {
+  updated: userUpdateProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId, input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+mutation UserUpdateProcedureOrTreatmentRequestAuthorizations($input: UserUpdateProcedureOrTreatmentRequestAuthorizationsInput!) {
+  updated: userUpdateProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!) {
+  deleted: userDeleteProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  items: publicProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationLists
+  }
+  count: publicCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  count: publicCountProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureOrTreatmentRequestAuthorizations($input: UserListProcedureOrTreatmentRequestAuthorizationInput) {
+  items: publicSelectProcedureOrTreatmentRequestAuthorizations(input: $input) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequestAuthorization($procedureOrTreatmentRequestAuthorizationId: String!) {
+  item: publicProcedureOrTreatmentRequestAuthorization(procedureOrTreatmentRequestAuthorizationId: $procedureOrTreatmentRequestAuthorizationId) {
+    ...ProcedureOrTreatmentRequestAuthorizationDetails
+  }
+}

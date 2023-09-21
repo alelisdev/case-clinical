@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-document-type.input'
+export * from './lib/dto/admin-list-document-type.input'
+export * from './lib/dto/admin-update-document-type.input'
+export * from './lib/dto/document-type.input'
+export * from './lib/dto/user-create-document-type.input'
+export * from './lib/dto/user-list-document-type.input'
+export * from './lib/dto/user-update-document-type.input'
+export * from './lib/dto/user-update-document-types.input'
+export * from './lib/models/document-type.model'
+export * from './lib/api-document-type-data-access.module'
+
+export * from './lib/api-document-type-data-access-admin.service'
+export * from './lib/api-document-type-data-access-public.service'
+export * from './lib/api-document-type-data-access-user.service'

@@ -1,0 +1,23 @@
+{
+  "name": "web-firm-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/firm/feature/src",
+  "prefix": "firm",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/firm/feature/src/**/*.ts", "libs/web/firm/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/firm/feature"],
+      "options": {
+        "jestConfig": "libs/web/firm/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+
+fragment CalendarTypeDetails on CalendarType {
+id
+createdAt
+updatedAt
+name
+
+
+userCalendars {
+    id
+    name
+  }
+
+}
+query AdminCalendarTypes($input: AdminListCalendarTypeInput) {
+  items: adminCalendarTypes(input: $input) {
+    ...CalendarTypeDetails
+  }
+  count: adminCountCalendarTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCalendarTypes($input: AdminListCalendarTypeInput) {
+  count: adminCountCalendarTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCalendarType($calendarTypeId: String!) {
+  item: adminCalendarType(calendarTypeId: $calendarTypeId) {
+    ...CalendarTypeDetails
+  }
+}
+mutation AdminCreateCalendarType($input: AdminCreateCalendarTypeInput!) {
+  created: adminCreateCalendarType(input: $input) {
+    ...CalendarTypeDetails
+  }
+}
+mutation AdminUpdateCalendarType($calendarTypeId: String!, $input: AdminUpdateCalendarTypeInput!) {
+  updated: adminUpdateCalendarType(calendarTypeId: $calendarTypeId, input: $input) {
+    ...CalendarTypeDetails
+  }
+}
+mutation AdminDeleteCalendarType($calendarTypeId: String!) {
+  deleted: adminDeleteCalendarType(calendarTypeId: $calendarTypeId) {
+    ...CalendarTypeDetails
+  }
+}
+
+query UserCalendarTypes($input: UserListCalendarTypeInput) {
+  items: userCalendarTypes(input: $input) {
+    ...CalendarTypeDetails
+  }
+  count: userCountCalendarTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCalendarTypes($input: UserListCalendarTypeInput) {
+  count: userCountCalendarTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCalendarType($calendarTypeId: String!) {
+  item: userCalendarType(calendarTypeId: $calendarTypeId) {
+    ...CalendarTypeDetails
+  }
+}
+mutation UserCreateCalendarType($input: UserCreateCalendarTypeInput!) {
+  created: userCreateCalendarType(input: $input) {
+    ...CalendarTypeDetails
+  }
+}
+mutation UserUpdateCalendarType($calendarTypeId: String!, $input: UserUpdateCalendarTypeInput!) {
+  updated: userUpdateCalendarType(calendarTypeId: $calendarTypeId, input: $input) {
+    ...CalendarTypeDetails
+  }
+}
+mutation UserDeleteCalendarType($calendarTypeId: String!) {
+  deleted: userDeleteCalendarType(calendarTypeId: $calendarTypeId) {
+    ...CalendarTypeDetails
+  }
+}

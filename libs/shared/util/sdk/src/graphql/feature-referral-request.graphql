@@ -1,0 +1,189 @@
+
+
+fragment ReferralRequestDetails on ReferralRequest {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+referredToId
+clinicalProviderLocationId
+status
+patient {
+  id
+  name
+}
+legalCase {
+  id
+  name
+}
+requestingProvider {
+  id
+  name
+}
+referredTo {
+  id
+  name
+}
+referredToLocation {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ReferralRequestLists on ReferralRequest {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+requestingProviderId
+referredToId
+clinicalProviderLocationId
+status
+patient {
+    id
+    name
+}
+legalCase {
+    id
+    name
+}
+requestingProvider {
+    id
+    name
+}
+referredTo {
+    id
+    name
+}
+referredToLocation {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminReferralRequests($input: AdminListReferralRequestInput) {
+  items: adminReferralRequests(input: $input) {
+    ...ReferralRequestLists
+  }
+  count: adminCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountReferralRequests($input: AdminListReferralRequestInput) {
+  count: adminCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminReferralRequest($referralRequestId: String!) {
+  item: adminReferralRequest(referralRequestId: $referralRequestId) {
+    ...ReferralRequestDetails
+  }
+}
+mutation AdminCreateReferralRequest($input: AdminCreateReferralRequestInput!) {
+  created: adminCreateReferralRequest(input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+mutation AdminUpdateReferralRequest($referralRequestId: String!, $input: AdminUpdateReferralRequestInput!) {
+  updated: adminUpdateReferralRequest(referralRequestId: $referralRequestId, input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+mutation AdminDeleteReferralRequest($referralRequestId: String!) {
+  deleted: adminDeleteReferralRequest(referralRequestId: $referralRequestId) {
+    ...ReferralRequestDetails
+  }
+}
+
+query UserReferralRequests($input: UserListReferralRequestInput) {
+  items: userReferralRequests(input: $input) {
+    ...ReferralRequestLists
+  }
+  count: userCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountReferralRequests($input: UserListReferralRequestInput) {
+  count: userCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectReferralRequests($input: UserListReferralRequestInput) {
+  items: userSelectReferralRequests(input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+
+query UserReferralRequest($referralRequestId: String!) {
+  item: userReferralRequest(referralRequestId: $referralRequestId) {
+    ...ReferralRequestDetails
+  }
+}
+
+mutation UserCreateReferralRequest($input: UserCreateReferralRequestInput!) {
+  created: userCreateReferralRequest(input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+mutation UserUpdateReferralRequest($referralRequestId: String!, $input: UserUpdateReferralRequestInput!) {
+  updated: userUpdateReferralRequest(referralRequestId: $referralRequestId, input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+
+mutation UserUpdateReferralRequests($input: UserUpdateReferralRequestsInput!) {
+  updated: userUpdateReferralRequests(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteReferralRequest($referralRequestId: String!) {
+  deleted: userDeleteReferralRequest(referralRequestId: $referralRequestId) {
+    ...ReferralRequestDetails
+  }
+}
+
+query PublicReferralRequests($input: UserListReferralRequestInput) {
+  items: publicReferralRequests(input: $input) {
+    ...ReferralRequestLists
+  }
+  count: publicCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountReferralRequests($input: UserListReferralRequestInput) {
+  count: publicCountReferralRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectReferralRequests($input: UserListReferralRequestInput) {
+  items: publicSelectReferralRequests(input: $input) {
+    ...ReferralRequestDetails
+  }
+}
+
+query PublicReferralRequest($referralRequestId: String!) {
+  item: publicReferralRequest(referralRequestId: $referralRequestId) {
+    ...ReferralRequestDetails
+  }
+}

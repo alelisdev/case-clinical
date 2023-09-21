@@ -1,0 +1,173 @@
+
+fragment SpecialtyDetails on Specialty {
+id
+createdAt
+updatedAt
+name
+active
+
+
+
+
+
+
+feeSchedules {
+    id
+    name
+  }
+
+clinicalProviderSpecialties {
+    id
+    name
+  }
+
+facilityFeeSchedules {
+    id
+    name
+  }
+}
+
+fragment SpecialtyLists on Specialty {
+id
+createdAt
+updatedAt
+name
+active
+
+
+
+
+
+
+feeSchedules {
+    id
+    name
+  }
+
+
+clinicalProviderSpecialties {
+    id
+    name
+  }
+
+
+facilityFeeSchedules {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminSpecialties($input: AdminListSpecialtyInput) {
+  items: adminSpecialties(input: $input) {
+    ...SpecialtyLists
+  }
+  count: adminCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountSpecialties($input: AdminListSpecialtyInput) {
+  count: adminCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminSpecialty($specialtyId: String!) {
+  item: adminSpecialty(specialtyId: $specialtyId) {
+    ...SpecialtyDetails
+  }
+}
+mutation AdminCreateSpecialty($input: AdminCreateSpecialtyInput!) {
+  created: adminCreateSpecialty(input: $input) {
+    ...SpecialtyDetails
+  }
+}
+mutation AdminUpdateSpecialty($specialtyId: String!, $input: AdminUpdateSpecialtyInput!) {
+  updated: adminUpdateSpecialty(specialtyId: $specialtyId, input: $input) {
+    ...SpecialtyDetails
+  }
+}
+mutation AdminDeleteSpecialty($specialtyId: String!) {
+  deleted: adminDeleteSpecialty(specialtyId: $specialtyId) {
+    ...SpecialtyDetails
+  }
+}
+
+query UserSpecialties($input: UserListSpecialtyInput) {
+  items: userSpecialties(input: $input) {
+    ...SpecialtyLists
+  }
+  count: userCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountSpecialties($input: UserListSpecialtyInput) {
+  count: userCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectSpecialties($input: UserListSpecialtyInput) {
+  items: userSelectSpecialties(input: $input) {
+    ...SpecialtyDetails
+  }
+}
+
+query UserSpecialty($specialtyId: String!) {
+  item: userSpecialty(specialtyId: $specialtyId) {
+    ...SpecialtyDetails
+  }
+}
+
+mutation UserCreateSpecialty($input: UserCreateSpecialtyInput!) {
+  created: userCreateSpecialty(input: $input) {
+    ...SpecialtyDetails
+  }
+}
+mutation UserUpdateSpecialty($specialtyId: String!, $input: UserUpdateSpecialtyInput!) {
+  updated: userUpdateSpecialty(specialtyId: $specialtyId, input: $input) {
+    ...SpecialtyDetails
+  }
+}
+
+mutation UserUpdateSpecialties($input: UserUpdateSpecialtiesInput!) {
+  updated: userUpdateSpecialties(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteSpecialty($specialtyId: String!) {
+  deleted: userDeleteSpecialty(specialtyId: $specialtyId) {
+    ...SpecialtyDetails
+  }
+}
+
+query PublicSpecialties($input: UserListSpecialtyInput) {
+  items: publicSpecialties(input: $input) {
+    ...SpecialtyLists
+  }
+  count: publicCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountSpecialties($input: UserListSpecialtyInput) {
+  count: publicCountSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectSpecialties($input: UserListSpecialtyInput) {
+  items: publicSelectSpecialties(input: $input) {
+    ...SpecialtyDetails
+  }
+}
+
+query PublicSpecialty($specialtyId: String!) {
+  item: publicSpecialty(specialtyId: $specialtyId) {
+    ...SpecialtyDetails
+  }
+}

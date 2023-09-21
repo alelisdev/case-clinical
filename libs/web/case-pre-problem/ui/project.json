@@ -1,0 +1,23 @@
+{
+  "name": "web-case-pre-problem-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-pre-problem/ui/src",
+  "prefix": "case-pre-problem",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/case-pre-problem/ui/src/**/*.ts", "libs/web/case-pre-problem/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-pre-problem/ui"],
+      "options": {
+        "jestConfig": "libs/web/case-pre-problem/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

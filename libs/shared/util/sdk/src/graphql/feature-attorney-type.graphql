@@ -1,0 +1,148 @@
+
+fragment AttorneyTypeDetails on AttorneyType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+attorneys {
+   ...AttorneyLists
+  }
+}
+
+fragment AttorneyTypeLists on AttorneyType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+attorneys {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAttorneyTypes($input: AdminListAttorneyTypeInput) {
+  items: adminAttorneyTypes(input: $input) {
+    ...AttorneyTypeLists
+  }
+  count: adminCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAttorneyTypes($input: AdminListAttorneyTypeInput) {
+  count: adminCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAttorneyType($attorneyTypeId: String!) {
+  item: adminAttorneyType(attorneyTypeId: $attorneyTypeId) {
+    ...AttorneyTypeDetails
+  }
+}
+mutation AdminCreateAttorneyType($input: AdminCreateAttorneyTypeInput!) {
+  created: adminCreateAttorneyType(input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+mutation AdminUpdateAttorneyType($attorneyTypeId: String!, $input: AdminUpdateAttorneyTypeInput!) {
+  updated: adminUpdateAttorneyType(attorneyTypeId: $attorneyTypeId, input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+mutation AdminDeleteAttorneyType($attorneyTypeId: String!) {
+  deleted: adminDeleteAttorneyType(attorneyTypeId: $attorneyTypeId) {
+    ...AttorneyTypeDetails
+  }
+}
+
+query UserAttorneyTypes($input: UserListAttorneyTypeInput) {
+  items: userAttorneyTypes(input: $input) {
+    ...AttorneyTypeLists
+  }
+  count: userCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAttorneyTypes($input: UserListAttorneyTypeInput) {
+  count: userCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAttorneyTypes($input: UserListAttorneyTypeInput) {
+  items: userSelectAttorneyTypes(input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+
+query UserAttorneyType($attorneyTypeId: String!) {
+  item: userAttorneyType(attorneyTypeId: $attorneyTypeId) {
+    ...AttorneyTypeDetails
+  }
+}
+
+mutation UserCreateAttorneyType($input: UserCreateAttorneyTypeInput!) {
+  created: userCreateAttorneyType(input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+mutation UserUpdateAttorneyType($attorneyTypeId: String!, $input: UserUpdateAttorneyTypeInput!) {
+  updated: userUpdateAttorneyType(attorneyTypeId: $attorneyTypeId, input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+
+mutation UserUpdateAttorneyTypes($input: UserUpdateAttorneyTypesInput!) {
+  updated: userUpdateAttorneyTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAttorneyType($attorneyTypeId: String!) {
+  deleted: userDeleteAttorneyType(attorneyTypeId: $attorneyTypeId) {
+    ...AttorneyTypeDetails
+  }
+}
+
+query PublicAttorneyTypes($input: UserListAttorneyTypeInput) {
+  items: publicAttorneyTypes(input: $input) {
+    ...AttorneyTypeLists
+  }
+  count: publicCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAttorneyTypes($input: UserListAttorneyTypeInput) {
+  count: publicCountAttorneyTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAttorneyTypes($input: UserListAttorneyTypeInput) {
+  items: publicSelectAttorneyTypes(input: $input) {
+    ...AttorneyTypeDetails
+  }
+}
+
+query PublicAttorneyType($attorneyTypeId: String!) {
+  item: publicAttorneyType(attorneyTypeId: $attorneyTypeId) {
+    ...AttorneyTypeDetails
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-insurance-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/insurance/ui/src",
+  "prefix": "insurance",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/insurance/ui/src/**/*.ts", "libs/web/insurance/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/insurance/ui"],
+      "options": {
+        "jestConfig": "libs/web/insurance/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

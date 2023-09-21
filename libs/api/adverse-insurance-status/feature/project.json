@@ -1,0 +1,26 @@
+{
+  "name": "api-adverse-insurance-status-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/adverse-insurance-status/feature/src",
+  "prefix": "adverse-insurance-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/adverse-insurance-status/data-access/src/**/*.ts",
+          "libs/api/adverse-insurance-status/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/adverse-insurance-status/data-access"],
+      "options": {
+        "jestConfig": "libs/api/adverse-insurance-status/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

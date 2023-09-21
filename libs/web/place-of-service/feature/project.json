@@ -1,0 +1,26 @@
+{
+  "name": "web-place-of-service-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/place-of-service/feature/src",
+  "prefix": "place-of-service",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/place-of-service/feature/src/**/*.ts",
+          "libs/web/place-of-service/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/place-of-service/feature"],
+      "options": {
+        "jestConfig": "libs/web/place-of-service/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

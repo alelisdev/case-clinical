@@ -1,0 +1,373 @@
+
+fragment PriorAuthorizationRequestDetails on PriorAuthorizationRequest {
+id
+createdAt
+updatedAt
+name
+referredOn
+approvedOn
+effectiveAsOf
+expiresOn
+duration
+procedureSiteId
+surgicalPositionId
+procedureDescription
+remarks
+underwritingApproved
+tpaApproved
+requiresMedicalDirector
+reviewedOn
+treatingProviderId
+referredToId
+priorAuthorizationNumber
+caseManager
+memberNumber
+medicalDirector
+tpaApprover
+underwriter
+prescriptionId
+visitKindId
+guidelineUsedId
+guidelineRequires
+authorizationKindId
+authorizationStatusId
+billId
+medicalReportId
+patientId
+caseProcedureId
+procedureSite {
+  id
+  name
+}
+surgicalPosition {
+  id
+  name
+}
+treatingProvider {
+  id
+  name
+}
+referredTo {
+  id
+  name
+}
+prescription {
+  id
+  name
+}
+visitKind {
+  id
+  name
+}
+guidelineUsed {
+  id
+  name
+}
+authorizationKind {
+  id
+  name
+}
+authorizationStatus {
+  id
+  name
+}
+bill {
+  id
+  name
+}
+medicalReport {
+  id
+  name
+}
+patient {
+  id
+  name
+}
+caseProcedure {
+  id
+  name
+}
+
+
+
+
+
+claims {
+    ...ClaimDetails
+  }
+
+guidelines {
+    id
+    name
+  }
+
+priorAuthDmes {
+    ...PriorAuthDmeDetails
+  }
+
+priorAuthorizationDiagnosisCodes {
+    ...PriorAuthorizationDiagnosisCodeDetails 
+  }
+
+priorAuthorizationEquipments {
+    ...PriorAuthorizationEquipmentDetails
+  }
+
+priorAuthorizationImplants {
+    ...PriorAuthorizationImplantDetails
+  }
+
+priorAuthorizationProcedureCodes {
+    ...PriorAuthorizationProcedureCodeDetails
+  }
+}
+
+fragment PriorAuthorizationRequestLists on PriorAuthorizationRequest {
+id
+createdAt
+updatedAt
+name
+referredOn
+approvedOn
+effectiveAsOf
+expiresOn
+duration
+procedureSiteId
+surgicalPositionId
+procedureDescription
+remarks
+underwritingApproved
+tpaApproved
+requiresMedicalDirector
+reviewedOn
+treatingProviderId
+referredToId
+priorAuthorizationNumber
+caseManager
+memberNumber
+medicalDirector
+tpaApprover
+underwriter
+prescriptionId
+visitKindId
+guidelineUsedId
+guidelineRequires
+authorizationKindId
+authorizationStatusId
+billId
+medicalReportId
+patientId
+caseProcedureId
+procedureSite {
+    id
+    name
+}
+surgicalPosition {
+    id
+    name
+}
+treatingProvider {
+    id
+    name
+}
+referredTo {
+    id
+    name
+}
+prescription {
+    id
+    name
+}
+visitKind {
+    id
+    name
+}
+guidelineUsed {
+    id
+    name
+}
+authorizationKind {
+    id
+    name
+}
+authorizationStatus {
+    id
+    name
+}
+bill {
+    id
+    name
+}
+medicalReport {
+    id
+    name
+}
+patient {
+    id
+    name
+}
+caseProcedure {
+    id
+    name
+}
+
+
+
+
+
+claims {
+    id
+    name
+  }
+
+
+guidelines {
+    id
+    name
+  }
+
+
+priorAuthDmes {
+    id
+    name
+  }
+
+
+priorAuthorizationDiagnosisCodes {
+    id
+    name
+  }
+
+
+priorAuthorizationEquipments {
+    id
+    name
+  }
+
+
+priorAuthorizationImplants {
+    id
+    name
+  }
+
+
+priorAuthorizationProcedureCodes {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPriorAuthorizationRequests($input: AdminListPriorAuthorizationRequestInput) {
+  items: adminPriorAuthorizationRequests(input: $input) {
+    ...PriorAuthorizationRequestLists
+  }
+  count: adminCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthorizationRequests($input: AdminListPriorAuthorizationRequestInput) {
+  count: adminCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthorizationRequest($priorAuthorizationRequestId: String!) {
+  item: adminPriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+mutation AdminCreatePriorAuthorizationRequest($input: AdminCreatePriorAuthorizationRequestInput!) {
+  created: adminCreatePriorAuthorizationRequest(input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+mutation AdminUpdatePriorAuthorizationRequest($priorAuthorizationRequestId: String!, $input: AdminUpdatePriorAuthorizationRequestInput!) {
+  updated: adminUpdatePriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId, input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+mutation AdminDeletePriorAuthorizationRequest($priorAuthorizationRequestId: String!) {
+  deleted: adminDeletePriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+query UserPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  items: userPriorAuthorizationRequests(input: $input) {
+    ...PriorAuthorizationRequestLists
+  }
+  count: userCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  count: userCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  items: userSelectPriorAuthorizationRequests(input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+query UserPriorAuthorizationRequest($priorAuthorizationRequestId: String!) {
+  item: userPriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+mutation UserCreatePriorAuthorizationRequest($input: UserCreatePriorAuthorizationRequestInput!) {
+  created: userCreatePriorAuthorizationRequest(input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+mutation UserUpdatePriorAuthorizationRequest($priorAuthorizationRequestId: String!, $input: UserUpdatePriorAuthorizationRequestInput!) {
+  updated: userUpdatePriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId, input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+mutation UserUpdatePriorAuthorizationRequests($input: UserUpdatePriorAuthorizationRequestsInput!) {
+  updated: userUpdatePriorAuthorizationRequests(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthorizationRequest($priorAuthorizationRequestId: String!) {
+  deleted: userDeletePriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+query PublicPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  items: publicPriorAuthorizationRequests(input: $input) {
+    ...PriorAuthorizationRequestLists
+  }
+  count: publicCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  count: publicCountPriorAuthorizationRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthorizationRequests($input: UserListPriorAuthorizationRequestInput) {
+  items: publicSelectPriorAuthorizationRequests(input: $input) {
+    ...PriorAuthorizationRequestDetails
+  }
+}
+
+query PublicPriorAuthorizationRequest($priorAuthorizationRequestId: String!) {
+  item: publicPriorAuthorizationRequest(priorAuthorizationRequestId: $priorAuthorizationRequestId) {
+    ...PriorAuthorizationRequestDetails
+  }
+}

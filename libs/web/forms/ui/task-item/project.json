@@ -1,0 +1,23 @@
+{
+  "name": "web-forms-ui-task-item",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/forms/ui/task-item/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/forms/ui/task-item/src/**/*.ts", "libs/web/forms/ui/task-item/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/forms/ui/task-item"],
+      "options": {
+        "jestConfig": "libs/web/forms/ui/task-item/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

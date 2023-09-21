@@ -1,0 +1,77 @@
+quick-chat {
+    z-index: 399;
+
+    > div {
+        overflow: hidden;
+    }
+
+    textarea {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        font-size: 14px !important;
+    }
+
+    textarea:focus,
+    text:active {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    textarea::placeholder {
+        font-size: 12px !important;
+    }
+
+    &.quick-chat-opened {
+        > div {
+            overflow: visible;
+        }
+    }
+
+    &:not(.quick-chat-opened) {
+        > div {
+            overflow: visible;
+            animation: addOverflowHidden 1ms linear 400ms;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+
+/* Adjustments depending on the selected layout */
+.quick-chat-header {
+    height: 74px;
+
+    enterprise-layout &,
+    modern-layout & {
+        height: 80px !important;
+    }
+}
+
+.quick-chat-detail-header {
+    height: auto;
+}
+
+/* Overlay */
+.quick-chat-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 299;
+    opacity: 1;
+    background-color: transparent;
+}
+
+@keyframes addOverflowHidden {
+    0% {
+        overflow: visible;
+    }
+    99% {
+        overflow: visible;
+    }
+    100% {
+        overflow: hidden;
+    }
+}

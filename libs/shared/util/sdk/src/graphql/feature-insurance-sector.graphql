@@ -1,0 +1,148 @@
+
+fragment InsuranceSectorDetails on InsuranceSector {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+insurances {
+    ...InsuranceLists
+  }
+}
+
+fragment InsuranceSectorLists on InsuranceSector {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+insurances {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminInsuranceSectors($input: AdminListInsuranceSectorInput) {
+  items: adminInsuranceSectors(input: $input) {
+    ...InsuranceSectorLists
+  }
+  count: adminCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountInsuranceSectors($input: AdminListInsuranceSectorInput) {
+  count: adminCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminInsuranceSector($insuranceSectorId: String!) {
+  item: adminInsuranceSector(insuranceSectorId: $insuranceSectorId) {
+    ...InsuranceSectorDetails
+  }
+}
+mutation AdminCreateInsuranceSector($input: AdminCreateInsuranceSectorInput!) {
+  created: adminCreateInsuranceSector(input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+mutation AdminUpdateInsuranceSector($insuranceSectorId: String!, $input: AdminUpdateInsuranceSectorInput!) {
+  updated: adminUpdateInsuranceSector(insuranceSectorId: $insuranceSectorId, input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+mutation AdminDeleteInsuranceSector($insuranceSectorId: String!) {
+  deleted: adminDeleteInsuranceSector(insuranceSectorId: $insuranceSectorId) {
+    ...InsuranceSectorDetails
+  }
+}
+
+query UserInsuranceSectors($input: UserListInsuranceSectorInput) {
+  items: userInsuranceSectors(input: $input) {
+    ...InsuranceSectorLists
+  }
+  count: userCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountInsuranceSectors($input: UserListInsuranceSectorInput) {
+  count: userCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectInsuranceSectors($input: UserListInsuranceSectorInput) {
+  items: userSelectInsuranceSectors(input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+
+query UserInsuranceSector($insuranceSectorId: String!) {
+  item: userInsuranceSector(insuranceSectorId: $insuranceSectorId) {
+    ...InsuranceSectorDetails
+  }
+}
+
+mutation UserCreateInsuranceSector($input: UserCreateInsuranceSectorInput!) {
+  created: userCreateInsuranceSector(input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+mutation UserUpdateInsuranceSector($insuranceSectorId: String!, $input: UserUpdateInsuranceSectorInput!) {
+  updated: userUpdateInsuranceSector(insuranceSectorId: $insuranceSectorId, input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+
+mutation UserUpdateInsuranceSectors($input: UserUpdateInsuranceSectorsInput!) {
+  updated: userUpdateInsuranceSectors(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteInsuranceSector($insuranceSectorId: String!) {
+  deleted: userDeleteInsuranceSector(insuranceSectorId: $insuranceSectorId) {
+    ...InsuranceSectorDetails
+  }
+}
+
+query PublicInsuranceSectors($input: UserListInsuranceSectorInput) {
+  items: publicInsuranceSectors(input: $input) {
+    ...InsuranceSectorLists
+  }
+  count: publicCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountInsuranceSectors($input: UserListInsuranceSectorInput) {
+  count: publicCountInsuranceSectors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectInsuranceSectors($input: UserListInsuranceSectorInput) {
+  items: publicSelectInsuranceSectors(input: $input) {
+    ...InsuranceSectorDetails
+  }
+}
+
+query PublicInsuranceSector($insuranceSectorId: String!) {
+  item: publicInsuranceSector(insuranceSectorId: $insuranceSectorId) {
+    ...InsuranceSectorDetails
+  }
+}

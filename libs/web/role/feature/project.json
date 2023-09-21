@@ -1,0 +1,23 @@
+{
+  "name": "web-role-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/role/feature/src",
+  "prefix": "role",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/role/feature/src/**/*.ts", "libs/web/role/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/role/feature"],
+      "options": {
+        "jestConfig": "libs/web/role/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

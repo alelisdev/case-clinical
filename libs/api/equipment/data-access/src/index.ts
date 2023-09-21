@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-equipment.input'
+export * from './lib/dto/admin-list-equipment.input'
+export * from './lib/dto/admin-update-equipment.input'
+export * from './lib/dto/equipment.input'
+export * from './lib/dto/user-create-equipment.input'
+export * from './lib/dto/user-list-equipment.input'
+export * from './lib/dto/user-update-equipment.input'
+export * from './lib/dto/user-update-equipments.input'
+export * from './lib/models/equipment.model'
+export * from './lib/api-equipment-data-access.module'
+
+export * from './lib/api-equipment-data-access-admin.service'
+export * from './lib/api-equipment-data-access-public.service'
+export * from './lib/api-equipment-data-access-user.service'

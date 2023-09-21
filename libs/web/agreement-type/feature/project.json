@@ -1,0 +1,26 @@
+{
+  "name": "web-agreement-type-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/agreement-type/feature/src",
+  "prefix": "agreement-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/agreement-type/feature/src/**/*.ts",
+          "libs/web/agreement-type/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/agreement-type/feature"],
+      "options": {
+        "jestConfig": "libs/web/agreement-type/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "type": "heading",
+    "templateOptions": {
+      "title": "Clinical Provider Tag Create",
+      "subtitle": "Please input new clinicalProviderTag information and click submit"
+    },
+    "className": "w-full"
+  },
+  {
+    "key": "clinicalProviderId",
+    "type": "select-form",
+    "templateOptions": {
+      "label": "Clinical Provider",
+      "variant": "clinical-provider",
+      "placeholder": "Select",
+      "required": true
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1"
+  },
+  {
+    "key": "tagId",
+    "type": "select-form",
+    "templateOptions": {
+      "label": "Tag",
+      "variant": "tag",
+      "placeholder": "Select",
+      "required": true
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1"
+  },
+  {
+    "key": "id",
+    "type": "input",
+    "templateOptions": {
+      "label": "Id",
+      "required": false
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+    "hideExpression": "(model: any, formState: any, field: FormlyFieldConfig) => {return true;}"
+  },
+  {
+    "key": "createdAt",
+    "type": "date",
+    "templateOptions": {
+      "label": "Created at",
+      "required": false
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+    "hideExpression": "(model: any, formState: any, field: FormlyFieldConfig) => {return true;}"
+  },
+  {
+    "key": "updatedAt",
+    "type": "date",
+    "templateOptions": {
+      "label": "Updated at",
+      "required": false
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+    "hideExpression": "(model: any, formState: any, field: FormlyFieldConfig) => {return true;}"
+  },
+  {
+    "key": "name",
+    "type": "input",
+    "templateOptions": {
+      "label": "Name",
+      "required": true
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1"
+  },
+  {
+    "key": "clinicalProviderId",
+    "type": "input",
+    "templateOptions": {
+      "label": "Clinical Provider Id",
+      "required": false
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+    "hideExpression": "(model: any, formState: any, field: FormlyFieldConfig) => {return true;}"
+  },
+  {
+    "key": "tagId",
+    "type": "input",
+    "templateOptions": {
+      "label": "Tag Id",
+      "required": false
+    },
+    "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+    "hideExpression": "(model: any, formState: any, field: FormlyFieldConfig) => {return true;}"
+  }
+]

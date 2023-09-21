@@ -1,0 +1,105 @@
+
+fragment AssignedDocumentDetails on AssignedDocument {
+id
+createdAt
+updatedAt
+name
+expirationDate
+entityName
+entityId
+documentId
+templateId
+documentTypeId
+userId
+document {
+    id
+    name
+}
+template {
+    id
+    name
+}
+documentType {
+    id
+    name
+}
+user {
+    id
+    name
+}
+
+
+
+
+
+}
+query AdminAssignedDocuments($input: AdminListAssignedDocumentInput) {
+  items: adminAssignedDocuments(input: $input) {
+    ...AssignedDocumentDetails
+  }
+  count: adminCountAssignedDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAssignedDocuments($input: AdminListAssignedDocumentInput) {
+  count: adminCountAssignedDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAssignedDocument($assignedDocumentId: String!) {
+  item: adminAssignedDocument(assignedDocumentId: $assignedDocumentId) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation AdminCreateAssignedDocument($input: AdminCreateAssignedDocumentInput!) {
+  created: adminCreateAssignedDocument(input: $input) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation AdminUpdateAssignedDocument($assignedDocumentId: String!, $input: AdminUpdateAssignedDocumentInput!) {
+  updated: adminUpdateAssignedDocument(assignedDocumentId: $assignedDocumentId, input: $input) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation AdminDeleteAssignedDocument($assignedDocumentId: String!) {
+  deleted: adminDeleteAssignedDocument(assignedDocumentId: $assignedDocumentId) {
+    ...AssignedDocumentDetails
+  }
+}
+
+query UserAssignedDocuments($input: UserListAssignedDocumentInput) {
+  items: userAssignedDocuments(input: $input) {
+    ...AssignedDocumentDetails
+  }
+  count: userCountAssignedDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAssignedDocuments($input: UserListAssignedDocumentInput) {
+  count: userCountAssignedDocuments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserAssignedDocument($assignedDocumentId: String!) {
+  item: userAssignedDocument(assignedDocumentId: $assignedDocumentId) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation UserCreateAssignedDocument($input: UserCreateAssignedDocumentInput!) {
+  created: userCreateAssignedDocument(input: $input) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation UserUpdateAssignedDocument($assignedDocumentId: String!, $input: UserUpdateAssignedDocumentInput!) {
+  updated: userUpdateAssignedDocument(assignedDocumentId: $assignedDocumentId, input: $input) {
+    ...AssignedDocumentDetails
+  }
+}
+mutation UserDeleteAssignedDocument($assignedDocumentId: String!) {
+  deleted: userDeleteAssignedDocument(assignedDocumentId: $assignedDocumentId) {
+    ...AssignedDocumentDetails
+  }
+}

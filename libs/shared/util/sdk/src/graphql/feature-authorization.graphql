@@ -1,0 +1,216 @@
+
+
+fragment AuthorizationDetails on Authorization {
+id
+createdAt
+updatedAt
+name
+vendorId
+authorizationCategoryId
+authorizationTypeId
+requestDescription
+durationOrQuantity
+unit
+cptCode
+procedureId
+vendor {
+  id
+  name
+}
+authorizationCategory {
+  id
+  name
+}
+authorizationType {
+  id
+  name
+}
+procedure {
+  id
+  name
+}
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+
+procedureOrTreatmentRequestAuthorizations {
+    id
+    name
+  }
+
+recommendedOrderAuthorizations {
+    id
+    name
+  }
+}
+
+fragment AuthorizationLists on Authorization {
+id
+createdAt
+updatedAt
+name
+vendorId
+authorizationCategoryId
+authorizationTypeId
+requestDescription
+durationOrQuantity
+unit
+cptCode
+procedureId
+vendor {
+    id
+    name
+}
+authorizationCategory {
+    id
+    name
+}
+authorizationType {
+    id
+    name
+}
+procedure {
+    id
+    name
+}
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+
+
+procedureOrTreatmentRequestAuthorizations {
+    id
+    name
+  }
+
+
+recommendedOrderAuthorizations {
+    id
+    name
+  }
+
+}
+
+query AdminAuthorizations($input: AdminListAuthorizationInput) {
+  items: adminAuthorizations(input: $input) {
+    ...AuthorizationLists
+  }
+  count: adminCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizations($input: AdminListAuthorizationInput) {
+  count: adminCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorization($authorizationId: String!) {
+  item: adminAuthorization(authorizationId: $authorizationId) {
+    ...AuthorizationDetails
+  }
+}
+mutation AdminCreateAuthorization($input: AdminCreateAuthorizationInput!) {
+  created: adminCreateAuthorization(input: $input) {
+    ...AuthorizationDetails
+  }
+}
+mutation AdminUpdateAuthorization($authorizationId: String!, $input: AdminUpdateAuthorizationInput!) {
+  updated: adminUpdateAuthorization(authorizationId: $authorizationId, input: $input) {
+    ...AuthorizationDetails
+  }
+}
+mutation AdminDeleteAuthorization($authorizationId: String!) {
+  deleted: adminDeleteAuthorization(authorizationId: $authorizationId) {
+    ...AuthorizationDetails
+  }
+}
+
+query UserAuthorizations($input: UserListAuthorizationInput) {
+  items: userAuthorizations(input: $input) {
+    ...AuthorizationLists
+  }
+  count: userCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizations($input: UserListAuthorizationInput) {
+  count: userCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizations($input: UserListAuthorizationInput) {
+  items: userSelectAuthorizations(input: $input) {
+    ...AuthorizationDetails
+  }
+}
+
+query UserAuthorization($authorizationId: String!) {
+  item: userAuthorization(authorizationId: $authorizationId) {
+    ...AuthorizationDetails
+  }
+}
+
+mutation UserCreateAuthorization($input: UserCreateAuthorizationInput!) {
+  created: userCreateAuthorization(input: $input) {
+    ...AuthorizationDetails
+  }
+}
+mutation UserUpdateAuthorization($authorizationId: String!, $input: UserUpdateAuthorizationInput!) {
+  updated: userUpdateAuthorization(authorizationId: $authorizationId, input: $input) {
+    ...AuthorizationDetails
+  }
+}
+
+mutation UserUpdateAuthorizations($input: UserUpdateAuthorizationsInput!) {
+  updated: userUpdateAuthorizations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorization($authorizationId: String!) {
+  deleted: userDeleteAuthorization(authorizationId: $authorizationId) {
+    ...AuthorizationDetails
+  }
+}
+
+query PublicAuthorizations($input: UserListAuthorizationInput) {
+  items: publicAuthorizations(input: $input) {
+    ...AuthorizationLists
+  }
+  count: publicCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizations($input: UserListAuthorizationInput) {
+  count: publicCountAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizations($input: UserListAuthorizationInput) {
+  items: publicSelectAuthorizations(input: $input) {
+    ...AuthorizationDetails
+  }
+}
+
+query PublicAuthorization($authorizationId: String!) {
+  item: publicAuthorization(authorizationId: $authorizationId) {
+    ...AuthorizationDetails
+  }
+}

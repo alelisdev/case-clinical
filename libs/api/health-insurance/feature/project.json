@@ -1,0 +1,26 @@
+{
+  "name": "api-health-insurance-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/health-insurance/feature/src",
+  "prefix": "health-insurance",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/health-insurance/data-access/src/**/*.ts",
+          "libs/api/health-insurance/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/health-insurance/data-access"],
+      "options": {
+        "jestConfig": "libs/api/health-insurance/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

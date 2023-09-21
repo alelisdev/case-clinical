@@ -1,0 +1,118 @@
+
+fragment TemplateDetails on Template {
+id
+createdAt
+updatedAt
+name
+attachment
+encoding
+signatureFileType
+code
+
+assignedDocuments {
+    id
+    name
+  }
+}
+
+fragment TemplateLists on Template {
+id
+createdAt
+updatedAt
+name
+attachment
+encoding
+signatureFileType
+code
+
+
+assignedDocuments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminTemplates($input: AdminListTemplateInput) {
+  items: adminTemplates(input: $input) {
+    ...TemplateLists
+  }
+  count: adminCountTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTemplates($input: AdminListTemplateInput) {
+  count: adminCountTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTemplate($templateId: String!) {
+  item: adminTemplate(templateId: $templateId) {
+    ...TemplateDetails
+  }
+}
+mutation AdminCreateTemplate($input: AdminCreateTemplateInput!) {
+  created: adminCreateTemplate(input: $input) {
+    ...TemplateDetails
+  }
+}
+mutation AdminUpdateTemplate($templateId: String!, $input: AdminUpdateTemplateInput!) {
+  updated: adminUpdateTemplate(templateId: $templateId, input: $input) {
+    ...TemplateDetails
+  }
+}
+mutation AdminDeleteTemplate($templateId: String!) {
+  deleted: adminDeleteTemplate(templateId: $templateId) {
+    ...TemplateDetails
+  }
+}
+
+query UserTemplates($input: UserListTemplateInput) {
+  items: userTemplates(input: $input) {
+    ...TemplateLists
+  }
+  count: userCountTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTemplates($input: UserListTemplateInput) {
+  count: userCountTemplates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTemplates($input: UserListTemplateInput) {
+  items: userSelectTemplates(input: $input) {
+    ...TemplateDetails
+  }
+}
+
+query UserTemplate($templateId: String!) {
+  item: userTemplate(templateId: $templateId) {
+    ...TemplateDetails
+  }
+}
+
+mutation UserCreateTemplate($input: UserCreateTemplateInput!) {
+  created: userCreateTemplate(input: $input) {
+    ...TemplateDetails
+  }
+}
+mutation UserUpdateTemplate($templateId: String!, $input: UserUpdateTemplateInput!) {
+  updated: userUpdateTemplate(templateId: $templateId, input: $input) {
+    ...TemplateDetails
+  }
+}
+
+mutation UserDeleteTemplate($templateId: String!) {
+  deleted: userDeleteTemplate(templateId: $templateId) {
+    ...TemplateDetails
+  }
+}
+
+

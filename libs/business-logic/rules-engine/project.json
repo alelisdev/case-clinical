@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/business-logic/rules-engine/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/rules-engine",
+        "tsConfig": "libs/business-logic/rules-engine/tsconfig.lib.json",
+        "packageJson": "libs/business-logic/rules-engine/package.json",
+        "main": "libs/business-logic/rules-engine/src/index.ts",
+        "assets": ["libs/business-logic/rules-engine/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/business-logic/rules-engine/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/business-logic/rules-engine"],
+      "options": {
+        "jestConfig": "libs/business-logic/rules-engine/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-rules-engine"
+}

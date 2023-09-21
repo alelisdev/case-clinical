@@ -1,0 +1,23 @@
+{
+  "name": "web-user-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/user/ui/src",
+  "prefix": "user",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/user/ui/src/**/*.ts", "libs/web/user/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/user/ui"],
+      "options": {
+        "jestConfig": "libs/web/user/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

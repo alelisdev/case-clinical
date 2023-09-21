@@ -1,0 +1,156 @@
+
+fragment EducationDetails on Education {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+school
+degree
+from
+to
+clinicalProvider {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment EducationLists on Education {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+school
+degree
+from
+to
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminEducations($input: AdminListEducationInput) {
+  items: adminEducations(input: $input) {
+    ...EducationLists
+  }
+  count: adminCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEducations($input: AdminListEducationInput) {
+  count: adminCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminEducation($educationId: String!) {
+  item: adminEducation(educationId: $educationId) {
+    ...EducationDetails
+  }
+}
+mutation AdminCreateEducation($input: AdminCreateEducationInput!) {
+  created: adminCreateEducation(input: $input) {
+    ...EducationDetails
+  }
+}
+mutation AdminUpdateEducation($educationId: String!, $input: AdminUpdateEducationInput!) {
+  updated: adminUpdateEducation(educationId: $educationId, input: $input) {
+    ...EducationDetails
+  }
+}
+mutation AdminDeleteEducation($educationId: String!) {
+  deleted: adminDeleteEducation(educationId: $educationId) {
+    ...EducationDetails
+  }
+}
+
+query UserEducations($input: UserListEducationInput) {
+  items: userEducations(input: $input) {
+    ...EducationLists
+  }
+  count: userCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEducations($input: UserListEducationInput) {
+  count: userCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectEducations($input: UserListEducationInput) {
+  items: userSelectEducations(input: $input) {
+    ...EducationDetails
+  }
+}
+
+query UserEducation($educationId: String!) {
+  item: userEducation(educationId: $educationId) {
+    ...EducationDetails
+  }
+}
+
+mutation UserCreateEducation($input: UserCreateEducationInput!) {
+  created: userCreateEducation(input: $input) {
+    ...EducationDetails
+  }
+}
+mutation UserUpdateEducation($educationId: String!, $input: UserUpdateEducationInput!) {
+  updated: userUpdateEducation(educationId: $educationId, input: $input) {
+    ...EducationDetails
+  }
+}
+
+mutation UserUpdateEducations($input: UserUpdateEducationsInput!) {
+  updated: userUpdateEducations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteEducation($educationId: String!) {
+  deleted: userDeleteEducation(educationId: $educationId) {
+    ...EducationDetails
+  }
+}
+
+query PublicEducations($input: UserListEducationInput) {
+  items: publicEducations(input: $input) {
+    ...EducationLists
+  }
+  count: publicCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountEducations($input: UserListEducationInput) {
+  count: publicCountEducations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectEducations($input: UserListEducationInput) {
+  items: publicSelectEducations(input: $input) {
+    ...EducationDetails
+  }
+}
+
+query PublicEducation($educationId: String!) {
+  item: publicEducation(educationId: $educationId) {
+    ...EducationDetails
+  }
+}

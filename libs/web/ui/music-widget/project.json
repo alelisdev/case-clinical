@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-music-widget",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/music-widget/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/music-widget/src/**/*.ts", "libs/web/ui/music-widget/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/music-widget"],
+      "options": {
+        "jestConfig": "libs/web/ui/music-widget/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

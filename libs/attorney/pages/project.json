@@ -1,0 +1,17 @@
+{
+  "name": "attorney-pages",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/attorney/pages/src",
+  "prefix": "case-clinical",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/attorney/pages/**/*.ts", "libs/attorney/pages/**/*.html"]
+      }
+    }
+  }
+}

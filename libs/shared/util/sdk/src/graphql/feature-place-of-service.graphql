@@ -1,0 +1,161 @@
+
+fragment PlaceOfServiceDetails on PlaceOfService {
+id
+createdAt
+updatedAt
+name
+isFacility
+
+
+
+
+
+
+claimProcedures {
+    ...ClaimProcedureLists
+  }
+
+locations {
+    id
+    name
+  }
+}
+
+fragment PlaceOfServiceLists on PlaceOfService {
+id
+createdAt
+updatedAt
+name
+isFacility
+
+
+
+
+
+
+claimProcedures {
+    id
+    name
+  }
+
+
+locations {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPlaceOfServices($input: AdminListPlaceOfServiceInput) {
+  items: adminPlaceOfServices(input: $input) {
+    ...PlaceOfServiceLists
+  }
+  count: adminCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPlaceOfServices($input: AdminListPlaceOfServiceInput) {
+  count: adminCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPlaceOfService($placeOfServiceId: String!) {
+  item: adminPlaceOfService(placeOfServiceId: $placeOfServiceId) {
+    ...PlaceOfServiceDetails
+  }
+}
+mutation AdminCreatePlaceOfService($input: AdminCreatePlaceOfServiceInput!) {
+  created: adminCreatePlaceOfService(input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+mutation AdminUpdatePlaceOfService($placeOfServiceId: String!, $input: AdminUpdatePlaceOfServiceInput!) {
+  updated: adminUpdatePlaceOfService(placeOfServiceId: $placeOfServiceId, input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+mutation AdminDeletePlaceOfService($placeOfServiceId: String!) {
+  deleted: adminDeletePlaceOfService(placeOfServiceId: $placeOfServiceId) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+query UserPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  items: userPlaceOfServices(input: $input) {
+    ...PlaceOfServiceLists
+  }
+  count: userCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  count: userCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  items: userSelectPlaceOfServices(input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+query UserPlaceOfService($placeOfServiceId: String!) {
+  item: userPlaceOfService(placeOfServiceId: $placeOfServiceId) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+mutation UserCreatePlaceOfService($input: UserCreatePlaceOfServiceInput!) {
+  created: userCreatePlaceOfService(input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+mutation UserUpdatePlaceOfService($placeOfServiceId: String!, $input: UserUpdatePlaceOfServiceInput!) {
+  updated: userUpdatePlaceOfService(placeOfServiceId: $placeOfServiceId, input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+mutation UserUpdatePlaceOfServices($input: UserUpdatePlaceOfServicesInput!) {
+  updated: userUpdatePlaceOfServices(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePlaceOfService($placeOfServiceId: String!) {
+  deleted: userDeletePlaceOfService(placeOfServiceId: $placeOfServiceId) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+query PublicPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  items: publicPlaceOfServices(input: $input) {
+    ...PlaceOfServiceLists
+  }
+  count: publicCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  count: publicCountPlaceOfServices(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPlaceOfServices($input: UserListPlaceOfServiceInput) {
+  items: publicSelectPlaceOfServices(input: $input) {
+    ...PlaceOfServiceDetails
+  }
+}
+
+query PublicPlaceOfService($placeOfServiceId: String!) {
+  item: publicPlaceOfService(placeOfServiceId: $placeOfServiceId) {
+    ...PlaceOfServiceDetails
+  }
+}

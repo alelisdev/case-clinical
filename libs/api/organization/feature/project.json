@@ -1,0 +1,26 @@
+{
+  "name": "api-organization-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/organization/feature/src",
+  "prefix": "organization",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/organization/data-access/src/**/*.ts",
+          "libs/api/organization/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/organization/data-access"],
+      "options": {
+        "jestConfig": "libs/api/organization/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

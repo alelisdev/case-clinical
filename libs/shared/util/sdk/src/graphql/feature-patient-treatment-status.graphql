@@ -1,0 +1,148 @@
+
+fragment PatientTreatmentStatusDetails on PatientTreatmentStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    ...LegalCaseLists
+  }
+}
+
+fragment PatientTreatmentStatusLists on PatientTreatmentStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPatientTreatmentStatuses($input: AdminListPatientTreatmentStatusInput) {
+  items: adminPatientTreatmentStatuses(input: $input) {
+    ...PatientTreatmentStatusLists
+  }
+  count: adminCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPatientTreatmentStatuses($input: AdminListPatientTreatmentStatusInput) {
+  count: adminCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPatientTreatmentStatus($patientTreatmentStatusId: String!) {
+  item: adminPatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+mutation AdminCreatePatientTreatmentStatus($input: AdminCreatePatientTreatmentStatusInput!) {
+  created: adminCreatePatientTreatmentStatus(input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+mutation AdminUpdatePatientTreatmentStatus($patientTreatmentStatusId: String!, $input: AdminUpdatePatientTreatmentStatusInput!) {
+  updated: adminUpdatePatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId, input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+mutation AdminDeletePatientTreatmentStatus($patientTreatmentStatusId: String!) {
+  deleted: adminDeletePatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+query UserPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  items: userPatientTreatmentStatuses(input: $input) {
+    ...PatientTreatmentStatusLists
+  }
+  count: userCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  count: userCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  items: userSelectPatientTreatmentStatuses(input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+query UserPatientTreatmentStatus($patientTreatmentStatusId: String!) {
+  item: userPatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+mutation UserCreatePatientTreatmentStatus($input: UserCreatePatientTreatmentStatusInput!) {
+  created: userCreatePatientTreatmentStatus(input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+mutation UserUpdatePatientTreatmentStatus($patientTreatmentStatusId: String!, $input: UserUpdatePatientTreatmentStatusInput!) {
+  updated: userUpdatePatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId, input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+mutation UserUpdatePatientTreatmentStatuses($input: UserUpdatePatientTreatmentStatusesInput!) {
+  updated: userUpdatePatientTreatmentStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePatientTreatmentStatus($patientTreatmentStatusId: String!) {
+  deleted: userDeletePatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+query PublicPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  items: publicPatientTreatmentStatuses(input: $input) {
+    ...PatientTreatmentStatusLists
+  }
+  count: publicCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  count: publicCountPatientTreatmentStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPatientTreatmentStatuses($input: UserListPatientTreatmentStatusInput) {
+  items: publicSelectPatientTreatmentStatuses(input: $input) {
+    ...PatientTreatmentStatusDetails
+  }
+}
+
+query PublicPatientTreatmentStatus($patientTreatmentStatusId: String!) {
+  item: publicPatientTreatmentStatus(patientTreatmentStatusId: $patientTreatmentStatusId) {
+    ...PatientTreatmentStatusDetails
+  }
+}

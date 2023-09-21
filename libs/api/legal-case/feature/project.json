@@ -1,0 +1,26 @@
+{
+  "name": "api-legal-case-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/legal-case/feature/src",
+  "prefix": "legal-case",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/legal-case/data-access/src/**/*.ts",
+          "libs/api/legal-case/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/legal-case/data-access"],
+      "options": {
+        "jestConfig": "libs/api/legal-case/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

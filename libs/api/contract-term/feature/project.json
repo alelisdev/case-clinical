@@ -1,0 +1,26 @@
+{
+  "name": "api-contract-term-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/contract-term/feature/src",
+  "prefix": "contract-term",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/contract-term/data-access/src/**/*.ts",
+          "libs/api/contract-term/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/contract-term/data-access"],
+      "options": {
+        "jestConfig": "libs/api/contract-term/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

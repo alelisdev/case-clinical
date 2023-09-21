@@ -1,0 +1,194 @@
+
+
+fragment RecommendedOrderAuthorizationDetails on RecommendedOrderAuthorization {
+id
+createdAt
+updatedAt
+name
+authorizationId
+recommendedOrderId
+authorization {
+  id
+  name
+  vendor {
+    id
+    name
+  }
+  authorizationCategory {
+    id
+    name
+  }
+  authorizationType {
+    id
+    name
+  }
+  procedure {
+    id
+    name
+  }
+
+
+}
+recommendedOrder {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RecommendedOrderAuthorizationLists on RecommendedOrderAuthorization {
+id
+createdAt
+updatedAt
+name
+authorizationId
+recommendedOrderId
+authorization {
+    id
+    name
+
+    vendor {
+      id
+      name
+    }
+    authorizationCategory {
+      id
+      name
+    }
+    authorizationType {
+      id
+      name
+    }
+    procedure {
+      id
+      name
+    }
+
+
+}
+recommendedOrder {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminRecommendedOrderAuthorizations($input: AdminListRecommendedOrderAuthorizationInput) {
+  items: adminRecommendedOrderAuthorizations(input: $input) {
+    ...RecommendedOrderAuthorizationLists
+  }
+  count: adminCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRecommendedOrderAuthorizations($input: AdminListRecommendedOrderAuthorizationInput) {
+  count: adminCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!) {
+  item: adminRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+mutation AdminCreateRecommendedOrderAuthorization($input: AdminCreateRecommendedOrderAuthorizationInput!) {
+  created: adminCreateRecommendedOrderAuthorization(input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+mutation AdminUpdateRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!, $input: AdminUpdateRecommendedOrderAuthorizationInput!) {
+  updated: adminUpdateRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId, input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+mutation AdminDeleteRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!) {
+  deleted: adminDeleteRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+query UserRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  items: userRecommendedOrderAuthorizations(input: $input) {
+    ...RecommendedOrderAuthorizationLists
+  }
+  count: userCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  count: userCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  items: userSelectRecommendedOrderAuthorizations(input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+query UserRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!) {
+  item: userRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+mutation UserCreateRecommendedOrderAuthorization($input: UserCreateRecommendedOrderAuthorizationInput!) {
+  created: userCreateRecommendedOrderAuthorization(input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+mutation UserUpdateRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!, $input: UserUpdateRecommendedOrderAuthorizationInput!) {
+  updated: userUpdateRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId, input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+mutation UserUpdateRecommendedOrderAuthorizations($input: UserUpdateRecommendedOrderAuthorizationsInput!) {
+  updated: userUpdateRecommendedOrderAuthorizations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!) {
+  deleted: userDeleteRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+query PublicRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  items: publicRecommendedOrderAuthorizations(input: $input) {
+    ...RecommendedOrderAuthorizationLists
+  }
+  count: publicCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  count: publicCountRecommendedOrderAuthorizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRecommendedOrderAuthorizations($input: UserListRecommendedOrderAuthorizationInput) {
+  items: publicSelectRecommendedOrderAuthorizations(input: $input) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}
+
+query PublicRecommendedOrderAuthorization($recommendedOrderAuthorizationId: String!) {
+  item: publicRecommendedOrderAuthorization(recommendedOrderAuthorizationId: $recommendedOrderAuthorizationId) {
+    ...RecommendedOrderAuthorizationDetails
+  }
+}

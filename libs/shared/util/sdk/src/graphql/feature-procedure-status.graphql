@@ -1,0 +1,148 @@
+
+fragment ProcedureStatusDetails on ProcedureStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+procedures {
+   ...CaseProcedureLists
+  }
+}
+
+fragment ProcedureStatusLists on ProcedureStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+procedures {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminProcedureStatuses($input: AdminListProcedureStatusInput) {
+  items: adminProcedureStatuses(input: $input) {
+    ...ProcedureStatusLists
+  }
+  count: adminCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureStatuses($input: AdminListProcedureStatusInput) {
+  count: adminCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureStatus($procedureStatusId: String!) {
+  item: adminProcedureStatus(procedureStatusId: $procedureStatusId) {
+    ...ProcedureStatusDetails
+  }
+}
+mutation AdminCreateProcedureStatus($input: AdminCreateProcedureStatusInput!) {
+  created: adminCreateProcedureStatus(input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+mutation AdminUpdateProcedureStatus($procedureStatusId: String!, $input: AdminUpdateProcedureStatusInput!) {
+  updated: adminUpdateProcedureStatus(procedureStatusId: $procedureStatusId, input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+mutation AdminDeleteProcedureStatus($procedureStatusId: String!) {
+  deleted: adminDeleteProcedureStatus(procedureStatusId: $procedureStatusId) {
+    ...ProcedureStatusDetails
+  }
+}
+
+query UserProcedureStatuses($input: UserListProcedureStatusInput) {
+  items: userProcedureStatuses(input: $input) {
+    ...ProcedureStatusLists
+  }
+  count: userCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureStatuses($input: UserListProcedureStatusInput) {
+  count: userCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureStatuses($input: UserListProcedureStatusInput) {
+  items: userSelectProcedureStatuses(input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+
+query UserProcedureStatus($procedureStatusId: String!) {
+  item: userProcedureStatus(procedureStatusId: $procedureStatusId) {
+    ...ProcedureStatusDetails
+  }
+}
+
+mutation UserCreateProcedureStatus($input: UserCreateProcedureStatusInput!) {
+  created: userCreateProcedureStatus(input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+mutation UserUpdateProcedureStatus($procedureStatusId: String!, $input: UserUpdateProcedureStatusInput!) {
+  updated: userUpdateProcedureStatus(procedureStatusId: $procedureStatusId, input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+
+mutation UserUpdateProcedureStatuses($input: UserUpdateProcedureStatusesInput!) {
+  updated: userUpdateProcedureStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureStatus($procedureStatusId: String!) {
+  deleted: userDeleteProcedureStatus(procedureStatusId: $procedureStatusId) {
+    ...ProcedureStatusDetails
+  }
+}
+
+query PublicProcedureStatuses($input: UserListProcedureStatusInput) {
+  items: publicProcedureStatuses(input: $input) {
+    ...ProcedureStatusLists
+  }
+  count: publicCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureStatuses($input: UserListProcedureStatusInput) {
+  count: publicCountProcedureStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureStatuses($input: UserListProcedureStatusInput) {
+  items: publicSelectProcedureStatuses(input: $input) {
+    ...ProcedureStatusDetails
+  }
+}
+
+query PublicProcedureStatus($procedureStatusId: String!) {
+  item: publicProcedureStatus(procedureStatusId: $procedureStatusId) {
+    ...ProcedureStatusDetails
+  }
+}

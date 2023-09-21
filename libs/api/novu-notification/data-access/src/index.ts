@@ -1,0 +1,5 @@
+export * from './lib/api-novu-notification-data-access.module'
+export * from './lib/api-novu-notification-data-access-service'
+export * from './lib/models/novu-notification.model'
+export * from './lib/dto/user-create-novu-notification.input'
+export * from './lib/dto/user-list-novu-notification.input'

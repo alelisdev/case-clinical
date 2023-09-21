@@ -1,0 +1,23 @@
+{
+  "name": "web-write-off-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/write-off/ui/src",
+  "prefix": "write-off",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/write-off/ui/src/**/*.ts", "libs/web/write-off/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/write-off/ui"],
+      "options": {
+        "jestConfig": "libs/web/write-off/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

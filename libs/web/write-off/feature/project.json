@@ -1,0 +1,23 @@
+{
+  "name": "web-write-off-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/write-off/feature/src",
+  "prefix": "write-off",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/write-off/feature/src/**/*.ts", "libs/web/write-off/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/write-off/feature"],
+      "options": {
+        "jestConfig": "libs/web/write-off/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

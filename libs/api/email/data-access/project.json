@@ -1,0 +1,22 @@
+{
+  "name": "api-email-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/email/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/email/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/email/data-access"],
+      "options": {
+        "jestConfig": "libs/api/email/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

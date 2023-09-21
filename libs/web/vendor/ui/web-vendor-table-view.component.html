@@ -1,0 +1,831 @@
+
+<ng-container>
+        <div class="bg-white md:rounded-lg md:shadow dark:bg-gray-800" >
+          <div class="p-4 sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-xl font-semibold text-gray-900">Vendors</h1>
+            </div>
+            <div class="sm:ml-16 sm:flex-none" *ngIf="vendors?.length > 0">
+              <a
+                type="button"
+                (click)="openDialog(createVendorTpl, {vendor: {}})"
+                class="flex rounded-full border-2 border-blue-500 p-2 text-blue-500 cursor-pointer hover:bg-gray-100 hover:border-blue-600 hover:text-blue-600 hover:shadow-lg hover:scale-105 transition duration-200"
+              >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+              </a>
+            </div>
+          </div>
+
+          <ng-template #createVendorTpl let-ref>
+          <div class="flex-grow flex flex-col">
+            <div class="text-lg font-semibold tracking-wider px-4 py-3 flex space-x-4 items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <ui-icon icon="table"></ui-icon>
+                <div>Create Vendor</div>
+              </div>
+            </div>
+            <div class="flex-grow">
+              <ui-vendor-form (send)="this.createVendor($event); ref.close()" [vendor]="ref.data?.vendor">
+              </ui-vendor-form>
+            </div>
+          </div>
+        </ng-template>
+
+            
+    <div class="overflow-x-auto">
+      <div *ngIf="vendors?.length > 0; else noData" class="flex flex-col justify-between">
+        <div class="overflow-x-auto">
+          <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Name
+                          </th>
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Tax Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Line 1
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Postal Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Email Address
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Phone Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Fax
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Mailing Address
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor Type
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Contracts
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Line 2
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Country
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Office
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Email
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Website
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Contact Person
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Owner
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            W 9
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank Routing Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank Account Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bank Zip
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bill Of Sale Template
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bill Of Sale Instructions
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ap Detail Template
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Notes
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Agreement Details
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Dl
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Nci
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Baa
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ucc
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Nds
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Contract
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Sa
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Other
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ota
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Permission
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Cellphone
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ach
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Facility Check
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Wire
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reduction Notes
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Latitude
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Longitude
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Business Central Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Case Accounts
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Procedure Vendors
+                          </th>
+
+                    </tr>
+                    </thead>
+                 <tbody class="bg-grey-light max-h-48 w-full divide-y divide-gray-200 overflow-y-scroll">
+                  <tr
+                    [routerLink]="['../../vendors', row.id, 'details', 'overview']"
+                    *ngFor="let row of vendors"
+                    class="w-full transition duration-200 hover:cursor-pointer hover:bg-blue-50"
+                  >
+                        
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.name }}
+                          </td>
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.taxId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.line1 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.city }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.state }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.postalCode }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.emailAddress }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.phoneNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.fax }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.mailingAddress }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.line2 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.country }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.office }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.email }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.website }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.contactPerson }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.owner }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.w9 }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankRoutingNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankAccountNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bankZip }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billOfSaleTemplate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.billOfSaleInstructions }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.apDetailTemplate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.notes }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.agreementDetails }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.dl }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.nci }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.baa }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ucc }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.nds }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.contract }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.sa }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.other }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ota }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.permission }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.cellphone }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ach }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.facilityCheck }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.wire }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reductionNotes }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.latitude }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.longitude }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.businessCentralName }}
+                          </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+        <div
+          class="flex h-full w-full items-center justify-end rounded-b-lg border-t-2 border-gray-200 bg-gray-50 p-3 text-gray-800"
+        >
+          <h1 class="mr-2 font-bold">Total Vendors:</h1>
+          <h1 class="">{{this.vendors | getTotal:'amount'}}</h1>
+    </div>
+</div>
+
+
+                  <ng-template #noData>
+              <div class="h-full w-full flex flex-col items-center justify-center py-6">
+                <h1 class="py-2 font-bold">No Vendor</h1>
+              <button
+                type="button"
+                (click)="openDialog(createVendorTpl, {vendor: {}})"
+                class="text-white bg-primary hover:bg-opacity-90 transition duration-300 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
+        >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Add New Vendor
+              </button>
+              </div>
+            </ng-template>
+        </div>
+    </div>
+  </ng-container>

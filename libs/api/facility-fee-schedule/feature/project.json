@@ -1,0 +1,26 @@
+{
+  "name": "api-facility-fee-schedule-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/facility-fee-schedule/feature/src",
+  "prefix": "facility-fee-schedule",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/facility-fee-schedule/data-access/src/**/*.ts",
+          "libs/api/facility-fee-schedule/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/facility-fee-schedule/data-access"],
+      "options": {
+        "jestConfig": "libs/api/facility-fee-schedule/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

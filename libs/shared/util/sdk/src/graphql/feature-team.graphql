@@ -1,0 +1,149 @@
+
+fragment TeamDetails on Team {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+teamUsers {
+    id
+    name
+  }
+}
+
+fragment TeamLists on Team {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+teamUsers {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminTeams($input: AdminListTeamInput) {
+  items: adminTeams(input: $input) {
+    ...TeamLists
+  }
+  count: adminCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTeams($input: AdminListTeamInput) {
+  count: adminCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTeam($teamId: String!) {
+  item: adminTeam(teamId: $teamId) {
+    ...TeamDetails
+  }
+}
+mutation AdminCreateTeam($input: AdminCreateTeamInput!) {
+  created: adminCreateTeam(input: $input) {
+    ...TeamDetails
+  }
+}
+mutation AdminUpdateTeam($teamId: String!, $input: AdminUpdateTeamInput!) {
+  updated: adminUpdateTeam(teamId: $teamId, input: $input) {
+    ...TeamDetails
+  }
+}
+mutation AdminDeleteTeam($teamId: String!) {
+  deleted: adminDeleteTeam(teamId: $teamId) {
+    ...TeamDetails
+  }
+}
+
+query UserTeams($input: UserListTeamInput) {
+  items: userTeams(input: $input) {
+    ...TeamLists
+  }
+  count: userCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTeams($input: UserListTeamInput) {
+  count: userCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTeams($input: UserListTeamInput) {
+  items: userSelectTeams(input: $input) {
+    ...TeamDetails
+  }
+}
+
+query UserTeam($teamId: String!) {
+  item: userTeam(teamId: $teamId) {
+    ...TeamDetails
+  }
+}
+
+mutation UserCreateTeam($input: UserCreateTeamInput!) {
+  created: userCreateTeam(input: $input) {
+    ...TeamDetails
+  }
+}
+mutation UserUpdateTeam($teamId: String!, $input: UserUpdateTeamInput!) {
+  updated: userUpdateTeam(teamId: $teamId, input: $input) {
+    ...TeamDetails
+  }
+}
+
+mutation UserUpdateTeams($input: UserUpdateTeamsInput!) {
+  updated: userUpdateTeams(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTeam($teamId: String!) {
+  deleted: userDeleteTeam(teamId: $teamId) {
+    ...TeamDetails
+  }
+}
+
+query PublicTeams($input: UserListTeamInput) {
+  items: publicTeams(input: $input) {
+    ...TeamLists
+  }
+  count: publicCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTeams($input: UserListTeamInput) {
+  count: publicCountTeams(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTeams($input: UserListTeamInput) {
+  items: publicSelectTeams(input: $input) {
+    ...TeamDetails
+  }
+}
+
+query PublicTeam($teamId: String!) {
+  item: publicTeam(teamId: $teamId) {
+    ...TeamDetails
+  }
+}

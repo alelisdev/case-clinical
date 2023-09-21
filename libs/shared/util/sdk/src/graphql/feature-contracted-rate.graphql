@@ -1,0 +1,206 @@
+
+fragment ContractedRateDetails on ContractedRate {
+id
+createdAt
+updatedAt
+name
+amount
+percentage
+reimbursedRate
+billOnBehalf
+contractId
+contractedRateKindId
+contractKindId
+visitKindId
+clinicalProviderId
+specialtyId
+contract {
+  id
+  name
+}
+contractedRateKind {
+  id
+  name
+}
+contractKind {
+  id
+  name
+}
+visitKind {
+  id
+  name
+}
+clinicalProvider {
+  id
+  name
+}
+specialty {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContractedRateLists on ContractedRate {
+id
+createdAt
+updatedAt
+name
+amount
+percentage
+reimbursedRate
+billOnBehalf
+contractId
+contractedRateKindId
+contractKindId
+visitKindId
+clinicalProviderId
+specialtyId
+contract {
+    id
+    name
+}
+contractedRateKind {
+    id
+    name
+}
+contractKind {
+    id
+    name
+}
+visitKind {
+    id
+    name
+}
+clinicalProvider {
+    id
+    name
+}
+specialty {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContractedRates($input: AdminListContractedRateInput) {
+  items: adminContractedRates(input: $input) {
+    ...ContractedRateLists
+  }
+  count: adminCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContractedRates($input: AdminListContractedRateInput) {
+  count: adminCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContractedRate($contractedRateId: String!) {
+  item: adminContractedRate(contractedRateId: $contractedRateId) {
+    ...ContractedRateDetails
+  }
+}
+mutation AdminCreateContractedRate($input: AdminCreateContractedRateInput!) {
+  created: adminCreateContractedRate(input: $input) {
+    ...ContractedRateDetails
+  }
+}
+mutation AdminUpdateContractedRate($contractedRateId: String!, $input: AdminUpdateContractedRateInput!) {
+  updated: adminUpdateContractedRate(contractedRateId: $contractedRateId, input: $input) {
+    ...ContractedRateDetails
+  }
+}
+mutation AdminDeleteContractedRate($contractedRateId: String!) {
+  deleted: adminDeleteContractedRate(contractedRateId: $contractedRateId) {
+    ...ContractedRateDetails
+  }
+}
+
+query UserContractedRates($input: UserListContractedRateInput) {
+  items: userContractedRates(input: $input) {
+    ...ContractedRateLists
+  }
+  count: userCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContractedRates($input: UserListContractedRateInput) {
+  count: userCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContractedRates($input: UserListContractedRateInput) {
+  items: userSelectContractedRates(input: $input) {
+    ...ContractedRateDetails
+  }
+}
+
+query UserContractedRate($contractedRateId: String!) {
+  item: userContractedRate(contractedRateId: $contractedRateId) {
+    ...ContractedRateDetails
+  }
+}
+
+mutation UserCreateContractedRate($input: UserCreateContractedRateInput!) {
+  created: userCreateContractedRate(input: $input) {
+    ...ContractedRateDetails
+  }
+}
+mutation UserUpdateContractedRate($contractedRateId: String!, $input: UserUpdateContractedRateInput!) {
+  updated: userUpdateContractedRate(contractedRateId: $contractedRateId, input: $input) {
+    ...ContractedRateDetails
+  }
+}
+
+mutation UserUpdateContractedRates($input: UserUpdateContractedRatesInput!) {
+  updated: userUpdateContractedRates(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContractedRate($contractedRateId: String!) {
+  deleted: userDeleteContractedRate(contractedRateId: $contractedRateId) {
+    ...ContractedRateDetails
+  }
+}
+
+query PublicContractedRates($input: UserListContractedRateInput) {
+  items: publicContractedRates(input: $input) {
+    ...ContractedRateLists
+  }
+  count: publicCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContractedRates($input: UserListContractedRateInput) {
+  count: publicCountContractedRates(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContractedRates($input: UserListContractedRateInput) {
+  items: publicSelectContractedRates(input: $input) {
+    ...ContractedRateDetails
+  }
+}
+
+query PublicContractedRate($contractedRateId: String!) {
+  item: publicContractedRate(contractedRateId: $contractedRateId) {
+    ...ContractedRateDetails
+  }
+}

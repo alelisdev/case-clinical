@@ -1,0 +1,95 @@
+
+fragment PermissionDetails on Permission {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+featurePermissions {
+    id
+    name
+  }
+
+}
+query AdminPermissions($input: AdminListPermissionInput) {
+  items: adminPermissions(input: $input) {
+    ...PermissionDetails
+  }
+  count: adminCountPermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPermissions($input: AdminListPermissionInput) {
+  count: adminCountPermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPermission($permissionId: String!) {
+  item: adminPermission(permissionId: $permissionId) {
+    ...PermissionDetails
+  }
+}
+mutation AdminCreatePermission($input: AdminCreatePermissionInput!) {
+  created: adminCreatePermission(input: $input) {
+    ...PermissionDetails
+  }
+}
+mutation AdminUpdatePermission($permissionId: String!, $input: AdminUpdatePermissionInput!) {
+  updated: adminUpdatePermission(permissionId: $permissionId, input: $input) {
+    ...PermissionDetails
+  }
+}
+mutation AdminDeletePermission($permissionId: String!) {
+  deleted: adminDeletePermission(permissionId: $permissionId) {
+    ...PermissionDetails
+  }
+}
+
+query UserPermissions($input: UserListPermissionInput) {
+  items: userPermissions(input: $input) {
+    ...PermissionDetails
+  }
+  count: userCountPermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPermissions($input: UserListPermissionInput) {
+  count: userCountPermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPermissions($input: UserListPermissionInput) {
+  items: userSelectPermissions(input: $input) {
+    ...PermissionDetails
+  }
+}
+
+query UserPermission($permissionId: String!) {
+  item: userPermission(permissionId: $permissionId) {
+    ...PermissionDetails
+  }
+}
+mutation UserCreatePermission($input: UserCreatePermissionInput!) {
+  created: userCreatePermission(input: $input) {
+    ...PermissionDetails
+  }
+}
+mutation UserUpdatePermission($permissionId: String!, $input: UserUpdatePermissionInput!) {
+  updated: userUpdatePermission(permissionId: $permissionId, input: $input) {
+    ...PermissionDetails
+  }
+}
+mutation UserDeletePermission($permissionId: String!) {
+  deleted: userDeletePermission(permissionId: $permissionId) {
+    ...PermissionDetails
+  }
+}

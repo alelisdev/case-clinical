@@ -1,0 +1,82 @@
+
+fragment CalendarWeekdayDetails on CalendarWeekday {
+id
+createdAt
+updatedAt
+name
+abbr
+label
+value
+
+
+}
+query AdminCalendarWeekdays($input: AdminListCalendarWeekdayInput) {
+  items: adminCalendarWeekdays(input: $input) {
+    ...CalendarWeekdayDetails
+  }
+  count: adminCountCalendarWeekdays(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCalendarWeekdays($input: AdminListCalendarWeekdayInput) {
+  count: adminCountCalendarWeekdays(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCalendarWeekday($calendarWeekdayId: String!) {
+  item: adminCalendarWeekday(calendarWeekdayId: $calendarWeekdayId) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation AdminCreateCalendarWeekday($input: AdminCreateCalendarWeekdayInput!) {
+  created: adminCreateCalendarWeekday(input: $input) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation AdminUpdateCalendarWeekday($calendarWeekdayId: String!, $input: AdminUpdateCalendarWeekdayInput!) {
+  updated: adminUpdateCalendarWeekday(calendarWeekdayId: $calendarWeekdayId, input: $input) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation AdminDeleteCalendarWeekday($calendarWeekdayId: String!) {
+  deleted: adminDeleteCalendarWeekday(calendarWeekdayId: $calendarWeekdayId) {
+    ...CalendarWeekdayDetails
+  }
+}
+
+query UserCalendarWeekdays($input: UserListCalendarWeekdayInput) {
+  items: userCalendarWeekdays(input: $input) {
+    ...CalendarWeekdayDetails
+  }
+  count: userCountCalendarWeekdays(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCalendarWeekdays($input: UserListCalendarWeekdayInput) {
+  count: userCountCalendarWeekdays(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCalendarWeekday($calendarWeekdayId: String!) {
+  item: userCalendarWeekday(calendarWeekdayId: $calendarWeekdayId) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation UserCreateCalendarWeekday($input: UserCreateCalendarWeekdayInput!) {
+  created: userCreateCalendarWeekday(input: $input) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation UserUpdateCalendarWeekday($calendarWeekdayId: String!, $input: UserUpdateCalendarWeekdayInput!) {
+  updated: userUpdateCalendarWeekday(calendarWeekdayId: $calendarWeekdayId, input: $input) {
+    ...CalendarWeekdayDetails
+  }
+}
+mutation UserDeleteCalendarWeekday($calendarWeekdayId: String!) {
+  deleted: userDeleteCalendarWeekday(calendarWeekdayId: $calendarWeekdayId) {
+    ...CalendarWeekdayDetails
+  }
+}

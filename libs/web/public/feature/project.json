@@ -1,0 +1,23 @@
+{
+  "name": "web-public-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/public/feature/src",
+  "prefix": "marketplace",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/public/feature/src/**/*.ts", "libs/web/public/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/public/feature"],
+      "options": {
+        "jestConfig": "libs/web/public/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

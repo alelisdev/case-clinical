@@ -1,0 +1,41 @@
+::ng-deep formly-repeat-section button {
+  margin-top: 0px !important;
+}
+
+::ng-deep ui-form-field-edit formly-group > formly-field {
+  width: 100% !important;
+}
+
+::ng-deep formly-form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep formly-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep ui-form-field-edit formly-field {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+::ng-deep formly-field > ng-component {
+  flex: 1;
+}
+
+::ng-deep ui-form-field-edit  mat-expansion-panel-header {
+  padding: 0px 7px 0px 7px !important;
+  height: 40px !important;
+}
+
+::ng-deep ui-form-field-edit  .mat-expansion-panel-body {
+  padding: 0px 7px 0px 7px !important;
+}
+
+::ng-deep .ui-formly-field-tabs > div {
+  margin: 0 !important;
+}

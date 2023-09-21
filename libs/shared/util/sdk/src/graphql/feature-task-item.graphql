@@ -1,0 +1,184 @@
+
+
+fragment TaskItemDetails on TaskItem {
+type
+id
+createdAt
+updatedAt
+name
+notes
+legalCaseId
+order
+priority
+assignedToId
+title
+dueDate
+assignedDate
+completedOn
+completed
+legalCase {
+  id
+  name
+}
+assignedTo {
+  id
+  name
+}
+
+
+
+
+
+taskTags {
+    id
+    name
+  }
+}
+
+fragment TaskItemLists on TaskItem {
+type
+id
+createdAt
+updatedAt
+name
+notes
+legalCaseId
+order
+priority
+assignedToId
+title
+dueDate
+assignedDate
+completedOn
+completed
+legalCase {
+    id
+    name
+}
+assignedTo {
+    id
+    name
+}
+
+
+
+
+
+taskTags {
+    id
+    name
+  }
+
+}
+
+query AdminTaskItems($input: AdminListTaskItemInput) {
+  items: adminTaskItems(input: $input) {
+    ...TaskItemLists
+  }
+  count: adminCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTaskItems($input: AdminListTaskItemInput) {
+  count: adminCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTaskItem($taskItemId: String!) {
+  item: adminTaskItem(taskItemId: $taskItemId) {
+    ...TaskItemDetails
+  }
+}
+mutation AdminCreateTaskItem($input: AdminCreateTaskItemInput!) {
+  created: adminCreateTaskItem(input: $input) {
+    ...TaskItemDetails
+  }
+}
+mutation AdminUpdateTaskItem($taskItemId: String!, $input: AdminUpdateTaskItemInput!) {
+  updated: adminUpdateTaskItem(taskItemId: $taskItemId, input: $input) {
+    ...TaskItemDetails
+  }
+}
+mutation AdminDeleteTaskItem($taskItemId: String!) {
+  deleted: adminDeleteTaskItem(taskItemId: $taskItemId) {
+    ...TaskItemDetails
+  }
+}
+
+query UserTaskItems($input: UserListTaskItemInput) {
+  items: userTaskItems(input: $input) {
+    ...TaskItemLists
+  }
+  count: userCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTaskItems($input: UserListTaskItemInput) {
+  count: userCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTaskItems($input: UserListTaskItemInput) {
+  items: userSelectTaskItems(input: $input) {
+    ...TaskItemDetails
+  }
+}
+
+query UserTaskItem($taskItemId: String!) {
+  item: userTaskItem(taskItemId: $taskItemId) {
+    ...TaskItemDetails
+  }
+}
+
+mutation UserCreateTaskItem($input: UserCreateTaskItemInput!) {
+  created: userCreateTaskItem(input: $input) {
+    ...TaskItemDetails
+  }
+}
+mutation UserUpdateTaskItem($taskItemId: String!, $input: UserUpdateTaskItemInput!) {
+  updated: userUpdateTaskItem(taskItemId: $taskItemId, input: $input) {
+    ...TaskItemDetails
+  }
+}
+
+mutation UserUpdateTaskItems($input: UserUpdateTaskItemsInput!) {
+  updated: userUpdateTaskItems(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTaskItem($taskItemId: String!) {
+  deleted: userDeleteTaskItem(taskItemId: $taskItemId) {
+    ...TaskItemDetails
+  }
+}
+
+query PublicTaskItems($input: UserListTaskItemInput) {
+  items: publicTaskItems(input: $input) {
+    ...TaskItemLists
+  }
+  count: publicCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTaskItems($input: UserListTaskItemInput) {
+  count: publicCountTaskItems(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTaskItems($input: UserListTaskItemInput) {
+  items: publicSelectTaskItems(input: $input) {
+    ...TaskItemDetails
+  }
+}
+
+query PublicTaskItem($taskItemId: String!) {
+  item: publicTaskItem(taskItemId: $taskItemId) {
+    ...TaskItemDetails
+  }
+}

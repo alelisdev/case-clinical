@@ -1,0 +1,149 @@
+
+fragment LeadSourceDetails on LeadSource {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment LeadSourceLists on LeadSource {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminLeadSources($input: AdminListLeadSourceInput) {
+  items: adminLeadSources(input: $input) {
+    ...LeadSourceLists
+  }
+  count: adminCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeadSources($input: AdminListLeadSourceInput) {
+  count: adminCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLeadSource($leadSourceId: String!) {
+  item: adminLeadSource(leadSourceId: $leadSourceId) {
+    ...LeadSourceDetails
+  }
+}
+mutation AdminCreateLeadSource($input: AdminCreateLeadSourceInput!) {
+  created: adminCreateLeadSource(input: $input) {
+    ...LeadSourceDetails
+  }
+}
+mutation AdminUpdateLeadSource($leadSourceId: String!, $input: AdminUpdateLeadSourceInput!) {
+  updated: adminUpdateLeadSource(leadSourceId: $leadSourceId, input: $input) {
+    ...LeadSourceDetails
+  }
+}
+mutation AdminDeleteLeadSource($leadSourceId: String!) {
+  deleted: adminDeleteLeadSource(leadSourceId: $leadSourceId) {
+    ...LeadSourceDetails
+  }
+}
+
+query UserLeadSources($input: UserListLeadSourceInput) {
+  items: userLeadSources(input: $input) {
+    ...LeadSourceLists
+  }
+  count: userCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeadSources($input: UserListLeadSourceInput) {
+  count: userCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeadSources($input: UserListLeadSourceInput) {
+  items: userSelectLeadSources(input: $input) {
+    ...LeadSourceDetails
+  }
+}
+
+query UserLeadSource($leadSourceId: String!) {
+  item: userLeadSource(leadSourceId: $leadSourceId) {
+    ...LeadSourceDetails
+  }
+}
+
+mutation UserCreateLeadSource($input: UserCreateLeadSourceInput!) {
+  created: userCreateLeadSource(input: $input) {
+    ...LeadSourceDetails
+  }
+}
+mutation UserUpdateLeadSource($leadSourceId: String!, $input: UserUpdateLeadSourceInput!) {
+  updated: userUpdateLeadSource(leadSourceId: $leadSourceId, input: $input) {
+    ...LeadSourceDetails
+  }
+}
+
+mutation UserUpdateLeadSources($input: UserUpdateLeadSourcesInput!) {
+  updated: userUpdateLeadSources(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLeadSource($leadSourceId: String!) {
+  deleted: userDeleteLeadSource(leadSourceId: $leadSourceId) {
+    ...LeadSourceDetails
+  }
+}
+
+query PublicLeadSources($input: UserListLeadSourceInput) {
+  items: publicLeadSources(input: $input) {
+    ...LeadSourceLists
+  }
+  count: publicCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeadSources($input: UserListLeadSourceInput) {
+  count: publicCountLeadSources(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeadSources($input: UserListLeadSourceInput) {
+  items: publicSelectLeadSources(input: $input) {
+    ...LeadSourceDetails
+  }
+}
+
+query PublicLeadSource($leadSourceId: String!) {
+  item: publicLeadSource(leadSourceId: $leadSourceId) {
+    ...LeadSourceDetails
+  }
+}

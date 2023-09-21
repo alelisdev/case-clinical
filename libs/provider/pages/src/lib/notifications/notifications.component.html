@@ -1,0 +1,12 @@
+<ng-container *ngIf="selectedProviderId$ | async as providerId">
+  <ui-formly-json-form
+    *ngIf="vm$ | async as vm"
+    class="w-full h-full"
+    formName="page_provider_notifications"
+    [showSubmitButton]="false"
+    [componentStore]="store"
+    [model]="{ providerId }"
+    [formData]="getFormData(vm)"
+    (formIsReady)="this.onResize();"
+  ></ui-formly-json-form>
+</ng-container>

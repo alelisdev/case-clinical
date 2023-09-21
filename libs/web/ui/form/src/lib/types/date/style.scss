@@ -1,0 +1,15 @@
+::ng-deep input[type=date]{
+    color-scheme: day
+}
+::ng-deep .dark input[type=date]{
+    color-scheme: dark
+}
+
+::ng-deep .relative{
+    .absolute.items-center{
+        // padding-right: 0px !important;
+    }
+    &:has(ng-component input[type=date].ng-invalid){
+
+    }
+}

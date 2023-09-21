@@ -1,0 +1,38 @@
+{
+  "name": "@schema-driven/core",
+  "version": "14.3.1",
+  "description": "Core models for the build motion framework.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schema-driven/schema-driven",
+    "directory": "libs/configuration"
+  },
+  "keywords": [
+    "actions",
+    "angular-rules-engine",
+    "Angular",
+    "angular configuration",
+    "angularlicio.us",
+    "angularlicious",
+    "build motion",
+    "schema-driven",
+    "business actions",
+    "configuration",
+    "framework",
+    "JSON rules engine",
+    "JavaScript rules engine",
+    "Matt Vaughn",
+    "rules engine",
+    "rules-engine",
+    "TypeScript Rules Engine"
+  ],
+  "author": "Michael.Buller@schemadriven.com www.schema-driven.com",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "homepage": "https://github.com/schema-driven/schema-driven#readme",
+  "bugs": {
+    "email": "Michael.Buller@schemadriven.com",
+    "url": "https://github.com/schema-driven/schema-driven/issues"
+  }
+}

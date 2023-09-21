@@ -1,0 +1,5 @@
+::ng-deep ui-card-header .border-gray-200 .justify-between .flex .space-x-3 ui-button button{
+    &:focus{
+        --tw-ring-offset-width: 0px !important;
+    }
+}

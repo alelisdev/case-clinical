@@ -1,0 +1,174 @@
+
+fragment ClinicalProviderLocationAvailabilityDetails on ClinicalProviderLocationAvailability {
+id
+createdAt
+updatedAt
+name
+day
+startTime
+endTime
+clinicalProviderLocationId
+clinicalProviderLocation {
+  id
+  name
+  clinicalProvider{
+    id
+    name
+    profilePictureId
+    profileImage {
+      ...DocumentOverview
+    }
+  }
+  location{
+    id
+    name
+  }
+}
+
+
+
+
+
+}
+
+fragment ClinicalProviderLocationAvailabilityLists on ClinicalProviderLocationAvailability {
+id
+createdAt
+updatedAt
+name
+day
+startTime
+endTime
+clinicalProviderLocationId
+clinicalProviderLocation {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminClinicalProviderLocationAvailabilities($input: AdminListClinicalProviderLocationAvailabilityInput) {
+  items: adminClinicalProviderLocationAvailabilities(input: $input) {
+    ...ClinicalProviderLocationAvailabilityLists
+  }
+  count: adminCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviderLocationAvailabilities($input: AdminListClinicalProviderLocationAvailabilityInput) {
+  count: adminCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!) {
+  item: adminClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+mutation AdminCreateClinicalProviderLocationAvailability($input: AdminCreateClinicalProviderLocationAvailabilityInput!) {
+  created: adminCreateClinicalProviderLocationAvailability(input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+mutation AdminUpdateClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!, $input: AdminUpdateClinicalProviderLocationAvailabilityInput!) {
+  updated: adminUpdateClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId, input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+mutation AdminDeleteClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!) {
+  deleted: adminDeleteClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+query UserClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  items: userClinicalProviderLocationAvailabilities(input: $input) {
+    ...ClinicalProviderLocationAvailabilityLists
+  }
+  count: userCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+query UserClinicalProviderBusinessHours($clinicalProviderId: String!) {
+  items: userClinicalProviderBusinessHours(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderLocationAvailabilityLists
+  }
+}
+
+query UserCountClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  count: userCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  items: userSelectClinicalProviderLocationAvailabilities(input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+query UserClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!) {
+  item: userClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+mutation UserCreateClinicalProviderLocationAvailability($input: UserCreateClinicalProviderLocationAvailabilityInput!) {
+  created: userCreateClinicalProviderLocationAvailability(input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+mutation UserUpdateClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!, $input: UserUpdateClinicalProviderLocationAvailabilityInput!) {
+  updated: userUpdateClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId, input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+mutation UserUpdateClinicalProviderLocationAvailabilities($input: UserUpdateClinicalProviderLocationAvailabilitiesInput!) {
+  updated: userUpdateClinicalProviderLocationAvailabilities(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!) {
+  deleted: userDeleteClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+query PublicClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  items: publicClinicalProviderLocationAvailabilities(input: $input) {
+    ...ClinicalProviderLocationAvailabilityLists
+  }
+  count: publicCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  count: publicCountClinicalProviderLocationAvailabilities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviderLocationAvailabilities($input: UserListClinicalProviderLocationAvailabilityInput) {
+  items: publicSelectClinicalProviderLocationAvailabilities(input: $input) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}
+
+query PublicClinicalProviderLocationAvailability($clinicalProviderLocationAvailabilityId: String!) {
+  item: publicClinicalProviderLocationAvailability(clinicalProviderLocationAvailabilityId: $clinicalProviderLocationAvailabilityId) {
+    ...ClinicalProviderLocationAvailabilityDetails
+  }
+}

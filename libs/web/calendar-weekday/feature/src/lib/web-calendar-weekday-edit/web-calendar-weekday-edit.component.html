@@ -1,0 +1,36 @@
+
+<ng-container *ngIf="vm$ | async as vm">
+  <ng-template #controlsTemplate>
+    <div class="px-3 space-x-3">
+      <ui-button label="Discard" variant="white" (click)="handleDiscardClick($event)"></ui-button>
+    </div>
+  </ng-template>
+
+  <ng-template #headerTemplate>
+    <ui-card-header
+      [title]="'Edit Calendar Weekday ' + vm.item?.name"
+      [controlsTemplate]="controlsTemplate"
+    ></ui-card-header>
+  </ng-template>
+
+  <ng-template #footerTemplate>
+    <div class="flex items-center justify-end px-6 pt-3 pb-6 space-x-3 dark:bg-transparent">
+      <ui-button label="Discard" variant="white" (click)="handleDiscardClick($event)"></ui-button>
+      <ui-button label="Save" type="submit" (click)="updateCalendarWeekday(vm.item)"></ui-button>
+    </div>
+  </ng-template>
+
+  <ui-panel
+    [headerTemplate]="headerTemplate"
+    [footerTemplate]="footerTemplate"
+    [disableHeaderPadding]="true"
+    [disableBodyPadding]="true"
+    [disableFooterPadding]="true"
+  >
+    <div class="px-6 py-4">
+      <ui-form [form]="form" [fields]="fields" [model]="vm.item" [options]="options"  (submitForm)="updateCalendarWeekday($event)">
+        <ui-button label="Save" type="submit"></ui-button>
+      </ui-form>
+    </div>
+  </ui-panel>
+</ng-container>

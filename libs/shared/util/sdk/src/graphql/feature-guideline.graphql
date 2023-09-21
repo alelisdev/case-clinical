@@ -1,0 +1,148 @@
+
+fragment GuidelineDetails on Guideline {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthGuidelines {
+    ...PriorAuthGuidelineLists
+  }
+}
+
+fragment GuidelineLists on Guideline {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthGuidelines {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminGuidelines($input: AdminListGuidelineInput) {
+  items: adminGuidelines(input: $input) {
+    ...GuidelineLists
+  }
+  count: adminCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountGuidelines($input: AdminListGuidelineInput) {
+  count: adminCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminGuideline($guidelineId: String!) {
+  item: adminGuideline(guidelineId: $guidelineId) {
+    ...GuidelineDetails
+  }
+}
+mutation AdminCreateGuideline($input: AdminCreateGuidelineInput!) {
+  created: adminCreateGuideline(input: $input) {
+    ...GuidelineDetails
+  }
+}
+mutation AdminUpdateGuideline($guidelineId: String!, $input: AdminUpdateGuidelineInput!) {
+  updated: adminUpdateGuideline(guidelineId: $guidelineId, input: $input) {
+    ...GuidelineDetails
+  }
+}
+mutation AdminDeleteGuideline($guidelineId: String!) {
+  deleted: adminDeleteGuideline(guidelineId: $guidelineId) {
+    ...GuidelineDetails
+  }
+}
+
+query UserGuidelines($input: UserListGuidelineInput) {
+  items: userGuidelines(input: $input) {
+    ...GuidelineLists
+  }
+  count: userCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountGuidelines($input: UserListGuidelineInput) {
+  count: userCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectGuidelines($input: UserListGuidelineInput) {
+  items: userSelectGuidelines(input: $input) {
+    ...GuidelineDetails
+  }
+}
+
+query UserGuideline($guidelineId: String!) {
+  item: userGuideline(guidelineId: $guidelineId) {
+    ...GuidelineDetails
+  }
+}
+
+mutation UserCreateGuideline($input: UserCreateGuidelineInput!) {
+  created: userCreateGuideline(input: $input) {
+    ...GuidelineDetails
+  }
+}
+mutation UserUpdateGuideline($guidelineId: String!, $input: UserUpdateGuidelineInput!) {
+  updated: userUpdateGuideline(guidelineId: $guidelineId, input: $input) {
+    ...GuidelineDetails
+  }
+}
+
+mutation UserUpdateGuidelines($input: UserUpdateGuidelinesInput!) {
+  updated: userUpdateGuidelines(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteGuideline($guidelineId: String!) {
+  deleted: userDeleteGuideline(guidelineId: $guidelineId) {
+    ...GuidelineDetails
+  }
+}
+
+query PublicGuidelines($input: UserListGuidelineInput) {
+  items: publicGuidelines(input: $input) {
+    ...GuidelineLists
+  }
+  count: publicCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountGuidelines($input: UserListGuidelineInput) {
+  count: publicCountGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectGuidelines($input: UserListGuidelineInput) {
+  items: publicSelectGuidelines(input: $input) {
+    ...GuidelineDetails
+  }
+}
+
+query PublicGuideline($guidelineId: String!) {
+  item: publicGuideline(guidelineId: $guidelineId) {
+    ...GuidelineDetails
+  }
+}

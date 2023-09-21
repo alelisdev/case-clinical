@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-manufacturer.input'
+export * from './lib/dto/admin-list-manufacturer.input'
+export * from './lib/dto/admin-update-manufacturer.input'
+export * from './lib/dto/manufacturer.input'
+export * from './lib/dto/user-create-manufacturer.input'
+export * from './lib/dto/user-list-manufacturer.input'
+export * from './lib/dto/user-update-manufacturer.input'
+export * from './lib/dto/user-update-manufacturers.input'
+export * from './lib/models/manufacturer.model'
+export * from './lib/api-manufacturer-data-access.module'
+
+export * from './lib/api-manufacturer-data-access-admin.service'
+export * from './lib/api-manufacturer-data-access-public.service'
+export * from './lib/api-manufacturer-data-access-user.service'

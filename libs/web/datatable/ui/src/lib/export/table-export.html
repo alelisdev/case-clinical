@@ -1,0 +1,21 @@
+<ui-button label="Export View" icon="download" class="flex items-center" [matMenuTriggerFor]="exportOptions">
+</ui-button>
+<mat-menu xPosition="before" #exportOptions="matMenu">
+    <span mat-menu-item disabled class="h-10">1. Which Columns to Export</span>
+    <button *ngFor="let columnOption of columnOptions; let i = index" mat-menu-item class="h-7 py-2" (click)="$event.stopPropagation(); selectedColOptionId=i">
+        <table-radio [checked]="selectedColOptionId===i" [title]="columnOption"></table-radio>
+    </button>
+    <span mat-menu-item disabled>2. File Format</span>
+    <button *ngFor="let fileFormat of fileFormats; let i = index" mat-menu-item class="h-7 py-2" (click)="$event.stopPropagation(); selectedFormatId=i">
+        <table-radio [checked]="selectedFormatId===i" [title]="fileFormat"></table-radio>
+    </button>
+    <span mat-menu-item disabled>3. Date Format</span>
+    <button *ngFor="let dateFormat of dateFormats; let i = index" mat-menu-item [disabled]="selectedFormatId === 0" class="h-7 py-2" (click)="$event.stopPropagation(); selectedDateFormatId=i">
+        <table-radio [checked]="selectedDateFormatId===i" [title]="dateFormat"></table-radio>
+    </button>
+    <span mat-menu-item disabled>4. Time Format</span>
+    <button *ngFor="let timeFormat of timeFormats; let i = index" mat-menu-item [disabled]="selectedFormatId === 0 || selectedDateFormatId > 0" class="h-7 py-2" (click)="$event.stopPropagation(); selectedTimeFormatId=i">
+        <table-radio [checked]="selectedTimeFormatId===i" [title]="timeFormat"></table-radio>
+    </button>
+    <div mat-menu-item><button (click)="onExportButtonClicked()" mat-raised-button color="primary" class="text-center w-full">Download</button></div>
+</mat-menu>

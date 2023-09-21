@@ -1,0 +1,38 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[ChatUsers] (
+    [id] NVARCHAR(1000) NOT NULL,
+    [createdAt] DATETIME2 CONSTRAINT [ChatUsers_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [updatedAt] DATETIME2 CONSTRAINT [ChatUsers_updatedAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [matrixUserId] NVARCHAR(1000) NOT NULL,
+    [userId] NVARCHAR(1000) NOT NULL,
+    [name] NVARCHAR(1000),
+    CONSTRAINT [ChatUsers_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+CREATE TABLE [dbo].[ChatUserMapping] (
+    [id] NVARCHAR(1000) NOT NULL,
+    [createdAt] DATETIME2 CONSTRAINT [ChatUserMapping_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [updatedAt] DATETIME2 CONSTRAINT [ChatUserMapping_updatedAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [from] NVARCHAR(1000) NOT NULL,
+    [to] NVARCHAR(1000) NOT NULL,
+    [roomId] NVARCHAR(1000) NOT NULL,
+    CONSTRAINT [ChatUserMapping_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

@@ -1,0 +1,50 @@
+.st7 {
+  fill: #1A202C;
+  font-family: Arial;
+  font-size: 9.22pt;
+}
+.st1 {
+  fill: #38A169;
+  font-family: Arial;
+  font-size: 7.38pt;
+}
+.st5 {
+  fill: #E53E3E;
+  font-family: Arial;
+  font-size: 7.38pt;
+}
+.st4 {
+  fill: #E53E3E;
+  font-family: Arial;
+  font-size: 7.38pt;
+}
+.st6 {
+  fill: #ECC94B;
+  font-family: Arial;
+  font-size: 18.44pt;
+}
+.st2 {
+  fill: #ECC94B;
+  font-family: Arial;
+  font-size: 7.38pt;
+}
+.st3 {
+  fill: #DD6B20;
+  font-family: Arial;
+  font-size: 7.38pt;
+}
+
+.needle {
+  transform-origin: 45% 50%;
+  transition: 50ms linear;
+}
+
+.finance-value{
+  font-size: 2.5rem !important;
+}
+
+::ng-deep ui-schema-driven-finance-report-gauge svg {
+  height: 100% !important;
+  min-height: 167px !important;
+  max-width: 187px !important;
+}

@@ -1,0 +1,435 @@
+
+<div class="outer">
+
+  <div class="controls" *ngIf="showControls">
+    <ng-template>
+      <app-button
+        [label]="'Rotate'"
+        [variant]="SECONDARY_VARIANT"
+        [size]="SMALL_SIZE"
+        (click)="rotate()"
+        [icon]="'repeat'"
+      ></app-button>
+      <app-button
+        [label]="'Guides'"
+        [variant]="SECONDARY_VARIANT"
+        [size]="SMALL_SIZE"
+        (click)="onGridClick()"
+        [icon]="'grid'"
+        [style.margin-left.px]="8"
+      ></app-button>
+    </ng-template>
+  </div>
+
+<div
+  class="wrapper"
+  [style.height.px]="height"
+  [style.max-height.px]="height"
+  [style.width.px]="width"
+  [style.max-width.px]="width"
+>
+  <svg
+    #RootSvg
+    [style.height]="svgHeight"
+    class="svg"
+    viewBox="0 0 235 640"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    (click)="logMousePosition($event)"
+  >
+
+    <g stroke="none" stroke-width="0" fill="none">
+
+      <g id="anatomical-male">
+        <ng-container 
+        *ngIf="this.gender === 'male'; else femaleImages"
+        >
+          <image @fadeInOut *ngIf="orientation === 'front'" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="assets/anatomical-model/anatomical-male-front.png"></image>
+          <image @fadeInOut *ngIf="orientation === 'back'" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="assets/anatomical-model/anatomical-male-back.png"></image>
+
+          <ng-container *ngIf="orientation === 'front'">
+
+            <ng-container *ngFor="let bodyPart of (activeBodyParts$ | async)">
+              <ng-container [ngSwitch]="bodyPart.name">
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.HEAD">
+                  <image
+                    [attr.x]="90"
+                    [attr.y]="2.9"
+                    xlink:href="assets/anatomical-male-parts/male-front-head-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.NECK">
+                  <image
+                    [attr.x]="72"
+                    [attr.y]="75"
+                    xlink:href="assets/anatomical-male-parts/male-front-neck.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.CHEST">
+                  <image
+                    [attr.x]="63"
+                    [attr.y]="108"
+                    xlink:href="assets/anatomical-male-parts/male-front-chest-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_SHOULDER || MALE_FRONT_REGION_ID.RIGHT_SHOULDER">
+                  <image
+                    [attr.x]="41"
+                    [attr.y]="99"
+                    [style.cursor]="'pointer'"
+                    xlink:href="assets/anatomical-male-parts/male-front-shoulder-right-outline.svg"
+                  />
+                  <image
+                    [attr.x]="145"
+                    [attr.y]="99"
+                    xlink:href="assets/anatomical-male-parts/male-front-shoulder-left-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.RIGHT_HAND">
+                  <image
+                    [attr.x]="0"
+                    [attr.y]="297"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-hand-right-outline.svg"
+                  />
+                </ng-container>
+
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_HAND">
+                  <image
+                    [attr.x]="186"
+                    [attr.y]="302"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-hand-left-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.ABDOMEN">
+                  <image
+                    [attr.x]="64"
+                    [attr.y]="144"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-abdomen-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.GROIN">
+                  <image
+                    [attr.x]="69"
+                    [attr.y]="255"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-groin-outline.svg"
+                  />
+                </ng-container>
+
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_FOREARM">
+                  <image
+                    [attr.x]="172"
+                    [attr.y]="208"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-forearm-left-outline.svg"
+                  />
+                </ng-container>
+                <ng-container *ngSwitchCase="MALE_FRONT_REGION_ID.RIGHT_FOREARM">
+                  <image
+                    [attr.x]="25"
+                    [attr.y]="208"
+                    xlink:href="./../../../../assets/anatomical-male-parts/male-front-forearm-right-outline.svg"
+                  />
+                </ng-container>
+              </ng-container>
+            </ng-container>
+
+            <image
+              @fadeInOut
+              [attr.x]="72"
+              [attr.y]="75"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.NECK ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.NECK)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.NECK)"
+              (click)="onBodyPartClick('Neck')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-neck.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="90"
+              [attr.y]="2.9"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.HEAD ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.HEAD)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.HEAD)"
+              (click)="onBodyPartClick('Head')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-head-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="41"
+              [attr.y]="99"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_SHOULDER ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_SHOULDER)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_SHOULDER)"
+              (click)="onBodyPartClick('Shoulder')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-shoulder-right-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="145"
+              [attr.y]="99"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_SHOULDER ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_SHOULDER)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_SHOULDER)"
+              (click)="onBodyPartClick('Shoulder')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-shoulder-left-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="63"
+              [attr.y]="108"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.CHEST ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.CHEST)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.CHEST)"
+              (click)="onBodyPartClick('Chest')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-chest-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="0"
+              [attr.y]="297"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_HAND ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_HAND)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_HAND)"
+              (click)="onBodyPartClick('Hand')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-hand-right-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="186"
+              [attr.y]="302"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_HAND ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_HAND)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_HAND)"
+              (click)="onBodyPartClick('Hand')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-hand-left-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="64"
+              [attr.y]="144"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.ABDOMEN ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.ABDOMEN)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.ABDOMEN)"
+              (click)="onBodyPartClick('Abdomen')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-abdomen-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="69"
+              [attr.y]="255"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.GROIN ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.GROIN)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.GROIN)"
+              (click)="onBodyPartClick('Hip/ Groin')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-groin-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="31"
+              [attr.y]="130"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_ARM ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_ARM)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_ARM)"
+              (click)="onBodyPartClick('Arm')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-arm-right-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="25"
+              [attr.y]="208"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_FOREARM ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_FOREARM)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_FOREARM)"
+              (click)="onBodyPartClick('Forearm ')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-forearm-right-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="172"
+              [attr.y]="208"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_FOREARM ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_FOREARM)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_FOREARM)"
+              (click)="onBodyPartClick('Forearm ')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-forearm-left-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="174"
+              [attr.y]="133"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_ARM ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_ARM)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_ARM)"
+              (click)="onBodyPartClick('Arm')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-arm-left-outline.svg"
+            />
+
+            <image
+              @fadeInOut
+              [attr.x]="123"
+              [attr.y]="578"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_FOOT ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_FOOT)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_FOOT)"
+              (click)="onBodyPartClick('Foot')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-foot-left-outline.svg"
+            />
+            <image
+              @fadeInOut
+              [attr.x]="89"
+              [attr.y]="553"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_ANKLE ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_ANKLE)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_ANKLE)"
+              (click)="onBodyPartClick('Ankle')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-ankle-right-outline.svg"
+            />
+            <image
+              @fadeInOut
+              [attr.x]="124"
+              [attr.y]="553"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.LEFT_ANKLE ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.LEFT_ANKLE)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.LEFT_ANKLE)"
+              (click)="onBodyPartClick('Ankle')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-ankle-left-outline.svg"
+            />
+            <image
+              @fadeInOut
+              [attr.x]="85"
+              [attr.y]="578"
+              [style.cursor]="'pointer'"
+              [style.opacity]="focusedRegion === MALE_FRONT_REGION_ID.RIGHT_FOOT ? 1.0 : 0.0"
+              (mouseenter)="onMouseEnterRegion(MALE_FRONT_REGION_ID.RIGHT_FOOT)"
+              (mouseleave)="onMouseLeaveRegion(MALE_FRONT_REGION_ID.RIGHT_FOOT)"
+              (click)="onBodyPartClick('Foot')"
+              xlink:href="./../../../../assets/anatomical-male-parts/male-front-foot-right-outline.svg"
+            />
+
+
+          </ng-container>
+
+          <!-- <ng-template #zoomTargets>
+            <ng-container [ngSwitch]="zoomTarget.id">
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.CHEST" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-chest.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.HEAD" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-head.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_ARM" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-left-arm.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_HAND" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-left-hand.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.RIGHT_LEG" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-right-leg.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.RIGHT_ARM" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-right-arm.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.RIGHT_HAND" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-right-hand.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.LEFT_LEG" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-left-leg.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_FRONT_REGION_ID.WAIST" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-front-waist.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.CHEST" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-chest.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.HEAD" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-head.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.LEFT_ARM" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-left-arm.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.LEFT_HAND" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-left-hand.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.RIGHT_LEG" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-right-leg.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.RIGHT_ARM" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-right-arm.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.RIGHT_HAND" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-right-hand.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.LEFT_LEG" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-left-leg.png" />
+              <image @fadeInOut *ngSwitchCase="MALE_BACK_REGION_ID.WAIST" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="./../../../../assets/anatomical-male-parts/male-back-waist.png" />
+            </ng-container>
+          </ng-template> -->
+        </ng-container>
+
+        <ng-template #femaleImages>
+          <image @fadeInOut *ngIf="orientation === 'FRONT'" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="assets/anatomical-model/anatomical-female-front.png"></image>
+          <image @fadeInOut *ngIf="orientation === 'BACK'" [attr.width]="IMAGE_WIDTH" [attr.height]="IMAGE_HEIGHT" xlink:href="assets/anatomical-model/anatomical-female-back.png"></image>
+        </ng-template>
+      </g>
+
+      <!-- <ng-container *ngFor="let region of visibleRegions">
+        <rect
+          @fadeInOut
+          [id]="region.id"
+          [style.x.px]="region.x"
+          [style.y.px]="region.y"
+          [style.height.px]="region.height"
+          [style.width.px]="region.width"
+          stroke="dodgerblue"
+          [style.opacity]="(showGrid) ? 1 : 0"
+          fill="transparent"
+          stroke-width="1"
+          (click)="onBodyRegionClick(region)"
+        ></rect>
+      </ng-container> -->
+
+      <!-- <ng-container *ngFor="let node of visibleNodes">
+        <image
+          [id]="node.id"
+          class="anchor"
+          @fadeInOut
+          (mouseenter)="onMouseEnterNode(node)"
+          (mouseleave)="onMouseLeaveNode(node)"
+          (click)="onNodeClick(node)"
+          [title]="node.description"
+          [attr.x]="resolveNodePosition(node).x - (NODE_SIZE / 2)"
+          [attr.y]="resolveNodePosition(node).y - (NODE_SIZE / 2)"
+          [class.anchor--selected]="isNodeSelected(node)"
+          [attr.height]="NODE_SIZE"
+          [attr.width]="NODE_SIZE"
+          [attr.xlink:href]="resolveNodeIcon(node)"
+        />
+      </ng-container> -->
+
+<!--      <ng-container *ngIf="nodeHoverTarget">-->
+<!--        <g class="node-popout">-->
+<!--          <rect-->
+<!--            height="60"-->
+<!--            [attr.width]="160"-->
+<!--            fill="black"-->
+<!--            [attr.x]="resolveNodePosition(nodeHoverTarget).x + 20"-->
+<!--            [attr.y]="resolveNodePosition(nodeHoverTarget).y - (30 * .25)"-->
+<!--          ></rect>-->
+<!--          <text-->
+<!--            fill="white"-->
+<!--            [attr.x]="resolveNodePosition(nodeHoverTarget).x + 28"-->
+<!--            [attr.y]="resolveNodePosition(nodeHoverTarget).y + 12"-->
+<!--          >-->
+<!--            {{ nodeHoverTarget.description }}-->
+<!--          </text>-->
+<!--          <text-->
+<!--            fill="red"-->
+<!--            [attr.x]="resolveNodePosition(nodeHoverTarget).x + 28"-->
+<!--            [attr.y]="resolveNodePosition(nodeHoverTarget).y + 32"-->
+<!--          >-->
+<!--            {{ resolveNodePosition(nodeHoverTarget).x }}-->
+<!--            {{ resolveNodePosition(nodeHoverTarget).y }}-->
+<!--          </text>-->
+<!--        </g>-->
+<!--      </ng-container>-->
+
+
+    </g>
+  </svg>
+</div>
+
+</div>

@@ -1,0 +1,180 @@
+<ng-template #PanelsIndicator>
+  <nav>
+    <ul class="border border-gray-300 divide-y divide-gray-300 rounded-md md:flex md:divide-y-0">
+      <ng-container *ngFor="let step of field.fieldGroup; let index = index; let last = last">
+        <li class="relative md:flex-1 md:flex">
+          <div class="flex items-center px-6 py-4 space-x-4 text-sm font-medium leading-5">
+            <ng-template #CompletedStep>
+              <div
+                class="flex items-center justify-center flex-shrink-0 w-10 h-10 transition duration-150 ease-in-out bg-blue-600 rounded-full group-hover:bg-blue-800">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd" />
+                </svg>
+              </div>
+            </ng-template>
+            <ng-container *ngIf="index >= activeStepIndex; else CompletedStep">
+              <div class="flex items-center justify-center flex-shrink-0 w-10 h-10 border-2 rounded-full"
+                [class.border-gray-300]="index > activeStepIndex" [class.border-blue-600]="index <= activeStepIndex">
+                <p [class.text-gray-500]="index > activeStepIndex"
+                  [class.group-hover:text-gray-900]="index > activeStepIndex"
+                  [class.text-blue-600]="index === activeStepIndex">
+                  {{ buildStepNumber(index) }}
+                </p>
+              </div>
+            </ng-container>
+            <p class="text-sm font-medium leading-5" [class.text-blue-600]="index === activeStepIndex"
+              [class.text-gray-900]="index < activeStepIndex" [class.text-gray-500]="index > activeStepIndex"
+              [class.group-hover:text-gray-900]="index > activeStepIndex">
+              {{ step.templateOptions.label }}
+            </p>
+          </div>
+          <ng-container *ngIf="!last">
+            <div class="absolute top-0 right-0 hidden w-5 h-full md:block">
+              <svg class="w-full h-full text-gray-300" viewBox="0 0 22 80" fill="none" preserveAspectRatio="none">
+                <path d="M0 -2L20 40L0 82" vector-effect="non-scaling-stroke" stroke="currentcolor"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+          </ng-container>
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+</ng-template>
+
+<ng-template #CirclesIndicator>
+  <nav aria-label="Progress" class="flex justify-center w-full">
+    <ol class="flex items-center justify-center">
+      <ng-container *ngFor="let step of field.fieldGroup; let index = index; let last = last">
+        <ng-template #CirclesCompletedStep>
+          <li class="relative" [class.pr-8]="!last" [class.sm:pr-20]="!last">
+            <!-- Completed Step -->
+            <ng-container *ngIf="!last">
+              <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="h-0.5 w-full bg-indigo-600"></div>
+              </div>
+            </ng-container>
+            <span
+              class="relative flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full hover:bg-indigo-900">
+              <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd" />
+              </svg>
+              <span class="sr-only">{{ step.templateOptions.label }}</span>
+            </span>
+          </li>
+        </ng-template>
+
+        <ng-template #CirclesCurrentStep>
+          <li class="relative" [class.pr-8]="!last" [class.sm:pr-20]="!last">
+            <!-- Current Step -->
+            <ng-container *ngIf="!last">
+              <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="h-0.5 w-full bg-gray-200"></div>
+              </div>
+            </ng-container>
+            <span
+              class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-indigo-600 rounded-full"
+              aria-current="step">
+              <span class="h-2.5 w-2.5 bg-indigo-600 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">{{ step.templateOptions.label }}</span>
+            </span>
+          </li>
+        </ng-template>
+
+        <ng-template #CirclesUpComingStep>
+          <li class="relative" [class.pr-8]="!last" [class.sm:pr-20]="!last">
+            <!-- Upcoming Step -->
+            <ng-container *ngIf="!last">
+              <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="h-0.5 w-full bg-gray-200"></div>
+              </div>
+            </ng-container>
+            <span
+              class="relative flex items-center justify-center w-8 h-8 bg-white border-2 border-gray-300 rounded-full group hover:border-gray-400">
+              <span class="h-2.5 w-2.5 bg-transparent rounded-full group-hover:bg-gray-300" aria-hidden="true"></span>
+              <span class="sr-only">{{ step.templateOptions.label }}</span>
+            </span>
+          </li>
+        </ng-template>
+
+        <ng-container *ngIf="activeStepIndex > index">
+          <ng-container *ngTemplateOutlet="CirclesCompletedStep"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="activeStepIndex === index">
+          <ng-container *ngTemplateOutlet="CirclesCurrentStep"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="activeStepIndex < index">
+          <ng-container *ngTemplateOutlet="CirclesUpComingStep"></ng-container>
+        </ng-container>
+      </ng-container>
+    </ol>
+  </nav>
+</ng-template>
+
+<ng-container [ngSwitch]="to.indicatorMode">
+  <ng-container *ngSwitchCase="STEP_INDICATOR_MODE.Circles">
+    <ng-container *ngTemplateOutlet="CirclesIndicator"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <ng-container *ngTemplateOutlet="PanelsIndicator"></ng-container>
+  </ng-container>
+</ng-container>
+
+<div [ngClass]="to.formClass">
+  <div class="flex flex-col w-full py-8">
+    <!-- <div>
+      <h3 *ngIf="stepHeader.label" class="text-lg font-medium leading-6 text-gray-900">
+        {{ stepHeader.label }}
+      </h3>
+      <p *ngIf="stepHeader?.lead" class="max-w-2xl mt-1 text-sm text-gray-500">
+        {{ stepHeader.lead }}
+      </p>
+    </div> -->
+    <ng-container *ngFor="let step of field.fieldGroup; let index = index">
+      <div *ngIf="index === activeStepIndex">
+        <formly-field [field]="step"></formly-field>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="pt-5 border-t border-gray-200">
+  <div class="flex justify-center">
+    <ng-container *ngIf="activeStepIndex > 0">
+      <span class="inline-flex mr-4 rounded-md shadow-sm">
+        <button type="button" (click)="onPrevStep()"
+          class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50">
+          <svg class="w-5 h-5 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+            </path>
+          </svg>
+        </button>
+      </span>
+    </ng-container>
+    <ng-template #CompleteButton>
+      <span class="inline-flex rounded-md shadow-sm">
+        <button type="button" (click)="this.onComplete()"
+          class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-green-600 border border-transparent rounded-md hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700">
+          Done
+        </button>
+      </span>
+    </ng-template>
+
+    <span class="inline-flex rounded-md shadow-sm" *ngIf="activeStepIndex + 1 < stepCount; else CompleteButton">
+      <button type="button" (click)="onNextStep()"
+        class="inline-flex items-center px-6 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700">
+        Continue
+        <svg class="w-5 h-5 ml-3 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </button>
+    </span>
+  </div>
+</div>

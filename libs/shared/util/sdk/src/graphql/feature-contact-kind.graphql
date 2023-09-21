@@ -1,0 +1,149 @@
+
+fragment ContactKindDetails on ContactKind {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contacts {
+    id
+    name
+  }
+}
+
+fragment ContactKindLists on ContactKind {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contacts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminContactKinds($input: AdminListContactKindInput) {
+  items: adminContactKinds(input: $input) {
+    ...ContactKindLists
+  }
+  count: adminCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContactKinds($input: AdminListContactKindInput) {
+  count: adminCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContactKind($contactKindId: String!) {
+  item: adminContactKind(contactKindId: $contactKindId) {
+    ...ContactKindDetails
+  }
+}
+mutation AdminCreateContactKind($input: AdminCreateContactKindInput!) {
+  created: adminCreateContactKind(input: $input) {
+    ...ContactKindDetails
+  }
+}
+mutation AdminUpdateContactKind($contactKindId: String!, $input: AdminUpdateContactKindInput!) {
+  updated: adminUpdateContactKind(contactKindId: $contactKindId, input: $input) {
+    ...ContactKindDetails
+  }
+}
+mutation AdminDeleteContactKind($contactKindId: String!) {
+  deleted: adminDeleteContactKind(contactKindId: $contactKindId) {
+    ...ContactKindDetails
+  }
+}
+
+query UserContactKinds($input: UserListContactKindInput) {
+  items: userContactKinds(input: $input) {
+    ...ContactKindLists
+  }
+  count: userCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContactKinds($input: UserListContactKindInput) {
+  count: userCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContactKinds($input: UserListContactKindInput) {
+  items: userSelectContactKinds(input: $input) {
+    ...ContactKindDetails
+  }
+}
+
+query UserContactKind($contactKindId: String!) {
+  item: userContactKind(contactKindId: $contactKindId) {
+    ...ContactKindDetails
+  }
+}
+
+mutation UserCreateContactKind($input: UserCreateContactKindInput!) {
+  created: userCreateContactKind(input: $input) {
+    ...ContactKindDetails
+  }
+}
+mutation UserUpdateContactKind($contactKindId: String!, $input: UserUpdateContactKindInput!) {
+  updated: userUpdateContactKind(contactKindId: $contactKindId, input: $input) {
+    ...ContactKindDetails
+  }
+}
+
+mutation UserUpdateContactKinds($input: UserUpdateContactKindsInput!) {
+  updated: userUpdateContactKinds(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContactKind($contactKindId: String!) {
+  deleted: userDeleteContactKind(contactKindId: $contactKindId) {
+    ...ContactKindDetails
+  }
+}
+
+query PublicContactKinds($input: UserListContactKindInput) {
+  items: publicContactKinds(input: $input) {
+    ...ContactKindLists
+  }
+  count: publicCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContactKinds($input: UserListContactKindInput) {
+  count: publicCountContactKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContactKinds($input: UserListContactKindInput) {
+  items: publicSelectContactKinds(input: $input) {
+    ...ContactKindDetails
+  }
+}
+
+query PublicContactKind($contactKindId: String!) {
+  item: publicContactKind(contactKindId: $contactKindId) {
+    ...ContactKindDetails
+  }
+}

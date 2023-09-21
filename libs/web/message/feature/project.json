@@ -1,0 +1,23 @@
+{
+  "name": "web-message-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/message/feature/src",
+  "prefix": "message",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/message/feature/src/**/*.ts", "libs/web/message/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/message/feature"],
+      "options": {
+        "jestConfig": "libs/web/message/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

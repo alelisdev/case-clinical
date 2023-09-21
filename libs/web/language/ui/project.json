@@ -1,0 +1,23 @@
+{
+  "name": "web-language-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/language/ui/src",
+  "prefix": "language",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/language/ui/src/**/*.ts", "libs/web/language/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/language/ui"],
+      "options": {
+        "jestConfig": "libs/web/language/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<ng-container *ngIf="vm$ | async as vm">
+    <ui-formly-json-form
+      class="w-full h-full"
+      formName="page_attorney_doctor_detail"
+      [showSubmitButton]="false"
+      [componentStore]="store"
+      [formData]="getFormData(vm)"
+      (formIsReady)="this.onResize()"
+    ></ui-formly-json-form>
+</ng-container>

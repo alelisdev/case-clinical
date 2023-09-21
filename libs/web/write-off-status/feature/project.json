@@ -1,0 +1,26 @@
+{
+  "name": "web-write-off-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/write-off-status/feature/src",
+  "prefix": "write-off-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/write-off-status/feature/src/**/*.ts",
+          "libs/web/write-off-status/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/write-off-status/feature"],
+      "options": {
+        "jestConfig": "libs/web/write-off-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

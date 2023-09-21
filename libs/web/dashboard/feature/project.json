@@ -1,0 +1,23 @@
+{
+  "name": "web-dashboard-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/dashboard/feature/src",
+  "prefix": "dashboard",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/dashboard/feature/src/**/*.ts", "libs/web/dashboard/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/dashboard/feature"],
+      "options": {
+        "jestConfig": "libs/web/dashboard/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,1900 @@
+
+<ng-container>
+        <div class="bg-white md:rounded-lg md:shadow dark:bg-gray-800" >
+          <div class="p-4 sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+              <h1 class="text-xl font-semibold text-gray-900">Case Accounts</h1>
+            </div>
+            <div class="sm:ml-16 sm:flex-none" *ngIf="caseAccounts?.length > 0">
+              <a
+                type="button"
+                (click)="openDialog(createCaseAccountTpl, {caseAccount: {}})"
+                class="flex rounded-full border-2 border-blue-500 p-2 text-blue-500 cursor-pointer hover:bg-gray-100 hover:border-blue-600 hover:text-blue-600 hover:shadow-lg hover:scale-105 transition duration-200"
+              >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+              </a>
+            </div>
+          </div>
+
+          <ng-template #createCaseAccountTpl let-ref>
+          <div class="flex-grow flex flex-col">
+            <div class="text-lg font-semibold tracking-wider px-4 py-3 flex space-x-4 items-center justify-between">
+              <div class="flex items-center space-x-4">
+                <ui-icon icon="table"></ui-icon>
+                <div>Create Case Account</div>
+              </div>
+            </div>
+            <div class="flex-grow">
+              <ui-case-account-form (send)="this.createCaseAccount($event); ref.close()" [caseAccount]="ref.data?.caseAccount">
+              </ui-case-account-form>
+            </div>
+          </div>
+        </ng-template>
+
+            
+    <div class="overflow-x-auto">
+      <div *ngIf="caseAccounts?.length > 0; else noData" class="flex flex-col justify-between">
+        <div class="overflow-x-auto">
+          <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Name
+                          </th>
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Location
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Vendor
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Status
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Procedure Type
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Agreement Type
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Agent
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Contract
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Portfolio
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Third Party Funder Name
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Original Due Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Term
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Service Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Quantity
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Original Debt
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Balance
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Last Balance
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reduction
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Treatment State
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Services Performed
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Cpt Codes
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Outside Broker Flat Fee
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Outside Broker Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Outside Broker Multiply
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Inside Broker Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Inside Broker Multiply
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Provider Txn ID
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Min Performance Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Min Performance Flat Fee
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Threshold Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Threshold Flat Fee
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Expected Pmt Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Expected Pmt Flat Fee
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Wc Fee Schedule
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Interest Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Treating Physician
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Referring Physician
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Servicing Fee Percent
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Paid to Plaintiff
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ifg Default Service Fee
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Assignee Pays to Assignor
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Projected Payoff Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Collections Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Deemed Write off Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Expensed Bad Debt Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Un Expensed Bad Debt Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Bageled Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            M DS Contract Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Re Opened Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ifg Advance Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Paid Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Qb Txn Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Qb Edit Sequence
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Qb Journal Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Refund QB Txn Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Refund QB Edit Sequence
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Refund QB Journal Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ghost Account
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ghosted Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ghosted by
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Un Ghosted Date
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Un Ghosted by
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Exclude From Borrowing Base
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Additional Payment
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Missing Bill
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Missing Lien
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Missing Medical Records
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Assigned to
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Resubmitted
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Overage Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Temp
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Created by
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Date Created
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Removed
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Securitization Group
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Outside Agent Id
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Default Team Lead
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Default Team Leader Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Treatment City
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Origination
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Threshold Provider Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Threshold Location Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Team Leader Rate Source
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Check Number
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Account Date Received
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Date Applied
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Amount Applied
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Taxable
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reimbursable
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Tax Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Time
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Expense Amount
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Count
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Description
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Note
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Medicare Rate
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Provider Percent of Medicare
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Contracted Amount
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Markup Percent
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reimbursed Total
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Initial Revenue
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Factor
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Retail Bill
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Est Margin
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Roi
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Attorney Paid
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Percent of Retail
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Reimbursed From PCR
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Ingredient Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Dispensing Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Administrative Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Co Pay
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Total Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Average Wholesale Price
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Weighted Average Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Average Sale Price
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Invoice Cost
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Usual and Customary
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            National Drug Code
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Procedure Vendor
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Write Offs
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Case Account Payments
+                          </th>
+
+
+                          <th
+                            scope="col"
+                           class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            Sub Ledger Entries
+                          </th>
+
+                    </tr>
+                    </thead>
+                 <tbody class="bg-grey-light max-h-48 w-full divide-y divide-gray-200 overflow-y-scroll">
+                  <tr
+                    [routerLink]="['../../case-accounts', row.id, 'details', 'overview']"
+                    *ngFor="let row of caseAccounts"
+                    class="w-full transition duration-200 hover:cursor-pointer hover:bg-blue-50"
+                  >
+                        
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.name }}
+                          </td>
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.thirdPartyFunderName }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.originalDueDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.accountTerm }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.serviceDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.quantity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.originalDebt }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.cost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.balance }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.lastBalance }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reduction }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.treatmentState }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.accountNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.servicesPerformed }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.cptCodes }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.outsideBrokerFlatFee }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.outsideBrokerRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.outsideBrokerMultiply }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insideBrokerRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.insideBrokerMultiply }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.providerTxnID }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.minPerformanceRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.minPerformanceFlatFee }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.thresholdRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.thresholdFlatFee }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.expectedPmtRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.expectedPmtFlatFee }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.wcFeeSchedule }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.interestRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.treatingPhysician }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.referringPhysician }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.servicingFeePercent }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.paidToPlaintiff }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ifgDefaultServiceFee }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.assigneePaysToAssignor }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.projectedPayoffDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.collectionsDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.deemedWriteOffDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.expensedBadDebtDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.unExpensedBadDebtDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.bageledDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.mDSContractDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reOpenedDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ifgAdvanceDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.paidDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.qbTxnId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.qbEditSequence }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.qbJournalDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.refundQBTxnId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.refundQBEditSequence }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.refundQBJournalDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ghostAccount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ghostedDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ghostedBy }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.unGhostedDate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.unGhostedBy }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.excludeFromBorrowingBase }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.additionalPayment }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.missingBill }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.missingLien }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.missingMedicalRecords }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.assignedTo }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.resubmitted }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.overageId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.temp }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.createdBy }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.dateCreated }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.removed }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.securitizationGroup }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.outsideAgentId }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.defaultTeamLead }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.defaultTeamLeaderRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.treatmentCity }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.origination }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.thresholdProviderRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.thresholdLocationRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.teamLeaderRateSource }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.checkNumber }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.accountDateReceived }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.dateApplied }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.amountApplied }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.taxable }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reimbursable }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.taxRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.time }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.rate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.expenseAmount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.count }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.description }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.note }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.medicareRate }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.providerPercentOfMedicare }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.contractedAmount }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.markupPercent }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reimbursedTotal }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.initialRevenue }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.factor }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.retailBill }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.estMargin }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.roi }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.attorneyPaid }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.percentOfRetail }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.reimbursedFromPCR }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.ingredientCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.dispensingCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.administrativeCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.coPay }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.totalCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.averageWholesalePrice }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.weightedAverageCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.averageSalePrice }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.invoiceCost }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.usualAndCustomary }}
+                          </td>
+
+
+                          <td
+                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                          >
+                            {{ row.nationalDrugCode }}
+                          </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+        <div
+          class="flex h-full w-full items-center justify-end rounded-b-lg border-t-2 border-gray-200 bg-gray-50 p-3 text-gray-800"
+        >
+          <h1 class="mr-2 font-bold">Total Case Accounts:</h1>
+          <h1 class="">{{this.caseAccounts | getTotal:'amount'}}</h1>
+    </div>
+</div>
+
+
+                  <ng-template #noData>
+              <div class="h-full w-full flex flex-col items-center justify-center py-6">
+                <h1 class="py-2 font-bold">No Case Account</h1>
+              <button
+                type="button"
+                (click)="openDialog(createCaseAccountTpl, {caseAccount: {}})"
+                class="text-white bg-primary hover:bg-opacity-90 transition duration-300 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
+        >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Add New Case Account
+              </button>
+              </div>
+            </ng-template>
+        </div>
+    </div>
+  </ng-container>

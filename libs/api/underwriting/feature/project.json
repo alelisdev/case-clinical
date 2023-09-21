@@ -1,0 +1,26 @@
+{
+  "name": "api-underwriting-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/underwriting/feature/src",
+  "prefix": "underwriting",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/underwriting/data-access/src/**/*.ts",
+          "libs/api/underwriting/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/underwriting/data-access"],
+      "options": {
+        "jestConfig": "libs/api/underwriting/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

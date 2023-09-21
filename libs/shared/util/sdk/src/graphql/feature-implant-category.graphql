@@ -1,0 +1,148 @@
+
+fragment ImplantCategoryDetails on ImplantCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+implants {
+    ...ImplantLists
+  }
+}
+
+fragment ImplantCategoryLists on ImplantCategory {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+implants {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminImplantCategories($input: AdminListImplantCategoryInput) {
+  items: adminImplantCategories(input: $input) {
+    ...ImplantCategoryLists
+  }
+  count: adminCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountImplantCategories($input: AdminListImplantCategoryInput) {
+  count: adminCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminImplantCategory($implantCategoryId: String!) {
+  item: adminImplantCategory(implantCategoryId: $implantCategoryId) {
+    ...ImplantCategoryDetails
+  }
+}
+mutation AdminCreateImplantCategory($input: AdminCreateImplantCategoryInput!) {
+  created: adminCreateImplantCategory(input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+mutation AdminUpdateImplantCategory($implantCategoryId: String!, $input: AdminUpdateImplantCategoryInput!) {
+  updated: adminUpdateImplantCategory(implantCategoryId: $implantCategoryId, input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+mutation AdminDeleteImplantCategory($implantCategoryId: String!) {
+  deleted: adminDeleteImplantCategory(implantCategoryId: $implantCategoryId) {
+    ...ImplantCategoryDetails
+  }
+}
+
+query UserImplantCategories($input: UserListImplantCategoryInput) {
+  items: userImplantCategories(input: $input) {
+    ...ImplantCategoryLists
+  }
+  count: userCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountImplantCategories($input: UserListImplantCategoryInput) {
+  count: userCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectImplantCategories($input: UserListImplantCategoryInput) {
+  items: userSelectImplantCategories(input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+
+query UserImplantCategory($implantCategoryId: String!) {
+  item: userImplantCategory(implantCategoryId: $implantCategoryId) {
+    ...ImplantCategoryDetails
+  }
+}
+
+mutation UserCreateImplantCategory($input: UserCreateImplantCategoryInput!) {
+  created: userCreateImplantCategory(input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+mutation UserUpdateImplantCategory($implantCategoryId: String!, $input: UserUpdateImplantCategoryInput!) {
+  updated: userUpdateImplantCategory(implantCategoryId: $implantCategoryId, input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+
+mutation UserUpdateImplantCategories($input: UserUpdateImplantCategoriesInput!) {
+  updated: userUpdateImplantCategories(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteImplantCategory($implantCategoryId: String!) {
+  deleted: userDeleteImplantCategory(implantCategoryId: $implantCategoryId) {
+    ...ImplantCategoryDetails
+  }
+}
+
+query PublicImplantCategories($input: UserListImplantCategoryInput) {
+  items: publicImplantCategories(input: $input) {
+    ...ImplantCategoryLists
+  }
+  count: publicCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountImplantCategories($input: UserListImplantCategoryInput) {
+  count: publicCountImplantCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectImplantCategories($input: UserListImplantCategoryInput) {
+  items: publicSelectImplantCategories(input: $input) {
+    ...ImplantCategoryDetails
+  }
+}
+
+query PublicImplantCategory($implantCategoryId: String!) {
+  item: publicImplantCategory(implantCategoryId: $implantCategoryId) {
+    ...ImplantCategoryDetails
+  }
+}

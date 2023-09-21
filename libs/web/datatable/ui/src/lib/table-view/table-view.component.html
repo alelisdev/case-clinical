@@ -1,0 +1,57 @@
+<ng-container *ngIf="treeMode else defaultGrid">
+  <ag-grid-angular
+    class="w-full h-full"
+    *ngIf="agGridClassName | async as agGridClassName"
+    [ngClass]="agGridClassName"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [autoGroupColumnDef]="autoGroupColumnDef"
+    [rowData]="data"
+    [animateRows]="true"
+    [groupDefaultExpanded]="0"
+    rowSelection="multiple"
+    [pagination]="pagination"
+    [paginationAutoPageSize]="pagination"
+    [groupSelectsChildren]="true"
+    [suppressRowClickSelection]="true"
+    [domLayout]="autoHeight ? 'autoHeight' : ''"
+    [modules]="modules"
+    (firstDataRendered)="onFirstDataRendered()"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+    [gridOptions]="gridOptions"
+    [statusBar]="statusBar"
+    [enableRangeSelection]="true"
+  >
+  </ag-grid-angular>
+</ng-container>
+
+<ng-template #defaultGrid>
+  <ag-grid-angular
+    *ngIf="agGridClassName | async as agGridClassName"
+    class="{{getClasses}}"
+    [domLayout]="autoHeight ? 'autoHeight' : ''"
+    [ngClass]="agGridClassName"
+    [rowData]="data"
+    [columnDefs]="columnDefs"
+    [modules]="modules"
+    rowSelection="multiple"
+    [sideBar]="showSidebar ? sideBar : null"
+    [excelStyles]="excelStyles"
+    [animateRows]="true"
+    [pagination]="pagination"
+    [paginationAutoPageSize]="pagination"
+    [suppressRowClickSelection]="suppressRowClickSelection"
+    [frameworkComponents]="frameworkComponents"
+    (sortChanged)="onSortChanged($event)"
+    (filterChanged)="onFilterChanged($event)"
+    (firstDataRendered)="onFirstDataRendered()"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+    [defaultColDef]="defaultColDef"
+    [gridOptions]="gridOptions"
+    [statusBar]="statusBar"
+    [enableRangeSelection]="true"
+  >
+  </ag-grid-angular>
+</ng-template>

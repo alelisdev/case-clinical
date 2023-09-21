@@ -1,0 +1,7 @@
+a:hover {
+  text-decoration: none;
+}
+
+::ng-deep .vertical-navbar-buttons ui-navs ul li a{
+  color: white !important;
+}

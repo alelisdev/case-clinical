@@ -1,0 +1,26 @@
+{
+  "name": "api-prescription-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/prescription/feature/src",
+  "prefix": "prescription",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/prescription/data-access/src/**/*.ts",
+          "libs/api/prescription/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/prescription/data-access"],
+      "options": {
+        "jestConfig": "libs/api/prescription/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "api-required-field-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/required-field/feature/src",
+  "prefix": "required-field",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/required-field/data-access/src/**/*.ts",
+          "libs/api/required-field/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/required-field/data-access"],
+      "options": {
+        "jestConfig": "libs/api/required-field/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+
+fragment AccountStatusDetails on AccountStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+   ...CaseAccountLists
+  }
+}
+
+fragment AccountStatusLists on AccountStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAccountStatuses($input: AdminListAccountStatusInput) {
+  items: adminAccountStatuses(input: $input) {
+    ...AccountStatusLists
+  }
+  count: adminCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAccountStatuses($input: AdminListAccountStatusInput) {
+  count: adminCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAccountStatus($accountStatusId: String!) {
+  item: adminAccountStatus(accountStatusId: $accountStatusId) {
+    ...AccountStatusDetails
+  }
+}
+mutation AdminCreateAccountStatus($input: AdminCreateAccountStatusInput!) {
+  created: adminCreateAccountStatus(input: $input) {
+    ...AccountStatusDetails
+  }
+}
+mutation AdminUpdateAccountStatus($accountStatusId: String!, $input: AdminUpdateAccountStatusInput!) {
+  updated: adminUpdateAccountStatus(accountStatusId: $accountStatusId, input: $input) {
+    ...AccountStatusDetails
+  }
+}
+mutation AdminDeleteAccountStatus($accountStatusId: String!) {
+  deleted: adminDeleteAccountStatus(accountStatusId: $accountStatusId) {
+    ...AccountStatusDetails
+  }
+}
+
+query UserAccountStatuses($input: UserListAccountStatusInput) {
+  items: userAccountStatuses(input: $input) {
+    ...AccountStatusLists
+  }
+  count: userCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAccountStatuses($input: UserListAccountStatusInput) {
+  count: userCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAccountStatuses($input: UserListAccountStatusInput) {
+  items: userSelectAccountStatuses(input: $input) {
+    ...AccountStatusDetails
+  }
+}
+
+query UserAccountStatus($accountStatusId: String!) {
+  item: userAccountStatus(accountStatusId: $accountStatusId) {
+    ...AccountStatusDetails
+  }
+}
+
+mutation UserCreateAccountStatus($input: UserCreateAccountStatusInput!) {
+  created: userCreateAccountStatus(input: $input) {
+    ...AccountStatusDetails
+  }
+}
+mutation UserUpdateAccountStatus($accountStatusId: String!, $input: UserUpdateAccountStatusInput!) {
+  updated: userUpdateAccountStatus(accountStatusId: $accountStatusId, input: $input) {
+    ...AccountStatusDetails
+  }
+}
+
+mutation UserUpdateAccountStatuses($input: UserUpdateAccountStatusesInput!) {
+  updated: userUpdateAccountStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAccountStatus($accountStatusId: String!) {
+  deleted: userDeleteAccountStatus(accountStatusId: $accountStatusId) {
+    ...AccountStatusDetails
+  }
+}
+
+query PublicAccountStatuses($input: UserListAccountStatusInput) {
+  items: publicAccountStatuses(input: $input) {
+    ...AccountStatusLists
+  }
+  count: publicCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAccountStatuses($input: UserListAccountStatusInput) {
+  count: publicCountAccountStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAccountStatuses($input: UserListAccountStatusInput) {
+  items: publicSelectAccountStatuses(input: $input) {
+    ...AccountStatusDetails
+  }
+}
+
+query PublicAccountStatus($accountStatusId: String!) {
+  item: publicAccountStatus(accountStatusId: $accountStatusId) {
+    ...AccountStatusDetails
+  }
+}

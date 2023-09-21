@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-user-role.input'
+export * from './lib/dto/admin-list-user-role.input'
+export * from './lib/dto/admin-update-user-role.input'
+export * from './lib/dto/user-role.input'
+export * from './lib/dto/user-create-user-role.input'
+export * from './lib/dto/user-list-user-role.input'
+export * from './lib/dto/user-update-user-role.input'
+export * from './lib/dto/user-update-user-roles.input'
+export * from './lib/models/user-role.model'
+export * from './lib/api-user-role-data-access.module'
+
+export * from './lib/api-user-role-data-access-admin.service'
+export * from './lib/api-user-role-data-access-public.service'
+export * from './lib/api-user-role-data-access-user.service'

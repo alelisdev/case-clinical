@@ -1,0 +1,164 @@
+
+fragment ContactSettingDetails on ContactSetting {
+id
+createdAt
+updatedAt
+name
+value
+iconUrl
+properties
+contactId
+integrationId
+contact {
+  id
+  name
+}
+integration {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContactSettingLists on ContactSetting {
+id
+createdAt
+updatedAt
+name
+value
+iconUrl
+properties
+contactId
+integrationId
+contact {
+    id
+    name
+}
+integration {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContactSettings($input: AdminListContactSettingInput) {
+  items: adminContactSettings(input: $input) {
+    ...ContactSettingLists
+  }
+  count: adminCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContactSettings($input: AdminListContactSettingInput) {
+  count: adminCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContactSetting($contactSettingId: String!) {
+  item: adminContactSetting(contactSettingId: $contactSettingId) {
+    ...ContactSettingDetails
+  }
+}
+mutation AdminCreateContactSetting($input: AdminCreateContactSettingInput!) {
+  created: adminCreateContactSetting(input: $input) {
+    ...ContactSettingDetails
+  }
+}
+mutation AdminUpdateContactSetting($contactSettingId: String!, $input: AdminUpdateContactSettingInput!) {
+  updated: adminUpdateContactSetting(contactSettingId: $contactSettingId, input: $input) {
+    ...ContactSettingDetails
+  }
+}
+mutation AdminDeleteContactSetting($contactSettingId: String!) {
+  deleted: adminDeleteContactSetting(contactSettingId: $contactSettingId) {
+    ...ContactSettingDetails
+  }
+}
+
+query UserContactSettings($input: UserListContactSettingInput) {
+  items: userContactSettings(input: $input) {
+    ...ContactSettingLists
+  }
+  count: userCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContactSettings($input: UserListContactSettingInput) {
+  count: userCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContactSettings($input: UserListContactSettingInput) {
+  items: userSelectContactSettings(input: $input) {
+    ...ContactSettingDetails
+  }
+}
+
+query UserContactSetting($contactSettingId: String!) {
+  item: userContactSetting(contactSettingId: $contactSettingId) {
+    ...ContactSettingDetails
+  }
+}
+
+mutation UserCreateContactSetting($input: UserCreateContactSettingInput!) {
+  created: userCreateContactSetting(input: $input) {
+    ...ContactSettingDetails
+  }
+}
+mutation UserUpdateContactSetting($contactSettingId: String!, $input: UserUpdateContactSettingInput!) {
+  updated: userUpdateContactSetting(contactSettingId: $contactSettingId, input: $input) {
+    ...ContactSettingDetails
+  }
+}
+
+mutation UserUpdateContactSettings($input: UserUpdateContactSettingsInput!) {
+  updated: userUpdateContactSettings(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContactSetting($contactSettingId: String!) {
+  deleted: userDeleteContactSetting(contactSettingId: $contactSettingId) {
+    ...ContactSettingDetails
+  }
+}
+
+query PublicContactSettings($input: UserListContactSettingInput) {
+  items: publicContactSettings(input: $input) {
+    ...ContactSettingLists
+  }
+  count: publicCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContactSettings($input: UserListContactSettingInput) {
+  count: publicCountContactSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContactSettings($input: UserListContactSettingInput) {
+  items: publicSelectContactSettings(input: $input) {
+    ...ContactSettingDetails
+  }
+}
+
+query PublicContactSetting($contactSettingId: String!) {
+  item: publicContactSetting(contactSettingId: $contactSettingId) {
+    ...ContactSettingDetails
+  }
+}

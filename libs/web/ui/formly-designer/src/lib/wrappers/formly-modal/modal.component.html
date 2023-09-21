@@ -1,0 +1,14 @@
+<ng-template #dlg let-ref>
+  <div class="w-auto h-auto min-w-80 min-h-26 p-2" style="overflow: auto">
+    <ui-formly-json-form
+      *ngIf="formName"
+      class="w-full h-full"
+      [formName]="formName"
+      [showSubmitButton]="showSubmitButton"
+      [componentStore]="store"
+      [model]="dlgModel"
+      (save)="submit($event)"
+      [formData]="dlgFormData">
+    </ui-formly-json-form>
+  </div>
+</ng-template>

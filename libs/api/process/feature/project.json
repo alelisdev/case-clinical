@@ -1,0 +1,23 @@
+{
+  "name": "api-process-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/process/feature/src",
+  "prefix": "process",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/process/data-access/src/**/*.ts", "libs/api/process/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/process/data-access"],
+      "options": {
+        "jestConfig": "libs/api/process/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+
+fragment UserCalendarDetails on UserCalendar {
+id
+createdAt
+updatedAt
+name
+calendarTypeId
+userId
+teamId
+calendarId
+
+
+}
+query AdminUserCalendars($input: AdminListUserCalendarInput) {
+  items: adminUserCalendars(input: $input) {
+    ...UserCalendarDetails
+  }
+  count: adminCountUserCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountUserCalendars($input: AdminListUserCalendarInput) {
+  count: adminCountUserCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminUserCalendar($userCalendarId: String!) {
+  item: adminUserCalendar(userCalendarId: $userCalendarId) {
+    ...UserCalendarDetails
+  }
+}
+mutation AdminCreateUserCalendar($input: AdminCreateUserCalendarInput!) {
+  created: adminCreateUserCalendar(input: $input) {
+    ...UserCalendarDetails
+  }
+}
+mutation AdminUpdateUserCalendar($userCalendarId: String!, $input: AdminUpdateUserCalendarInput!) {
+  updated: adminUpdateUserCalendar(userCalendarId: $userCalendarId, input: $input) {
+    ...UserCalendarDetails
+  }
+}
+mutation AdminDeleteUserCalendar($userCalendarId: String!) {
+  deleted: adminDeleteUserCalendar(userCalendarId: $userCalendarId) {
+    ...UserCalendarDetails
+  }
+}
+
+query UserUserCalendars($input: UserListUserCalendarInput) {
+  items: userUserCalendars(input: $input) {
+    ...UserCalendarDetails
+  }
+  count: userCountUserCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountUserCalendars($input: UserListUserCalendarInput) {
+  count: userCountUserCalendars(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserUserCalendar($userCalendarId: String!) {
+  item: userUserCalendar(userCalendarId: $userCalendarId) {
+    ...UserCalendarDetails
+  }
+}
+mutation UserCreateUserCalendar($input: UserCreateUserCalendarInput!) {
+  created: userCreateUserCalendar(input: $input) {
+    ...UserCalendarDetails
+  }
+}
+mutation UserUpdateUserCalendar($userCalendarId: String!, $input: UserUpdateUserCalendarInput!) {
+  updated: userUpdateUserCalendar(userCalendarId: $userCalendarId, input: $input) {
+    ...UserCalendarDetails
+  }
+}
+mutation UserDeleteUserCalendar($userCalendarId: String!) {
+  deleted: userDeleteUserCalendar(userCalendarId: $userCalendarId) {
+    ...UserCalendarDetails
+  }
+}

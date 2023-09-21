@@ -1,0 +1,23 @@
+{
+  "name": "web-auth-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/auth/feature/src",
+  "prefix": "auth",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/auth/feature/src/**/*.ts", "libs/web/auth/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/auth/feature"],
+      "options": {
+        "jestConfig": "libs/web/auth/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

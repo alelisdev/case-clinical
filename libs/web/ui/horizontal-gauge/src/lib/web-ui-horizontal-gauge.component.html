@@ -1,0 +1,74 @@
+<div class="w-full flex">
+  <div class="flex h-full mx-auto md:mx-0 md:w-full p-4">
+    <div class="flex h-full w-full flex-col gap-2 bg-white sm:text-right">
+      <h1 class="text-center text-2xl font-bold capitalize">Expenses</h1>
+      <div class="flex h-full flex-col">
+        <div class="flex flex-row gap-1 p-1 sm:flex-col sm:gap-0">
+          <h1 class="text-sm font-bold">Policy Limit:</h1>
+          <h1 class="text-sm">${{ formatCurrencyString(policyLimit) }}</h1>
+        </div>
+        <div class="flex h-full flex-1 gap-1 sm:flex-col">
+          <div class="flex flex-col justify-between pr-1 text-right text-xs font-bold sm:flex-row-reverse sm:gap-2">
+            <h3>100%</h3>
+            <h3>90%</h3>
+            <h3>80%</h3>
+            <h3>70%</h3>
+            <h3>60%</h3>
+            <h3>50%</h3>
+            <h3>40%</h3>
+            <h3>30%</h3>
+            <h3>20%</h3>
+            <h3>10%</h3>
+          </div>
+
+          <div class="flex flex-col justify-between py-2 sm:flex-row sm:py-0 sm:px-3 sm:pr-6">
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+            <div class="h-0 w-1 border-b sm:h-1 sm:w-0 sm:border-b-0 sm:border-r"></div>
+          </div>
+
+          <div
+            class="relative ml-1 h-64 w-12 justify-end rounded-full bg-gray-100 p-1 shadow-inner shadow-gray-400 sm:h-10 sm:w-full"
+          >
+            <div
+              class="absolute inset-x-0 bottom-0 h-44 rounded-full bg-red-500"
+              classa="absolute inset-x-1 bottom-1 h-48 rounded-full bg-gradient-to-tr from-red-500 via-rose-500 to-orange-500 shadow-inner shadow-rose-100/100 transition duration-300 sm:hidden"
+            ></div>
+
+            <div
+              class="absolute inset-y-1 left-1 hidden h-auto w-60 rounded-full bg-gradient-to-tr from-red-500 via-rose-500 to-orange-500 shadow-inner shadow-rose-100/100 transition duration-300 sm:block"
+            ></div>
+            <div
+              class="absolute inset-x-1 bottom-1 h-32 rounded-full bg-gradient-to-tr from-blue-500 via-cyan-600 to-cyan-500 shadow-inner shadow-blue-100/100 transition duration-300 sm:hidden"
+            ></div>
+            <div
+              class="absolute inset-y-1 left-1 hidden h-auto w-36 rounded-full bg-gradient-to-tr from-blue-500 via-cyan-600 to-cyan-500 shadow-inner shadow-blue-100/100 transition duration-300 sm:block"
+            ></div>
+          </div>
+
+          <div class="flex flex-col justify-end pl-1 sm:flex-row sm:justify-start sm:pl-0">
+            <div
+              class="mb-8 rounded-sm border border-gray-400 bg-gray-50 p-1 text-center text-xs sm:ml-32 sm:mb-0 sm:-translate-x-10 sm:translate-y-0"
+            >
+              <h1>Total Expenses</h1>
+              <h1 class="font-bold">${{ formatCurrencyString(totalExpenses) }}</h1>
+            </div>
+            <div
+              class="mb-24 rounded-sm border border-gray-400 bg-gray-50 p-1 text-center text-xs sm:ml-4 sm:mb-0 sm:-translate-x-10 sm:translate-y-0"
+            >
+              <h1>Medical Expenses</h1>
+              <h1 class="font-bold">${{ formatCurrencyString(medicalExpenses) }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

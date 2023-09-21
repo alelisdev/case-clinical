@@ -1,0 +1,17 @@
+::ng-deep .ng-select-container {
+  margin-top: 0px !important;
+  /* background-color: transparent !important; */
+}
+
+::ng-deep .forSelectForm .ng-select-container{
+  border: 1px solid #ff0000a8;
+}
+
+::ng-deep ui-button button{
+  height: 100% !important;
+  justify-content: center;
+}
+
+::ng-deep .ngneat-dialog-backdrop {
+  z-index: 998 !important;
+}

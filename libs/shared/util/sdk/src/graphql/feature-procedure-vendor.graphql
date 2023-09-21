@@ -1,0 +1,213 @@
+
+
+fragment ProcedureVendorDetails on ProcedureVendor {
+id
+createdAt
+updatedAt
+name
+procedureId
+contractId
+vendorId
+statusId
+estimate
+fundingApproved
+procedure {
+  id
+  name
+}
+contract {
+  id
+  name
+}
+vendor {
+  id
+  name
+  vendorType{
+    id
+    name
+  }
+}
+status {
+  id
+  name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+documents {
+    id
+    name
+  }
+}
+
+fragment ProcedureVendorLists on ProcedureVendor {
+id
+createdAt
+updatedAt
+name
+procedureId
+contractId
+vendorId
+statusId
+estimate
+fundingApproved
+procedure {
+    id
+    name
+}
+contract {
+    id
+    name
+    process {
+      id
+      name
+    }
+}
+vendor {
+    id
+    name
+    vendorType{
+    id
+    name
+  }
+}
+status {
+    id
+    name
+}
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+
+documents {
+    id
+    name
+  }
+
+}
+
+query AdminProcedureVendors($input: AdminListProcedureVendorInput) {
+  items: adminProcedureVendors(input: $input) {
+    ...ProcedureVendorLists
+  }
+  count: adminCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureVendors($input: AdminListProcedureVendorInput) {
+  count: adminCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureVendor($procedureVendorId: String!) {
+  item: adminProcedureVendor(procedureVendorId: $procedureVendorId) {
+    ...ProcedureVendorDetails
+  }
+}
+mutation AdminCreateProcedureVendor($input: AdminCreateProcedureVendorInput!) {
+  created: adminCreateProcedureVendor(input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+mutation AdminUpdateProcedureVendor($procedureVendorId: String!, $input: AdminUpdateProcedureVendorInput!) {
+  updated: adminUpdateProcedureVendor(procedureVendorId: $procedureVendorId, input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+mutation AdminDeleteProcedureVendor($procedureVendorId: String!) {
+  deleted: adminDeleteProcedureVendor(procedureVendorId: $procedureVendorId) {
+    ...ProcedureVendorDetails
+  }
+}
+
+query UserProcedureVendors($input: UserListProcedureVendorInput) {
+  items: userProcedureVendors(input: $input) {
+    ...ProcedureVendorLists
+  }
+  count: userCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureVendors($input: UserListProcedureVendorInput) {
+  count: userCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureVendors($input: UserListProcedureVendorInput) {
+  items: userSelectProcedureVendors(input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+
+query UserProcedureVendor($procedureVendorId: String!) {
+  item: userProcedureVendor(procedureVendorId: $procedureVendorId) {
+    ...ProcedureVendorDetails
+  }
+}
+
+mutation UserCreateProcedureVendor($input: UserCreateProcedureVendorInput!) {
+  created: userCreateProcedureVendor(input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+mutation UserUpdateProcedureVendor($procedureVendorId: String!, $input: UserUpdateProcedureVendorInput!) {
+  updated: userUpdateProcedureVendor(procedureVendorId: $procedureVendorId, input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+
+mutation UserUpdateProcedureVendors($input: UserUpdateProcedureVendorsInput!) {
+  updated: userUpdateProcedureVendors(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureVendor($procedureVendorId: String!) {
+  deleted: userDeleteProcedureVendor(procedureVendorId: $procedureVendorId) {
+    ...ProcedureVendorDetails
+  }
+}
+
+query PublicProcedureVendors($input: UserListProcedureVendorInput) {
+  items: publicProcedureVendors(input: $input) {
+    ...ProcedureVendorLists
+  }
+  count: publicCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureVendors($input: UserListProcedureVendorInput) {
+  count: publicCountProcedureVendors(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureVendors($input: UserListProcedureVendorInput) {
+  items: publicSelectProcedureVendors(input: $input) {
+    ...ProcedureVendorDetails
+  }
+}
+
+query PublicProcedureVendor($procedureVendorId: String!) {
+  item: publicProcedureVendor(procedureVendorId: $procedureVendorId) {
+    ...ProcedureVendorDetails
+  }
+}

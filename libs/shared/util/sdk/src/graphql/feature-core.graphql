@@ -1,0 +1,90 @@
+query Uptime {
+  uptime
+}
+
+query GetSasToken {
+  result: getSasToken {
+    storageAccessToken
+    storageUri
+  }
+}
+
+# fragment ResponseObject on ResponseObject {
+#   message
+#   code
+# }
+
+# fragment CommonResponseDetails on CommonResponse {
+#   data {
+#     ...ResponseObject
+#   }
+#   error {
+#     ...ResponseObject
+#   }
+# }
+
+
+fragment UpdateResult on UpdateResult {
+  updated
+  created
+  failed
+}
+
+
+query GetFileSasToken($input: UserUpdateDocumentInput!) {
+  result: getFileSasToken(input: $input) {
+    storageAccessToken
+    storageUri
+  }
+}
+
+fragment CorePagingDetails on CorePaging {
+  limit
+  skip
+  total
+}
+
+fragment IntercomDetails on IntercomMessage {
+  type
+  scope
+  payload
+}
+
+mutation IntercomPub($type: String!, $scope: String, $payload: JSON) {
+  intercomPub(type: $type, scope: $scope, payload: $payload) {
+    ...IntercomDetails
+  }
+}
+
+mutation userUpdateUserStatus($input: String!) {
+  result: userUpdateUserStatus(input: $input)
+}
+
+subscription IntercomSub {
+  intercomSub {
+    ...IntercomDetails
+  }
+}
+
+query UserPublicTemplate($templateId: String!) {
+  item: userPublicTemplate(templateId: $templateId) {
+    ...TemplateDetails
+  }
+}
+
+mutation UserCreateSignDocument($user: UserUpdateDto!, $attachment: String!) {
+  document: userCreateSignDocument(user: $user, attachment: $attachment)
+}
+
+mutation getPdfDocument($user: UserUpdateDto!, $attachment: String!, $templateName: String!) {
+  document: getPdfDocument(user: $user, attachment: $attachment, templateName: $templateName) {
+    name
+    attachment
+    extension
+  }
+}
+
+mutation getPatientMrnNumber($dateOfBirth: String!, $dateOfLoss: String!, $accidentKind: String!, $legalCaseId: String!) {
+  patientMrn: getPatientMrnNumber(dateOfBirth: $dateOfBirth, dateOfLoss: $dateOfLoss , accidentKind: $accidentKind, legalCaseId: $legalCaseId )
+}
+

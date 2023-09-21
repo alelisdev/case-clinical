@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-page-header",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/page-header/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/page-header/src/**/*.ts", "libs/web/ui/page-header/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/page-header"],
+      "options": {
+        "jestConfig": "libs/web/ui/page-header/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

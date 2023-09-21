@@ -1,0 +1,8 @@
+{
+  "name": "web-style",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/style/src",
+  "prefix": "style",
+  "targets": {}
+}

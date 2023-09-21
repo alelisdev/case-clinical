@@ -1,0 +1,23 @@
+::ng-deep .example-button {
+  margin-top: -5px;
+  padding:3px 10px;
+  margin-bottom: 0px;
+}
+
+.example-tooltip-uppercase {
+  font-size:14px;
+  white-space: pre-wrap !important;;
+}
+
+::ng-deep .mat-mdc-menu-content.mdc-list {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  ::ng-deep span.mat-mdc-menu-item.mdc-list-item {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    min-height: auto !important;
+  }
+
+}
+ 
+

@@ -1,0 +1,26 @@
+{
+  "name": "api-document-type-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/document-type/feature/src",
+  "prefix": "document-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/document-type/data-access/src/**/*.ts",
+          "libs/api/document-type/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/document-type/data-access"],
+      "options": {
+        "jestConfig": "libs/api/document-type/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

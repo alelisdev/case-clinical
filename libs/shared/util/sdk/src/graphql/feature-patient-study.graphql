@@ -1,0 +1,157 @@
+
+fragment PatientStudyDetails on PatientStudy {
+id
+createdAt
+updatedAt
+name
+patientId
+patient {
+  id
+  name
+}
+
+
+
+
+
+documents {
+    id
+    name
+  }
+}
+
+fragment PatientStudyLists on PatientStudy {
+id
+createdAt
+updatedAt
+name
+patientId
+patient {
+    id
+    name
+}
+
+
+
+
+
+documents {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPatientStudies($input: AdminListPatientStudyInput) {
+  items: adminPatientStudies(input: $input) {
+    ...PatientStudyLists
+  }
+  count: adminCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPatientStudies($input: AdminListPatientStudyInput) {
+  count: adminCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPatientStudy($patientStudyId: String!) {
+  item: adminPatientStudy(patientStudyId: $patientStudyId) {
+    ...PatientStudyDetails
+  }
+}
+mutation AdminCreatePatientStudy($input: AdminCreatePatientStudyInput!) {
+  created: adminCreatePatientStudy(input: $input) {
+    ...PatientStudyDetails
+  }
+}
+mutation AdminUpdatePatientStudy($patientStudyId: String!, $input: AdminUpdatePatientStudyInput!) {
+  updated: adminUpdatePatientStudy(patientStudyId: $patientStudyId, input: $input) {
+    ...PatientStudyDetails
+  }
+}
+mutation AdminDeletePatientStudy($patientStudyId: String!) {
+  deleted: adminDeletePatientStudy(patientStudyId: $patientStudyId) {
+    ...PatientStudyDetails
+  }
+}
+
+query UserPatientStudies($input: UserListPatientStudyInput) {
+  items: userPatientStudies(input: $input) {
+    ...PatientStudyLists
+  }
+  count: userCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPatientStudies($input: UserListPatientStudyInput) {
+  count: userCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPatientStudies($input: UserListPatientStudyInput) {
+  items: userSelectPatientStudies(input: $input) {
+    ...PatientStudyDetails
+  }
+}
+
+query UserPatientStudy($patientStudyId: String!) {
+  item: userPatientStudy(patientStudyId: $patientStudyId) {
+    ...PatientStudyDetails
+  }
+}
+
+mutation UserCreatePatientStudy($input: UserCreatePatientStudyInput!) {
+  created: userCreatePatientStudy(input: $input) {
+    ...PatientStudyDetails
+  }
+}
+mutation UserUpdatePatientStudy($patientStudyId: String!, $input: UserUpdatePatientStudyInput!) {
+  updated: userUpdatePatientStudy(patientStudyId: $patientStudyId, input: $input) {
+    ...PatientStudyDetails
+  }
+}
+
+mutation UserUpdatePatientStudies($input: UserUpdatePatientStudiesInput!) {
+  updated: userUpdatePatientStudies(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePatientStudy($patientStudyId: String!) {
+  deleted: userDeletePatientStudy(patientStudyId: $patientStudyId) {
+    ...PatientStudyDetails
+  }
+}
+
+query PublicPatientStudies($input: UserListPatientStudyInput) {
+  items: publicPatientStudies(input: $input) {
+    ...PatientStudyLists
+  }
+  count: publicCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPatientStudies($input: UserListPatientStudyInput) {
+  count: publicCountPatientStudies(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPatientStudies($input: UserListPatientStudyInput) {
+  items: publicSelectPatientStudies(input: $input) {
+    ...PatientStudyDetails
+  }
+}
+
+query PublicPatientStudy($patientStudyId: String!) {
+  item: publicPatientStudy(patientStudyId: $patientStudyId) {
+    ...PatientStudyDetails
+  }
+}

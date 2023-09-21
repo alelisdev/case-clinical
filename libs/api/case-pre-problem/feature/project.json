@@ -1,0 +1,26 @@
+{
+  "name": "api-case-pre-problem-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/case-pre-problem/feature/src",
+  "prefix": "case-pre-problem",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/case-pre-problem/data-access/src/**/*.ts",
+          "libs/api/case-pre-problem/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/case-pre-problem/data-access"],
+      "options": {
+        "jestConfig": "libs/api/case-pre-problem/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

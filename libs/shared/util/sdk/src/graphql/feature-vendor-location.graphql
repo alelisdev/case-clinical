@@ -1,0 +1,160 @@
+
+fragment VendorLocationDetails on VendorLocation {
+id
+createdAt
+updatedAt
+name
+vendorId
+locations {
+  id
+  name
+  placeOfService {
+    id
+    name
+  }
+}
+vendor {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment VendorLocationLists on VendorLocation {
+id
+createdAt
+updatedAt
+name
+vendorId
+locations {
+    id
+    name
+}
+vendor {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminVendorLocations($input: AdminListVendorLocationInput) {
+  items: adminVendorLocations(input: $input) {
+    ...VendorLocationLists
+  }
+  count: adminCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountVendorLocations($input: AdminListVendorLocationInput) {
+  count: adminCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminVendorLocation($vendorLocationId: String!) {
+  item: adminVendorLocation(vendorLocationId: $vendorLocationId) {
+    ...VendorLocationDetails
+  }
+}
+mutation AdminCreateVendorLocation($input: AdminCreateVendorLocationInput!) {
+  created: adminCreateVendorLocation(input: $input) {
+    ...VendorLocationDetails
+  }
+}
+mutation AdminUpdateVendorLocation($vendorLocationId: String!, $input: AdminUpdateVendorLocationInput!) {
+  updated: adminUpdateVendorLocation(vendorLocationId: $vendorLocationId, input: $input) {
+    ...VendorLocationDetails
+  }
+}
+mutation AdminDeleteVendorLocation($vendorLocationId: String!) {
+  deleted: adminDeleteVendorLocation(vendorLocationId: $vendorLocationId) {
+    ...VendorLocationDetails
+  }
+}
+
+query UserVendorLocations($input: UserListVendorLocationInput) {
+  items: userVendorLocations(input: $input) {
+    ...VendorLocationLists
+  }
+  count: userCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountVendorLocations($input: UserListVendorLocationInput) {
+  count: userCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectVendorLocations($input: UserListVendorLocationInput) {
+  items: userSelectVendorLocations(input: $input) {
+    ...VendorLocationDetails
+  }
+}
+
+query UserVendorLocation($vendorLocationId: String!) {
+  item: userVendorLocation(vendorLocationId: $vendorLocationId) {
+    ...VendorLocationDetails
+  }
+}
+
+mutation UserCreateVendorLocation($input: UserCreateVendorLocationInput!) {
+  created: userCreateVendorLocation(input: $input) {
+    ...VendorLocationDetails
+  }
+}
+mutation UserUpdateVendorLocation($vendorLocationId: String!, $input: UserUpdateVendorLocationInput!) {
+  updated: userUpdateVendorLocation(vendorLocationId: $vendorLocationId, input: $input) {
+    ...VendorLocationDetails
+  }
+}
+
+mutation UserUpdateVendorLocations($input: UserUpdateVendorLocationsInput!) {
+  updated: userUpdateVendorLocations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteVendorLocation($vendorLocationId: String!) {
+  deleted: userDeleteVendorLocation(vendorLocationId: $vendorLocationId) {
+    ...VendorLocationDetails
+  }
+}
+
+query PublicVendorLocations($input: UserListVendorLocationInput) {
+  items: publicVendorLocations(input: $input) {
+    ...VendorLocationLists
+  }
+  count: publicCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountVendorLocations($input: UserListVendorLocationInput) {
+  count: publicCountVendorLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectVendorLocations($input: UserListVendorLocationInput) {
+  items: publicSelectVendorLocations(input: $input) {
+    ...VendorLocationDetails
+  }
+}
+
+query PublicVendorLocation($vendorLocationId: String!) {
+  item: publicVendorLocation(vendorLocationId: $vendorLocationId) {
+    ...VendorLocationDetails
+  }
+}

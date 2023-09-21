@@ -1,0 +1,160 @@
+
+fragment PriorAuthorizationEquipmentDetails on PriorAuthorizationEquipment {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+equipmentId
+priorAuthorizationRequestId
+equipment {
+  id
+  name
+}
+priorAuthorizationRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthorizationEquipmentLists on PriorAuthorizationEquipment {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+equipmentId
+priorAuthorizationRequestId
+equipment {
+    id
+    name
+}
+priorAuthorizationRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPriorAuthorizationEquipments($input: AdminListPriorAuthorizationEquipmentInput) {
+  items: adminPriorAuthorizationEquipments(input: $input) {
+    ...PriorAuthorizationEquipmentLists
+  }
+  count: adminCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthorizationEquipments($input: AdminListPriorAuthorizationEquipmentInput) {
+  count: adminCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!) {
+  item: adminPriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+mutation AdminCreatePriorAuthorizationEquipment($input: AdminCreatePriorAuthorizationEquipmentInput!) {
+  created: adminCreatePriorAuthorizationEquipment(input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+mutation AdminUpdatePriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!, $input: AdminUpdatePriorAuthorizationEquipmentInput!) {
+  updated: adminUpdatePriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId, input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+mutation AdminDeletePriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!) {
+  deleted: adminDeletePriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+query UserPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  items: userPriorAuthorizationEquipments(input: $input) {
+    ...PriorAuthorizationEquipmentLists
+  }
+  count: userCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  count: userCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  items: userSelectPriorAuthorizationEquipments(input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+query UserPriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!) {
+  item: userPriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+mutation UserCreatePriorAuthorizationEquipment($input: UserCreatePriorAuthorizationEquipmentInput!) {
+  created: userCreatePriorAuthorizationEquipment(input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+mutation UserUpdatePriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!, $input: UserUpdatePriorAuthorizationEquipmentInput!) {
+  updated: userUpdatePriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId, input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+mutation UserUpdatePriorAuthorizationEquipments($input: UserUpdatePriorAuthorizationEquipmentsInput!) {
+  updated: userUpdatePriorAuthorizationEquipments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!) {
+  deleted: userDeletePriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+query PublicPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  items: publicPriorAuthorizationEquipments(input: $input) {
+    ...PriorAuthorizationEquipmentLists
+  }
+  count: publicCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  count: publicCountPriorAuthorizationEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthorizationEquipments($input: UserListPriorAuthorizationEquipmentInput) {
+  items: publicSelectPriorAuthorizationEquipments(input: $input) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}
+
+query PublicPriorAuthorizationEquipment($priorAuthorizationEquipmentId: String!) {
+  item: publicPriorAuthorizationEquipment(priorAuthorizationEquipmentId: $priorAuthorizationEquipmentId) {
+    ...PriorAuthorizationEquipmentDetails
+  }
+}

@@ -1,0 +1,78 @@
+<div class="overflow-hidden border-1 border-zinc-100">
+  <div class="flow-root">
+    <div class="-my-2 mx-0 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-zinc-100" style = "overflow: scroll;">
+          <thead [style]="headStyle" class="divide-y divide-zinc-100">
+            <tr>
+              <th *ngIf="showCheckBox" scope="col"
+                class="py-3.5 px-1 w-8 text-left font-semibold dark:text-white text-gray-900">
+                <input type="checkbox"
+                  class="focus:ring-blue-500 mt-0 h-4 w-4 text-blue-600 border-gray-300 dark:bg-gray-800 dark:border-gray-600 rounded"
+                  [formlyAttributes]="field" [checked]="isAllCheckBoxChecked"
+                  (change)="onAllCheckBoxChanged($event.target)" />
+              </th>
+              <th scope="col" class="py-3.5 px-3 text-left font-semibold dark:text-white text-gray-900"
+                [style]="header.minwidth" *ngFor="let header of headers">
+                <div *ngIf="manualArrangement">{{ header.title }}</div>
+                <div *ngIf="!manualArrangement && isPlainHeader(header)">{{ header }}</div>
+                <div *ngIf="!manualArrangement && !isPlainHeader(header)">
+                  <formly-field [field]="header"></formly-field>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="!manualArrangement" class="divide-y divide-zinc-100 bg-white">
+            <ng-container *ngFor="let datum of data; let i = index;">
+              <tr class="hover:bg-gray-300 dark:bg-slate-800">
+                <td *ngIf="showCheckBox" class="whitespace-nowrap py-4 px-1 text-md dark:text-white">
+                  <input type="checkbox"
+                    class="focus:ring-blue-500 mt-0 h-4 w-4 text-blue-600 border-gray-300 dark:bg-gray-800 dark:border-gray-600 rounded"
+                    [id]="id + '_' + i" [checked]="isChecked(i)" [formlyAttributes]="field"
+                    (change)="onSelectionChanged(i, $event.target)" />
+                </td>
+                <td class="whitespace-nowrap py-4 px-3 text-md dark:text-white"
+                  *ngFor="let chiledField of columnFields; let j = index;">
+                  <ui-context-provider class="flex" [data]="datum">
+                    <formly-field [field]="chiledField" class="dark:bg-slate-800"></formly-field>
+                  </ui-context-provider>
+                </td>
+              </tr>
+
+              <!-- Display Child Tables -->
+              <ng-container *ngIf="childTableFields.length > 0">
+                <tr *ngFor="let tableWrapper of childTableFields">
+                  <td></td>
+                  <td [attr.colspan]="columnFields.length-1">
+                    {{ log(tableWrapper) }}
+                    <ui-context-provider class="flex" [data]="datum">
+                      <formly-field [field]="tableWrapper" class="dark:bg-slate-800"></formly-field>
+                    </ui-context-provider>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+
+
+            <tr *ngIf="data?.length === 0">
+              <td colspan="100" class="text-center">There is no data to display</td>
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="manualArrangement" class="divide-y divide-zinc-100 bg-white">
+            <tr *ngFor="let chiledField of field.fieldGroup">
+              <td *ngFor="let cloneField of chiledField.fieldGroup"
+                class="py-4 px-3 text-md dark:bg-slate-800 dark:text-white">
+                <formly-field [field]="cloneField"></formly-field>
+              </td>
+            </tr>
+            <tr *ngIf="field.fieldGroup?.length === 0">
+              <td colspan="100" class="text-center">There is no data to display</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

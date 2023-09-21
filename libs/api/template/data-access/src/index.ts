@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-template.input'
+export * from './lib/dto/admin-list-template.input'
+export * from './lib/dto/admin-update-template.input'
+export * from './lib/dto/template.input'
+export * from './lib/dto/user-create-template.input'
+export * from './lib/dto/user-list-template.input'
+export * from './lib/dto/user-update-template.input'
+export * from './lib/dto/user-update-templates.input'
+export * from './lib/models/template.model'
+export * from './lib/api-template-data-access.module'
+
+export * from './lib/api-template-data-access-admin.service'
+export * from './lib/api-template-data-access-public.service'
+export * from './lib/api-template-data-access-user.service'

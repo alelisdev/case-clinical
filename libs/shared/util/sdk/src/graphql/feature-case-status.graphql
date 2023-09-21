@@ -1,0 +1,172 @@
+
+fragment CaseStatusDetails on CaseStatus {
+id
+createdAt
+updatedAt
+name
+orderIndex
+color
+isDefault
+tickerDate
+maxTickerDate
+moveDocs
+dateCreated
+removed
+createdBy
+migSource
+entity
+temp
+
+
+
+
+
+
+legalCases {
+   ...LegalCaseLists
+  }
+}
+
+fragment CaseStatusLists on CaseStatus {
+id
+createdAt
+updatedAt
+name
+orderIndex
+color
+isDefault
+tickerDate
+maxTickerDate
+moveDocs
+dateCreated
+removed
+createdBy
+migSource
+entity
+temp
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCaseStatuses($input: AdminListCaseStatusInput) {
+  items: adminCaseStatuses(input: $input) {
+    ...CaseStatusLists
+  }
+  count: adminCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseStatuses($input: AdminListCaseStatusInput) {
+  count: adminCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseStatus($caseStatusId: String!) {
+  item: adminCaseStatus(caseStatusId: $caseStatusId) {
+    ...CaseStatusDetails
+  }
+}
+mutation AdminCreateCaseStatus($input: AdminCreateCaseStatusInput!) {
+  created: adminCreateCaseStatus(input: $input) {
+    ...CaseStatusDetails
+  }
+}
+mutation AdminUpdateCaseStatus($caseStatusId: String!, $input: AdminUpdateCaseStatusInput!) {
+  updated: adminUpdateCaseStatus(caseStatusId: $caseStatusId, input: $input) {
+    ...CaseStatusDetails
+  }
+}
+mutation AdminDeleteCaseStatus($caseStatusId: String!) {
+  deleted: adminDeleteCaseStatus(caseStatusId: $caseStatusId) {
+    ...CaseStatusDetails
+  }
+}
+
+query UserCaseStatuses($input: UserListCaseStatusInput) {
+  items: userCaseStatuses(input: $input) {
+    ...CaseStatusLists
+  }
+  count: userCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseStatuses($input: UserListCaseStatusInput) {
+  count: userCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCaseStatuses($input: UserListCaseStatusInput) {
+  items: userSelectCaseStatuses(input: $input) {
+    ...CaseStatusDetails
+  }
+}
+
+query UserCaseStatus($caseStatusId: String!) {
+  item: userCaseStatus(caseStatusId: $caseStatusId) {
+    ...CaseStatusDetails
+  }
+}
+
+mutation UserCreateCaseStatus($input: UserCreateCaseStatusInput!) {
+  created: userCreateCaseStatus(input: $input) {
+    ...CaseStatusDetails
+  }
+}
+mutation UserUpdateCaseStatus($caseStatusId: String!, $input: UserUpdateCaseStatusInput!) {
+  updated: userUpdateCaseStatus(caseStatusId: $caseStatusId, input: $input) {
+    ...CaseStatusDetails
+  }
+}
+
+mutation UserUpdateCaseStatuses($input: UserUpdateCaseStatusesInput!) {
+  updated: userUpdateCaseStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseStatus($caseStatusId: String!) {
+  deleted: userDeleteCaseStatus(caseStatusId: $caseStatusId) {
+    ...CaseStatusDetails
+  }
+}
+
+query PublicCaseStatuses($input: UserListCaseStatusInput) {
+  items: publicCaseStatuses(input: $input) {
+    ...CaseStatusLists
+  }
+  count: publicCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseStatuses($input: UserListCaseStatusInput) {
+  count: publicCountCaseStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseStatuses($input: UserListCaseStatusInput) {
+  items: publicSelectCaseStatuses(input: $input) {
+    ...CaseStatusDetails
+  }
+}
+
+query PublicCaseStatus($caseStatusId: String!) {
+  item: publicCaseStatus(caseStatusId: $caseStatusId) {
+    ...CaseStatusDetails
+  }
+}

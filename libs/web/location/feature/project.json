@@ -1,0 +1,23 @@
+{
+  "name": "web-location-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/location/feature/src",
+  "prefix": "location",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/location/feature/src/**/*.ts", "libs/web/location/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/location/feature"],
+      "options": {
+        "jestConfig": "libs/web/location/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

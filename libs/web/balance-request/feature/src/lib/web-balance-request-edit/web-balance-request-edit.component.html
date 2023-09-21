@@ -1,0 +1,38 @@
+
+<ng-container *ngIf="vm$ | async as vm" class="absolute inset-0 flex flex-col overflow-y-hidden">
+  <ng-template #controlsTemplate>
+    <div class="space-x-3 px-6">
+      <ui-button *transloco="let t" [label]="t('discard')" variant="white" (click)="handleDiscardClick($event)"></ui-button>
+    </div>
+  </ng-template>
+
+  <ng-template #headerTemplate >
+    <ui-card-header *transloco="let t" [title]="t('edit_balanceRequest')" [controlsTemplate]="controlsTemplate"></ui-card-header>
+  </ng-template>
+
+  <ng-template #footerTemplate>
+    <div class="flex items-center justify-end pb-6 pt-3 dark:bg-transparent">
+      <ng-container></ng-container>
+    </div>
+  </ng-template>
+
+  <ui-panel
+    [headerTemplate]="headerTemplate"
+    [footerTemplate]="footerTemplate"
+    [disableHeaderPadding]="true"
+    [disableBodyPadding]="true"
+    [disableFooterPadding]="true"
+    class="absolute inset-0 overflow-y-auto p-2 md:p-4"
+  >
+    <div class="px-6 py-4">
+      <ui-formly-json-form
+        [formName]="'balanceRequest_edit'"
+        [showSubmitButton]="true"
+        [formData]="formData"
+        [componentStore]="this.store"
+        [model]="vm.item"
+        (formIsReady)="formIsReady()"
+      ></ui-formly-json-form>
+    </div>
+  </ui-panel>
+</ng-container>

@@ -1,0 +1,148 @@
+
+fragment PaymentTypeDetails on PaymentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    ...PaymentLists
+  }
+}
+
+fragment PaymentTypeLists on PaymentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPaymentTypes($input: AdminListPaymentTypeInput) {
+  items: adminPaymentTypes(input: $input) {
+    ...PaymentTypeLists
+  }
+  count: adminCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPaymentTypes($input: AdminListPaymentTypeInput) {
+  count: adminCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPaymentType($paymentTypeId: String!) {
+  item: adminPaymentType(paymentTypeId: $paymentTypeId) {
+    ...PaymentTypeDetails
+  }
+}
+mutation AdminCreatePaymentType($input: AdminCreatePaymentTypeInput!) {
+  created: adminCreatePaymentType(input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+mutation AdminUpdatePaymentType($paymentTypeId: String!, $input: AdminUpdatePaymentTypeInput!) {
+  updated: adminUpdatePaymentType(paymentTypeId: $paymentTypeId, input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+mutation AdminDeletePaymentType($paymentTypeId: String!) {
+  deleted: adminDeletePaymentType(paymentTypeId: $paymentTypeId) {
+    ...PaymentTypeDetails
+  }
+}
+
+query UserPaymentTypes($input: UserListPaymentTypeInput) {
+  items: userPaymentTypes(input: $input) {
+    ...PaymentTypeLists
+  }
+  count: userCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPaymentTypes($input: UserListPaymentTypeInput) {
+  count: userCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPaymentTypes($input: UserListPaymentTypeInput) {
+  items: userSelectPaymentTypes(input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+
+query UserPaymentType($paymentTypeId: String!) {
+  item: userPaymentType(paymentTypeId: $paymentTypeId) {
+    ...PaymentTypeDetails
+  }
+}
+
+mutation UserCreatePaymentType($input: UserCreatePaymentTypeInput!) {
+  created: userCreatePaymentType(input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+mutation UserUpdatePaymentType($paymentTypeId: String!, $input: UserUpdatePaymentTypeInput!) {
+  updated: userUpdatePaymentType(paymentTypeId: $paymentTypeId, input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+
+mutation UserUpdatePaymentTypes($input: UserUpdatePaymentTypesInput!) {
+  updated: userUpdatePaymentTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePaymentType($paymentTypeId: String!) {
+  deleted: userDeletePaymentType(paymentTypeId: $paymentTypeId) {
+    ...PaymentTypeDetails
+  }
+}
+
+query PublicPaymentTypes($input: UserListPaymentTypeInput) {
+  items: publicPaymentTypes(input: $input) {
+    ...PaymentTypeLists
+  }
+  count: publicCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPaymentTypes($input: UserListPaymentTypeInput) {
+  count: publicCountPaymentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPaymentTypes($input: UserListPaymentTypeInput) {
+  items: publicSelectPaymentTypes(input: $input) {
+    ...PaymentTypeDetails
+  }
+}
+
+query PublicPaymentType($paymentTypeId: String!) {
+  item: publicPaymentType(paymentTypeId: $paymentTypeId) {
+    ...PaymentTypeDetails
+  }
+}

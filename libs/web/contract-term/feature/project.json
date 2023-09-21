@@ -1,0 +1,26 @@
+{
+  "name": "web-contract-term-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/contract-term/feature/src",
+  "prefix": "contract-term",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/contract-term/feature/src/**/*.ts",
+          "libs/web/contract-term/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/contract-term/feature"],
+      "options": {
+        "jestConfig": "libs/web/contract-term/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

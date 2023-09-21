@@ -1,0 +1,388 @@
+fragment NotificationDetails on Notification {
+  id
+  createdAt
+  updatedAt
+  name
+  title
+  description
+  type
+  icon
+  image
+  link
+  useRouter
+  time
+  read
+  userId
+
+  appointment {
+    id
+    createdAt
+    updatedAt
+    name
+    appointmentDateAndTime
+    locationId
+    checkedIn
+    checkedInDateTime
+    medicalReportId
+    billId
+    imagingId
+    duration
+    patientId
+    clinicalProviderId
+    legalCaseId
+    appointmentStatusId
+    notes
+    recurringEventId
+    isFirstInstance
+    description
+    start
+    end
+    allDay
+    recurrence
+    finalVisitApproved
+    visitKindId
+    location {
+      id
+      name
+      latitude
+      longitude
+    }
+    visitKind {
+      id
+      name
+    }
+    medicalReport {
+      id
+      name
+    }
+    bill {
+      id
+      name
+    }
+    imaging {
+      id
+      name
+    }
+    patient {
+      id
+      name
+      primaryAddressCity
+      primaryAddressStateOrProvince
+      primaryEmailAddress
+      primaryPhoneNumber
+      mobileNumber
+      users {
+        avatarUrl
+      }
+      gender {
+        id
+        name
+      }
+    }
+    clinicalProvider {
+      id
+      createdAt
+      updatedAt
+      name
+      firstName
+      lastName
+      phoneNumber
+      emailAddress
+      profilePictureId
+      compressProfilePictureId
+      clinicalProviderSpecialties {
+        id
+        name
+        specialtyId
+        specialty {
+          id
+          name
+        }
+      }
+      profileImage {
+        ...DocumentOverview
+      }
+
+      clinicalProviderLocations {
+        id
+        createdAt
+        updatedAt
+        name
+        locationId
+        location {
+          id
+          name
+        }
+      }
+    }
+    legalCase {
+      id
+      name
+      caseStatusDate
+      caseStatus {
+        id
+        name
+        tickerDate
+      }
+    }
+    appointmentStatus {
+      id
+      name
+    }
+
+    claimProcedures {
+      id
+      name
+    }
+
+    caseProcedures {
+      id
+      name
+    }
+  }
+}
+
+fragment NovuNotificationDetails on NovuNotification {
+  id
+  createdAt
+  updatedAt
+  isAdmin
+  name
+  description
+  read
+  when
+  tag
+  redirectLink
+  appointment {
+    id
+    createdAt
+    updatedAt
+    name
+    appointmentDateAndTime
+    locationId
+    checkedIn
+    checkedInDateTime
+    medicalReportId
+    billId
+    imagingId
+    duration
+    patientId
+    clinicalProviderId
+    legalCaseId
+    appointmentStatusId
+    notes
+    recurringEventId
+    isFirstInstance
+    description
+    start
+    end
+    allDay
+    recurrence
+    finalVisitApproved
+    visitKindId
+    location {
+      id
+      name
+      latitude
+      longitude
+    }
+    visitKind {
+      id
+      name
+    }
+    medicalReport {
+      id
+      name
+    }
+    bill {
+      id
+      name
+    }
+    imaging {
+      id
+      name
+    }
+    patient {
+      id
+      name
+      primaryAddressCity
+      primaryAddressStateOrProvince
+      primaryEmailAddress
+      primaryPhoneNumber
+      mobileNumber
+      users {
+        avatarUrl
+      }
+      gender {
+        id
+        name
+      }
+    }
+    clinicalProvider {
+      id
+      createdAt
+      updatedAt
+      name
+      firstName
+      lastName
+      phoneNumber
+      emailAddress
+      profilePictureId
+      compressProfilePictureId
+      clinicalProviderSpecialties {
+        id
+        name
+        specialtyId
+        specialty {
+          id
+          name
+        }
+      }
+      profileImage {
+        ...DocumentOverview
+      }
+
+      clinicalProviderLocations {
+        id
+        createdAt
+        updatedAt
+        name
+        locationId
+        location {
+          id
+          name
+        }
+      }
+    }
+    legalCase {
+      id
+      name
+      caseStatusDate
+      caseStatus {
+        id
+        name
+        tickerDate
+      }
+    }
+    appointmentStatus {
+      id
+      name
+    }
+
+    claimProcedures {
+      id
+      name
+    }
+
+    caseProcedures {
+      id
+      name
+    }
+  }
+}
+
+query userNovuNotifications($input: UserListNovuNotificationInput) {
+  notifications: userNovuNotifications(input: $input) {
+    ...NovuNotificationDetails
+  }
+
+  count: userCountNovuNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserCountNovuNotifications($input: UserListNovuNotificationInput) {
+  count: userCountNovuNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+mutation subscribeNovuNotification($notificationId: String!) {
+  users: subscribeNovuNotification(notificationId: $notificationId)
+}
+
+mutation unsubscribeNovuNotification($notificationId: String!) {
+  users: unsubscribeNovuNotification(notificationId: $notificationId)
+}
+
+mutation updateReadStatus($notificationId: String!) {
+  notification: updateReadStatus(notificationId: $notificationId)
+}
+
+query AdminNotifications($input: AdminListNotificationInput) {
+  items: adminNotifications(input: $input) {
+    ...NotificationDetails
+  }
+  count: adminCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminCountNotifications($input: AdminListNotificationInput) {
+  count: adminCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminNotification($notificationId: String!) {
+  item: adminNotification(notificationId: $notificationId) {
+    ...NotificationDetails
+  }
+}
+
+mutation AdminCreateNotification($input: AdminCreateNotificationInput!) {
+  created: adminCreateNotification(input: $input) {
+    ...NotificationDetails
+  }
+}
+
+mutation AdminUpdateNotification($notificationId: String!, $input: AdminUpdateNotificationInput!) {
+  updated: adminUpdateNotification(notificationId: $notificationId, input: $input) {
+    ...NotificationDetails
+  }
+}
+
+mutation AdminDeleteNotification($notificationId: String!) {
+  deleted: adminDeleteNotification(notificationId: $notificationId) {
+    ...NotificationDetails
+  }
+}
+
+query UserNotifications($input: UserListNotificationInput) {
+  items: userNotifications(input: $input) {
+    ...NotificationDetails
+  }
+  count: userCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserCountNotifications($input: UserListNotificationInput) {
+  count: userCountNotifications(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserNotification($notificationId: String!) {
+  item: userNotification(notificationId: $notificationId) {
+    ...NotificationDetails
+  }
+}
+
+mutation UserCreateNotification($input: UserCreateNotificationInput!) {
+  created: userCreateNotification(input: $input) {
+    ...NotificationDetails
+  }
+}
+
+mutation UserUpdateNotification($notificationId: String!, $input: UserUpdateNotificationInput!) {
+  updated: userUpdateNotification(notificationId: $notificationId, input: $input) {
+    ...NotificationDetails
+  }
+}
+
+mutation UserDeleteNotification($notificationId: String!) {
+  deleted: userDeleteNotification(notificationId: $notificationId) {
+    ...NotificationDetails
+  }
+}

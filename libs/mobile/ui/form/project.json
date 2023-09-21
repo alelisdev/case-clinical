@@ -1,0 +1,23 @@
+{
+  "name": "mobile-ui-form",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/ui/form/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/ui/form/src/**/*.ts", "libs/mobile/ui/form/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/ui/form"],
+      "options": {
+        "jestConfig": "libs/mobile/ui/form/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

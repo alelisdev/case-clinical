@@ -1,0 +1,145 @@
+<!-- <ng-container>
+  <ng-container *ngIf="this.document$ | async as files">
+    <ng-container *ngIf="(this.to.multiple===true) || !(files?.length > 0 || uploadedDocuments$?.value?.length > 0)">
+      <div>
+        <ui-button label="Attach Files" variant="Default" (click)="onFileUploadBtnClick(fileUpload)" [disabled]="formControl.disabled"></ui-button>
+      </div>
+      <div class="h-0">
+        <input 
+            class="opacity-0 h-0"
+            type="file"
+            webUiFormFieldFile
+            [formControl]="formControl"
+            [formlyAttributes]="field"
+            [multiple]="to.multiple"
+            (change)="fileChanged($event)"
+            (focus)="onFocus($event)"
+            (click)="preventDef($event,true)"
+            #fileUpload
+        />
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="files.length > 0 && this.to?.multiple===true">
+      <h4 class="mt-5">Currently selected : {{files.length}}</h4>
+    </ng-container>
+
+    <ng-container>
+      <div class="flex flex-wrap gap-2">
+        <div *ngFor="let file of files;let i=index" class="rounded-xl p-2.5 bg-stone-200">
+          <div class="flex flex-row justify-between gap-4">
+            <a
+              webUiFormFieldFile
+              ngDefaultControl
+              class="text-blue-500 no-underline hover:cursor-pointer break-all"
+              [download]="file?.name"
+              [formControl]="formControl"
+              [formlyAttributes]="field"
+              (click)="openDocument(file)"
+              #tooltip="matTooltip"        
+              [matTooltip]="file?.name"
+              >{{ getAbbrName(file?.name) }}
+            </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 min-w-6 hover:cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              (click)="!formControl.disabled ? fileDeleted(file, i) : null"
+            >
+              <path
+                class="text-red-500 w-5 h-5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container>
+    <div class="mt-2 text-sm text-red-600 maxsize">
+      <p *ngIf="(formControl.errors?.maxFileSize) && (!fileUploadConfig.isValidFile)">File size should not be greater than 200 MB.</p>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div class="mt-2 text-sm text-red-600">
+      <p *ngIf="to.sizeLimit && (formControl.errors?.customFileSize) && (!fileUploadConfig.isValidFile)">File size should not be greater than {{getSize(to.sizeLimit)}}.</p>
+    </div>
+  </ng-container>
+
+  <ng-container>
+    <div class="mt-2 text-sm text-red-600">
+      <p *ngIf="to?.allowedExtensions && (formControl.errors?.extensionType) && (!fileUploadConfig.isValidFile)">File type should be one of the following : <span *ngFor="let type of to.allowedExtensions;index as i" >{{type}}<span *ngIf="i!==to.allowedExtensions.length-1" >, </span><span *ngIf="i===to.allowedExtensions.length-1" >.</span></span> </p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="this.uploadedDocuments$ | async as uploadedFiles">
+    <ng-container *ngIf="uploadedFiles.length > 0 && this.to?.multiple===true">
+      <h4 class="mt-5">Uploaded Documents : {{uploadedFiles.length}}</h4>
+    </ng-container>
+
+    <ng-container>
+      <div class="flex flex-wrap gap-2" >
+          <div *ngFor="let uploadedFile of uploadedFiles;let i=index" class="rounded-xl p-2.5 bg-stone-200">
+            <div class="flex flex-row justify-between items-center gap-4 ">
+              <a
+                webUiFormFieldFile
+                ngDefaultControl
+                class="text-blue-500 no-underline hover:cursor-pointer break-all"
+                [download]="uploadedFile?.name"
+                [formControl]="formControl"
+                [formlyAttributes]="field"
+                (click)="openDocument(uploadedFile)"
+                #tooltip="matTooltip"
+                [matTooltip]="uploadedFile?.name"
+                >{{ getAbbrName(uploadedFile?.name) }}
+              </a>
+              <svg *ngIf="!formControl.disabled"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 min-w-6 hover:cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                (click)="!formControl.disabled ? deleteUploaded(uploadedFile,i) : null"
+              >
+                <path
+                  class="text-red-500 w-5 h-5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+      </div>
+    </ng-container> 
+  </ng-container>
+
+  <ng-container #filePreviewTpl>
+      <ui-file-preview #filePreview mode="edit"></ui-file-preview>
+  </ng-container>
+</ng-container> -->
+<div>
+  <input
+      id="image-file-input"
+      class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+      type="file"
+      [multiple]="multiple"
+      [accept]="allowedExtensions"
+      (change)="fileChanged($event)"
+      #imageFileInput>
+  <label
+      class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-400 hover:bg-opacity-20 dark:hover:bg-black dark:hover:bg-opacity-5"
+      for="image-file-input"
+      matRipple>
+      <mat-icon [svgIcon]="'heroicons_outline:paper-clip'"></mat-icon>
+  </label>
+</div>

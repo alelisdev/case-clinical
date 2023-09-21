@@ -1,0 +1,85 @@
+<div class="flex flex-col flex-auto overflow-y-auto p-8">
+<!-- Loading bar -->
+<mat-progress-bar class="absolute inset-x-0 top-0 h-0.5" *ngIf="_mailboxService.labelsLoading$ | async" [mode]="'indeterminate'"></mat-progress-bar>
+    <div class="flex items-center">
+        <!-- Sidebar toggle button -->
+        <div class="md:hidden -ml-2 mr-3">
+            <button
+                mat-icon-button
+                (click)="mailboxComponent.drawer.toggle()">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+        </div>
+        <!-- Title -->
+        <div>
+            <div class="text-3xl font-extrabold tracking-tight">Manage Labels</div>
+            <div class="text-secondary">Create, update and delete labels</div>
+        </div>
+    </div>
+
+    <!-- Labels form -->
+    <form
+        class="mt-8"
+        [formGroup]="labelsForm">
+
+        <!-- New label -->
+        <div
+            class="flex items-center justify-start w-full max-w-80 mt-6"
+            [formGroupName]="'newLabel'">
+            <mat-form-field class="w-full">
+                <mat-label>New Label</mat-label>
+                <input
+                    matInput
+                    [formControlName]="'title'"
+                    maxlength="191"
+                    [placeholder]="'Label title'">
+                <button
+                    mat-icon-button
+                    matSuffix
+                    [disabled]="!labelsForm.get('newLabel').valid || !labelsForm.get('newLabel').dirty || labelsForm.get('newLabel').value.title === ''"
+                    (click)="addLabel()">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <!-- Labels -->
+        <div
+            class="flex flex-col w-full mt-4" style="max-width: 22.5rem !important;"
+            [formArrayName]="'labels'">
+            <!-- Label -->
+            <ng-container *ngFor="let label of labelsForm.get('labels')['controls']">
+                <div class="flex">
+                    <mat-form-field class="w-full">
+                        <input
+                            matInput
+                            maxlength="191"
+                            (keyup)="labelKeyup(label)"
+                            [placeholder]="'Label title'"
+                            [formControl]="label.get('title')">
+                        <button
+                            mat-icon-button
+                            matSuffix
+                            [disabled]="!label.valid || !label.dirty || label.value.title === ''"
+                            (click)="updateLabels(label)">
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <button
+                        mat-icon-button
+                        matSuffix
+                        (click)="deleteLabel(label.get('id').value)">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+    </form>
+</div>

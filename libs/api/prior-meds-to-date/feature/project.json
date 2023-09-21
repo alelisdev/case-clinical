@@ -1,0 +1,26 @@
+{
+  "name": "api-prior-meds-to-date-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/prior-meds-to-date/feature/src",
+  "prefix": "prior-meds-to-date",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/prior-meds-to-date/data-access/src/**/*.ts",
+          "libs/api/prior-meds-to-date/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/prior-meds-to-date/data-access"],
+      "options": {
+        "jestConfig": "libs/api/prior-meds-to-date/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

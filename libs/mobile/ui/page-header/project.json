@@ -1,0 +1,23 @@
+{
+  "name": "mobile-ui-page-header",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/ui/page-header/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/ui/page-header/src/**/*.ts", "libs/mobile/ui/page-header/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/ui/page-header"],
+      "options": {
+        "jestConfig": "libs/mobile/ui/page-header/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<section aria-labelledby="information-title" class="flex w-full py-2 px-2">
+  <div class="bg-white shadow md:rounded-lg md:shadow dark:bg-gray-800 w-full">
+    <div class="px-4 py-3 sm:px-6 flex-row w-full">
+      <div class="flex flex-col sm:flex-row flex-wrap justify-between items-center -mx-1 overflow-hidden px-2 py-2">
+        <h2 id="information-title" class="ml-6 text-lg leading-6  font-medium text-gray-900 dark:text-gray-50 w-auto">{{ title }}</h2>
+        <ui-formly-form-select [formName]="formName"></ui-formly-form-select>
+        <div class="flex flex-row gap-2 w-auto mt-4 sm:mt-0">
+          <ui-button icon="back-arrow" variant="white" routerLink="../../../" label="Back"></ui-button>
+          <ui-button icon="pencil" variant="white" routerLink="../edit" label="Edit" *featureFlag="UpdateFlag"></ui-button>
+          <ui-button icon="trash" variant="danger" (click)="deleteItem()" label="Delete" *featureFlag="DeleteFlag"></ui-button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:px-6 w-full overflow-auto" #overviewHeaderContent>
+      <ng-container #fieldComponent></ng-container>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+fragment CourseDetails on Course {
+    id
+    title
+    description
+    duration
+    totalSteps
+    duration
+    slug
+    progress {
+      completed
+      currentStep
+    }
+    category {
+      id
+      title
+      slug
+    }
+    createdAt
+    updatedAt
+}
+
+fragment CourseDetailsWithSteps on Course {
+  id
+  title
+  description
+  duration
+  slug
+  totalSteps
+  duration
+  progress {
+    courseProgressId
+    completed
+    currentStep
+  }
+  category {
+    id
+    title
+    slug
+  }
+  createdAt
+  updatedAt
+  steps {
+    id
+    order
+    title
+    subtitle
+    content
+  }
+}
+
+mutation UserCreateCourse($input: UserCreateCourseInput! ) {
+  created: userCreateCourse(input: $input) {
+    ...CourseDetails
+  }
+}
+
+mutation UserUpdateCourse($courseId: String!, $input: UserUpdateCourseInput!) {
+  updated: userUpdateCourse(courseId: $courseId, input: $input) {
+    ...CourseDetails
+  }
+}
+
+mutation UserDeleteCourse($courseId: String!) {
+  deleted: userDeleteCourse(courseId: $courseId) {
+    ...CourseDetails
+  }
+}
+
+query UserCourses($input: UserListCourseInput! ) {
+  items: userCourses(input: $input) {
+    ...CourseDetails
+  }
+  count: userCountCourses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserCourse($courseId: String!) {
+  course: userCourse(courseId: $courseId) {
+     ...CourseDetailsWithSteps
+  }
+}

@@ -1,0 +1,148 @@
+
+fragment BankDetails on Bank {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+   ...PaymentLists
+  }
+}
+
+fragment BankLists on Bank {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminBanks($input: AdminListBankInput) {
+  items: adminBanks(input: $input) {
+    ...BankLists
+  }
+  count: adminCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountBanks($input: AdminListBankInput) {
+  count: adminCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminBank($bankId: String!) {
+  item: adminBank(bankId: $bankId) {
+    ...BankDetails
+  }
+}
+mutation AdminCreateBank($input: AdminCreateBankInput!) {
+  created: adminCreateBank(input: $input) {
+    ...BankDetails
+  }
+}
+mutation AdminUpdateBank($bankId: String!, $input: AdminUpdateBankInput!) {
+  updated: adminUpdateBank(bankId: $bankId, input: $input) {
+    ...BankDetails
+  }
+}
+mutation AdminDeleteBank($bankId: String!) {
+  deleted: adminDeleteBank(bankId: $bankId) {
+    ...BankDetails
+  }
+}
+
+query UserBanks($input: UserListBankInput) {
+  items: userBanks(input: $input) {
+    ...BankLists
+  }
+  count: userCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountBanks($input: UserListBankInput) {
+  count: userCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectBanks($input: UserListBankInput) {
+  items: userSelectBanks(input: $input) {
+    ...BankDetails
+  }
+}
+
+query UserBank($bankId: String!) {
+  item: userBank(bankId: $bankId) {
+    ...BankDetails
+  }
+}
+
+mutation UserCreateBank($input: UserCreateBankInput!) {
+  created: userCreateBank(input: $input) {
+    ...BankDetails
+  }
+}
+mutation UserUpdateBank($bankId: String!, $input: UserUpdateBankInput!) {
+  updated: userUpdateBank(bankId: $bankId, input: $input) {
+    ...BankDetails
+  }
+}
+
+mutation UserUpdateBanks($input: UserUpdateBanksInput!) {
+  updated: userUpdateBanks(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteBank($bankId: String!) {
+  deleted: userDeleteBank(bankId: $bankId) {
+    ...BankDetails
+  }
+}
+
+query PublicBanks($input: UserListBankInput) {
+  items: publicBanks(input: $input) {
+    ...BankLists
+  }
+  count: publicCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountBanks($input: UserListBankInput) {
+  count: publicCountBanks(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectBanks($input: UserListBankInput) {
+  items: publicSelectBanks(input: $input) {
+    ...BankDetails
+  }
+}
+
+query PublicBank($bankId: String!) {
+  item: publicBank(bankId: $bankId) {
+    ...BankDetails
+  }
+}

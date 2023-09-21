@@ -1,0 +1,23 @@
+{
+  "name": "api-claim-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/claim/feature/src",
+  "prefix": "claim",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/claim/data-access/src/**/*.ts", "libs/api/claim/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/claim/data-access"],
+      "options": {
+        "jestConfig": "libs/api/claim/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

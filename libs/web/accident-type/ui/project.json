@@ -1,0 +1,23 @@
+{
+  "name": "web-accident-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/accident-type/ui/src",
+  "prefix": "accident-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/accident-type/ui/src/**/*.ts", "libs/web/accident-type/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/accident-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/accident-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

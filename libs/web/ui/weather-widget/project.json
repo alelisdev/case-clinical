@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-weather-widget",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/weather-widget/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/weather-widget/src/**/*.ts", "libs/web/ui/weather-widget/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/weather-widget"],
+      "options": {
+        "jestConfig": "libs/web/ui/weather-widget/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

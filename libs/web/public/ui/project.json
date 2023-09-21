@@ -1,0 +1,23 @@
+{
+  "name": "web-public-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/public/ui/src",
+  "prefix": "marketplace",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/public/ui/src/**/*.ts", "libs/web/public/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/public/ui"],
+      "options": {
+        "jestConfig": "libs/web/public/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

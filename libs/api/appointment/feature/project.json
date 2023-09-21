@@ -1,0 +1,22 @@
+{
+  "name": "api-appointment-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/appointment/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/appointment/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/appointment/feature"],
+      "options": {
+        "jestConfig": "libs/api/appointment/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "web-motor-vehicle-accident-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/motor-vehicle-accident/feature/src",
+  "prefix": "motor-vehicle-accident",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/motor-vehicle-accident/feature/src/**/*.ts",
+          "libs/web/motor-vehicle-accident/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/motor-vehicle-accident/feature"],
+      "options": {
+        "jestConfig": "libs/web/motor-vehicle-accident/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

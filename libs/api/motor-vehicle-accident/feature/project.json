@@ -1,0 +1,26 @@
+{
+  "name": "api-motor-vehicle-accident-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/motor-vehicle-accident/feature/src",
+  "prefix": "motor-vehicle-accident",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/motor-vehicle-accident/data-access/src/**/*.ts",
+          "libs/api/motor-vehicle-accident/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/motor-vehicle-accident/data-access"],
+      "options": {
+        "jestConfig": "libs/api/motor-vehicle-accident/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

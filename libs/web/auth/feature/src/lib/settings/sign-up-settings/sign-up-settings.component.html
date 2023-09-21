@@ -1,0 +1,84 @@
+<div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0">
+  <div
+    class="flex items-center justify-center w-full sm:w-auto md:h-full md:w-full py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card">
+    <div class="sm:w-full mx-auto sm:mx-0">
+      <!-- Logo -->
+      <!-- <div class="w-40 text-center mx-auto">
+        <img src="assets/images/logo/tenant_logo.png" />
+      </div> -->
+      <!-- Title -->
+      <div class="mt-8 mb-8 px-4 text-4xl text-center font-extrabold tracking-tight leading-tight">Sign Up Settings</div>
+      <mat-horizontal-stepper [linear]="true" #horizontalStepper class="hidden md:block dark:bg-gray-900">
+        <mat-step *ngFor="let panel of panels" #horizontalStepperStep1>
+          <div class="flex flex-col items-center">
+            <ng-template matStepLabel>{{ panel.title }}</ng-template>
+            <ng-container [ngSwitch]="panel.id">
+              <ng-container *ngSwitchCase="'account'">
+                <settings-account></settings-account>
+              </ng-container>
+              <ng-container *ngSwitchCase="'security'">
+                <settings-security></settings-security>
+              </ng-container>
+              <!-- Plan & Billing -->
+              <ng-container *ngSwitchCase="'plan-billing'">
+                <settings-plan-billing></settings-plan-billing>
+              </ng-container>
+              <!-- Notifications -->
+              <ng-container *ngSwitchCase="'notifications'">
+                <settings-notifications></settings-notifications>
+              </ng-container>
+              <!-- Team -->
+              <ng-container *ngSwitchCase="'feature'">
+                <settings-feature></settings-feature>
+              </ng-container>
+              <ng-container *ngSwitchCase="'team'">
+                <settings-team></settings-team>
+              </ng-container>
+              <ng-container *ngSwitchCase="'role'">
+                <settings-role></settings-role>
+              </ng-container>
+              <ng-container *ngSwitchCase="'tenant'">
+                <settings-tenant></settings-tenant>
+              </ng-container>
+            </ng-container>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+      <mat-vertical-stepper [linear]="true" #verticalStepper class="md:hidden rounded dark:bg-gray-900">
+        <mat-step *ngFor="let panel of panels; let i = index" #horizontalStepperStep1>
+          <ng-template matStepLabel>{{ panel.title }}</ng-template>
+          <ng-container [ngSwitch]="panel.id" class="dark:bg-gray-900">
+            <ng-container *ngSwitchCase="'account'">
+              <settings-account></settings-account>
+            </ng-container>
+            <ng-container *ngSwitchCase="'security'">
+              <settings-security></settings-security>
+            </ng-container>
+            <!-- Plan & Billing -->
+            <ng-container *ngSwitchCase="'plan-billing'">
+              <settings-plan-billing></settings-plan-billing>
+            </ng-container>
+            <!-- Notifications -->
+            <ng-container *ngSwitchCase="'notifications'">
+              <settings-notifications></settings-notifications>
+            </ng-container>
+            <!-- Team -->
+            <ng-container *ngSwitchCase="'feature'">
+              <settings-feature></settings-feature>
+            </ng-container>
+            <ng-container *ngSwitchCase="'team'">
+              <settings-team></settings-team>
+            </ng-container>
+            <ng-container *ngSwitchCase="'role'">
+              <settings-role></settings-role>
+            </ng-container>
+            <ng-container *ngSwitchCase="'tenant'">
+              <settings-tenant></settings-tenant>
+            </ng-container>
+          </ng-container>
+        </mat-step>
+      </mat-vertical-stepper>
+    </div>
+  </div>
+</div>

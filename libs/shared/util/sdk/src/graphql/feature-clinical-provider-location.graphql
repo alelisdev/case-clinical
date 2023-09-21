@@ -1,0 +1,297 @@
+fragment ClinicalProviderLocationDetails on ClinicalProviderLocation {
+  id
+  createdAt
+  updatedAt
+  name
+  clinicalProviderId
+  locationId
+  clinicalProvider {
+    id
+    name
+    bio
+    profilePictureId
+    phoneNumber
+    emailAddress
+    vendor {
+      id
+      name
+    }
+    educations {
+      id
+      name
+      school
+      degree
+      from
+      to
+    }
+
+    awards {
+      id
+      name
+      school
+      note
+      awardedAt
+    }
+
+    experiences {
+      id
+      name
+      workplace
+      from
+      to
+    }
+
+    clinicalProviderLocations {
+      id
+      name
+      location {
+        id
+        name
+        latitude
+        longitude
+        officePhone
+        locationImages {
+          id
+          name
+        }
+      }
+
+      clinicalProviderLocationAvailabilities {
+        id
+        name
+        day
+        startTime
+        endTime
+      }
+    }
+
+    services {
+      id
+      name
+      service {
+        id
+        name
+      }
+    }
+
+    vendor {
+      id
+      name
+    }
+
+    favoriteProviders {
+      id
+      name
+    }
+
+    clinicalProviderSpecialties {
+      ...ClinicalProviderSpecialtyLists
+    }
+
+    clinicalProviderTags {
+      id
+      name
+      tag {
+        id
+        name
+      }
+    }
+  }
+  locationId
+  location {
+    id
+    name
+    latitude
+    longitude
+    locationImages {
+      id
+      name
+    }
+  }
+
+  clinicalProviderLocationAvailabilities {
+    id
+    name
+  }
+}
+
+fragment ClinicalProviderLocationLists on ClinicalProviderLocation {
+  id
+  createdAt
+  updatedAt
+  name
+  clinicalProviderId
+  locationId
+  distance
+  
+  clinicalProvider {
+    id
+    name
+    profilePictureId
+    phoneNumber
+    emailAddress
+    services {
+      id
+      name
+      service {
+        id
+        name
+      }
+    }
+
+    vendor {
+      id
+      name
+    }
+
+    favoriteProviders {
+      id
+      name
+    }
+
+    clinicalProviderSpecialties {
+      ...ClinicalProviderSpecialtyLists
+    }
+
+    clinicalProviderTags {
+      id
+      name
+      tag {
+        id
+        name
+      }
+    }
+  }
+  locationId
+  location {
+    id
+    name
+    latitude
+    longitude
+    locationImages {
+      id
+      name
+    }
+  }
+
+  clinicalProviderLocationAvailabilities {
+    id
+    name
+  }
+}
+
+query AdminClinicalProviderLocations($input: AdminListClinicalProviderLocationInput) {
+  items: adminClinicalProviderLocations(input: $input) {
+    ...ClinicalProviderLocationLists
+  }
+  count: adminCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviderLocations($input: AdminListClinicalProviderLocationInput) {
+  count: adminCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminClinicalProviderLocation($clinicalProviderLocationId: String!) {
+  item: adminClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+mutation AdminCreateClinicalProviderLocation($input: AdminCreateClinicalProviderLocationInput!) {
+  created: adminCreateClinicalProviderLocation(input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+mutation AdminUpdateClinicalProviderLocation(
+  $clinicalProviderLocationId: String!
+  $input: AdminUpdateClinicalProviderLocationInput!
+) {
+  updated: adminUpdateClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId, input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+mutation AdminDeleteClinicalProviderLocation($clinicalProviderLocationId: String!) {
+  deleted: adminDeleteClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+query UserClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  items: userClinicalProviderLocations(input: $input) {
+    ...ClinicalProviderLocationLists
+  }
+  count: userCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  count: userCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  items: userSelectClinicalProviderLocations(input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+query UserClinicalProviderLocation($clinicalProviderLocationId: String!) {
+  item: userClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+mutation UserCreateClinicalProviderLocation($input: UserCreateClinicalProviderLocationInput!) {
+  created: userCreateClinicalProviderLocation(input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+mutation UserUpdateClinicalProviderLocation(
+  $clinicalProviderLocationId: String!
+  $input: UserUpdateClinicalProviderLocationInput!
+) {
+  updated: userUpdateClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId, input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+mutation UserUpdateClinicalProviderLocations($input: UserUpdateClinicalProviderLocationsInput!) {
+  updated: userUpdateClinicalProviderLocations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProviderLocation($clinicalProviderLocationId: String!) {
+  deleted: userDeleteClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+query PublicClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  items: publicClinicalProviderLocations(input: $input) {
+    ...ClinicalProviderLocationLists
+  }
+  count: publicCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  count: publicCountClinicalProviderLocations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviderLocations($input: UserListClinicalProviderLocationInput) {
+  items: publicSelectClinicalProviderLocations(input: $input) {
+    ...ClinicalProviderLocationDetails
+  }
+}
+
+query PublicClinicalProviderLocation($clinicalProviderLocationId: String!) {
+  item: publicClinicalProviderLocation(clinicalProviderLocationId: $clinicalProviderLocationId) {
+    ...ClinicalProviderLocationDetails
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-search",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/search/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/search/src/**/*.ts", "libs/web/ui/search/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/search"],
+      "options": {
+        "jestConfig": "libs/web/ui/search/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

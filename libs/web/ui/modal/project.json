@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-modal",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/modal/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/modal/src/**/*.ts", "libs/web/ui/modal/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/modal"],
+      "options": {
+        "jestConfig": "libs/web/ui/modal/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

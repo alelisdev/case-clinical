@@ -1,0 +1,26 @@
+{
+  "name": "web-calendar-weekday-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/calendar-weekday/feature/src",
+  "prefix": "calendar-weekday",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/calendar-weekday/feature/src/**/*.ts",
+          "libs/web/calendar-weekday/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/calendar-weekday/feature"],
+      "options": {
+        "jestConfig": "libs/web/calendar-weekday/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

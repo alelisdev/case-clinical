@@ -1,0 +1,307 @@
+[
+  {
+    "wrappers": ["card"],
+    "templateOptions": { "title": "Functional Neurological Symptoms", "light": false, "hideHeader": false },
+    "className": "w-full",
+    "fieldGroup": [
+      {
+        "wrappers": ["vertical"],
+        "templateOptions": {
+          "divider": false,
+          "showNoDataLabel": false,
+          "backgroundImage": { "opacity": 0, "size": "cover", "position": "center", "image": null }
+        },
+        "className": "w-full",
+        "fieldGroup": [
+          {
+            "key": "hoursOfSleepAtNightBeforeTheAccident",
+            "type": "integer",
+            "templateOptions": {
+              "label": "Hours of sleep at night BEFORE the Accident",
+              "readonly": false,
+              "hideLabel": false,
+              "compact": false
+            },
+            "className": "w-full sm:w-1/2 px-1",
+            "selected": false
+          },
+          {
+            "key": "hoursOfSleepAtNightAfterTheAccident",
+            "type": "integer",
+            "templateOptions": {
+              "label": "Hours of sleep at night AFTER the Accident",
+              "readonly": false,
+              "hideLabel": false,
+              "compact": false
+            },
+            "className": "w-full sm:w-1/2 px-1",
+            "selected": false
+          }
+        ],
+        "selected": false
+      },
+      {
+        "wrappers": ["vertical"],
+        "templateOptions": {},
+        "className": "w-full",
+        "fieldGroup": [
+          {
+            "key": "tbiCheckList",
+            "type": "multicheckbox",
+            "templateOptions": {
+              "label": "TBI",
+              "options": [
+                { "label": "Headache", "value": "Headache" },
+                { "label": "Nausea", "value": "Nausea" },
+                { "label": "Vomiting", "value": "Vomiting" },
+                { "label": "Balance Problems", "value": "Balance Problems" },
+                { "label": "Dizziness", "value": "Dizziness" },
+                { "label": "Fatigue", "value": "Fatigue" },
+                { "label": "Trouble Falling Asleep", "value": "Trouble Falling Asleep" },
+                { "label": "Excessive Sleep", "value": "Excessive Sleep" },
+                { "label": "Loss of Sleep", "value": "Loss of Sleep" },
+                { "label": "Drowsiness", "value": "Drowsiness" },
+                { "label": "Light Sensitivity", "value": "Light Sensitivity" },
+                { "label": "Noise Sensitivity", "value": "Noise Sensitivity" },
+                { "label": "Irritability", "value": "Irritability" },
+                { "label": "Sadness", "value": "Sadness" },
+                { "label": "Nervousness", "value": "Nervousness" },
+                { "label": "More Emotional", "value": "More Emotional" },
+                { "label": "Depressed", "value": "Depressed" },
+                { "label": "Numbness", "value": "Numbness" },
+                { "label": "Feeling \"Slow\"", "value": "Feeling \"Slow\"" },
+                { "label": "Feeling \"Foggy\"", "value": "Feeling \"Foggy\"" },
+                { "label": "Difficulty Concentrating", "value": "Difficulty Concentrating" },
+                { "label": "Difficulty Remembering", "value": "Difficulty Remembering" },
+                { "label": "Confusion", "value": "Confusion" },
+                { "label": "Visual Problems", "value": "Visual Problems" },
+                { "label": "Fuzzy / Double Vision", "value": "Fuzzy / Double Vision" },
+                { "label": "Sees Stars", "value": "Sees Stars" },
+                { "label": "Black Spots", "value": "Black Spots" },
+                { "label": "Other", "value": "Other" }
+              ],
+              "hideLabel": false,
+              "compact": false
+            },
+            "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+            "selected": false
+          },
+          {
+            "key": "otherTBI",
+            "type": "input",
+            "templateOptions": {
+              "label": "Other TBI Symptoms",
+              "readonly": false,
+              "hideLabel": false,
+              "compact": false,
+              "isBankNumber": false,
+              "debounce": 100
+            },
+            "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+            "selected": false
+          }
+        ]
+      }
+    ],
+    "selected": false
+  },
+  {
+    "wrappers": ["card"],
+    "templateOptions": { "title": "Audiological Symptoms", "light": false, "hideHeader": false },
+    "className": "w-full",
+    "fieldGroup": [
+      {
+        "key": "audiological",
+        "type": "multicheckbox",
+        "templateOptions": {
+          "label": "Symptoms",
+          "options": [
+            { "label": "Ringing In Ears", "value": "Ringing In Ears" },
+            { "label": "Difficulty Hearing", "value": "Difficulty Hearing" },
+            { "label": "Hearing Loss", "value": "Hearing Loss" }
+          ],
+          "hideLabel": false,
+          "compact": false
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      },
+      {
+        "key": "multicheck",
+        "type": "multicheckbox",
+        "templateOptions": {
+          "label": "Category",
+          "options": [
+            { "label": "Left", "value": "Left" },
+            { "label": "Right", "value": "Right" },
+            { "label": "Both", "value": "Both" }
+          ],
+          "hideLabel": false,
+          "compact": false
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      },
+      {
+        "key": "audiologicalSeverity",
+        "type": "integer",
+        "templateOptions": {
+          "label": "Audiological Severity",
+          "readonly": false,
+          "hideLabel": false,
+          "compact": false
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      }
+    ],
+    "selected": false
+  },
+  {
+    "wrappers": ["card"],
+    "templateOptions": { "title": "Bodily Injury Symptoms", "light": false, "hideHeader": false },
+    "className": "w-full",
+    "fieldGroup": [
+      {
+        "key": "injuries",
+        "isArray": true,
+        "type": "repeat",
+        "wrappers": ["card"],
+        "templateOptions": { "title": "Injuries" },
+        "fieldArray": {
+          "fieldGroup": [
+            {
+              "key": "bodyPart",
+              "type": "dropdown",
+              "templateOptions": {
+                "label": "Body Part",
+                "readonly": false,
+                "hideLabel": false,
+                "compact": false,
+                "labelProp": "title",
+                "valueProp": "id",
+                "autoSelect": false,
+                "items": [
+                  { "id": "Head", "title": "Head" },
+                  { "id": "Eyes", "title": "Eyes" },
+                  { "id": "Neck", "title": "Neck" },
+                  { "id": "Upper Back", "title": "Upper Back" },
+                  { "id": "Mid Back", "title": "Mid Back" },
+                  { "id": "Low Back", "title": "Low Back" },
+                  { "id": "Shoulders", "title": "Shoulders" },
+                  { "id": "Abdominal", "title": "Abdominal" },
+                  { "id": "Ribs", "title": "Ribs" },
+                  { "id": "Elbow", "title": "Elbow" },
+                  { "id": "Wrist", "title": "Wrist" },
+                  { "id": "Hand / Knuckle", "title": "Hand / Knuckle" },
+                  { "id": "Arm", "title": "Arm" },
+                  { "id": "Hip", "title": "Hip" },
+                  { "id": "Leg", "title": "Leg" },
+                  { "id": "Calf", "title": "Calf" },
+                  { "id": "Knee", "title": "Knee" },
+                  { "id": "Ankle", "title": "Ankle" },
+                  { "id": "Foot", "title": "Foot" },
+                  { "id": "Toes", "title": "Toes" }
+                ]
+              },
+              "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+              "selected": false
+            },
+            {
+              "key": "side",
+              "type": "multicheckbox",
+              "templateOptions": {
+                "label": "Side",
+                "options": [
+                  { "label": "Left", "value": "Left" },
+                  { "label": "Right", "value": "Right" },
+                  { "label": "Both", "value": "Both" }
+                ],
+                "hideLabel": false,
+                "compact": false
+              },
+              "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+              "selected": false
+            },
+            {
+              "key": "painLevel",
+              "type": "integer",
+              "templateOptions": {
+                "label": "Pain Level between 0 to 10",
+                "readonly": false,
+                "hideLabel": false,
+                "compact": false,
+                "min": 0
+              },
+              "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+              "selected": false
+            }
+          ]
+        },
+        "className": "w-full",
+        "selected": false
+      },
+      {
+        "key": "numbnessBodyParts",
+        "type": "multi-select",
+        "templateOptions": {
+          "label": "Numbness In These Body Parts",
+          "labelProp": "title",
+          "valueProp": "id",
+          "autoSelect": false,
+          "multiple": true,
+          "isAddBtn": true,
+          "items": []
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      },
+      {
+        "key": "tinglingBodyParts",
+        "type": "multi-select",
+        "templateOptions": {
+          "label": "Tingling In These Body Parts",
+          "labelProp": "title",
+          "valueProp": "id",
+          "autoSelect": false,
+          "multiple": true,
+          "isAddBtn": true,
+          "items": []
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      },
+      {
+        "key": "burningBodyParts",
+        "type": "multi-select",
+        "templateOptions": {
+          "label": "Burning In These Body Parts",
+          "labelProp": "title",
+          "valueProp": "id",
+          "autoSelect": false,
+          "multiple": true,
+          "isAddBtn": true,
+          "items": []
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      },
+      {
+        "key": "weaknessBodyParts",
+        "type": "multi-select",
+        "templateOptions": {
+          "label": "Weakness In These Body Parts",
+          "labelProp": "title",
+          "valueProp": "id",
+          "autoSelect": false,
+          "multiple": true,
+          "isAddBtn": true,
+          "items": []
+        },
+        "className": "w-full sm:w-1/2 md:w-1/4 px-1",
+        "selected": false
+      }
+    ],
+    "selected": false
+  }
+]

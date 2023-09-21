@@ -1,0 +1,60 @@
+
+
+<ng-select
+  [class]="to?.className || 'custom'"
+  [items]="this.items"
+  [placeholder]="to?.placeholder || ''"
+  [bindLabel]="to?.labelProp ?? 'label'"
+  [bindValue]="to?.valueProp ?? 'value'"
+  [multiple]="to.multiple"
+  [virtualScroll]="true"
+  [loading]="loading"
+  [formControl]="formControl"
+  [groupBy]="to.groupBy"
+  [compareWith]="to?.compareWith"
+  (change)="to?.onChange($event)"
+  (search)="changed($event)"
+>
+  <ng-template ng-typetosearch-tmp>
+    <div class="ng-option disabled">Start typing...</div>
+  </ng-template>
+
+  <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+    <button
+      class="cursor-pointer text-gray-500 flex w-full gap-1 p-3 hover:bg-gray-100 hover:text-gray-700 transition duration-200 justify-center items-center text-semibold text-md"
+      type="button"
+      (click)="this.openDialog(createPriorAuthDmeTpl, { priorAuthDme: this.to.defaultValues || {} })"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+      Add {{ searchTerm }}
+    </button>
+  </ng-template>
+  <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
+    <div class="ng-option disabled">Fetching data for "{{ searchTerm }}"</div>
+  </ng-template>
+</ng-select>
+<br />
+
+<ng-template #createPriorAuthDmeTpl let-ref>
+  <div class="flex-grow flex flex-col p-4 gap-2">
+    <div class="text-semibold text-lg">Create Prior Auth Dme</div>
+
+    <ui-prior-auth-dme-form
+      class="flex-grow flex flex-col"
+      (send)="this.to.createPriorAuthDme($event); ref.close()"
+      [priorAuthDme]="ref.data?.priorAuthDme"
+    >
+    </ui-prior-auth-dme-form>
+  </div>
+</ng-template>
+
+

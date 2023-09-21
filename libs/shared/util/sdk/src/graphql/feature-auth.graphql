@@ -1,0 +1,35 @@
+fragment AuthTokenDetails on AuthToken {
+  token
+  features
+  verified
+  signupStatus
+  subscriberId
+}
+
+query me {
+  me {
+    ...UserDetails
+  }
+}
+
+mutation Logout {
+  logout
+}
+
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    ...AuthTokenDetails
+  }
+}
+
+mutation Register($input: RegisterInput!) {
+  register(input: $input) {
+    ...AuthTokenDetails
+  }
+}
+
+mutation Refresh($accessToken: String!) {
+  refresh(accessToken: $accessToken) {
+    ...AuthTokenDetails
+  }
+}

@@ -1,0 +1,154 @@
+
+fragment AwardDetails on Award {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+school
+awardedAt
+note
+clinicalProvider {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment AwardLists on Award {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+school
+awardedAt
+note
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminAwards($input: AdminListAwardInput) {
+  items: adminAwards(input: $input) {
+    ...AwardLists
+  }
+  count: adminCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAwards($input: AdminListAwardInput) {
+  count: adminCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAward($awardId: String!) {
+  item: adminAward(awardId: $awardId) {
+    ...AwardDetails
+  }
+}
+mutation AdminCreateAward($input: AdminCreateAwardInput!) {
+  created: adminCreateAward(input: $input) {
+    ...AwardDetails
+  }
+}
+mutation AdminUpdateAward($awardId: String!, $input: AdminUpdateAwardInput!) {
+  updated: adminUpdateAward(awardId: $awardId, input: $input) {
+    ...AwardDetails
+  }
+}
+mutation AdminDeleteAward($awardId: String!) {
+  deleted: adminDeleteAward(awardId: $awardId) {
+    ...AwardDetails
+  }
+}
+
+query UserAwards($input: UserListAwardInput) {
+  items: userAwards(input: $input) {
+    ...AwardLists
+  }
+  count: userCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAwards($input: UserListAwardInput) {
+  count: userCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAwards($input: UserListAwardInput) {
+  items: userSelectAwards(input: $input) {
+    ...AwardDetails
+  }
+}
+
+query UserAward($awardId: String!) {
+  item: userAward(awardId: $awardId) {
+    ...AwardDetails
+  }
+}
+
+mutation UserCreateAward($input: UserCreateAwardInput!) {
+  created: userCreateAward(input: $input) {
+    ...AwardDetails
+  }
+}
+mutation UserUpdateAward($awardId: String!, $input: UserUpdateAwardInput!) {
+  updated: userUpdateAward(awardId: $awardId, input: $input) {
+    ...AwardDetails
+  }
+}
+
+mutation UserUpdateAwards($input: UserUpdateAwardsInput!) {
+  updated: userUpdateAwards(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAward($awardId: String!) {
+  deleted: userDeleteAward(awardId: $awardId) {
+    ...AwardDetails
+  }
+}
+
+query PublicAwards($input: UserListAwardInput) {
+  items: publicAwards(input: $input) {
+    ...AwardLists
+  }
+  count: publicCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAwards($input: UserListAwardInput) {
+  count: publicCountAwards(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAwards($input: UserListAwardInput) {
+  items: publicSelectAwards(input: $input) {
+    ...AwardDetails
+  }
+}
+
+query PublicAward($awardId: String!) {
+  item: publicAward(awardId: $awardId) {
+    ...AwardDetails
+  }
+}

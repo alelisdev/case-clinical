@@ -1,0 +1,177 @@
+
+
+fragment ProcedureOrTreatmentRequestDetails on ProcedureOrTreatmentRequest {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+facilityVendorId
+facilityContractId
+anesthesiaVendorId
+anesthesiaVendorContractId
+requestingProviderId
+procedureTypeId
+status
+
+
+
+
+
+
+diagnosisCodes {
+    id
+    name
+  }
+
+authorizations {
+    id
+    name
+  }
+}
+
+fragment ProcedureOrTreatmentRequestLists on ProcedureOrTreatmentRequest {
+id
+createdAt
+updatedAt
+name
+patientId
+legalCaseId
+facilityVendorId
+facilityContractId
+anesthesiaVendorId
+anesthesiaVendorContractId
+requestingProviderId
+procedureTypeId
+status
+
+
+
+
+
+
+diagnosisCodes {
+    id
+    name
+  }
+
+
+authorizations {
+    id
+    name
+  }
+
+}
+
+query AdminProcedureOrTreatmentRequests($input: AdminListProcedureOrTreatmentRequestInput) {
+  items: adminProcedureOrTreatmentRequests(input: $input) {
+    ...ProcedureOrTreatmentRequestLists
+  }
+  count: adminCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureOrTreatmentRequests($input: AdminListProcedureOrTreatmentRequestInput) {
+  count: adminCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!) {
+  item: adminProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+mutation AdminCreateProcedureOrTreatmentRequest($input: AdminCreateProcedureOrTreatmentRequestInput!) {
+  created: adminCreateProcedureOrTreatmentRequest(input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+mutation AdminUpdateProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!, $input: AdminUpdateProcedureOrTreatmentRequestInput!) {
+  updated: adminUpdateProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId, input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+mutation AdminDeleteProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!) {
+  deleted: adminDeleteProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  items: userProcedureOrTreatmentRequests(input: $input) {
+    ...ProcedureOrTreatmentRequestLists
+  }
+  count: userCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  count: userCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  items: userSelectProcedureOrTreatmentRequests(input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+query UserProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!) {
+  item: userProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+mutation UserCreateProcedureOrTreatmentRequest($input: UserCreateProcedureOrTreatmentRequestInput!) {
+  created: userCreateProcedureOrTreatmentRequest(input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+mutation UserUpdateProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!, $input: UserUpdateProcedureOrTreatmentRequestInput!) {
+  updated: userUpdateProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId, input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+mutation UserUpdateProcedureOrTreatmentRequests($input: UserUpdateProcedureOrTreatmentRequestsInput!) {
+  updated: userUpdateProcedureOrTreatmentRequests(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!) {
+  deleted: userDeleteProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  items: publicProcedureOrTreatmentRequests(input: $input) {
+    ...ProcedureOrTreatmentRequestLists
+  }
+  count: publicCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  count: publicCountProcedureOrTreatmentRequests(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureOrTreatmentRequests($input: UserListProcedureOrTreatmentRequestInput) {
+  items: publicSelectProcedureOrTreatmentRequests(input: $input) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}
+
+query PublicProcedureOrTreatmentRequest($procedureOrTreatmentRequestId: String!) {
+  item: publicProcedureOrTreatmentRequest(procedureOrTreatmentRequestId: $procedureOrTreatmentRequestId) {
+    ...ProcedureOrTreatmentRequestDetails
+  }
+}

@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-task-item.input'
+export * from './lib/dto/admin-list-task-item.input'
+export * from './lib/dto/admin-update-task-item.input'
+export * from './lib/dto/task-item.input'
+export * from './lib/dto/user-create-task-item.input'
+export * from './lib/dto/user-list-task-item.input'
+export * from './lib/dto/user-update-task-item.input'
+export * from './lib/dto/user-update-task-items.input'
+export * from './lib/models/task-item.model'
+export * from './lib/api-task-item-data-access.module'
+
+export * from './lib/api-task-item-data-access-admin.service'
+export * from './lib/api-task-item-data-access-public.service'
+export * from './lib/api-task-item-data-access-user.service'

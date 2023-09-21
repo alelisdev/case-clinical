@@ -1,0 +1,148 @@
+
+fragment AuthorizationStatusDetails on AuthorizationStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationRequests {
+   ...PriorAuthorizationRequestLists
+  }
+}
+
+fragment AuthorizationStatusLists on AuthorizationStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAuthorizationStatuses($input: AdminListAuthorizationStatusInput) {
+  items: adminAuthorizationStatuses(input: $input) {
+    ...AuthorizationStatusLists
+  }
+  count: adminCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizationStatuses($input: AdminListAuthorizationStatusInput) {
+  count: adminCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorizationStatus($authorizationStatusId: String!) {
+  item: adminAuthorizationStatus(authorizationStatusId: $authorizationStatusId) {
+    ...AuthorizationStatusDetails
+  }
+}
+mutation AdminCreateAuthorizationStatus($input: AdminCreateAuthorizationStatusInput!) {
+  created: adminCreateAuthorizationStatus(input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+mutation AdminUpdateAuthorizationStatus($authorizationStatusId: String!, $input: AdminUpdateAuthorizationStatusInput!) {
+  updated: adminUpdateAuthorizationStatus(authorizationStatusId: $authorizationStatusId, input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+mutation AdminDeleteAuthorizationStatus($authorizationStatusId: String!) {
+  deleted: adminDeleteAuthorizationStatus(authorizationStatusId: $authorizationStatusId) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+query UserAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  items: userAuthorizationStatuses(input: $input) {
+    ...AuthorizationStatusLists
+  }
+  count: userCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  count: userCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  items: userSelectAuthorizationStatuses(input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+query UserAuthorizationStatus($authorizationStatusId: String!) {
+  item: userAuthorizationStatus(authorizationStatusId: $authorizationStatusId) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+mutation UserCreateAuthorizationStatus($input: UserCreateAuthorizationStatusInput!) {
+  created: userCreateAuthorizationStatus(input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+mutation UserUpdateAuthorizationStatus($authorizationStatusId: String!, $input: UserUpdateAuthorizationStatusInput!) {
+  updated: userUpdateAuthorizationStatus(authorizationStatusId: $authorizationStatusId, input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+mutation UserUpdateAuthorizationStatuses($input: UserUpdateAuthorizationStatusesInput!) {
+  updated: userUpdateAuthorizationStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorizationStatus($authorizationStatusId: String!) {
+  deleted: userDeleteAuthorizationStatus(authorizationStatusId: $authorizationStatusId) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+query PublicAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  items: publicAuthorizationStatuses(input: $input) {
+    ...AuthorizationStatusLists
+  }
+  count: publicCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  count: publicCountAuthorizationStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizationStatuses($input: UserListAuthorizationStatusInput) {
+  items: publicSelectAuthorizationStatuses(input: $input) {
+    ...AuthorizationStatusDetails
+  }
+}
+
+query PublicAuthorizationStatus($authorizationStatusId: String!) {
+  item: publicAuthorizationStatus(authorizationStatusId: $authorizationStatusId) {
+    ...AuthorizationStatusDetails
+  }
+}

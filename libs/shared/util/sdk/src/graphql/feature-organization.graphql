@@ -1,0 +1,179 @@
+
+fragment OrganizationDetails on Organization {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+feeSchedules {
+   ...FeeScheduleLists
+  }
+
+facilityFeeSchedules {
+    ...FacilityFeeScheduleLists
+  }
+
+contracts {
+   ...ContractLists
+  }
+
+liensHeld {
+    id
+    name
+  }
+}
+
+fragment OrganizationLists on Organization {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+feeSchedules {
+    id
+    name
+  }
+
+
+facilityFeeSchedules {
+    id
+    name
+  }
+
+
+contracts {
+    id
+    name
+  }
+
+
+liensHeld {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminOrganizations($input: AdminListOrganizationInput) {
+  items: adminOrganizations(input: $input) {
+    ...OrganizationLists
+  }
+  count: adminCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountOrganizations($input: AdminListOrganizationInput) {
+  count: adminCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminOrganization($organizationId: String!) {
+  item: adminOrganization(organizationId: $organizationId) {
+    ...OrganizationDetails
+  }
+}
+mutation AdminCreateOrganization($input: AdminCreateOrganizationInput!) {
+  created: adminCreateOrganization(input: $input) {
+    ...OrganizationDetails
+  }
+}
+mutation AdminUpdateOrganization($organizationId: String!, $input: AdminUpdateOrganizationInput!) {
+  updated: adminUpdateOrganization(organizationId: $organizationId, input: $input) {
+    ...OrganizationDetails
+  }
+}
+mutation AdminDeleteOrganization($organizationId: String!) {
+  deleted: adminDeleteOrganization(organizationId: $organizationId) {
+    ...OrganizationDetails
+  }
+}
+
+query UserOrganizations($input: UserListOrganizationInput) {
+  items: userOrganizations(input: $input) {
+    ...OrganizationLists
+  }
+  count: userCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountOrganizations($input: UserListOrganizationInput) {
+  count: userCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectOrganizations($input: UserListOrganizationInput) {
+  items: userSelectOrganizations(input: $input) {
+    ...OrganizationDetails
+  }
+}
+
+query UserOrganization($organizationId: String!) {
+  item: userOrganization(organizationId: $organizationId) {
+    ...OrganizationDetails
+  }
+}
+
+mutation UserCreateOrganization($input: UserCreateOrganizationInput!) {
+  created: userCreateOrganization(input: $input) {
+    ...OrganizationDetails
+  }
+}
+mutation UserUpdateOrganization($organizationId: String!, $input: UserUpdateOrganizationInput!) {
+  updated: userUpdateOrganization(organizationId: $organizationId, input: $input) {
+    ...OrganizationDetails
+  }
+}
+
+mutation UserUpdateOrganizations($input: UserUpdateOrganizationsInput!) {
+  updated: userUpdateOrganizations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteOrganization($organizationId: String!) {
+  deleted: userDeleteOrganization(organizationId: $organizationId) {
+    ...OrganizationDetails
+  }
+}
+
+query PublicOrganizations($input: UserListOrganizationInput) {
+  items: publicOrganizations(input: $input) {
+    ...OrganizationLists
+  }
+  count: publicCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountOrganizations($input: UserListOrganizationInput) {
+  count: publicCountOrganizations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectOrganizations($input: UserListOrganizationInput) {
+  items: publicSelectOrganizations(input: $input) {
+    ...OrganizationDetails
+  }
+}
+
+query PublicOrganization($organizationId: String!) {
+  item: publicOrganization(organizationId: $organizationId) {
+    ...OrganizationDetails
+  }
+}

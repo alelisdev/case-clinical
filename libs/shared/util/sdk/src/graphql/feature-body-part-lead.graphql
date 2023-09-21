@@ -1,0 +1,158 @@
+
+fragment BodyPartLeadDetails on BodyPartLead {
+id
+createdAt
+updatedAt
+name
+leadId
+bodyPartId
+lead {
+  id
+  name
+}
+bodyPart {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment BodyPartLeadLists on BodyPartLead {
+id
+createdAt
+updatedAt
+name
+leadId
+bodyPartId
+lead {
+    id
+    name
+}
+bodyPart {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminBodyPartLeads($input: AdminListBodyPartLeadInput) {
+  items: adminBodyPartLeads(input: $input) {
+    ...BodyPartLeadLists
+  }
+  count: adminCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountBodyPartLeads($input: AdminListBodyPartLeadInput) {
+  count: adminCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminBodyPartLead($bodyPartLeadId: String!) {
+  item: adminBodyPartLead(bodyPartLeadId: $bodyPartLeadId) {
+    ...BodyPartLeadDetails
+  }
+}
+mutation AdminCreateBodyPartLead($input: AdminCreateBodyPartLeadInput!) {
+  created: adminCreateBodyPartLead(input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+mutation AdminUpdateBodyPartLead($bodyPartLeadId: String!, $input: AdminUpdateBodyPartLeadInput!) {
+  updated: adminUpdateBodyPartLead(bodyPartLeadId: $bodyPartLeadId, input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+mutation AdminDeleteBodyPartLead($bodyPartLeadId: String!) {
+  deleted: adminDeleteBodyPartLead(bodyPartLeadId: $bodyPartLeadId) {
+    ...BodyPartLeadDetails
+  }
+}
+
+query UserBodyPartLeads($input: UserListBodyPartLeadInput) {
+  items: userBodyPartLeads(input: $input) {
+    ...BodyPartLeadLists
+  }
+  count: userCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountBodyPartLeads($input: UserListBodyPartLeadInput) {
+  count: userCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectBodyPartLeads($input: UserListBodyPartLeadInput) {
+  items: userSelectBodyPartLeads(input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+
+query UserBodyPartLead($bodyPartLeadId: String!) {
+  item: userBodyPartLead(bodyPartLeadId: $bodyPartLeadId) {
+    ...BodyPartLeadDetails
+  }
+}
+
+mutation UserCreateBodyPartLead($input: UserCreateBodyPartLeadInput!) {
+  created: userCreateBodyPartLead(input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+mutation UserUpdateBodyPartLead($bodyPartLeadId: String!, $input: UserUpdateBodyPartLeadInput!) {
+  updated: userUpdateBodyPartLead(bodyPartLeadId: $bodyPartLeadId, input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+
+mutation UserUpdateBodyPartLeads($input: UserUpdateBodyPartLeadsInput!) {
+  updated: userUpdateBodyPartLeads(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteBodyPartLead($bodyPartLeadId: String!) {
+  deleted: userDeleteBodyPartLead(bodyPartLeadId: $bodyPartLeadId) {
+    ...BodyPartLeadDetails
+  }
+}
+
+query PublicBodyPartLeads($input: UserListBodyPartLeadInput) {
+  items: publicBodyPartLeads(input: $input) {
+    ...BodyPartLeadLists
+  }
+  count: publicCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountBodyPartLeads($input: UserListBodyPartLeadInput) {
+  count: publicCountBodyPartLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectBodyPartLeads($input: UserListBodyPartLeadInput) {
+  items: publicSelectBodyPartLeads(input: $input) {
+    ...BodyPartLeadDetails
+  }
+}
+
+query PublicBodyPartLead($bodyPartLeadId: String!) {
+  item: publicBodyPartLead(bodyPartLeadId: $bodyPartLeadId) {
+    ...BodyPartLeadDetails
+  }
+}

@@ -1,0 +1,159 @@
+
+fragment AccidentTypeDetails on AccidentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+requiredFields {
+    ...RequiredFieldLists
+  }
+}
+
+fragment AccidentTypeLists on AccidentType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+
+requiredFields {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAccidentTypes($input: AdminListAccidentTypeInput) {
+  items: adminAccidentTypes(input: $input) {
+    ...AccidentTypeLists
+  }
+  count: adminCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAccidentTypes($input: AdminListAccidentTypeInput) {
+  count: adminCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAccidentType($accidentTypeId: String!) {
+  item: adminAccidentType(accidentTypeId: $accidentTypeId) {
+    ...AccidentTypeDetails
+  }
+}
+mutation AdminCreateAccidentType($input: AdminCreateAccidentTypeInput!) {
+  created: adminCreateAccidentType(input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+mutation AdminUpdateAccidentType($accidentTypeId: String!, $input: AdminUpdateAccidentTypeInput!) {
+  updated: adminUpdateAccidentType(accidentTypeId: $accidentTypeId, input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+mutation AdminDeleteAccidentType($accidentTypeId: String!) {
+  deleted: adminDeleteAccidentType(accidentTypeId: $accidentTypeId) {
+    ...AccidentTypeDetails
+  }
+}
+
+query UserAccidentTypes($input: UserListAccidentTypeInput) {
+  items: userAccidentTypes(input: $input) {
+    ...AccidentTypeLists
+  }
+  count: userCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAccidentTypes($input: UserListAccidentTypeInput) {
+  count: userCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAccidentTypes($input: UserListAccidentTypeInput) {
+  items: userSelectAccidentTypes(input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+
+query UserAccidentType($accidentTypeId: String!) {
+  item: userAccidentType(accidentTypeId: $accidentTypeId) {
+    ...AccidentTypeDetails
+  }
+}
+
+mutation UserCreateAccidentType($input: UserCreateAccidentTypeInput!) {
+  created: userCreateAccidentType(input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+mutation UserUpdateAccidentType($accidentTypeId: String!, $input: UserUpdateAccidentTypeInput!) {
+  updated: userUpdateAccidentType(accidentTypeId: $accidentTypeId, input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+
+mutation UserUpdateAccidentTypes($input: UserUpdateAccidentTypesInput!) {
+  updated: userUpdateAccidentTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAccidentType($accidentTypeId: String!) {
+  deleted: userDeleteAccidentType(accidentTypeId: $accidentTypeId) {
+    ...AccidentTypeDetails
+  }
+}
+
+query PublicAccidentTypes($input: UserListAccidentTypeInput) {
+  items: publicAccidentTypes(input: $input) {
+    ...AccidentTypeLists
+  }
+  count: publicCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAccidentTypes($input: UserListAccidentTypeInput) {
+  count: publicCountAccidentTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAccidentTypes($input: UserListAccidentTypeInput) {
+  items: publicSelectAccidentTypes(input: $input) {
+    ...AccidentTypeDetails
+  }
+}
+
+query PublicAccidentType($accidentTypeId: String!) {
+  item: publicAccidentType(accidentTypeId: $accidentTypeId) {
+    ...AccidentTypeDetails
+  }
+}

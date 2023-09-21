@@ -1,0 +1,8 @@
+<div class="flex flex-col flex-auto overflow-hidden" [ngClass]="className">
+    <div *ngIf="!to.condensed && !to.hideHeader" class="flex items-start justify-between">
+        <div class="text-lg font-medium tracking-tight leading-6 truncate">{{ to.title }}{{ to.required ? '*' : '' }}</div>
+    </div>
+    <div class="flex flex-col items-center" [ngClass]="{'mt-2': !to.condensed && !to.hideHeader }">
+      <ng-container #fieldComponent></ng-container>
+    </div>
+</div>

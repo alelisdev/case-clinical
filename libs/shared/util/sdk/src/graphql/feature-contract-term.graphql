@@ -1,0 +1,154 @@
+
+fragment ContractTermDetails on ContractTerm {
+id
+createdAt
+updatedAt
+name
+maxApproved
+numberIncluded
+factor
+contractTermId
+contract {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContractTermLists on ContractTerm {
+id
+createdAt
+updatedAt
+name
+maxApproved
+numberIncluded
+factor
+contractTermId
+contract {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContractTerms($input: AdminListContractTermInput) {
+  items: adminContractTerms(input: $input) {
+    ...ContractTermLists
+  }
+  count: adminCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContractTerms($input: AdminListContractTermInput) {
+  count: adminCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContractTerm($contractTermId: String!) {
+  item: adminContractTerm(contractTermId: $contractTermId) {
+    ...ContractTermDetails
+  }
+}
+mutation AdminCreateContractTerm($input: AdminCreateContractTermInput!) {
+  created: adminCreateContractTerm(input: $input) {
+    ...ContractTermDetails
+  }
+}
+mutation AdminUpdateContractTerm($contractTermId: String!, $input: AdminUpdateContractTermInput!) {
+  updated: adminUpdateContractTerm(contractTermId: $contractTermId, input: $input) {
+    ...ContractTermDetails
+  }
+}
+mutation AdminDeleteContractTerm($contractTermId: String!) {
+  deleted: adminDeleteContractTerm(contractTermId: $contractTermId) {
+    ...ContractTermDetails
+  }
+}
+
+query UserContractTerms($input: UserListContractTermInput) {
+  items: userContractTerms(input: $input) {
+    ...ContractTermLists
+  }
+  count: userCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContractTerms($input: UserListContractTermInput) {
+  count: userCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContractTerms($input: UserListContractTermInput) {
+  items: userSelectContractTerms(input: $input) {
+    ...ContractTermDetails
+  }
+}
+
+query UserContractTerm($contractTermId: String!) {
+  item: userContractTerm(contractTermId: $contractTermId) {
+    ...ContractTermDetails
+  }
+}
+
+mutation UserCreateContractTerm($input: UserCreateContractTermInput!) {
+  created: userCreateContractTerm(input: $input) {
+    ...ContractTermDetails
+  }
+}
+mutation UserUpdateContractTerm($contractTermId: String!, $input: UserUpdateContractTermInput!) {
+  updated: userUpdateContractTerm(contractTermId: $contractTermId, input: $input) {
+    ...ContractTermDetails
+  }
+}
+
+mutation UserUpdateContractTerms($input: UserUpdateContractTermsInput!) {
+  updated: userUpdateContractTerms(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContractTerm($contractTermId: String!) {
+  deleted: userDeleteContractTerm(contractTermId: $contractTermId) {
+    ...ContractTermDetails
+  }
+}
+
+query PublicContractTerms($input: UserListContractTermInput) {
+  items: publicContractTerms(input: $input) {
+    ...ContractTermLists
+  }
+  count: publicCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContractTerms($input: UserListContractTermInput) {
+  count: publicCountContractTerms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContractTerms($input: UserListContractTermInput) {
+  items: publicSelectContractTerms(input: $input) {
+    ...ContractTermDetails
+  }
+}
+
+query PublicContractTerm($contractTermId: String!) {
+  item: publicContractTerm(contractTermId: $contractTermId) {
+    ...ContractTermDetails
+  }
+}

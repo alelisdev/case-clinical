@@ -1,0 +1,17 @@
+{
+  "name": "api-horoscope-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/horoscope/data-access/src",
+  "prefix": "case-clinical",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/horoscope/data-access/**/*.ts", "libs/api/horoscope/data-access/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

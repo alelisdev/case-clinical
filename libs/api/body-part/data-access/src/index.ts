@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-body-part.input'
+export * from './lib/dto/admin-list-body-part.input'
+export * from './lib/dto/admin-update-body-part.input'
+export * from './lib/dto/body-part.input'
+export * from './lib/dto/user-create-body-part.input'
+export * from './lib/dto/user-list-body-part.input'
+export * from './lib/dto/user-update-body-part.input'
+export * from './lib/dto/user-update-body-parts.input'
+export * from './lib/models/body-part.model'
+export * from './lib/api-body-part-data-access.module'
+
+export * from './lib/api-body-part-data-access-admin.service'
+export * from './lib/api-body-part-data-access-public.service'
+export * from './lib/api-body-part-data-access-user.service'

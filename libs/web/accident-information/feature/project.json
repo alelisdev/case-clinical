@@ -1,0 +1,26 @@
+{
+  "name": "web-accident-information-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/accident-information/feature/src",
+  "prefix": "accident-information",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/accident-information/feature/src/**/*.ts",
+          "libs/web/accident-information/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/accident-information/feature"],
+      "options": {
+        "jestConfig": "libs/web/accident-information/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

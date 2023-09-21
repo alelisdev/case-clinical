@@ -1,0 +1,172 @@
+
+fragment FacilityFeeScheduleDetails on FacilityFeeSchedule {
+id
+createdAt
+updatedAt
+name
+organizationId
+specialtyId
+code
+modifier
+description
+medicareFacilityRate
+facilityFee
+baseUnit
+profCf
+organization {
+  id
+  name
+}
+specialty {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment FacilityFeeScheduleLists on FacilityFeeSchedule {
+id
+createdAt
+updatedAt
+name
+organizationId
+specialtyId
+code
+modifier
+description
+medicareFacilityRate
+facilityFee
+baseUnit
+profCf
+organization {
+    id
+    name
+}
+specialty {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminFacilityFeeSchedules($input: AdminListFacilityFeeScheduleInput) {
+  items: adminFacilityFeeSchedules(input: $input) {
+    ...FacilityFeeScheduleLists
+  }
+  count: adminCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFacilityFeeSchedules($input: AdminListFacilityFeeScheduleInput) {
+  count: adminCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFacilityFeeSchedule($facilityFeeScheduleId: String!) {
+  item: adminFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+mutation AdminCreateFacilityFeeSchedule($input: AdminCreateFacilityFeeScheduleInput!) {
+  created: adminCreateFacilityFeeSchedule(input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+mutation AdminUpdateFacilityFeeSchedule($facilityFeeScheduleId: String!, $input: AdminUpdateFacilityFeeScheduleInput!) {
+  updated: adminUpdateFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId, input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+mutation AdminDeleteFacilityFeeSchedule($facilityFeeScheduleId: String!) {
+  deleted: adminDeleteFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+query UserFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  items: userFacilityFeeSchedules(input: $input) {
+    ...FacilityFeeScheduleLists
+  }
+  count: userCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  count: userCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  items: userSelectFacilityFeeSchedules(input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+query UserFacilityFeeSchedule($facilityFeeScheduleId: String!) {
+  item: userFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+mutation UserCreateFacilityFeeSchedule($input: UserCreateFacilityFeeScheduleInput!) {
+  created: userCreateFacilityFeeSchedule(input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+mutation UserUpdateFacilityFeeSchedule($facilityFeeScheduleId: String!, $input: UserUpdateFacilityFeeScheduleInput!) {
+  updated: userUpdateFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId, input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+mutation UserUpdateFacilityFeeSchedules($input: UserUpdateFacilityFeeSchedulesInput!) {
+  updated: userUpdateFacilityFeeSchedules(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteFacilityFeeSchedule($facilityFeeScheduleId: String!) {
+  deleted: userDeleteFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+query PublicFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  items: publicFacilityFeeSchedules(input: $input) {
+    ...FacilityFeeScheduleLists
+  }
+  count: publicCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  count: publicCountFacilityFeeSchedules(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectFacilityFeeSchedules($input: UserListFacilityFeeScheduleInput) {
+  items: publicSelectFacilityFeeSchedules(input: $input) {
+    ...FacilityFeeScheduleDetails
+  }
+}
+
+query PublicFacilityFeeSchedule($facilityFeeScheduleId: String!) {
+  item: publicFacilityFeeSchedule(facilityFeeScheduleId: $facilityFeeScheduleId) {
+    ...FacilityFeeScheduleDetails
+  }
+}

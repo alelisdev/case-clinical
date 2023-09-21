@@ -1,0 +1,276 @@
+
+
+fragment AttorneyDetails on Attorney {
+id
+createdAt
+updatedAt
+name
+firmId
+attorneyStatusId
+attorneyTypeId
+title
+firstName
+lastName
+address
+city
+state
+zip
+email
+direct
+fax
+cellPhone
+barNumber
+barState
+doNotDisturb
+temp
+createdById
+dateCreated
+removed
+migSource
+entity
+firmNolongerNeeded
+totalSiteCostAllocated
+totalSiteCostReturned
+totalBilledCharges
+collectedOfBilled
+openCases
+totalCasesReturned
+totalCasesWrittenOff
+firm {
+  id
+  name
+}
+attorneyStatus {
+  id
+  name
+}
+attorneyType {
+  id
+  name
+}
+
+
+
+
+
+legalCases {
+    ...LegalCaseLists
+  }
+
+user {
+    id
+    name
+  }
+}
+
+fragment AttorneyLists on Attorney {
+id
+createdAt
+updatedAt
+name
+firmId
+attorneyStatusId
+attorneyTypeId
+title
+firstName
+lastName
+address
+city
+state
+zip
+email
+direct
+fax
+cellPhone
+barNumber
+barState
+doNotDisturb
+temp
+createdById
+dateCreated
+removed
+migSource
+entity
+firmNolongerNeeded
+totalSiteCostAllocated
+totalSiteCostReturned
+totalBilledCharges
+collectedOfBilled
+openCases
+totalCasesReturned
+totalCasesWrittenOff
+firm {
+    id
+    name
+}
+attorneyStatus {
+    id
+    name
+}
+attorneyType {
+    id
+    name
+}
+
+
+
+
+
+legalCases {
+    id
+    name
+        patient {
+      name
+      firstName
+      middleName
+      lastName
+      nickname
+      dateOfBirth
+      homePhoneNumber
+      mobileNumber
+      bmi
+      occupation
+    }
+    patientId
+    caseProcedures {
+      ...CaseProcedureLists
+    }
+    taskItems {
+      id
+      name
+      createdAt
+      updatedAt
+      assignedToId
+      title
+      dueDate
+      completedOn
+      completed
+      legalCaseId
+      notes
+      order
+      priority
+      type      
+    }
+  }
+
+
+user {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAttorneys($input: AdminListAttorneyInput) {
+  items: adminAttorneys(input: $input) {
+    ...AttorneyLists
+  }
+  count: adminCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAttorneys($input: AdminListAttorneyInput) {
+  count: adminCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAttorney($attorneyId: String!) {
+  item: adminAttorney(attorneyId: $attorneyId) {
+    ...AttorneyDetails
+  }
+}
+mutation AdminCreateAttorney($input: AdminCreateAttorneyInput!) {
+  created: adminCreateAttorney(input: $input) {
+    ...AttorneyDetails
+  }
+}
+mutation AdminUpdateAttorney($attorneyId: String!, $input: AdminUpdateAttorneyInput!) {
+  updated: adminUpdateAttorney(attorneyId: $attorneyId, input: $input) {
+    ...AttorneyDetails
+  }
+}
+mutation AdminDeleteAttorney($attorneyId: String!) {
+  deleted: adminDeleteAttorney(attorneyId: $attorneyId) {
+    ...AttorneyDetails
+  }
+}
+
+query UserAttorneys($input: UserListAttorneyInput) {
+  items: userAttorneys(input: $input) {
+    ...AttorneyLists
+  }
+  count: userCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAttorneys($input: UserListAttorneyInput) {
+  count: userCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAttorneys($input: UserListAttorneyInput) {
+  items: userSelectAttorneys(input: $input) {
+    ...AttorneyDetails
+  }
+}
+
+query UserAttorney($attorneyId: String!) {
+  item: userAttorney(attorneyId: $attorneyId) {
+    ...AttorneyDetails
+  }
+}
+
+mutation UserCreateAttorney($input: UserCreateAttorneyInput!) {
+  created: userCreateAttorney(input: $input) {
+    ...AttorneyDetails
+  }
+}
+mutation UserUpdateAttorney($attorneyId: String!, $input: UserUpdateAttorneyInput!) {
+  updated: userUpdateAttorney(attorneyId: $attorneyId, input: $input) {
+    ...AttorneyDetails
+  }
+}
+
+mutation UserUpdateAttorneys($input: UserUpdateAttorneysInput!) {
+  updated: userUpdateAttorneys(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAttorney($attorneyId: String!) {
+  deleted: userDeleteAttorney(attorneyId: $attorneyId) {
+    ...AttorneyDetails
+  }
+}
+
+query PublicAttorneys($input: UserListAttorneyInput) {
+  items: publicAttorneys(input: $input) {
+    ...AttorneyLists
+  }
+  count: publicCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAttorneys($input: UserListAttorneyInput) {
+  count: publicCountAttorneys(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAttorneys($input: UserListAttorneyInput) {
+  items: publicSelectAttorneys(input: $input) {
+    ...AttorneyDetails
+  }
+}
+
+query PublicAttorney($attorneyId: String!) {
+  item: publicAttorney(attorneyId: $attorneyId) {
+    ...AttorneyDetails
+  }
+}

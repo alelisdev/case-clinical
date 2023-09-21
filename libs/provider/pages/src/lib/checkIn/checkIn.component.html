@@ -1,0 +1,12 @@
+<ng-container *ngIf="selectedProviderId$ | async as providerId">
+  <ui-formly-json-form
+    *ngIf="appointment$ | async as appointment"
+    class="w-full h-full"
+    formName="page_provider_appointment_checkIn"
+    [showSubmitButton]="false"
+    [componentStore]="store"
+    [model]="{ providerId }"
+    [formData]="getFormData(appointment)"
+    (formIsReady)="this.onResize()"
+  ></ui-formly-json-form>
+</ng-container>

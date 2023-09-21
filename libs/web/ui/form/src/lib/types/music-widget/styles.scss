@@ -1,0 +1,9 @@
+::ng-deep ang-music-player .wrapper {
+  height: 100% !important;
+  min-height: 130px;
+  background-color: transparent !important;
+}
+
+::ng-deep ang-music-player .wrapper .container .details .slidecontainer input[type="range"] {
+  z-index: 0;
+}

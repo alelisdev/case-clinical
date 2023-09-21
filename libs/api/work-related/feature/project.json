@@ -1,0 +1,26 @@
+{
+  "name": "api-work-related-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/work-related/feature/src",
+  "prefix": "work-related",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/work-related/data-access/src/**/*.ts",
+          "libs/api/work-related/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/work-related/data-access"],
+      "options": {
+        "jestConfig": "libs/api/work-related/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

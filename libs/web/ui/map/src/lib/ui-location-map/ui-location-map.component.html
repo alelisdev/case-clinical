@@ -1,0 +1,21 @@
+<input
+  (keydown.enter)="$event.preventDefault()"
+  id="search-bar"
+  placeholder="Search address"
+  autocapitalize="off"
+  type="text"
+  [class]="classes"
+  [value]="formattedAddress"
+  (change)="onInputEvent($event)"
+  #search
+/>
+<agm-map #agmMap *ngIf="showMap" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" >
+  <agm-marker
+    [latitude]="latitude"
+    [iconUrl]="'/assets/icons/map_icon/default.svg'"
+    [markerDraggable]="true"
+    (dragEnd)="markerDragEnd($event)"
+    [longitude]="longitude"
+  >
+  </agm-marker>
+</agm-map>

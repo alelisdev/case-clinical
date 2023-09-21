@@ -1,0 +1,23 @@
+{
+  "name": "web-patient-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/patient/feature/src",
+  "prefix": "patient",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/patient/feature/src/**/*.ts", "libs/web/patient/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/patient/feature"],
+      "options": {
+        "jestConfig": "libs/web/patient/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-case-procedure-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/case-procedure/ui/src",
+  "prefix": "case-procedure",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/case-procedure/ui/src/**/*.ts", "libs/web/case-procedure/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/case-procedure/ui"],
+      "options": {
+        "jestConfig": "libs/web/case-procedure/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

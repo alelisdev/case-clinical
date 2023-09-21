@@ -1,0 +1,8 @@
+ui-ag-grid-component {
+  width: 100%;
+  height: 100%;
+}
+
+::ng-deep .hideHorizontalScrollbar .ag-body-horizontal-scroll-viewport::-webkit-scrollbar {
+  display: none;
+}

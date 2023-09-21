@@ -1,0 +1,23 @@
+{
+  "name": "mobile-account-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/account/ui/src",
+  "prefix": "account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/account/ui/src/**/*.ts", "libs/mobile/account/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/account/ui"],
+      "options": {
+        "jestConfig": "libs/mobile/account/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

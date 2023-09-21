@@ -1,0 +1,10 @@
+FROM node:18-alpine3.16
+
+WORKDIR /node/app
+ENV NODE_ENV="production"
+
+COPY /dist/apps/api /node/app/dist
+COPY /libs /node/app/libs
+COPY /node_modules /node/app/node_modules
+
+ENTRYPOINT ["node", "dist/main.js"]

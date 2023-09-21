@@ -1,0 +1,125 @@
+fragment NavigationDetails on Navigation {
+id
+title
+subtitle
+type
+icon
+userId
+link
+children {
+    id
+    title
+    subtitle
+    type
+    icon
+    link
+      children {
+      id
+      title
+      subtitle
+      type
+      icon
+      link
+    }
+  }
+}
+
+
+
+fragment RoleNavigationDetails on RoleNavigation {
+    id
+    title
+    subtitle
+    type
+    icon
+    link
+    feature {
+      name
+    }
+}
+
+
+
+query AdminRoleNavigations($input: AdminListRoleNavigationInput!) {
+  roleNavigations: adminRoleNavigations(input: $input) {
+   ...RoleNavigationDetails
+  }
+}
+
+query AdminNavigations($input: AdminListNavigationInput) {
+  items: adminNavigations(input: $input) {
+    ...NavigationDetails
+  }
+  count: adminCountNavigations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountNavigations($input: AdminListNavigationInput) {
+  count: adminCountNavigations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+mutation adminUpdateRoleNavigation($id: String!, $input: AdminUpdateRoleNavigationInput!) {
+  updated: adminUpdateRoleNavigation(roleNavigationId: $id, input: $input) {
+    ...RoleNavigationDetails
+  }
+}
+
+
+query AdminNavigation($navigationId: String!) {
+  item: adminNavigation(navigationId: $navigationId) {
+    ...NavigationDetails
+  }
+}
+mutation AdminCreateNavigation($input: AdminCreateNavigationInput!) {
+  created: adminCreateNavigation(input: $input) {
+    ...NavigationDetails
+  }
+}
+mutation AdminUpdateNavigation($navigationId: String!, $input: AdminUpdateNavigationInput!) {
+  updated: adminUpdateNavigation(navigationId: $navigationId, input: $input) {
+    ...NavigationDetails
+  }
+}
+mutation AdminDeleteNavigation($navigationId: String!) {
+  deleted: adminDeleteNavigation(navigationId: $navigationId) {
+    ...NavigationDetails
+  }
+}
+
+query UserNavigations($input: UserListNavigationInput) {
+  items: userNavigations(input: $input) {
+    ...NavigationDetails
+  }
+  count: userCountNavigations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountNavigations($input: UserListNavigationInput) {
+  count: userCountNavigations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserNavigation($navigationId: String!) {
+  item: userNavigation(navigationId: $navigationId) {
+    ...NavigationDetails
+  }
+}
+mutation UserCreateNavigation($input: UserCreateNavigationInput!) {
+  created: userCreateNavigation(input: $input) {
+    ...NavigationDetails
+  }
+}
+mutation UserUpdateNavigation($navigationId: String!, $input: UserUpdateNavigationInput!) {
+  updated: userUpdateNavigation(navigationId: $navigationId, input: $input) {
+    ...NavigationDetails
+  }
+}
+mutation UserDeleteNavigation($navigationId: String!) {
+  deleted: userDeleteNavigation(navigationId: $navigationId) {
+    ...NavigationDetails
+  }
+}

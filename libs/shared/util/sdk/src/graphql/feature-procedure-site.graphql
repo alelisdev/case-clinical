@@ -1,0 +1,150 @@
+
+fragment ProcedureSiteDetails on ProcedureSite {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+
+
+priorAuthorizationRequests {
+   ...PriorAuthorizationRequestLists
+  }
+}
+
+fragment ProcedureSiteLists on ProcedureSite {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminProcedureSites($input: AdminListProcedureSiteInput) {
+  items: adminProcedureSites(input: $input) {
+    ...ProcedureSiteLists
+  }
+  count: adminCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedureSites($input: AdminListProcedureSiteInput) {
+  count: adminCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedureSite($procedureSiteId: String!) {
+  item: adminProcedureSite(procedureSiteId: $procedureSiteId) {
+    ...ProcedureSiteDetails
+  }
+}
+mutation AdminCreateProcedureSite($input: AdminCreateProcedureSiteInput!) {
+  created: adminCreateProcedureSite(input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+mutation AdminUpdateProcedureSite($procedureSiteId: String!, $input: AdminUpdateProcedureSiteInput!) {
+  updated: adminUpdateProcedureSite(procedureSiteId: $procedureSiteId, input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+mutation AdminDeleteProcedureSite($procedureSiteId: String!) {
+  deleted: adminDeleteProcedureSite(procedureSiteId: $procedureSiteId) {
+    ...ProcedureSiteDetails
+  }
+}
+
+query UserProcedureSites($input: UserListProcedureSiteInput) {
+  items: userProcedureSites(input: $input) {
+    ...ProcedureSiteLists
+  }
+  count: userCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedureSites($input: UserListProcedureSiteInput) {
+  count: userCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedureSites($input: UserListProcedureSiteInput) {
+  items: userSelectProcedureSites(input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+
+query UserProcedureSite($procedureSiteId: String!) {
+  item: userProcedureSite(procedureSiteId: $procedureSiteId) {
+    ...ProcedureSiteDetails
+  }
+}
+
+mutation UserCreateProcedureSite($input: UserCreateProcedureSiteInput!) {
+  created: userCreateProcedureSite(input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+mutation UserUpdateProcedureSite($procedureSiteId: String!, $input: UserUpdateProcedureSiteInput!) {
+  updated: userUpdateProcedureSite(procedureSiteId: $procedureSiteId, input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+
+mutation UserUpdateProcedureSites($input: UserUpdateProcedureSitesInput!) {
+  updated: userUpdateProcedureSites(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedureSite($procedureSiteId: String!) {
+  deleted: userDeleteProcedureSite(procedureSiteId: $procedureSiteId) {
+    ...ProcedureSiteDetails
+  }
+}
+
+query PublicProcedureSites($input: UserListProcedureSiteInput) {
+  items: publicProcedureSites(input: $input) {
+    ...ProcedureSiteLists
+  }
+  count: publicCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedureSites($input: UserListProcedureSiteInput) {
+  count: publicCountProcedureSites(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedureSites($input: UserListProcedureSiteInput) {
+  items: publicSelectProcedureSites(input: $input) {
+    ...ProcedureSiteDetails
+  }
+}
+
+query PublicProcedureSite($procedureSiteId: String!) {
+  item: publicProcedureSite(procedureSiteId: $procedureSiteId) {
+    ...ProcedureSiteDetails
+  }
+}

@@ -1,0 +1,149 @@
+
+fragment TeamRoleDetails on TeamRole {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+teamUsers {
+    id
+    name
+  }
+}
+
+fragment TeamRoleLists on TeamRole {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+teamUsers {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminTeamRoles($input: AdminListTeamRoleInput) {
+  items: adminTeamRoles(input: $input) {
+    ...TeamRoleLists
+  }
+  count: adminCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTeamRoles($input: AdminListTeamRoleInput) {
+  count: adminCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTeamRole($teamRoleId: String!) {
+  item: adminTeamRole(teamRoleId: $teamRoleId) {
+    ...TeamRoleDetails
+  }
+}
+mutation AdminCreateTeamRole($input: AdminCreateTeamRoleInput!) {
+  created: adminCreateTeamRole(input: $input) {
+    ...TeamRoleDetails
+  }
+}
+mutation AdminUpdateTeamRole($teamRoleId: String!, $input: AdminUpdateTeamRoleInput!) {
+  updated: adminUpdateTeamRole(teamRoleId: $teamRoleId, input: $input) {
+    ...TeamRoleDetails
+  }
+}
+mutation AdminDeleteTeamRole($teamRoleId: String!) {
+  deleted: adminDeleteTeamRole(teamRoleId: $teamRoleId) {
+    ...TeamRoleDetails
+  }
+}
+
+query UserTeamRoles($input: UserListTeamRoleInput) {
+  items: userTeamRoles(input: $input) {
+    ...TeamRoleLists
+  }
+  count: userCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTeamRoles($input: UserListTeamRoleInput) {
+  count: userCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTeamRoles($input: UserListTeamRoleInput) {
+  items: userSelectTeamRoles(input: $input) {
+    ...TeamRoleDetails
+  }
+}
+
+query UserTeamRole($teamRoleId: String!) {
+  item: userTeamRole(teamRoleId: $teamRoleId) {
+    ...TeamRoleDetails
+  }
+}
+
+mutation UserCreateTeamRole($input: UserCreateTeamRoleInput!) {
+  created: userCreateTeamRole(input: $input) {
+    ...TeamRoleDetails
+  }
+}
+mutation UserUpdateTeamRole($teamRoleId: String!, $input: UserUpdateTeamRoleInput!) {
+  updated: userUpdateTeamRole(teamRoleId: $teamRoleId, input: $input) {
+    ...TeamRoleDetails
+  }
+}
+
+mutation UserUpdateTeamRoles($input: UserUpdateTeamRolesInput!) {
+  updated: userUpdateTeamRoles(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTeamRole($teamRoleId: String!) {
+  deleted: userDeleteTeamRole(teamRoleId: $teamRoleId) {
+    ...TeamRoleDetails
+  }
+}
+
+query PublicTeamRoles($input: UserListTeamRoleInput) {
+  items: publicTeamRoles(input: $input) {
+    ...TeamRoleLists
+  }
+  count: publicCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTeamRoles($input: UserListTeamRoleInput) {
+  count: publicCountTeamRoles(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTeamRoles($input: UserListTeamRoleInput) {
+  items: publicSelectTeamRoles(input: $input) {
+    ...TeamRoleDetails
+  }
+}
+
+query PublicTeamRole($teamRoleId: String!) {
+  item: publicTeamRole(teamRoleId: $teamRoleId) {
+    ...TeamRoleDetails
+  }
+}

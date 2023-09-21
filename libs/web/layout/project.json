@@ -1,0 +1,23 @@
+{
+  "name": "web-layout",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/layout/src",
+  "prefix": "layout",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/layout/src/**/*.ts", "libs/web/layout/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/layout"],
+      "options": {
+        "jestConfig": "libs/web/layout/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

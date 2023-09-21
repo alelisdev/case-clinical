@@ -1,0 +1,30 @@
+FROM node:18.13.0-alpine as build
+
+WORKDIR /app
+EXPOSE 3000
+
+COPY package.json package.json
+RUN apk update
+RUN apk add curl bash make
+RUN rm -rf /var/cache/apk/*
+RUN apk add --no-cache git openssh
+RUN yarn --force
+RUN yarn global add @nrwl/cli
+RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
+
+ENV NODE_OPTIONS=--max-old-space-size=16000
+COPY . .
+COPY package.json package.json
+RUN yarn build:apiOnly
+RUN npm prune --omit=dev --legacy-peer-deps
+
+FROM node:18.13.0-alpine
+
+WORKDIR /node/app
+ENV NODE_ENV="production"
+
+COPY --from=build /app/dist/apps/api /node/app/dist
+COPY --from=build /app/libs/api /node/app/libs/api
+COPY --from=build /app/node_modules /node/app/node_modules
+
+ENTRYPOINT ["node", "dist/main.js"]

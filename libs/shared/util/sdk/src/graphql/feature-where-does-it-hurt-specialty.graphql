@@ -1,0 +1,86 @@
+fragment WhereDoesItHurtSpecialtyDetails on WhereDoesItHurtSpecialty {
+  id
+  createdAt
+  updatedAt
+  name
+  whereDoesItHurtId
+  specialty {
+    id
+    name
+  }
+  ordinal
+}
+query AdminWhereDoesItHurtSpecialties($input: AdminListWhereDoesItHurtSpecialtyInput) {
+  items: adminWhereDoesItHurtSpecialties(input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+  count: adminCountWhereDoesItHurtSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountWhereDoesItHurtSpecialties($input: AdminListWhereDoesItHurtSpecialtyInput) {
+  count: adminCountWhereDoesItHurtSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminWhereDoesItHurtSpecialty($whereDoesItHurtSpecialtyId: String!) {
+  item: adminWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation AdminCreateWhereDoesItHurtSpecialty($input: AdminCreateWhereDoesItHurtSpecialtyInput!) {
+  created: adminCreateWhereDoesItHurtSpecialty(input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation AdminUpdateWhereDoesItHurtSpecialty(
+  $whereDoesItHurtSpecialtyId: String!
+  $input: AdminUpdateWhereDoesItHurtSpecialtyInput!
+) {
+  updated: adminUpdateWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId, input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation AdminDeleteWhereDoesItHurtSpecialty($whereDoesItHurtSpecialtyId: String!) {
+  deleted: adminDeleteWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+
+query UserWhereDoesItHurtSpecialties($input: UserListWhereDoesItHurtSpecialtyInput) {
+  items: userWhereDoesItHurtSpecialties(input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+  count: userCountWhereDoesItHurtSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountWhereDoesItHurtSpecialties($input: UserListWhereDoesItHurtSpecialtyInput) {
+  count: userCountWhereDoesItHurtSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserWhereDoesItHurtSpecialty($whereDoesItHurtSpecialtyId: String!) {
+  item: userWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation UserCreateWhereDoesItHurtSpecialty($input: UserCreateWhereDoesItHurtSpecialtyInput!) {
+  created: userCreateWhereDoesItHurtSpecialty(input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation UserUpdateWhereDoesItHurtSpecialty(
+  $whereDoesItHurtSpecialtyId: String!
+  $input: UserUpdateWhereDoesItHurtSpecialtyInput!
+) {
+  updated: userUpdateWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId, input: $input) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}
+mutation UserDeleteWhereDoesItHurtSpecialty($whereDoesItHurtSpecialtyId: String!) {
+  deleted: userDeleteWhereDoesItHurtSpecialty(whereDoesItHurtSpecialtyId: $whereDoesItHurtSpecialtyId) {
+    ...WhereDoesItHurtSpecialtyDetails
+  }
+}

@@ -1,0 +1,11 @@
+<div *ngIf="vm$ | async as vm" class="w-full max-w-3xl">
+  <ui-formly-json-form
+    class="w-full h-full"
+    formName="user_create"
+    [showSubmitButton]="true"
+    [model]="vm.profile"
+    [formData]="vm.profile" 
+    (save)="submit($event)"
+  ></ui-formly-json-form>
+  <!-- <button *ngIf="isSignUpProcess" [disabled]="!vm.canGoNext" mat-flat-button type="button" matStepperNext [color]="'primary'">Next</button> -->
+</div>

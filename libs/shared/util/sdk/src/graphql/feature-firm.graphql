@@ -1,0 +1,231 @@
+
+
+fragment FirmDetails on Firm {
+id
+createdAt
+updatedAt
+name
+firmStatusNote
+firmStatusId
+firmName
+address
+address2
+city
+state
+zip
+country
+office
+fax
+webAddress
+email
+rating
+notes
+doNotDisturb
+invoiceOnly
+reductionNotes
+deceased
+createdBy
+dateCreated
+openCases
+totalSiteCostReturned
+collectedOfBilled
+totalCasesReturned
+totalSiteCostAllocated
+totalBilledCharges
+averageTimeOut
+eulaId
+firmStatus {
+  id
+  name
+}
+eula {
+  id
+  name
+}
+
+
+
+
+
+attorneys {
+    ...AttorneyLists
+  }
+
+legalCases {
+    ...LegalCaseLists
+  }
+}
+
+fragment FirmLists on Firm {
+id
+createdAt
+updatedAt
+name
+firmStatusNote
+firmStatusId
+firmName
+address
+address2
+city
+state
+zip
+country
+office
+fax
+webAddress
+email
+rating
+notes
+doNotDisturb
+invoiceOnly
+reductionNotes
+deceased
+createdBy
+dateCreated
+openCases
+totalSiteCostReturned
+collectedOfBilled
+totalCasesReturned
+totalSiteCostAllocated
+totalBilledCharges
+averageTimeOut
+eulaId
+firmStatus {
+    id
+    name
+}
+eula {
+    id
+    name
+}
+
+
+
+
+
+attorneys {
+    id
+    name
+  }
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminFirms($input: AdminListFirmInput) {
+  items: adminFirms(input: $input) {
+    ...FirmLists
+  }
+  count: adminCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFirms($input: AdminListFirmInput) {
+  count: adminCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFirm($firmId: String!) {
+  item: adminFirm(firmId: $firmId) {
+    ...FirmDetails
+  }
+}
+mutation AdminCreateFirm($input: AdminCreateFirmInput!) {
+  created: adminCreateFirm(input: $input) {
+    ...FirmDetails
+  }
+}
+mutation AdminUpdateFirm($firmId: String!, $input: AdminUpdateFirmInput!) {
+  updated: adminUpdateFirm(firmId: $firmId, input: $input) {
+    ...FirmDetails
+  }
+}
+mutation AdminDeleteFirm($firmId: String!) {
+  deleted: adminDeleteFirm(firmId: $firmId) {
+    ...FirmDetails
+  }
+}
+
+query UserFirms($input: UserListFirmInput) {
+  items: userFirms(input: $input) {
+    ...FirmLists
+  }
+  count: userCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFirms($input: UserListFirmInput) {
+  count: userCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFirms($input: UserListFirmInput) {
+  items: userSelectFirms(input: $input) {
+    ...FirmDetails
+  }
+}
+
+query UserFirm($firmId: String!) {
+  item: userFirm(firmId: $firmId) {
+    ...FirmDetails
+  }
+}
+
+mutation UserCreateFirm($input: UserCreateFirmInput!) {
+  created: userCreateFirm(input: $input) {
+    ...FirmDetails
+  }
+}
+mutation UserUpdateFirm($firmId: String!, $input: UserUpdateFirmInput!) {
+  updated: userUpdateFirm(firmId: $firmId, input: $input) {
+    ...FirmDetails
+  }
+}
+
+mutation UserUpdateFirms($input: UserUpdateFirmsInput!) {
+  updated: userUpdateFirms(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteFirm($firmId: String!) {
+  deleted: userDeleteFirm(firmId: $firmId) {
+    ...FirmDetails
+  }
+}
+
+query PublicFirms($input: UserListFirmInput) {
+  items: publicFirms(input: $input) {
+    ...FirmLists
+  }
+  count: publicCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountFirms($input: UserListFirmInput) {
+  count: publicCountFirms(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectFirms($input: UserListFirmInput) {
+  items: publicSelectFirms(input: $input) {
+    ...FirmDetails
+  }
+}
+
+query PublicFirm($firmId: String!) {
+  item: publicFirm(firmId: $firmId) {
+    ...FirmDetails
+  }
+}

@@ -1,0 +1,150 @@
+
+fragment VisitKindDetails on VisitKind {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+
+
+priorAuthorizationRequests {
+   ...PriorAuthorizationRequestLists
+  }
+}
+
+fragment VisitKindLists on VisitKind {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminVisitKinds($input: AdminListVisitKindInput) {
+  items: adminVisitKinds(input: $input) {
+    ...VisitKindLists
+  }
+  count: adminCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountVisitKinds($input: AdminListVisitKindInput) {
+  count: adminCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminVisitKind($visitKindId: String!) {
+  item: adminVisitKind(visitKindId: $visitKindId) {
+    ...VisitKindDetails
+  }
+}
+mutation AdminCreateVisitKind($input: AdminCreateVisitKindInput!) {
+  created: adminCreateVisitKind(input: $input) {
+    ...VisitKindDetails
+  }
+}
+mutation AdminUpdateVisitKind($visitKindId: String!, $input: AdminUpdateVisitKindInput!) {
+  updated: adminUpdateVisitKind(visitKindId: $visitKindId, input: $input) {
+    ...VisitKindDetails
+  }
+}
+mutation AdminDeleteVisitKind($visitKindId: String!) {
+  deleted: adminDeleteVisitKind(visitKindId: $visitKindId) {
+    ...VisitKindDetails
+  }
+}
+
+query UserVisitKinds($input: UserListVisitKindInput) {
+  items: userVisitKinds(input: $input) {
+    ...VisitKindLists
+  }
+  count: userCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountVisitKinds($input: UserListVisitKindInput) {
+  count: userCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectVisitKinds($input: UserListVisitKindInput) {
+  items: userSelectVisitKinds(input: $input) {
+    ...VisitKindDetails
+  }
+}
+
+query UserVisitKind($visitKindId: String!) {
+  item: userVisitKind(visitKindId: $visitKindId) {
+    ...VisitKindDetails
+  }
+}
+
+mutation UserCreateVisitKind($input: UserCreateVisitKindInput!) {
+  created: userCreateVisitKind(input: $input) {
+    ...VisitKindDetails
+  }
+}
+mutation UserUpdateVisitKind($visitKindId: String!, $input: UserUpdateVisitKindInput!) {
+  updated: userUpdateVisitKind(visitKindId: $visitKindId, input: $input) {
+    ...VisitKindDetails
+  }
+}
+
+mutation UserUpdateVisitKinds($input: UserUpdateVisitKindsInput!) {
+  updated: userUpdateVisitKinds(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteVisitKind($visitKindId: String!) {
+  deleted: userDeleteVisitKind(visitKindId: $visitKindId) {
+    ...VisitKindDetails
+  }
+}
+
+query PublicVisitKinds($input: UserListVisitKindInput) {
+  items: publicVisitKinds(input: $input) {
+    ...VisitKindLists
+  }
+  count: publicCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountVisitKinds($input: UserListVisitKindInput) {
+  count: publicCountVisitKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectVisitKinds($input: UserListVisitKindInput) {
+  items: publicSelectVisitKinds(input: $input) {
+    ...VisitKindDetails
+  }
+}
+
+query PublicVisitKind($visitKindId: String!) {
+  item: publicVisitKind(visitKindId: $visitKindId) {
+    ...VisitKindDetails
+  }
+}

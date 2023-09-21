@@ -1,0 +1,43 @@
+<div *ngIf="vm$ | async as vm" class="w-full max-w-3xl">
+
+    <!-- Section -->
+    <div class="w-full text-xl">Admin Notifications</div>
+    <div class="grid grid-cols-1 gap-2 w-full mt-4">
+      <!-- Communication -->
+      <div *ngFor="let adminNotification of vm.adminNotifications" class="flex items-center justify-between text-white shadow-gray-400 border-2 rounded-lg p-2 relative">
+        <div class="flex-auto cursor-pointer" >
+          <div class="leading-6 font-medium text-gray-900 dark:text-gray-50">{{ adminNotification.name }}</div>
+        </div>
+        <mat-slide-toggle class="ml-2" [color]="'primary'" [(ngModel)]="adminNotification.subscribed">
+        </mat-slide-toggle>
+        <div class="absolute left-0 right-0 top-0 bottom-0 z-99999 cursor-pointer" (click)="toggleSubscribe(adminNotification)"></div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="my-10 border-t"></div>
+
+    <!-- Section -->
+    <div class="w-full text-xl">User Notifications</div>
+    <div *ngFor="let userNotification of vm.userNotifications" class="grid grid-cols-1 gap-4 w-full mt-4">
+      <!-- Comments -->
+      <div class="flex items-center justify-between text-gray-900 dark:text-gray-50 relative shadow-gray-400 border-2 rounded-lg p-2">
+        <div class="flex-auto leading-6 cursor-pointer">
+          {{ userNotification.name }}
+        </div>
+        <mat-slide-toggle class="ml-2" [color]="'primary'" [(ngModel)]="userNotification.subscribed">
+        </mat-slide-toggle>
+        <div class="absolute left-0 right-0 top-0 bottom-0 z-99999 cursor-pointer" (click)="toggleSubscribe(userNotification)"></div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="my-10 border-t"></div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-2">
+      <button *ngIf="isSignUpProcess" mat-flat-button type="button" matStepperPrevious [color]="'primary'">Back</button>
+      <button *ngIf="isSignUpProcess" mat-flat-button type="button" [color]="'primary'"
+        routerLink="/dashboards/project">Done</button>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "mobile-about-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/about/feature/src",
+  "prefix": "about",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/about/feature/src/**/*.ts", "libs/mobile/about/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/about/feature"],
+      "options": {
+        "jestConfig": "libs/mobile/about/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

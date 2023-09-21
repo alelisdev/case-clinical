@@ -1,0 +1,8 @@
+<ui-formly-json-form
+*ngIf="vm$ | async as vm"
+class="w-full h-full"
+formName="page_attorney_booking_success"
+[showSubmitButton]="false"
+[model]="model"
+[formData]="getFormData(vm)"
+></ui-formly-json-form>

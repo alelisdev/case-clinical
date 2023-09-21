@@ -1,0 +1,23 @@
+{
+  "name": "web-document-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/document-type/ui/src",
+  "prefix": "document-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/document-type/ui/src/**/*.ts", "libs/web/document-type/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/document-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/document-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+
+
+fragment EligibilityStatusDetails on EligibilityStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+eligibilityRequests {
+    id
+    name
+  }
+}
+
+fragment EligibilityStatusLists on EligibilityStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+eligibilityRequests {
+    id
+    name
+  }
+
+}
+
+query AdminEligibilityStatuses($input: AdminListEligibilityStatusInput) {
+  items: adminEligibilityStatuses(input: $input) {
+    ...EligibilityStatusLists
+  }
+  count: adminCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEligibilityStatuses($input: AdminListEligibilityStatusInput) {
+  count: adminCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminEligibilityStatus($eligibilityStatusId: String!) {
+  item: adminEligibilityStatus(eligibilityStatusId: $eligibilityStatusId) {
+    ...EligibilityStatusDetails
+  }
+}
+mutation AdminCreateEligibilityStatus($input: AdminCreateEligibilityStatusInput!) {
+  created: adminCreateEligibilityStatus(input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+mutation AdminUpdateEligibilityStatus($eligibilityStatusId: String!, $input: AdminUpdateEligibilityStatusInput!) {
+  updated: adminUpdateEligibilityStatus(eligibilityStatusId: $eligibilityStatusId, input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+mutation AdminDeleteEligibilityStatus($eligibilityStatusId: String!) {
+  deleted: adminDeleteEligibilityStatus(eligibilityStatusId: $eligibilityStatusId) {
+    ...EligibilityStatusDetails
+  }
+}
+
+query UserEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  items: userEligibilityStatuses(input: $input) {
+    ...EligibilityStatusLists
+  }
+  count: userCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  count: userCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  items: userSelectEligibilityStatuses(input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+
+query UserEligibilityStatus($eligibilityStatusId: String!) {
+  item: userEligibilityStatus(eligibilityStatusId: $eligibilityStatusId) {
+    ...EligibilityStatusDetails
+  }
+}
+
+mutation UserCreateEligibilityStatus($input: UserCreateEligibilityStatusInput!) {
+  created: userCreateEligibilityStatus(input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+mutation UserUpdateEligibilityStatus($eligibilityStatusId: String!, $input: UserUpdateEligibilityStatusInput!) {
+  updated: userUpdateEligibilityStatus(eligibilityStatusId: $eligibilityStatusId, input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+
+mutation UserUpdateEligibilityStatuses($input: UserUpdateEligibilityStatusesInput!) {
+  updated: userUpdateEligibilityStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteEligibilityStatus($eligibilityStatusId: String!) {
+  deleted: userDeleteEligibilityStatus(eligibilityStatusId: $eligibilityStatusId) {
+    ...EligibilityStatusDetails
+  }
+}
+
+query PublicEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  items: publicEligibilityStatuses(input: $input) {
+    ...EligibilityStatusLists
+  }
+  count: publicCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  count: publicCountEligibilityStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectEligibilityStatuses($input: UserListEligibilityStatusInput) {
+  items: publicSelectEligibilityStatuses(input: $input) {
+    ...EligibilityStatusDetails
+  }
+}
+
+query PublicEligibilityStatus($eligibilityStatusId: String!) {
+  item: publicEligibilityStatus(eligibilityStatusId: $eligibilityStatusId) {
+    ...EligibilityStatusDetails
+  }
+}

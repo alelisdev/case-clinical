@@ -1,0 +1,18 @@
+<div class="flex gap-2 relative w-full h-full">
+  <div class="flex w-full sm:w-10/12 h-full">
+    <div id="parentDiv" class="h-full overflow-auto" scrollSpy [spiedTags]="['DIV']" (sectionChange)="onSectionChange($event)">
+      <div class="flex" *ngFor="let field of field.fieldGroup; let i = index" [attr.id]="'section' + (i+1)">
+        <formly-group [field]="field"></formly-group>
+      </div>
+    </div>
+  </div>
+  <div class="w-0 sm:w-2/12 h-full overflow-auto">
+    <ul>
+      <li *ngFor="let field of field.fieldGroup; let i = index;" [ngClass]="getClass(i+1)" (click)="scrollTo(i+1)">
+        <a class="no-underline cursor-pointer" >
+          {{ field.templateOptions?.label }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="w-full max-w-3xl">
+  <ui-formly-json-form
+    *ngIf="vm$ | async as vm"
+    formName="settings_security"
+    [componentStore]="store"
+    [showSubmitButton]="false"
+    [formData]="vm"
+    (save)="this.store.updatePasswordEffect($event)"
+  ></ui-formly-json-form>
+</div>

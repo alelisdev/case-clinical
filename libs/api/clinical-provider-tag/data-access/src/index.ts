@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-clinical-provider-tag.input'
+export * from './lib/dto/admin-list-clinical-provider-tag.input'
+export * from './lib/dto/admin-update-clinical-provider-tag.input'
+export * from './lib/dto/clinical-provider-tag.input'
+export * from './lib/dto/user-create-clinical-provider-tag.input'
+export * from './lib/dto/user-list-clinical-provider-tag.input'
+export * from './lib/dto/user-update-clinical-provider-tag.input'
+export * from './lib/dto/user-update-clinical-provider-tags.input'
+export * from './lib/models/clinical-provider-tag.model'
+export * from './lib/api-clinical-provider-tag-data-access.module'
+
+export * from './lib/api-clinical-provider-tag-data-access-admin.service'
+export * from './lib/api-clinical-provider-tag-data-access-public.service'
+export * from './lib/api-clinical-provider-tag-data-access-user.service'

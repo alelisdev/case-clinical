@@ -1,0 +1,23 @@
+{
+  "name": "web-course-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/course/ui/src",
+  "prefix": "course",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/course/ui/src/**/*.ts", "libs/web/course/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/course/ui"],
+      "options": {
+        "jestConfig": "libs/web/course/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+
+
+fragment AuthorizationTypeDetails on AuthorizationType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+}
+
+fragment AuthorizationTypeLists on AuthorizationType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizations {
+    id
+    name
+  }
+
+}
+
+query AdminAuthorizationTypes($input: AdminListAuthorizationTypeInput) {
+  items: adminAuthorizationTypes(input: $input) {
+    ...AuthorizationTypeLists
+  }
+  count: adminCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAuthorizationTypes($input: AdminListAuthorizationTypeInput) {
+  count: adminCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAuthorizationType($authorizationTypeId: String!) {
+  item: adminAuthorizationType(authorizationTypeId: $authorizationTypeId) {
+    ...AuthorizationTypeDetails
+  }
+}
+mutation AdminCreateAuthorizationType($input: AdminCreateAuthorizationTypeInput!) {
+  created: adminCreateAuthorizationType(input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+mutation AdminUpdateAuthorizationType($authorizationTypeId: String!, $input: AdminUpdateAuthorizationTypeInput!) {
+  updated: adminUpdateAuthorizationType(authorizationTypeId: $authorizationTypeId, input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+mutation AdminDeleteAuthorizationType($authorizationTypeId: String!) {
+  deleted: adminDeleteAuthorizationType(authorizationTypeId: $authorizationTypeId) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+query UserAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  items: userAuthorizationTypes(input: $input) {
+    ...AuthorizationTypeLists
+  }
+  count: userCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  count: userCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  items: userSelectAuthorizationTypes(input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+query UserAuthorizationType($authorizationTypeId: String!) {
+  item: userAuthorizationType(authorizationTypeId: $authorizationTypeId) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+mutation UserCreateAuthorizationType($input: UserCreateAuthorizationTypeInput!) {
+  created: userCreateAuthorizationType(input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+mutation UserUpdateAuthorizationType($authorizationTypeId: String!, $input: UserUpdateAuthorizationTypeInput!) {
+  updated: userUpdateAuthorizationType(authorizationTypeId: $authorizationTypeId, input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+mutation UserUpdateAuthorizationTypes($input: UserUpdateAuthorizationTypesInput!) {
+  updated: userUpdateAuthorizationTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAuthorizationType($authorizationTypeId: String!) {
+  deleted: userDeleteAuthorizationType(authorizationTypeId: $authorizationTypeId) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+query PublicAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  items: publicAuthorizationTypes(input: $input) {
+    ...AuthorizationTypeLists
+  }
+  count: publicCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  count: publicCountAuthorizationTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAuthorizationTypes($input: UserListAuthorizationTypeInput) {
+  items: publicSelectAuthorizationTypes(input: $input) {
+    ...AuthorizationTypeDetails
+  }
+}
+
+query PublicAuthorizationType($authorizationTypeId: String!) {
+  item: publicAuthorizationType(authorizationTypeId: $authorizationTypeId) {
+    ...AuthorizationTypeDetails
+  }
+}

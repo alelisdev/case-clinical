@@ -1,0 +1,160 @@
+
+fragment CaseTypeDetails on CaseType {
+id
+createdAt
+updatedAt
+name
+orderIndex
+dateCreated
+removed
+migSource
+entity
+temp
+
+
+
+
+
+
+legalCases {
+   ...LegalCaseLists
+  }
+}
+
+fragment CaseTypeLists on CaseType {
+id
+createdAt
+updatedAt
+name
+orderIndex
+dateCreated
+removed
+migSource
+entity
+temp
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCaseTypes($input: AdminListCaseTypeInput) {
+  items: adminCaseTypes(input: $input) {
+    ...CaseTypeLists
+  }
+  count: adminCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseTypes($input: AdminListCaseTypeInput) {
+  count: adminCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseType($caseTypeId: String!) {
+  item: adminCaseType(caseTypeId: $caseTypeId) {
+    ...CaseTypeDetails
+  }
+}
+mutation AdminCreateCaseType($input: AdminCreateCaseTypeInput!) {
+  created: adminCreateCaseType(input: $input) {
+    ...CaseTypeDetails
+  }
+}
+mutation AdminUpdateCaseType($caseTypeId: String!, $input: AdminUpdateCaseTypeInput!) {
+  updated: adminUpdateCaseType(caseTypeId: $caseTypeId, input: $input) {
+    ...CaseTypeDetails
+  }
+}
+mutation AdminDeleteCaseType($caseTypeId: String!) {
+  deleted: adminDeleteCaseType(caseTypeId: $caseTypeId) {
+    ...CaseTypeDetails
+  }
+}
+
+query UserCaseTypes($input: UserListCaseTypeInput) {
+  items: userCaseTypes(input: $input) {
+    ...CaseTypeLists
+  }
+  count: userCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseTypes($input: UserListCaseTypeInput) {
+  count: userCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCaseTypes($input: UserListCaseTypeInput) {
+  items: userSelectCaseTypes(input: $input) {
+    ...CaseTypeDetails
+  }
+}
+
+query UserCaseType($caseTypeId: String!) {
+  item: userCaseType(caseTypeId: $caseTypeId) {
+    ...CaseTypeDetails
+  }
+}
+
+mutation UserCreateCaseType($input: UserCreateCaseTypeInput!) {
+  created: userCreateCaseType(input: $input) {
+    ...CaseTypeDetails
+  }
+}
+mutation UserUpdateCaseType($caseTypeId: String!, $input: UserUpdateCaseTypeInput!) {
+  updated: userUpdateCaseType(caseTypeId: $caseTypeId, input: $input) {
+    ...CaseTypeDetails
+  }
+}
+
+mutation UserUpdateCaseTypes($input: UserUpdateCaseTypesInput!) {
+  updated: userUpdateCaseTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseType($caseTypeId: String!) {
+  deleted: userDeleteCaseType(caseTypeId: $caseTypeId) {
+    ...CaseTypeDetails
+  }
+}
+
+query PublicCaseTypes($input: UserListCaseTypeInput) {
+  items: publicCaseTypes(input: $input) {
+    ...CaseTypeLists
+  }
+  count: publicCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseTypes($input: UserListCaseTypeInput) {
+  count: publicCountCaseTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseTypes($input: UserListCaseTypeInput) {
+  items: publicSelectCaseTypes(input: $input) {
+    ...CaseTypeDetails
+  }
+}
+
+query PublicCaseType($caseTypeId: String!) {
+  item: publicCaseType(caseTypeId: $caseTypeId) {
+    ...CaseTypeDetails
+  }
+}

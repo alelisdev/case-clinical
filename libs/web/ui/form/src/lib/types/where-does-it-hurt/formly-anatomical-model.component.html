@@ -1,0 +1,195 @@
+<div class="flex flex-col justify-center items-center content-center gap-2">
+  <h1 class="text-xl font-bold text-center">Select pain location</h1>
+
+  <div class="flex flex-col gap-6" (mouseenter)="anatomyFocused = true" (mouseleave)="anatomyFocused = false">
+    <div class="flex flex-col md:flex-row rounded-md justify-center">
+      <div
+        [ngClass]="[
+          filteredWDIHs.length > 0 ? 'rounded-l-md' : 'rounded-md',
+          'flex flex-col justify-center align-middle items-center  z-10 border p-1 transition duration-300'
+        ]"
+      >
+        <div class="h-full w-full flex flex-col items-center bg-white p-4 max-w-md">
+          <div class="flex justify-between w-full">
+            <button
+              type="button"
+              (click)="front = !front; updateImages()"
+              class="px-3 py-1 text-md text-gray-600 font-bold rounded-md border shadow-sm hover:bg-gray-200 hover:shadow-inner transition duration-200"
+            >
+              {{ front ? 'Back' : 'Front' }}
+            </button>
+            <div [ngClass]="[hoverPart.length > 0 ? 'px-2 py-1  font-bold text-md' : '']">
+              {{ hoverPart }}
+            </div>
+          </div>
+          <div class="flex-1 h-24 w-full justify-center relative">
+            <img
+              [src]="backgroundImage"
+              [alt]="backgroundAltImage"
+              style="display: block; width: 100%; height: 100%; object-fit: contain"
+              class="anatomi-bg-img"
+            />
+
+            <svg
+              class="absolute inset-0 h-full w-full transition duration-200"
+              viewBox="0 0 235 639"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g stroke-width="1" fill-rule="evenodd" fill-opacity="0.25">
+                <path
+                  *ngFor="let part of activeParts"
+                  stroke-width="1"
+                  [ngClass]="[
+                    isClicked(part.id)
+                      ? 'opacity-100 stroke-red-500 fill-red-500 shadow-md  sm:hover:stroke-red-300 sm:hover:fill-red-300'
+                      : ' sm:hover:stroke-gray-400 sm:hover:fill-gray-400',
+                    'transition duration-200 sm:hover:opacity-100 hover:shadow-sm '
+                  ]"
+                  (mouseenter)="hoverPart = part.id"
+                  (mouseleave)="hoverPart = ''"
+                  (click)="!to?.disabled && clicked(part.id)"
+                  [id]="part.id"
+                  [attr.d]="part.path"
+                  [attr.transform]="part.transform"
+                >
+                  {{ part.id }}
+                </path>
+              </g>
+            </svg>
+          </div>
+          <span class="relative z-0 inline-flex shadow-sm rounded-md">
+            <button
+              type="button"
+              (click)="male = true; updateImages()"
+              [ngClass]="[
+                male ? 'bg-gray-200 shadow-inner' : '',
+                'transition duration-200 relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 '
+              ]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 512 511.01"
+                class="-ml-1 mr-2 h-5 w-5 text-gray-400"
+              >
+                <path
+                  fill-rule="nonzero"
+                  d="m456.72 96.62-115.49 115.5c22.46 31.03 35.72 69.17 35.72 110.41 0 52.04-21.1 99.17-55.2 133.27-34.11 34.1-81.23 55.21-133.28 55.21-52.03 0-99.17-21.11-133.27-55.21C21.1 421.7 0 374.57 0 322.53c0-52.04 21.1-99.17 55.2-133.27 34.1-34.1 81.23-55.21 133.27-55.21 42.91 0 82.47 14.35 114.16 38.5L419.89 55.28h-62.84V0H512v158.91h-55.28V96.62zM282.66 228.35c-24.1-24.1-57.41-39.02-94.19-39.02s-70.08 14.92-94.18 39.02c-24.1 24.1-39.01 57.4-39.01 94.18 0 36.78 14.91 70.09 39.01 94.19 24.1 24.1 57.4 39.01 94.18 39.01 36.78 0 70.09-14.91 94.19-39.01 24.1-24.1 39.01-57.41 39.01-94.19s-14.91-70.08-39.01-94.18z"
+                />
+              </svg>
+              Male
+            </button>
+            <button
+              type="button"
+              [ngClass]="[
+                !male ? 'bg-gray-200 shadow-inner' : '',
+                'transition duration-200 -ml-px relative inline-flex items-center px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 '
+              ]"
+              (click)="male = false; updateImages()"
+            >
+              <svg
+                class="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                viewBox="0 0 361 511.42"
+              >
+                <path
+                  fill-rule="nonzero"
+                  d="M203.64 359.53v44.17h78.58v52.94h-78.58v54.78H150.7v-54.78H72.13V403.7h78.57v-45.15c-37.91-6.3-71.82-24.41-97.83-50.42C20.21 275.47 0 230.35 0 180.5c0-49.84 20.21-94.97 52.87-127.63S130.65 0 180.5 0c49.84 0 94.97 20.21 127.63 52.87S361 130.66 361 180.5c0 49.84-20.21 94.97-52.87 127.63-27.52 27.52-63.9 46.2-104.49 51.4zM270.7 90.3c-23.08-23.08-54.98-37.36-90.2-37.36-35.23 0-67.12 14.28-90.2 37.36s-37.36 54.98-37.36 90.2c0 35.23 14.28 67.12 37.36 90.2s54.97 37.36 90.2 37.36c35.22 0 67.12-14.28 90.2-37.36s37.36-54.97 37.36-90.2c0-35.22-14.28-67.12-37.36-90.2z"
+                />
+              </svg>
+              Female
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div [@slideInOut] *ngIf="selectedParts.length > 0 && anatomyFocused" class="flex flex-col p-4 bg-gray-50 z-0 border-t border-b">
+        <h1 class="text-lg font-bold">Pain Location</h1>
+        <div
+          *ngFor="let part of selectedParts"
+          class="px-2 font-sem py-1 text-md w-full my-1 flex flex-row justify-between group gap-4"
+        >
+          {{ part }}
+          <button (click)="!to?.disabled && clicked(part)" type="button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div [@slideInOut] *ngIf="filteredWDIHs.length > 0 && anatomyFocused" class="flex flex-col p-4 bg-gray-50 z-0 border rounded-r-md">
+        <h1 class="text-lg font-bold">Select Pain Type</h1>
+        <button
+          type="button"
+          *ngFor="let wdih of filteredWDIHs"
+          (click)="!to?.disabled && clickWDIH(wdih)"
+          [ngClass]="[
+            wdihIsSelected(wdih) ? 'bg-blue-700 shadow-inner text-white' : 'bg-gray-300 shadow-md ',
+            'px-2 font-sem py-1 text-md w-full my-1 flex flex-row justify-start group gap-4 border rounded-full font-semibold transition duration-200'
+          ]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            [ngClass]="[wdihIsSelected(wdih) ? 'text-white' : 'hidden', 'h-5 w-5']"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {{ wdih.name }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedWDIHs.length > 0 && anatomyFocused" class="border p-4 gap-2 rounded-md flex flex-col bg-gray-50 items-center">
+      <h1 class="text-xl font-semibold">Workup</h1>
+      <div class="gap-2 justify-center flex flex-wrap">
+        <div
+          *ngFor="let wdih of selectedWDIHs"
+          class="p-2 bg-white rounded-md flex-none border shadow-md text-center flex flex-col gap-2"
+        >
+          <h1>{{ wdih.name }}</h1>
+          <div *ngFor="let wdihs of wdih.whereDoesItHurtSpecialties | sort: 'ordinal'">
+            <div class="px-3 py-1 rounded-full border bg-white font-semibold">
+              {{ wdihs.specialty.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div
+      *ngIf="selectedSpecialists.length > 0"
+      class="border p-4 gap-2 rounded-md flex flex-col bg-gray-50 items-center"
+    >
+      <h1 class="text-xl font-semibold">Recommended Specialist</h1>
+      <div class="gap-2 items-center content-center justify-center flex flex-wrap max-w-fit">
+        <div
+          *ngFor="let specialty of selectedSpecialists"
+          class="p-2 bg-white rounded-md border shadow-sm max-w-36 text-center"
+        >
+          {{ specialty.name }}
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

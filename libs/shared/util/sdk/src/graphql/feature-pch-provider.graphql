@@ -1,0 +1,148 @@
+
+fragment PchProviderDetails on PchProvider {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+clinicalProvider {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PchProviderLists on PchProvider {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+clinicalProvider {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPchProviders($input: AdminListPchProviderInput) {
+  items: adminPchProviders(input: $input) {
+    ...PchProviderLists
+  }
+  count: adminCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPchProviders($input: AdminListPchProviderInput) {
+  count: adminCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPchProvider($pchProviderId: String!) {
+  item: adminPchProvider(pchProviderId: $pchProviderId) {
+    ...PchProviderDetails
+  }
+}
+mutation AdminCreatePchProvider($input: AdminCreatePchProviderInput!) {
+  created: adminCreatePchProvider(input: $input) {
+    ...PchProviderDetails
+  }
+}
+mutation AdminUpdatePchProvider($pchProviderId: String!, $input: AdminUpdatePchProviderInput!) {
+  updated: adminUpdatePchProvider(pchProviderId: $pchProviderId, input: $input) {
+    ...PchProviderDetails
+  }
+}
+mutation AdminDeletePchProvider($pchProviderId: String!) {
+  deleted: adminDeletePchProvider(pchProviderId: $pchProviderId) {
+    ...PchProviderDetails
+  }
+}
+
+query UserPchProviders($input: UserListPchProviderInput) {
+  items: userPchProviders(input: $input) {
+    ...PchProviderLists
+  }
+  count: userCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPchProviders($input: UserListPchProviderInput) {
+  count: userCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPchProviders($input: UserListPchProviderInput) {
+  items: userSelectPchProviders(input: $input) {
+    ...PchProviderDetails
+  }
+}
+
+query UserPchProvider($pchProviderId: String!) {
+  item: userPchProvider(pchProviderId: $pchProviderId) {
+    ...PchProviderDetails
+  }
+}
+
+mutation UserCreatePchProvider($input: UserCreatePchProviderInput!) {
+  created: userCreatePchProvider(input: $input) {
+    ...PchProviderDetails
+  }
+}
+mutation UserUpdatePchProvider($pchProviderId: String!, $input: UserUpdatePchProviderInput!) {
+  updated: userUpdatePchProvider(pchProviderId: $pchProviderId, input: $input) {
+    ...PchProviderDetails
+  }
+}
+
+mutation UserUpdatePchProviders($input: UserUpdatePchProvidersInput!) {
+  updated: userUpdatePchProviders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePchProvider($pchProviderId: String!) {
+  deleted: userDeletePchProvider(pchProviderId: $pchProviderId) {
+    ...PchProviderDetails
+  }
+}
+
+query PublicPchProviders($input: UserListPchProviderInput) {
+  items: publicPchProviders(input: $input) {
+    ...PchProviderLists
+  }
+  count: publicCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPchProviders($input: UserListPchProviderInput) {
+  count: publicCountPchProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPchProviders($input: UserListPchProviderInput) {
+  items: publicSelectPchProviders(input: $input) {
+    ...PchProviderDetails
+  }
+}
+
+query PublicPchProvider($pchProviderId: String!) {
+  item: publicPchProvider(pchProviderId: $pchProviderId) {
+    ...PchProviderDetails
+  }
+}

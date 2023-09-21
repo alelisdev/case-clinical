@@ -1,0 +1,23 @@
+{
+  "name": "web-legal-case-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/legal-case/feature/src",
+  "prefix": "legal-case",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/legal-case/feature/src/**/*.ts", "libs/web/legal-case/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/legal-case/feature"],
+      "options": {
+        "jestConfig": "libs/web/legal-case/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

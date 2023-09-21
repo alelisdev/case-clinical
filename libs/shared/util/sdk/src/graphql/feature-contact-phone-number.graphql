@@ -1,0 +1,162 @@
+
+fragment ContactPhoneNumberDetails on ContactPhoneNumber {
+id
+createdAt
+updatedAt
+name
+countryId
+phoneNumber
+label
+contactId
+country {
+  id
+  name
+}
+contact {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContactPhoneNumberLists on ContactPhoneNumber {
+id
+createdAt
+updatedAt
+name
+countryId
+phoneNumber
+label
+contactId
+country {
+    id
+    name
+}
+contact {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContactPhoneNumbers($input: AdminListContactPhoneNumberInput) {
+  items: adminContactPhoneNumbers(input: $input) {
+    ...ContactPhoneNumberLists
+  }
+  count: adminCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContactPhoneNumbers($input: AdminListContactPhoneNumberInput) {
+  count: adminCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContactPhoneNumber($contactPhoneNumberId: String!) {
+  item: adminContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId) {
+    ...ContactPhoneNumberDetails
+  }
+}
+mutation AdminCreateContactPhoneNumber($input: AdminCreateContactPhoneNumberInput!) {
+  created: adminCreateContactPhoneNumber(input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+mutation AdminUpdateContactPhoneNumber($contactPhoneNumberId: String!, $input: AdminUpdateContactPhoneNumberInput!) {
+  updated: adminUpdateContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId, input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+mutation AdminDeleteContactPhoneNumber($contactPhoneNumberId: String!) {
+  deleted: adminDeleteContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+query UserContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  items: userContactPhoneNumbers(input: $input) {
+    ...ContactPhoneNumberLists
+  }
+  count: userCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  count: userCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  items: userSelectContactPhoneNumbers(input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+query UserContactPhoneNumber($contactPhoneNumberId: String!) {
+  item: userContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+mutation UserCreateContactPhoneNumber($input: UserCreateContactPhoneNumberInput!) {
+  created: userCreateContactPhoneNumber(input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+mutation UserUpdateContactPhoneNumber($contactPhoneNumberId: String!, $input: UserUpdateContactPhoneNumberInput!) {
+  updated: userUpdateContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId, input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+mutation UserUpdateContactPhoneNumbers($input: UserUpdateContactPhoneNumbersInput!) {
+  updated: userUpdateContactPhoneNumbers(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContactPhoneNumber($contactPhoneNumberId: String!) {
+  deleted: userDeleteContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+query PublicContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  items: publicContactPhoneNumbers(input: $input) {
+    ...ContactPhoneNumberLists
+  }
+  count: publicCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  count: publicCountContactPhoneNumbers(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContactPhoneNumbers($input: UserListContactPhoneNumberInput) {
+  items: publicSelectContactPhoneNumbers(input: $input) {
+    ...ContactPhoneNumberDetails
+  }
+}
+
+query PublicContactPhoneNumber($contactPhoneNumberId: String!) {
+  item: publicContactPhoneNumber(contactPhoneNumberId: $contactPhoneNumberId) {
+    ...ContactPhoneNumberDetails
+  }
+}

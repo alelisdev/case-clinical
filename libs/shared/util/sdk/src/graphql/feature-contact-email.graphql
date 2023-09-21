@@ -1,0 +1,150 @@
+
+fragment ContactEmailDetails on ContactEmail {
+id
+createdAt
+updatedAt
+email
+name
+contactId
+contact {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ContactEmailLists on ContactEmail {
+id
+createdAt
+updatedAt
+email
+name
+contactId
+contact {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminContactEmails($input: AdminListContactEmailInput) {
+  items: adminContactEmails(input: $input) {
+    ...ContactEmailLists
+  }
+  count: adminCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContactEmails($input: AdminListContactEmailInput) {
+  count: adminCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContactEmail($contactEmailId: String!) {
+  item: adminContactEmail(contactEmailId: $contactEmailId) {
+    ...ContactEmailDetails
+  }
+}
+mutation AdminCreateContactEmail($input: AdminCreateContactEmailInput!) {
+  created: adminCreateContactEmail(input: $input) {
+    ...ContactEmailDetails
+  }
+}
+mutation AdminUpdateContactEmail($contactEmailId: String!, $input: AdminUpdateContactEmailInput!) {
+  updated: adminUpdateContactEmail(contactEmailId: $contactEmailId, input: $input) {
+    ...ContactEmailDetails
+  }
+}
+mutation AdminDeleteContactEmail($contactEmailId: String!) {
+  deleted: adminDeleteContactEmail(contactEmailId: $contactEmailId) {
+    ...ContactEmailDetails
+  }
+}
+
+query UserContactEmails($input: UserListContactEmailInput) {
+  items: userContactEmails(input: $input) {
+    ...ContactEmailLists
+  }
+  count: userCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContactEmails($input: UserListContactEmailInput) {
+  count: userCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContactEmails($input: UserListContactEmailInput) {
+  items: userSelectContactEmails(input: $input) {
+    ...ContactEmailDetails
+  }
+}
+
+query UserContactEmail($contactEmailId: String!) {
+  item: userContactEmail(contactEmailId: $contactEmailId) {
+    ...ContactEmailDetails
+  }
+}
+
+mutation UserCreateContactEmail($input: UserCreateContactEmailInput!) {
+  created: userCreateContactEmail(input: $input) {
+    ...ContactEmailDetails
+  }
+}
+mutation UserUpdateContactEmail($contactEmailId: String!, $input: UserUpdateContactEmailInput!) {
+  updated: userUpdateContactEmail(contactEmailId: $contactEmailId, input: $input) {
+    ...ContactEmailDetails
+  }
+}
+
+mutation UserUpdateContactEmails($input: UserUpdateContactEmailsInput!) {
+  updated: userUpdateContactEmails(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContactEmail($contactEmailId: String!) {
+  deleted: userDeleteContactEmail(contactEmailId: $contactEmailId) {
+    ...ContactEmailDetails
+  }
+}
+
+query PublicContactEmails($input: UserListContactEmailInput) {
+  items: publicContactEmails(input: $input) {
+    ...ContactEmailLists
+  }
+  count: publicCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContactEmails($input: UserListContactEmailInput) {
+  count: publicCountContactEmails(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContactEmails($input: UserListContactEmailInput) {
+  items: publicSelectContactEmails(input: $input) {
+    ...ContactEmailDetails
+  }
+}
+
+query PublicContactEmail($contactEmailId: String!) {
+  item: publicContactEmail(contactEmailId: $contactEmailId) {
+    ...ContactEmailDetails
+  }
+}

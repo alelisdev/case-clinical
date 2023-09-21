@@ -1,0 +1,149 @@
+
+fragment InjuryDetails on Injury {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment InjuryLists on Injury {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminInjuries($input: AdminListInjuryInput) {
+  items: adminInjuries(input: $input) {
+    ...InjuryLists
+  }
+  count: adminCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountInjuries($input: AdminListInjuryInput) {
+  count: adminCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminInjury($injuryId: String!) {
+  item: adminInjury(injuryId: $injuryId) {
+    ...InjuryDetails
+  }
+}
+mutation AdminCreateInjury($input: AdminCreateInjuryInput!) {
+  created: adminCreateInjury(input: $input) {
+    ...InjuryDetails
+  }
+}
+mutation AdminUpdateInjury($injuryId: String!, $input: AdminUpdateInjuryInput!) {
+  updated: adminUpdateInjury(injuryId: $injuryId, input: $input) {
+    ...InjuryDetails
+  }
+}
+mutation AdminDeleteInjury($injuryId: String!) {
+  deleted: adminDeleteInjury(injuryId: $injuryId) {
+    ...InjuryDetails
+  }
+}
+
+query UserInjuries($input: UserListInjuryInput) {
+  items: userInjuries(input: $input) {
+    ...InjuryLists
+  }
+  count: userCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountInjuries($input: UserListInjuryInput) {
+  count: userCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectInjuries($input: UserListInjuryInput) {
+  items: userSelectInjuries(input: $input) {
+    ...InjuryDetails
+  }
+}
+
+query UserInjury($injuryId: String!) {
+  item: userInjury(injuryId: $injuryId) {
+    ...InjuryDetails
+  }
+}
+
+mutation UserCreateInjury($input: UserCreateInjuryInput!) {
+  created: userCreateInjury(input: $input) {
+    ...InjuryDetails
+  }
+}
+mutation UserUpdateInjury($injuryId: String!, $input: UserUpdateInjuryInput!) {
+  updated: userUpdateInjury(injuryId: $injuryId, input: $input) {
+    ...InjuryDetails
+  }
+}
+
+mutation UserUpdateInjuries($input: UserUpdateInjuriesInput!) {
+  updated: userUpdateInjuries(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteInjury($injuryId: String!) {
+  deleted: userDeleteInjury(injuryId: $injuryId) {
+    ...InjuryDetails
+  }
+}
+
+query PublicInjuries($input: UserListInjuryInput) {
+  items: publicInjuries(input: $input) {
+    ...InjuryLists
+  }
+  count: publicCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountInjuries($input: UserListInjuryInput) {
+  count: publicCountInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectInjuries($input: UserListInjuryInput) {
+  items: publicSelectInjuries(input: $input) {
+    ...InjuryDetails
+  }
+}
+
+query PublicInjury($injuryId: String!) {
+  item: publicInjury(injuryId: $injuryId) {
+    ...InjuryDetails
+  }
+}

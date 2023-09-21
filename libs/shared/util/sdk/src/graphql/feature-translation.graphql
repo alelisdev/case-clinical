@@ -1,0 +1,110 @@
+
+fragment TranslationDetails on Translation {
+id
+createdAt
+updatedAt
+name
+languageCode
+translation
+
+
+
+
+
+
+}
+
+fragment TranslationLists on Translation {
+id
+createdAt
+updatedAt
+name
+languageCode
+translation
+
+
+
+
+
+
+}
+
+
+
+query AdminTranslations($input: AdminListTranslationInput) {
+  items: adminTranslations(input: $input) {
+    ...TranslationLists
+  }
+  count: adminCountTranslations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTranslations($input: AdminListTranslationInput) {
+  count: adminCountTranslations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTranslation($translationId: String!) {
+  item: adminTranslation(translationId: $translationId) {
+    ...TranslationDetails
+  }
+}
+mutation AdminCreateTranslation($input: AdminCreateTranslationInput!) {
+  created: adminCreateTranslation(input: $input) {
+    ...TranslationDetails
+  }
+}
+mutation AdminUpdateTranslation($translationId: String!, $input: AdminUpdateTranslationInput!) {
+  updated: adminUpdateTranslation(translationId: $translationId, input: $input) {
+    ...TranslationDetails
+  }
+}
+mutation AdminDeleteTranslation($translationId: String!) {
+  deleted: adminDeleteTranslation(translationId: $translationId) {
+    ...TranslationDetails
+  }
+}
+
+query UserTranslations($input: UserListTranslationInput) {
+  items: userTranslations(input: $input) {
+    ...TranslationLists
+  }
+  count: userCountTranslations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTranslations($input: UserListTranslationInput) {
+  count: userCountTranslations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTranslations($input: UserListTranslationInput) {
+  items: userSelectTranslations(input: $input) {
+    ...TranslationDetails
+  }
+}
+
+query UserTranslation($translationId: String!) {
+  item: userTranslation(translationId: $translationId) {
+    ...TranslationDetails
+  }
+}
+mutation UserCreateTranslation($input: UserCreateTranslationInput!) {
+  created: userCreateTranslation(input: $input) {
+    ...TranslationDetails
+  }
+}
+mutation UserUpdateTranslation($translationId: String!, $input: UserUpdateTranslationInput!) {
+  updated: userUpdateTranslation(translationId: $translationId, input: $input) {
+    ...TranslationDetails
+  }
+}
+mutation UserDeleteTranslation($translationId: String!) {
+  deleted: userDeleteTranslation(translationId: $translationId) {
+    ...TranslationDetails
+  }
+}

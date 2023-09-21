@@ -1,0 +1,26 @@
+{
+  "name": "api-assigned-document-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/assigned-document/feature/src",
+  "prefix": "assigned-document",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/assigned-document/data-access/src/**/*.ts",
+          "libs/api/assigned-document/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/assigned-document/data-access"],
+      "options": {
+        "jestConfig": "libs/api/assigned-document/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

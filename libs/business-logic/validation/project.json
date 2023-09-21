@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/validation/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/validation"],
+      "options": {
+        "project": "libs/validation/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/validation/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/validation/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/validation"],
+      "options": {
+        "jestConfig": "libs/validation/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/validation/**/*.ts", "libs/validation/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-validation"
+}

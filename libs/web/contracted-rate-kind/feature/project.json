@@ -1,0 +1,26 @@
+{
+  "name": "web-contracted-rate-kind-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/contracted-rate-kind/feature/src",
+  "prefix": "contracted-rate-kind",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/contracted-rate-kind/feature/src/**/*.ts",
+          "libs/web/contracted-rate-kind/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/contracted-rate-kind/feature"],
+      "options": {
+        "jestConfig": "libs/web/contracted-rate-kind/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

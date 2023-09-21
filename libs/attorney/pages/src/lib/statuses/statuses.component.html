@@ -1,0 +1,13 @@
+
+<ui-formly-json-form
+  *ngIf="vm$ | async as vm"
+  class="w-full h-full"
+  formName="page_attorney_statuses"
+  [showSubmitButton]="false"
+  [componentStore]="store"
+  [model]="model"
+  [formData]="getFormData(vm)"
+  (formIsReady)="this.onResize()"
+></ui-formly-json-form>
+  
+  

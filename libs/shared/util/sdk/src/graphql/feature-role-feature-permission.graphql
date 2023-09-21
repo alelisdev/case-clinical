@@ -1,0 +1,158 @@
+
+fragment RoleFeaturePermissionDetails on RoleFeaturePermission {
+id
+createdAt
+updatedAt
+name
+featurePermissionId
+roleId
+featurePermission {
+  id
+  name
+}
+role {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment RoleFeaturePermissionLists on RoleFeaturePermission {
+id
+createdAt
+updatedAt
+name
+featurePermissionId
+roleId
+featurePermission {
+    id
+    name
+}
+role {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminRoleFeaturePermissions($input: AdminListRoleFeaturePermissionInput) {
+  items: adminRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionLists
+  }
+  count: adminCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountRoleFeaturePermissions($input: AdminListRoleFeaturePermissionInput) {
+  count: adminCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminRoleFeaturePermission($roleFeaturePermissionId: String!) {
+  item: adminRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+mutation AdminCreateRoleFeaturePermission($input: AdminCreateRoleFeaturePermissionInput!) {
+  created: adminCreateRoleFeaturePermission(input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+mutation AdminUpdateRoleFeaturePermission($roleFeaturePermissionId: String!, $input: AdminUpdateRoleFeaturePermissionInput!) {
+  updated: adminUpdateRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId, input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+mutation AdminDeleteRoleFeaturePermission($roleFeaturePermissionId: String!) {
+  deleted: adminDeleteRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+query UserRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  items: userRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionLists
+  }
+  count: userCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  count: userCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  items: userSelectRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+query UserRoleFeaturePermission($roleFeaturePermissionId: String!) {
+  item: userRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+mutation UserCreateRoleFeaturePermission($input: UserCreateRoleFeaturePermissionInput!) {
+  created: userCreateRoleFeaturePermission(input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+mutation UserUpdateRoleFeaturePermission($roleFeaturePermissionId: String!, $input: UserUpdateRoleFeaturePermissionInput!) {
+  updated: userUpdateRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId, input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+mutation UserUpdateRoleFeaturePermissions($input: UserUpdateRoleFeaturePermissionsInput!) {
+  updated: userUpdateRoleFeaturePermissions(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteRoleFeaturePermission($roleFeaturePermissionId: String!) {
+  deleted: userDeleteRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+query PublicRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  items: publicRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionLists
+  }
+  count: publicCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  count: publicCountRoleFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectRoleFeaturePermissions($input: UserListRoleFeaturePermissionInput) {
+  items: publicSelectRoleFeaturePermissions(input: $input) {
+    ...RoleFeaturePermissionDetails
+  }
+}
+
+query PublicRoleFeaturePermission($roleFeaturePermissionId: String!) {
+  item: publicRoleFeaturePermission(roleFeaturePermissionId: $roleFeaturePermissionId) {
+    ...RoleFeaturePermissionDetails
+  }
+}

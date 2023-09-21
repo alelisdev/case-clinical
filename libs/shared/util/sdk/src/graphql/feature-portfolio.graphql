@@ -1,0 +1,148 @@
+
+fragment PortfolioDetails on Portfolio {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+   ...CaseAccountLists
+  }
+}
+
+fragment PortfolioLists on Portfolio {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+caseAccounts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPortfolios($input: AdminListPortfolioInput) {
+  items: adminPortfolios(input: $input) {
+    ...PortfolioLists
+  }
+  count: adminCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPortfolios($input: AdminListPortfolioInput) {
+  count: adminCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPortfolio($portfolioId: String!) {
+  item: adminPortfolio(portfolioId: $portfolioId) {
+    ...PortfolioDetails
+  }
+}
+mutation AdminCreatePortfolio($input: AdminCreatePortfolioInput!) {
+  created: adminCreatePortfolio(input: $input) {
+    ...PortfolioDetails
+  }
+}
+mutation AdminUpdatePortfolio($portfolioId: String!, $input: AdminUpdatePortfolioInput!) {
+  updated: adminUpdatePortfolio(portfolioId: $portfolioId, input: $input) {
+    ...PortfolioDetails
+  }
+}
+mutation AdminDeletePortfolio($portfolioId: String!) {
+  deleted: adminDeletePortfolio(portfolioId: $portfolioId) {
+    ...PortfolioDetails
+  }
+}
+
+query UserPortfolios($input: UserListPortfolioInput) {
+  items: userPortfolios(input: $input) {
+    ...PortfolioLists
+  }
+  count: userCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPortfolios($input: UserListPortfolioInput) {
+  count: userCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPortfolios($input: UserListPortfolioInput) {
+  items: userSelectPortfolios(input: $input) {
+    ...PortfolioDetails
+  }
+}
+
+query UserPortfolio($portfolioId: String!) {
+  item: userPortfolio(portfolioId: $portfolioId) {
+    ...PortfolioDetails
+  }
+}
+
+mutation UserCreatePortfolio($input: UserCreatePortfolioInput!) {
+  created: userCreatePortfolio(input: $input) {
+    ...PortfolioDetails
+  }
+}
+mutation UserUpdatePortfolio($portfolioId: String!, $input: UserUpdatePortfolioInput!) {
+  updated: userUpdatePortfolio(portfolioId: $portfolioId, input: $input) {
+    ...PortfolioDetails
+  }
+}
+
+mutation UserUpdatePortfolios($input: UserUpdatePortfoliosInput!) {
+  updated: userUpdatePortfolios(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePortfolio($portfolioId: String!) {
+  deleted: userDeletePortfolio(portfolioId: $portfolioId) {
+    ...PortfolioDetails
+  }
+}
+
+query PublicPortfolios($input: UserListPortfolioInput) {
+  items: publicPortfolios(input: $input) {
+    ...PortfolioLists
+  }
+  count: publicCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPortfolios($input: UserListPortfolioInput) {
+  count: publicCountPortfolios(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPortfolios($input: UserListPortfolioInput) {
+  items: publicSelectPortfolios(input: $input) {
+    ...PortfolioDetails
+  }
+}
+
+query PublicPortfolio($portfolioId: String!) {
+  item: publicPortfolio(portfolioId: $portfolioId) {
+    ...PortfolioDetails
+  }
+}

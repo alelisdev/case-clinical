@@ -1,0 +1,14 @@
+::ng-deep ng-dropdown-panel {
+  /* position: static !important; */
+}
+
+::ng-deep .ng-dropdown-panel-items {
+  /* position: static; */
+  min-height: 240px !important;
+  height: 240px !important;
+}
+
+.ng-select.custom ::ng-deep .ng-select-container  {
+  min-height: 200px;
+  border-radius: 0;
+}

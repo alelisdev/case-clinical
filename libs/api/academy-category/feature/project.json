@@ -1,0 +1,26 @@
+{
+  "name": "api-academy-category-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/academy-category/feature/src",
+  "prefix": "academy-category",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/academy-category/data-access/src/**/*.ts",
+          "libs/api/academy-category/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/academy-category/data-access"],
+      "options": {
+        "jestConfig": "libs/api/academy-category/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

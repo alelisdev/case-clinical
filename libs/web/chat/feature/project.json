@@ -1,0 +1,23 @@
+{
+  "name": "web-chat-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/chat/feature/src",
+  "prefix": "chat",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/chat/feature/src/**/*.ts", "libs/web/chat/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/chat/feature"],
+      "options": {
+        "jestConfig": "libs/web/chat/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,169 @@
+
+fragment LeadInjuryDetails on LeadInjury {
+id
+createdAt
+updatedAt
+name
+leadId
+bodyPartId
+severityId
+lead {
+  id
+  name
+}
+severity {
+  id
+  name
+}
+
+
+
+
+
+injuries {
+    id
+    name
+  }
+}
+
+fragment LeadInjuryLists on LeadInjury {
+id
+createdAt
+updatedAt
+name
+leadId
+bodyPartId
+severityId
+lead {
+    id
+    name
+}
+severity {
+    id
+    name
+}
+
+
+
+
+
+injuries {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminLeadInjuries($input: AdminListLeadInjuryInput) {
+  items: adminLeadInjuries(input: $input) {
+    ...LeadInjuryLists
+  }
+  count: adminCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeadInjuries($input: AdminListLeadInjuryInput) {
+  count: adminCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLeadInjury($leadInjuryId: String!) {
+  item: adminLeadInjury(leadInjuryId: $leadInjuryId) {
+    ...LeadInjuryDetails
+  }
+}
+mutation AdminCreateLeadInjury($input: AdminCreateLeadInjuryInput!) {
+  created: adminCreateLeadInjury(input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+mutation AdminUpdateLeadInjury($leadInjuryId: String!, $input: AdminUpdateLeadInjuryInput!) {
+  updated: adminUpdateLeadInjury(leadInjuryId: $leadInjuryId, input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+mutation AdminDeleteLeadInjury($leadInjuryId: String!) {
+  deleted: adminDeleteLeadInjury(leadInjuryId: $leadInjuryId) {
+    ...LeadInjuryDetails
+  }
+}
+
+query UserLeadInjuries($input: UserListLeadInjuryInput) {
+  items: userLeadInjuries(input: $input) {
+    ...LeadInjuryLists
+  }
+  count: userCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeadInjuries($input: UserListLeadInjuryInput) {
+  count: userCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeadInjuries($input: UserListLeadInjuryInput) {
+  items: userSelectLeadInjuries(input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+
+query UserLeadInjury($leadInjuryId: String!) {
+  item: userLeadInjury(leadInjuryId: $leadInjuryId) {
+    ...LeadInjuryDetails
+  }
+}
+
+mutation UserCreateLeadInjury($input: UserCreateLeadInjuryInput!) {
+  created: userCreateLeadInjury(input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+mutation UserUpdateLeadInjury($leadInjuryId: String!, $input: UserUpdateLeadInjuryInput!) {
+  updated: userUpdateLeadInjury(leadInjuryId: $leadInjuryId, input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+
+mutation UserUpdateLeadInjuries($input: UserUpdateLeadInjuriesInput!) {
+  updated: userUpdateLeadInjuries(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLeadInjury($leadInjuryId: String!) {
+  deleted: userDeleteLeadInjury(leadInjuryId: $leadInjuryId) {
+    ...LeadInjuryDetails
+  }
+}
+
+query PublicLeadInjuries($input: UserListLeadInjuryInput) {
+  items: publicLeadInjuries(input: $input) {
+    ...LeadInjuryLists
+  }
+  count: publicCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeadInjuries($input: UserListLeadInjuryInput) {
+  count: publicCountLeadInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeadInjuries($input: UserListLeadInjuryInput) {
+  items: publicSelectLeadInjuries(input: $input) {
+    ...LeadInjuryDetails
+  }
+}
+
+query PublicLeadInjury($leadInjuryId: String!) {
+  item: publicLeadInjury(leadInjuryId: $leadInjuryId) {
+    ...LeadInjuryDetails
+  }
+}

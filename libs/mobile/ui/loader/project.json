@@ -1,0 +1,23 @@
+{
+  "name": "mobile-ui-loader",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/ui/loader/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/ui/loader/src/**/*.ts", "libs/mobile/ui/loader/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/ui/loader"],
+      "options": {
+        "jestConfig": "libs/mobile/ui/loader/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

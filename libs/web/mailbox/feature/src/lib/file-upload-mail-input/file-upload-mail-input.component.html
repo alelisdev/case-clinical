@@ -1,0 +1,95 @@
+<div class="flex my-auto mt-2">
+  <div>
+    <input
+        id="image-file-input"
+        class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+        type="file"
+        [multiple]="multiple"
+        [accept]="allowedExtensions"
+        [formControl]="formControl"
+        (change)="fileChanged($event)">
+    <label
+        class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-400 hover:bg-opacity-20 dark:hover:bg-black dark:hover:bg-opacity-5"
+        for="image-file-input"
+        matRipple>
+        <mat-icon [svgIcon]="'heroicons_outline:paper-clip'"></mat-icon>
+    </label>
+  </div>
+
+  <div>
+    <div
+        class="flex flex-wrap gap-2 ml-3"
+        style="min-height: 20px !important; max-height: 100px !important; overflow-y: auto !important"
+      >
+      <ng-container *ngIf="document.length">
+        <div *ngFor="let file of document; let i = index" class="rounded-xl p-2.5 bg-stone-200">
+          <div class="flex flex-row justify-between items-center gap-4">
+            <a
+              webUiFormFieldFile
+              ngDefaultControl
+              class="text-blue-500 no-underline hover:cursor-pointer break-all"
+              [download]="file?.name"
+              (click)="openDocument(file)"
+              #tooltip="matTooltip"
+              [matTooltip]="file?.name"
+              >{{ getAbbrName(file?.name) }}
+            </a>
+            <svg
+              *ngIf="!formControl.disabled"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 min-w-6 hover:cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              (click)="!formControl.disabled ? fileDeleted(file, i) : null"
+            >
+              <path
+                class="text-red-500 w-5 h-5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="uploadedDocument.length">
+        <div *ngFor="let file of uploadedDocument; let i = index" class="rounded-xl p-2.5 bg-stone-200">
+          <div class="flex flex-row justify-between items-center gap-4">
+            <a
+              webUiFormFieldFile
+              ngDefaultControl
+              class="text-blue-500 no-underline hover:cursor-pointer break-all"
+              [download]="file?.filename"
+              (click)="openDocument(file)"
+              #tooltip="matTooltip"
+              [matTooltip]="file?.filename"
+              >{{ getAbbrName(file?.filename) }}
+            </a>
+            <svg
+              *ngIf="!formControl.disabled"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 min-w-6 hover:cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              (click)="!formControl.disabled ? fileDeleted(file, i) : null"
+            >
+              <path
+                class="text-red-500 w-5 h-5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <ng-container #filePreviewTpl>
+      <ui-file-preview #filePreview mode="edit" [isDownloadable]="true"></ui-file-preview>
+    </ng-container>
+  </div>
+</div>

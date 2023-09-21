@@ -1,0 +1,149 @@
+
+fragment SeverityDetails on Severity {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+}
+
+fragment SeverityLists on Severity {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+leads {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminSeverities($input: AdminListSeverityInput) {
+  items: adminSeverities(input: $input) {
+    ...SeverityLists
+  }
+  count: adminCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountSeverities($input: AdminListSeverityInput) {
+  count: adminCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminSeverity($severityId: String!) {
+  item: adminSeverity(severityId: $severityId) {
+    ...SeverityDetails
+  }
+}
+mutation AdminCreateSeverity($input: AdminCreateSeverityInput!) {
+  created: adminCreateSeverity(input: $input) {
+    ...SeverityDetails
+  }
+}
+mutation AdminUpdateSeverity($severityId: String!, $input: AdminUpdateSeverityInput!) {
+  updated: adminUpdateSeverity(severityId: $severityId, input: $input) {
+    ...SeverityDetails
+  }
+}
+mutation AdminDeleteSeverity($severityId: String!) {
+  deleted: adminDeleteSeverity(severityId: $severityId) {
+    ...SeverityDetails
+  }
+}
+
+query UserSeverities($input: UserListSeverityInput) {
+  items: userSeverities(input: $input) {
+    ...SeverityLists
+  }
+  count: userCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountSeverities($input: UserListSeverityInput) {
+  count: userCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectSeverities($input: UserListSeverityInput) {
+  items: userSelectSeverities(input: $input) {
+    ...SeverityDetails
+  }
+}
+
+query UserSeverity($severityId: String!) {
+  item: userSeverity(severityId: $severityId) {
+    ...SeverityDetails
+  }
+}
+
+mutation UserCreateSeverity($input: UserCreateSeverityInput!) {
+  created: userCreateSeverity(input: $input) {
+    ...SeverityDetails
+  }
+}
+mutation UserUpdateSeverity($severityId: String!, $input: UserUpdateSeverityInput!) {
+  updated: userUpdateSeverity(severityId: $severityId, input: $input) {
+    ...SeverityDetails
+  }
+}
+
+mutation UserUpdateSeverities($input: UserUpdateSeveritiesInput!) {
+  updated: userUpdateSeverities(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteSeverity($severityId: String!) {
+  deleted: userDeleteSeverity(severityId: $severityId) {
+    ...SeverityDetails
+  }
+}
+
+query PublicSeverities($input: UserListSeverityInput) {
+  items: publicSeverities(input: $input) {
+    ...SeverityLists
+  }
+  count: publicCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountSeverities($input: UserListSeverityInput) {
+  count: publicCountSeverities(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectSeverities($input: UserListSeverityInput) {
+  items: publicSelectSeverities(input: $input) {
+    ...SeverityDetails
+  }
+}
+
+query PublicSeverity($severityId: String!) {
+  item: publicSeverity(severityId: $severityId) {
+    ...SeverityDetails
+  }
+}

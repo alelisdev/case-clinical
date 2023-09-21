@@ -1,0 +1,148 @@
+
+fragment CategoryDetails on Category {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizationKinds {
+    ...AuthorizationKindLists
+  }
+}
+
+fragment CategoryLists on Category {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+authorizationKinds {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCategories($input: AdminListCategoryInput) {
+  items: adminCategories(input: $input) {
+    ...CategoryLists
+  }
+  count: adminCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCategories($input: AdminListCategoryInput) {
+  count: adminCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCategory($categoryId: String!) {
+  item: adminCategory(categoryId: $categoryId) {
+    ...CategoryDetails
+  }
+}
+mutation AdminCreateCategory($input: AdminCreateCategoryInput!) {
+  created: adminCreateCategory(input: $input) {
+    ...CategoryDetails
+  }
+}
+mutation AdminUpdateCategory($categoryId: String!, $input: AdminUpdateCategoryInput!) {
+  updated: adminUpdateCategory(categoryId: $categoryId, input: $input) {
+    ...CategoryDetails
+  }
+}
+mutation AdminDeleteCategory($categoryId: String!) {
+  deleted: adminDeleteCategory(categoryId: $categoryId) {
+    ...CategoryDetails
+  }
+}
+
+query UserCategories($input: UserListCategoryInput) {
+  items: userCategories(input: $input) {
+    ...CategoryLists
+  }
+  count: userCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCategories($input: UserListCategoryInput) {
+  count: userCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCategories($input: UserListCategoryInput) {
+  items: userSelectCategories(input: $input) {
+    ...CategoryDetails
+  }
+}
+
+query UserCategory($categoryId: String!) {
+  item: userCategory(categoryId: $categoryId) {
+    ...CategoryDetails
+  }
+}
+
+mutation UserCreateCategory($input: UserCreateCategoryInput!) {
+  created: userCreateCategory(input: $input) {
+    ...CategoryDetails
+  }
+}
+mutation UserUpdateCategory($categoryId: String!, $input: UserUpdateCategoryInput!) {
+  updated: userUpdateCategory(categoryId: $categoryId, input: $input) {
+    ...CategoryDetails
+  }
+}
+
+mutation UserUpdateCategories($input: UserUpdateCategoriesInput!) {
+  updated: userUpdateCategories(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCategory($categoryId: String!) {
+  deleted: userDeleteCategory(categoryId: $categoryId) {
+    ...CategoryDetails
+  }
+}
+
+query PublicCategories($input: UserListCategoryInput) {
+  items: publicCategories(input: $input) {
+    ...CategoryLists
+  }
+  count: publicCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCategories($input: UserListCategoryInput) {
+  count: publicCountCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCategories($input: UserListCategoryInput) {
+  items: publicSelectCategories(input: $input) {
+    ...CategoryDetails
+  }
+}
+
+query PublicCategory($categoryId: String!) {
+  item: publicCategory(categoryId: $categoryId) {
+    ...CategoryDetails
+  }
+}

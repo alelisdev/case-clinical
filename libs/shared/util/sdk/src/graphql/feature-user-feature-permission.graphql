@@ -1,0 +1,110 @@
+
+fragment UserFeaturePermissionDetails on UserFeaturePermission {
+id
+createdAt
+updatedAt
+name
+featurePermissionId
+userId
+featurePermission {
+    id
+    name
+}
+user {
+    id
+    name
+}
+
+
+}
+
+fragment UserFeaturePermissionUpdateResultDetails on UserFeaturePermissionUpdateResult {
+  featureCount
+  featurePermissionCount
+}
+
+
+query AdminUserFeaturePermissions($input: AdminListUserFeaturePermissionInput) {
+  items: adminUserFeaturePermissions(input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+  count: adminCountUserFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountUserFeaturePermissions($input: AdminListUserFeaturePermissionInput) {
+  count: adminCountUserFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminUserFeaturePermission($userFeaturePermissionId: String!) {
+  item: adminUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation AdminCreateUserFeaturePermission($input: AdminCreateUserFeaturePermissionInput!) {
+  created: adminCreateUserFeaturePermission(input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation AdminUpdateUserFeaturePermission($userFeaturePermissionId: String!, $input: AdminUpdateUserFeaturePermissionInput!) {
+  updated: adminUpdateUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId, input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation AdminDeleteUserFeaturePermission($userFeaturePermissionId: String!) {
+  deleted: adminDeleteUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId) {
+    ...UserFeaturePermissionDetails
+  }
+}
+
+query UserUserFeaturePermissions($input: UserListUserFeaturePermissionInput) {
+  items: userUserFeaturePermissions(input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+  count: userCountUserFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountUserFeaturePermissions($input: UserListUserFeaturePermissionInput) {
+  count: userCountUserFeaturePermissions(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectUserFeaturePermissions($input: UserListUserFeaturePermissionInput) {
+  items: userSelectUserFeaturePermissions(input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+}
+
+query UserUserFeaturePermission($userFeaturePermissionId: String!) {
+  item: userUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation UserCreateUserFeaturePermission($input: UserCreateUserFeaturePermissionInput!) {
+  created: userCreateUserFeaturePermission(input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation UserUpdateUserFeaturePermission($userFeaturePermissionId: String!, $input: UserUpdateUserFeaturePermissionInput!) {
+  updated: userUpdateUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId, input: $input) {
+    ...UserFeaturePermissionDetails
+  }
+}
+mutation UserDeleteUserFeaturePermission($userFeaturePermissionId: String!) {
+  deleted: userDeleteUserFeaturePermission(userFeaturePermissionId: $userFeaturePermissionId) {
+    ...UserFeaturePermissionDetails
+  }
+}
+
+
+mutation AdminUpdateUserRoles($userId: String!,$input: AdminUserFeaturePermissionUpdateInput!) {
+  result: adminUpdateUserRoles(userId: $userId, input: $input) {
+    ...UserFeaturePermissionUpdateResultDetails
+  }
+}

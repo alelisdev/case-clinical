@@ -1,0 +1,158 @@
+
+
+fragment TaskTagDetails on TaskTag {
+id
+createdAt
+updatedAt
+name
+taskId
+tagId
+
+task {
+  id
+  name
+}
+tag {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment TaskTagLists on TaskTag {
+id
+createdAt
+updatedAt
+name
+taskId
+tagId
+task {
+    id
+    name
+}
+tag {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminTaskTags($input: AdminListTaskTagInput) {
+  items: adminTaskTags(input: $input) {
+    ...TaskTagLists
+  }
+  count: adminCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountTaskTags($input: AdminListTaskTagInput) {
+  count: adminCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminTaskTag($taskTagId: String!) {
+  item: adminTaskTag(taskTagId: $taskTagId) {
+    ...TaskTagDetails
+  }
+}
+mutation AdminCreateTaskTag($input: AdminCreateTaskTagInput!) {
+  created: adminCreateTaskTag(input: $input) {
+    ...TaskTagDetails
+  }
+}
+mutation AdminUpdateTaskTag($taskTagId: String!, $input: AdminUpdateTaskTagInput!) {
+  updated: adminUpdateTaskTag(taskTagId: $taskTagId, input: $input) {
+    ...TaskTagDetails
+  }
+}
+mutation AdminDeleteTaskTag($taskTagId: String!) {
+  deleted: adminDeleteTaskTag(taskTagId: $taskTagId) {
+    ...TaskTagDetails
+  }
+}
+
+query UserTaskTags($input: UserListTaskTagInput) {
+  items: userTaskTags(input: $input) {
+    ...TaskTagLists
+  }
+  count: userCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountTaskTags($input: UserListTaskTagInput) {
+  count: userCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectTaskTags($input: UserListTaskTagInput) {
+  items: userSelectTaskTags(input: $input) {
+    ...TaskTagDetails
+  }
+}
+
+query UserTaskTag($taskTagId: String!) {
+  item: userTaskTag(taskTagId: $taskTagId) {
+    ...TaskTagDetails
+  }
+}
+
+mutation UserCreateTaskTag($input: UserCreateTaskTagInput!) {
+  created: userCreateTaskTag(input: $input) {
+    ...TaskTagDetails
+  }
+}
+mutation UserUpdateTaskTag($taskTagId: String!, $input: UserUpdateTaskTagInput!) {
+  updated: userUpdateTaskTag(taskTagId: $taskTagId, input: $input) {
+    ...TaskTagDetails
+  }
+}
+
+mutation UserUpdateTaskTags($input: UserUpdateTaskTagsInput!) {
+  updated: userUpdateTaskTags(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteTaskTag($taskTagId: String!) {
+  deleted: userDeleteTaskTag(taskTagId: $taskTagId) {
+    ...TaskTagDetails
+  }
+}
+
+query PublicTaskTags($input: UserListTaskTagInput) {
+  items: publicTaskTags(input: $input) {
+    ...TaskTagLists
+  }
+  count: publicCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountTaskTags($input: UserListTaskTagInput) {
+  count: publicCountTaskTags(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectTaskTags($input: UserListTaskTagInput) {
+  items: publicSelectTaskTags(input: $input) {
+    ...TaskTagDetails
+  }
+}
+
+query PublicTaskTag($taskTagId: String!) {
+  item: publicTaskTag(taskTagId: $taskTagId) {
+    ...TaskTagDetails
+  }
+}

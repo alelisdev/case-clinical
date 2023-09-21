@@ -1,0 +1,159 @@
+
+
+fragment ClinicalProviderSpecialtyDetails on ClinicalProviderSpecialty {
+id
+createdAt
+updatedAt
+name
+npi
+clinicalProviderId
+specialtyId
+clinicalProvider {
+  id
+  name
+}
+specialty {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment ClinicalProviderSpecialtyLists on ClinicalProviderSpecialty {
+id
+createdAt
+updatedAt
+name
+npi
+clinicalProviderId
+specialtyId
+clinicalProvider {
+    id
+    name
+}
+specialty {
+    id
+    name
+}
+
+
+
+
+
+}
+
+query AdminClinicalProviderSpecialties($input: AdminListClinicalProviderSpecialtyInput) {
+  items: adminClinicalProviderSpecialties(input: $input) {
+    ...ClinicalProviderSpecialtyLists
+  }
+  count: adminCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviderSpecialties($input: AdminListClinicalProviderSpecialtyInput) {
+  count: adminCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!) {
+  item: adminClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+mutation AdminCreateClinicalProviderSpecialty($input: AdminCreateClinicalProviderSpecialtyInput!) {
+  created: adminCreateClinicalProviderSpecialty(input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+mutation AdminUpdateClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!, $input: AdminUpdateClinicalProviderSpecialtyInput!) {
+  updated: adminUpdateClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId, input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+mutation AdminDeleteClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!) {
+  deleted: adminDeleteClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+query UserClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  items: userClinicalProviderSpecialties(input: $input) {
+    ...ClinicalProviderSpecialtyLists
+  }
+  count: userCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  count: userCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  items: userSelectClinicalProviderSpecialties(input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+query UserClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!) {
+  item: userClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+mutation UserCreateClinicalProviderSpecialty($input: UserCreateClinicalProviderSpecialtyInput!) {
+  created: userCreateClinicalProviderSpecialty(input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+mutation UserUpdateClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!, $input: UserUpdateClinicalProviderSpecialtyInput!) {
+  updated: userUpdateClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId, input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+mutation UserUpdateClinicalProviderSpecialties($input: UserUpdateClinicalProviderSpecialtiesInput!) {
+  updated: userUpdateClinicalProviderSpecialties(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!) {
+  deleted: userDeleteClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+query PublicClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  items: publicClinicalProviderSpecialties(input: $input) {
+    ...ClinicalProviderSpecialtyLists
+  }
+  count: publicCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  count: publicCountClinicalProviderSpecialties(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviderSpecialties($input: UserListClinicalProviderSpecialtyInput) {
+  items: publicSelectClinicalProviderSpecialties(input: $input) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}
+
+query PublicClinicalProviderSpecialty($clinicalProviderSpecialtyId: String!) {
+  item: publicClinicalProviderSpecialty(clinicalProviderSpecialtyId: $clinicalProviderSpecialtyId) {
+    ...ClinicalProviderSpecialtyDetails
+  }
+}

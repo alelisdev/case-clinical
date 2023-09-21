@@ -1,0 +1,148 @@
+
+fragment EquipmentDetails on Equipment {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationEquipments {
+   ...PriorAuthorizationEquipmentLists
+  }
+}
+
+fragment EquipmentLists on Equipment {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+priorAuthorizationEquipments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminEquipments($input: AdminListEquipmentInput) {
+  items: adminEquipments(input: $input) {
+    ...EquipmentLists
+  }
+  count: adminCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountEquipments($input: AdminListEquipmentInput) {
+  count: adminCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminEquipment($equipmentId: String!) {
+  item: adminEquipment(equipmentId: $equipmentId) {
+    ...EquipmentDetails
+  }
+}
+mutation AdminCreateEquipment($input: AdminCreateEquipmentInput!) {
+  created: adminCreateEquipment(input: $input) {
+    ...EquipmentDetails
+  }
+}
+mutation AdminUpdateEquipment($equipmentId: String!, $input: AdminUpdateEquipmentInput!) {
+  updated: adminUpdateEquipment(equipmentId: $equipmentId, input: $input) {
+    ...EquipmentDetails
+  }
+}
+mutation AdminDeleteEquipment($equipmentId: String!) {
+  deleted: adminDeleteEquipment(equipmentId: $equipmentId) {
+    ...EquipmentDetails
+  }
+}
+
+query UserEquipments($input: UserListEquipmentInput) {
+  items: userEquipments(input: $input) {
+    ...EquipmentLists
+  }
+  count: userCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountEquipments($input: UserListEquipmentInput) {
+  count: userCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectEquipments($input: UserListEquipmentInput) {
+  items: userSelectEquipments(input: $input) {
+    ...EquipmentDetails
+  }
+}
+
+query UserEquipment($equipmentId: String!) {
+  item: userEquipment(equipmentId: $equipmentId) {
+    ...EquipmentDetails
+  }
+}
+
+mutation UserCreateEquipment($input: UserCreateEquipmentInput!) {
+  created: userCreateEquipment(input: $input) {
+    ...EquipmentDetails
+  }
+}
+mutation UserUpdateEquipment($equipmentId: String!, $input: UserUpdateEquipmentInput!) {
+  updated: userUpdateEquipment(equipmentId: $equipmentId, input: $input) {
+    ...EquipmentDetails
+  }
+}
+
+mutation UserUpdateEquipments($input: UserUpdateEquipmentsInput!) {
+  updated: userUpdateEquipments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteEquipment($equipmentId: String!) {
+  deleted: userDeleteEquipment(equipmentId: $equipmentId) {
+    ...EquipmentDetails
+  }
+}
+
+query PublicEquipments($input: UserListEquipmentInput) {
+  items: publicEquipments(input: $input) {
+    ...EquipmentLists
+  }
+  count: publicCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountEquipments($input: UserListEquipmentInput) {
+  count: publicCountEquipments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectEquipments($input: UserListEquipmentInput) {
+  items: publicSelectEquipments(input: $input) {
+    ...EquipmentDetails
+  }
+}
+
+query PublicEquipment($equipmentId: String!) {
+  item: publicEquipment(equipmentId: $equipmentId) {
+    ...EquipmentDetails
+  }
+}

@@ -1,0 +1,158 @@
+
+fragment PriorAuthGuidelineDetails on PriorAuthGuideline {
+id
+createdAt
+updatedAt
+name
+guidelineId
+priorAuthorizationRequestId
+guideline {
+  id
+  name
+}
+priorAuthorizationRequest {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthGuidelineLists on PriorAuthGuideline {
+id
+createdAt
+updatedAt
+name
+guidelineId
+priorAuthorizationRequestId
+guideline {
+    id
+    name
+}
+priorAuthorizationRequest {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminPriorAuthGuidelines($input: AdminListPriorAuthGuidelineInput) {
+  items: adminPriorAuthGuidelines(input: $input) {
+    ...PriorAuthGuidelineLists
+  }
+  count: adminCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthGuidelines($input: AdminListPriorAuthGuidelineInput) {
+  count: adminCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthGuideline($priorAuthGuidelineId: String!) {
+  item: adminPriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+mutation AdminCreatePriorAuthGuideline($input: AdminCreatePriorAuthGuidelineInput!) {
+  created: adminCreatePriorAuthGuideline(input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+mutation AdminUpdatePriorAuthGuideline($priorAuthGuidelineId: String!, $input: AdminUpdatePriorAuthGuidelineInput!) {
+  updated: adminUpdatePriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId, input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+mutation AdminDeletePriorAuthGuideline($priorAuthGuidelineId: String!) {
+  deleted: adminDeletePriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+query UserPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  items: userPriorAuthGuidelines(input: $input) {
+    ...PriorAuthGuidelineLists
+  }
+  count: userCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  count: userCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  items: userSelectPriorAuthGuidelines(input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+query UserPriorAuthGuideline($priorAuthGuidelineId: String!) {
+  item: userPriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+mutation UserCreatePriorAuthGuideline($input: UserCreatePriorAuthGuidelineInput!) {
+  created: userCreatePriorAuthGuideline(input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+mutation UserUpdatePriorAuthGuideline($priorAuthGuidelineId: String!, $input: UserUpdatePriorAuthGuidelineInput!) {
+  updated: userUpdatePriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId, input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+mutation UserUpdatePriorAuthGuidelines($input: UserUpdatePriorAuthGuidelinesInput!) {
+  updated: userUpdatePriorAuthGuidelines(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthGuideline($priorAuthGuidelineId: String!) {
+  deleted: userDeletePriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+query PublicPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  items: publicPriorAuthGuidelines(input: $input) {
+    ...PriorAuthGuidelineLists
+  }
+  count: publicCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  count: publicCountPriorAuthGuidelines(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthGuidelines($input: UserListPriorAuthGuidelineInput) {
+  items: publicSelectPriorAuthGuidelines(input: $input) {
+    ...PriorAuthGuidelineDetails
+  }
+}
+
+query PublicPriorAuthGuideline($priorAuthGuidelineId: String!) {
+  item: publicPriorAuthGuideline(priorAuthGuidelineId: $priorAuthGuidelineId) {
+    ...PriorAuthGuidelineDetails
+  }
+}

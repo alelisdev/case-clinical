@@ -1,0 +1,340 @@
+
+fragment PatientDetails on Patient {
+id
+createdAt
+updatedAt
+name
+firstName
+middleName
+lastName
+suffix
+genderId
+nickname
+height
+weight
+dateOfBirth
+primaryPhoneNumber
+isPrimaryPhoneMobile
+secondaryPhoneNumber
+isSecondaryPhoneMobile
+memberRegistrationNumber
+ethnicityId
+languageId
+requiresTranslator
+socialSecurityNumber
+honorific
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+workAddressLine1
+workAddressLine2
+workAddressCity
+workAddressStateOrProvince
+workAddressPostalCode
+workAddress
+homeAddress
+notes
+latitude
+longitude
+workLatitude
+workLongitude
+emergencyContactId
+homePhoneNumber
+mobileNumber
+bmi
+occupation
+debtorRemarks
+subpoenaId
+ethnicity {
+  id
+  name
+}
+gender {
+  id
+  name
+}
+language {
+  id
+  name
+}
+
+
+subpoena {
+    ...DocumentDetails
+  }
+
+
+prescriptions {
+   ...PrescriptionDetails
+  }
+
+documents {
+    ...DocumentDetails
+  }
+
+patientStudies {
+   ...PatientStudyDetails
+  }
+
+claims {
+   ...ClaimDetails
+  }
+
+legalCases {
+    ...LegalCaseDetails
+  }
+
+priorAuthorizationRequests {
+    ...PriorAuthorizationRequestDetails
+  }
+
+appointments {
+    ...AppointmentDetails
+  }
+
+users {
+    id
+    name
+    avatarUrl
+  }
+}
+
+fragment PatientLists on Patient {
+id
+createdAt
+updatedAt
+name
+firstName
+middleName
+lastName
+suffix
+genderId
+nickname
+height
+weight
+dateOfBirth
+primaryPhoneNumber
+isPrimaryPhoneMobile
+secondaryPhoneNumber
+isSecondaryPhoneMobile
+memberRegistrationNumber
+ethnicityId
+languageId
+requiresTranslator
+socialSecurityNumber
+honorific
+primaryEmailAddress
+primaryAddressLine1
+primaryAddressLine2
+primaryAddressCity
+primaryAddressStateOrProvince
+primaryAddressPostalCode
+workAddressLine1
+workAddressLine2
+workAddressCity
+workAddressStateOrProvince
+workAddressPostalCode
+workAddress
+homeAddress
+notes
+latitude
+longitude
+workLatitude
+workLongitude
+emergencyContactId
+homePhoneNumber
+mobileNumber
+bmi
+occupation
+debtorRemarks
+subpoenaId
+ethnicity {
+    id
+    name
+}
+gender {
+    id
+    name
+}
+language {
+    id
+    name
+}
+
+
+subpoena {
+    id
+    name
+}
+
+
+prescriptions {
+    id
+    name
+  }
+
+
+documents {
+    id
+    name
+  }
+
+
+patientStudies {
+    id
+    name
+  }
+
+
+claims {
+    id
+    name
+  }
+
+
+legalCases {
+    id
+    name
+    medicalRecordNumber
+    pharmacyControlNumber
+    pchGroupNumber
+    dateOfLoss
+  }
+
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+
+appointments {
+    id
+    name
+  }
+
+
+users {
+    id
+    name
+    avatarUrl
+  }
+
+}
+
+
+
+query AdminPatients($input: AdminListPatientInput) {
+  items: adminPatients(input: $input) {
+    ...PatientLists
+  }
+  count: adminCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPatients($input: AdminListPatientInput) {
+  count: adminCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPatient($patientId: String!) {
+  item: adminPatient(patientId: $patientId) {
+    ...PatientDetails
+  }
+}
+mutation AdminCreatePatient($input: AdminCreatePatientInput!) {
+  created: adminCreatePatient(input: $input) {
+    ...PatientDetails
+  }
+}
+mutation AdminUpdatePatient($patientId: String!, $input: AdminUpdatePatientInput!) {
+  updated: adminUpdatePatient(patientId: $patientId, input: $input) {
+    ...PatientDetails
+  }
+}
+mutation AdminDeletePatient($patientId: String!) {
+  deleted: adminDeletePatient(patientId: $patientId) {
+    ...PatientDetails
+  }
+}
+
+query UserPatients($input: UserListPatientInput) {
+  items: userPatients(input: $input) {
+    ...PatientLists
+  }
+  count: userCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPatients($input: UserListPatientInput) {
+  count: userCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPatients($input: UserListPatientInput) {
+  items: userSelectPatients(input: $input) {
+    ...PatientDetails
+  }
+}
+
+query UserPatient($patientId: String!) {
+  item: userPatient(patientId: $patientId) {
+    ...PatientDetails
+  }
+}
+
+mutation UserCreatePatient($input: UserCreatePatientInput!) {
+  created: userCreatePatient(input: $input) {
+    ...PatientDetails
+  }
+}
+mutation UserUpdatePatient($patientId: String!, $input: UserUpdatePatientInput!) {
+  updated: userUpdatePatient(patientId: $patientId, input: $input) {
+    ...PatientDetails
+  }
+}
+
+mutation UserUpdatePatients($input: UserUpdatePatientsInput!) {
+  updated: userUpdatePatients(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePatient($patientId: String!) {
+  deleted: userDeletePatient(patientId: $patientId) {
+    ...PatientDetails
+  }
+}
+
+query PublicPatients($input: UserListPatientInput) {
+  items: publicPatients(input: $input) {
+    ...PatientLists
+  }
+  count: publicCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPatients($input: UserListPatientInput) {
+  count: publicCountPatients(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPatients($input: UserListPatientInput) {
+  items: publicSelectPatients(input: $input) {
+    ...PatientDetails
+  }
+}
+
+query PublicPatient($patientId: String!) {
+  item: publicPatient(patientId: $patientId) {
+    ...PatientDetails
+  }
+}

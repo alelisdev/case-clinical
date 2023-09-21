@@ -1,0 +1,156 @@
+
+fragment PriorAuthDmeDetails on PriorAuthDme {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+priorAuthId
+durableMedicalEquipmentId
+priorAuthorizationRequest {
+  id
+  name
+}
+durableMedicalEquipment {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment PriorAuthDmeLists on PriorAuthDme {
+id
+createdAt
+updatedAt
+name
+estimatedCost
+priorAuthId
+durableMedicalEquipmentId
+estimatedCost
+priorAuthorizationRequest {
+    id
+    name
+}
+durableMedicalEquipment {
+    id
+    name
+}
+}
+
+
+
+query AdminPriorAuthDmes($input: AdminListPriorAuthDmeInput) {
+  items: adminPriorAuthDmes(input: $input) {
+    ...PriorAuthDmeLists
+  }
+  count: adminCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPriorAuthDmes($input: AdminListPriorAuthDmeInput) {
+  count: adminCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPriorAuthDme($priorAuthDmeId: String!) {
+  item: adminPriorAuthDme(priorAuthDmeId: $priorAuthDmeId) {
+    ...PriorAuthDmeDetails
+  }
+}
+mutation AdminCreatePriorAuthDme($input: AdminCreatePriorAuthDmeInput!) {
+  created: adminCreatePriorAuthDme(input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+mutation AdminUpdatePriorAuthDme($priorAuthDmeId: String!, $input: AdminUpdatePriorAuthDmeInput!) {
+  updated: adminUpdatePriorAuthDme(priorAuthDmeId: $priorAuthDmeId, input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+mutation AdminDeletePriorAuthDme($priorAuthDmeId: String!) {
+  deleted: adminDeletePriorAuthDme(priorAuthDmeId: $priorAuthDmeId) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+query UserPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  items: userPriorAuthDmes(input: $input) {
+    ...PriorAuthDmeLists
+  }
+  count: userCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  count: userCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  items: userSelectPriorAuthDmes(input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+query UserPriorAuthDme($priorAuthDmeId: String!) {
+  item: userPriorAuthDme(priorAuthDmeId: $priorAuthDmeId) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+mutation UserCreatePriorAuthDme($input: UserCreatePriorAuthDmeInput!) {
+  created: userCreatePriorAuthDme(input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+mutation UserUpdatePriorAuthDme($priorAuthDmeId: String!, $input: UserUpdatePriorAuthDmeInput!) {
+  updated: userUpdatePriorAuthDme(priorAuthDmeId: $priorAuthDmeId, input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+mutation UserUpdatePriorAuthDmes($input: UserUpdatePriorAuthDmesInput!) {
+  updated: userUpdatePriorAuthDmes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePriorAuthDme($priorAuthDmeId: String!) {
+  deleted: userDeletePriorAuthDme(priorAuthDmeId: $priorAuthDmeId) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+query PublicPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  items: publicPriorAuthDmes(input: $input) {
+    ...PriorAuthDmeLists
+  }
+  count: publicCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  count: publicCountPriorAuthDmes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPriorAuthDmes($input: UserListPriorAuthDmeInput) {
+  items: publicSelectPriorAuthDmes(input: $input) {
+    ...PriorAuthDmeDetails
+  }
+}
+
+query PublicPriorAuthDme($priorAuthDmeId: String!) {
+  item: publicPriorAuthDme(priorAuthDmeId: $priorAuthDmeId) {
+    ...PriorAuthDmeDetails
+  }
+}

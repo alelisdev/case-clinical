@@ -1,0 +1,113 @@
+::ng-deep .swiper-button-prev,
+::ng-deep .swiper-button-next,
+::ng-deep .swiper .swiper-button-prev,
+::ng-deep .swiper .swiper-button-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+	box-shadow: 1px 6px 14px rgba(0,0,0,0.2);
+	background: #fff;
+	border-radius: 100%;	
+    cursor: pointer;	
+    border: none;
+    outline: none;
+    background: #fff;
+    z-index: 9999;
+}
+::ng-deep .swiper-button-prev:hover,
+::ng-deep .swiper-button-prev:focus,
+::ng-deep .swiper-button-next:hover,
+::ng-deep .swiper-button-next:focus,
+::ng-deep .swiper ::ng-deep .swiper-button-prev:hover,
+::ng-deep .swiper ::ng-deep .swiper-button-next:hover {
+    background-color: #0de0fe;
+	color: #fff;
+	opacity: 1;
+}
+::ng-deep .swiper-button-prev:hover:before,
+::ng-deep .swiper-button-prev:focus:before,
+::ng-deep .swiper-button-next:hover:before,
+::ng-deep .swiper-button-next:focus:before,
+::ng-deep .swiper ::ng-deep .swiper-button-prev:hover:before,
+::ng-deep .swiper ::ng-deep .swiper-button-next:hover:before {
+	color: #fff;
+    opacity: 1;
+}
+::ng-deep .swiper-button-prev.slick-disabled:before,
+::ng-deep .swiper-button-next.slick-disabled:before {
+    opacity: .25;
+}
+::ng-deep .swiper-button-prev:before,
+::ng-deep .swiper-button-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #383838;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+::ng-deep .swiper-button-prev {
+    left: 0;
+	z-index:1;
+}
+::ng-deep .swiper .swiper-button-prev:after,
+::ng-deep .swiper .swiper-button-next:after {
+	display: none;
+}
+::ng-deep .swiper .swiper-button-prev:before {
+	content: '←';
+	color: #383838;
+	height: 40px;
+	font-size: 20px;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+
+}
+::ng-deep .swiper .swiper-button-next:before {
+	content: '→';
+	color: #383838;
+	font-size: 20px;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	-webkit-justify-content: center;
+	height: 40px;
+}
+::ng-deep [dir='rtl'] .swiper-button-prev {
+    right: -25px;
+    left: auto;
+}
+::ng-deep .swiper-button-prev:before {
+    content: '←';
+}
+::ng-deep [dir='rtl'] .swiper-button-prev:before {
+    content: '→';
+}
+::ng-deep .swiper-button-next {
+    right: 0;
+}
+::ng-deep [dir='rtl'] .swiper-button-next {
+    right: auto;
+    left: -25px;
+}
+::ng-deep .swiper-button-next:before {
+    content: '→';
+}
+::ng-deep [dir='rtl'] .swiper-button-next:before {
+    content: '←';
+}

@@ -1,0 +1,168 @@
+
+fragment SettingDetails on Setting {
+id
+createdAt
+updatedAt
+name
+value
+dateFormat
+timeFormat
+startWeekOn
+userId
+user {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment SettingLists on Setting {
+id
+createdAt
+updatedAt
+name
+value
+dateFormat
+timeFormat
+startWeekOn
+userId
+user {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminSettings($input: AdminListSettingInput) {
+  items: adminSettings(input: $input) {
+    ...SettingLists
+  }
+  count: adminCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountSettings($input: AdminListSettingInput) {
+  count: adminCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+query loadBasicData($roleInput: UserListRoleInput!, $featureInput: UserListFeatureInput!, $permissionInput: UserListPermissionInput!) {
+  roles: userRoles(input: $roleInput) {
+    ...RoleDetails
+  },
+  permissions: userPermissions(input: $permissionInput) {
+    ...PermissionDetails
+  },
+  features: userFeatures(input: $featureInput) {
+    ...FeatureDetails
+  }
+}
+
+
+query AdminSetting($settingId: String!) {
+  item: adminSetting(settingId: $settingId) {
+    ...SettingDetails
+  }
+}
+mutation AdminCreateSetting($input: AdminCreateSettingInput!) {
+  created: adminCreateSetting(input: $input) {
+    ...SettingDetails
+  }
+}
+mutation AdminUpdateSetting($settingId: String!, $input: AdminUpdateSettingInput!) {
+  updated: adminUpdateSetting(settingId: $settingId, input: $input) {
+    ...SettingDetails
+  }
+}
+mutation AdminDeleteSetting($settingId: String!) {
+  deleted: adminDeleteSetting(settingId: $settingId) {
+    ...SettingDetails
+  }
+}
+
+query UserSettings($input: UserListSettingInput) {
+  items: userSettings(input: $input) {
+    ...SettingLists
+  }
+  count: userCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountSettings($input: UserListSettingInput) {
+  count: userCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectSettings($input: UserListSettingInput) {
+  items: userSelectSettings(input: $input) {
+    ...SettingDetails
+  }
+}
+
+query UserSetting($settingId: String!) {
+  item: userSetting(settingId: $settingId) {
+    ...SettingDetails
+  }
+}
+
+mutation UserCreateSetting($input: UserCreateSettingInput!) {
+  created: userCreateSetting(input: $input) {
+    ...SettingDetails
+  }
+}
+mutation UserUpdateSetting($settingId: String!, $input: UserUpdateSettingInput!) {
+  updated: userUpdateSetting(settingId: $settingId, input: $input) {
+    ...SettingDetails
+  }
+}
+
+mutation UserUpdateSettings($input: UserUpdateSettingsInput!) {
+  updated: userUpdateSettings(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteSetting($settingId: String!) {
+  deleted: userDeleteSetting(settingId: $settingId) {
+    ...SettingDetails
+  }
+}
+
+query PublicSettings($input: UserListSettingInput) {
+  items: publicSettings(input: $input) {
+    ...SettingLists
+  }
+  count: publicCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountSettings($input: UserListSettingInput) {
+  count: publicCountSettings(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectSettings($input: UserListSettingInput) {
+  items: publicSelectSettings(input: $input) {
+    ...SettingDetails
+  }
+}
+
+query PublicSetting($settingId: String!) {
+  item: publicSetting(settingId: $settingId) {
+    ...SettingDetails
+  }
+}

@@ -1,0 +1,17 @@
+<ul *ngIf="direction==='Vertical'" class="divide-y divider-slate-500 text-lg">
+  <li *ngFor="let option of data">
+    <a class="flex flex-row gap-1 items-center py-3 px-4 font-bold hover:bg-sky-600 rounded-md" [routerLink]="[option.link]" routerLinkActive="router-link-active" [ngClass]="{'text-sky-800 hover:text-gray-50': !dark, 'text-sky-800 hover:text-white': dark}">
+      <ui-la-icon size="1x"  class="text-xl" *ngIf="showIcon" [icon]="option.icon"></ui-la-icon>
+      <span>{{ option.title }}</span>
+    </a>
+  </li>
+</ul>
+
+<ul *ngIf="direction==='Horizontal'" class="flex justify-center text-lg ml-8">
+  <li class="mr-12" *ngFor="let option of data">
+    <a class="font-bold flex flex-row items-center gap-1" [routerLink]="[option.link]" routerLinkActive="router-link-active" [ngClass]="{'text-coolGray-500 hover:text-coolGray-900': !dark, 'text-sky-800 hover:text-gray-300': dark}">
+      <ui-la-icon size="1x" class="text-xl" *ngIf="showIcon" [icon]="option.icon"></ui-la-icon>
+      <span>{{ option.title }}</span>
+    </a>
+  </li>
+</ul>

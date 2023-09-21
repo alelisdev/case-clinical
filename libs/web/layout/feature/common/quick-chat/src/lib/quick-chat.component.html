@@ -1,0 +1,369 @@
+<div class="fixed top-0 bottom-10 w-full sm:w-96 lg:h-screen lg:shadow" *ngIf="!isDetail">
+    <div
+        class="flex flex-col w-full sm:w-96 h-full transition-transform duration-400 ease-drawer bg-card"
+        [ngClass]="{
+            '-translate-x-full sm:-translate-x-96 shadow': opened,
+            'translate-x-0': !opened
+        }"
+    >
+        <!-- Header -->
+        <div class="quick-chat-header flex flex-0 items-center justify-center cursor-pointer bg-blue-600" (click)="toggle()">
+            <div class="flex flex-8 items-center justify-center mx-auto">
+                <p class="text-white text-xl">Messages</p>
+            </div>
+            <!-- Toggle -->
+
+            <!-- Contact info -->
+            <ng-container *ngIf="opened && selectedChat">
+                <div class="flex flex-2 items-center">
+                    <button class="ml-auto mr-4" mat-icon-button>
+                        <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-auto border-t overflow-auto">
+            <!-- Chat list -->
+
+            <!-- Conversation -->
+            <div class="flex flex-col flex-auto overflow-auto dark:bg-transparent">
+                <ng-container *ngFor="let chat of chats; trackBy: trackByFn">
+                    <div class="flex items-center justify-between px-6"
+                    [ngClass]="{
+                        'hover:bg-gray-100 dark:hover:bg-hover': !selectedChat || selectedChat.id !== chat.id,
+                        'bg-primary-50 dark:bg-hover': selectedChat && selectedChat.id === chat.id
+                    }">
+                        <div
+                            class="flex items-center py-3 px-4 cursor-pointer gap-2"
+                            (click)="selectChat(chat.id)"
+                        >
+                            <div class="relative flex flex-0 items-center justify-center w-8 h-8">
+                                <ng-container *ngIf="chat.unreadCount > 0">
+                                    <div
+                                        class="absolute bottom-0 right-0 flex-0 w-2 h-2 -ml-0.5 rounded-full ring-2 ring-bg-card dark:ring-gray-900 bg-primary dark:bg-primary-500 text-on-primary"
+                                        [class.ring-primary-50]="selectedChat && selectedChat.id === chat.id"
+                                    ></div>
+                                </ng-container>
+                                <ng-container *ngIf="chat.contact?.avatar">
+                                    <img
+                                        class="w-full h-full rounded-full object-cover"
+                                        [src]="'assets/images/patient.png'"
+                                        alt="Contact avatar"
+                                    />
+                                </ng-container>
+                                <ng-container *ngIf="!chat.contact?.avatar">
+                                    <div
+                                        class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                                    >
+                                        {{ chat.contact?.name.charAt(0) }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div>
+                                <div>
+                                    <span>Hi. Anything I can help with?</span>
+                                </div>
+                                <div>
+                                    <span>Intercom</span>&nbsp;
+                                    <ng-container *ngIf="true">
+                                        <span>Just now</span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <ui-la-icon icon="las angle-right" size="1x" class="text-primary cursor-pointer"></ui-la-icon>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chat; else selectChatOrStartNew">
+                    <div class="flex flex-col-reverse overflow-y-auto overscroll-y-contain">
+                        <div class="flex flex-col flex-auto shrink p-6">
+                            <ng-container
+                                *ngFor="
+                                    let message of chat.messages;
+                                    let i = index;
+                                    let first = first;
+                                    let last = last;
+                                    trackBy: trackByFn
+                                "
+                            >
+                                <!-- Start of the day -->
+                                <ng-container
+                                    *ngIf="
+                                        first ||
+                                        (chat.messages[i - 1].createdAt | date: 'd') !== (message.createdAt | date: 'd')
+                                    "
+                                >
+                                    <div class="flex items-center justify-center my-3 -mx-6">
+                                        <div class="flex-auto border-b"></div>
+                                        <div class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
+                                            {{ message.createdAt | date: 'longDate' }}
+                                        </div>
+                                        <div class="flex-auto border-b"></div>
+                                    </div>
+                                </ng-container>
+                                <div
+                                    class="flex flex-col"
+                                    [ngClass]="{
+                                        'items-end': message.isMine,
+                                        'items-start': !message.isMine,
+                                        'mt-0.5': i > 0 && chat.messages[i - 1].isMine === message.isMine,
+                                        'mt-3': i > 0 && chat.messages[i - 1].isMine !== message.isMine
+                                    }"
+                                >
+                                    <!-- Bubble -->
+                                    <div
+                                        class="relative max-w-3/4 px-3 py-2 rounded-lg"
+                                        [ngClass]="{
+                                            'bg-blue-600 text-blue-50': message.isMine,
+                                            'bg-gray-500 text-gray-50': !message.isMine
+                                        }"
+                                    >
+                                        <!-- Speech bubble tail -->
+                                        <ng-container *ngIf="last || chat.messages[i + 1].isMine !== message.isMine">
+                                            <div
+                                                class="absolute bottom-0 w-3"
+                                                [ngClass]="{
+                                                    'text-blue-500 -right-1 -mr-px mb-px': message.isMine,
+                                                    'text-gray-500 -left-1 -ml-px mb-px -scale-x-1': !message.isMine
+                                                }"
+                                            >
+                                                <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                            </div>
+                                        </ng-container>
+                                        <!-- Message -->
+                                        <div class="min-w-4 leading-5" [innerHTML]="message.value"></div>
+                                    </div>
+                                    <!-- Time -->
+                                    <ng-container
+                                        *ngIf="
+                                            first ||
+                                            last ||
+                                            chat.messages[i + 1].isMine !== message.isMine ||
+                                            chat.messages[i + 1].createdAt !== message.createdAt
+                                        "
+                                    >
+                                        <div
+                                            class="my-0.5 text-sm font-medium text-secondary"
+                                            [ngClass]="{ 'mr-3': message.isMine, 'ml-3': !message.isMine }"
+                                        >
+                                            {{ message.createdAt | date: 'HH:mm' }}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <!-- Message field -->
+                    <div class="flex items-end p-4 bg-gray-50 dark:bg-transparent">
+                        <div class="px-2 py-1 bg-blue-600 w-48 mx-auto gap-2 my-2 rounded-lg flex items-center justify-center cursor-pointer">
+                            <span class="text-white">Send us a message</span>
+                            <button mat-icon-button>
+                                <mat-icon class="rotate-90 text-white" [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="false" class="flex justify-between py-3 px-5">
+            <div>
+                <div class="flex justify-center items-center">
+                    <ui-la-icon icon="las home" size="2x" class="text-primary cursor-pointer"></ui-la-icon>
+                </div>
+                <p class="text-md mx-auto">Home</p>
+            </div>
+            <div>
+                <div class="flex justify-center items-center">
+                    <ui-la-icon icon="las comment" size="2x" class="text-primary cursor-pointer"></ui-la-icon>
+                </div>
+                <p class="text-md mx-auto">Messages</p>
+            </div>
+            <div>
+                <div class="flex justify-center items-center">
+                    <ui-la-icon icon="las question-circle" size="2x" class="text-primary cursor-pointer"></ui-la-icon>
+                </div>
+                <p class="text-md mx-auto">Help</p>
+            </div>
+            <div>
+                <div class="flex justify-center items-center">
+                    <ui-la-icon icon="las bullhorn" size="2x" class="text-primary cursor-pointer"></ui-la-icon>
+                </div>
+                <p class="text-md mx-auto">News</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Select chat or start new template -->
+<ng-template #selectChatOrStartNew>
+    <div class="flex flex-col flex-auto items-center justify-center w-full h-full p-4">
+        <mat-icon class="icon-size-20" [svgIcon]="'iconsmind:speach_bubble'"></mat-icon>
+        <div class="mt-4 text-xl text-center font-medium tracking-tight text-secondary">Select a conversation</div>
+    </div>
+</ng-template>
+
+<div class="fixed top-0 bottom-10 w-full sm:w-96 lg:h-screen lg:shadow" *ngIf="isDetail">
+    <div
+        class="flex flex-col w-full sm:w-96 h-full transition-transform duration-400 ease-drawer bg-card"
+        [ngClass]="{
+            '-translate-x-full sm:-translate-x-96 shadow': opened,
+            'translate-x-0': !opened
+        }"
+    >
+    <!-- Header -->
+    <div class="quick-chat-detail-header flex flex-0 items-center justify-center cursor-pointer bg-blue-600" (click)="toggle()">
+        <div>
+            <ui-la-icon (click)="setIsDetail(false)" icon="las angle-left" size="2x" class="cursor-pointer text-white"></ui-la-icon>
+        </div>
+        <div class="flex flex-8 items-center justify-center mx-auto">
+            <p class="text-white text-xl font-bold">Pacific Crest HealthCare</p>
+        </div>
+
+        <!-- Contact info -->
+        <ng-container *ngIf="opened && selectedChat">
+            <div class="flex flex-2 items-center">
+                <button class="ml-auto mr-4" mat-icon-button>
+                    <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+                </button>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="w-full items-start bg-blue-600 justify-center gap-3 pt-4 pb-2">
+        <div class="flex justify-center items-center gap-1">
+            <img
+                class="w-8 h-full rounded-full object-cover"
+                [src]="'assets/images/patient.png'"
+            />
+            <img
+                class="w-8 h-full rounded-full object-cover"
+                [src]="'assets/images/patient.png'"
+            />
+            <img
+                class="w-8 h-full rounded-full object-cover"
+                [src]="'assets/images/patient.png'"
+            />
+        </div>
+        <p class="text-lg text-white font-semibold leading-normal text-center mt-5 mb-2">We typically reply within a day</p>
+        <div>
+            <div class="items-center justify-center mx-auto w-3/4">
+                <p class="text-md text-center font-normal leading-normal text-white">We help your business grow by connecting you to your customers. For more support, tips & tricks, check out the Communit</p>
+            </div>
+            <p class="text-white text-center mb-4">https://community.intercom.com</p>
+        </div>
+    </div>
+
+    <div class="flex flex-auto border-t overflow-auto">
+        <div class="flex flex-col-reverse overflow-y-auto overscroll-y-contain">
+            <div class="flex flex-col flex-auto shrink p-6">
+                <ng-container
+                    *ngFor="
+                        let message of chat.messages;
+                        let i = index;
+                        let first = first;
+                        let last = last;
+                        trackBy: trackByFn
+                    "
+                >
+                    <!-- Start of the day -->
+                    <ng-container
+                        *ngIf="
+                            first ||
+                            (chat.messages[i - 1].createdAt | date: 'd') !== (message.createdAt | date: 'd')
+                        "
+                    >
+                        <div class="flex items-center justify-center my-3 -mx-6">
+                            <div class="flex-auto border-b"></div>
+                            <div class="flex-0 mx-4 text-sm font-medium leading-5 text-secondary">
+                                {{ message.createdAt | date: 'longDate' }}
+                            </div>
+                            <div class="flex-auto border-b"></div>
+                        </div>
+                    </ng-container>
+                    <div
+                        class="flex flex-col"
+                        [ngClass]="{
+                            'items-end': message.isMine,
+                            'items-start': !message.isMine,
+                            'mt-0.5': i > 0 && chat.messages[i - 1].isMine === message.isMine,
+                            'mt-3': i > 0 && chat.messages[i - 1].isMine !== message.isMine
+                        }"
+                    >
+                        <!-- Bubble -->
+                        <div
+                            class="relative max-w-3/4 px-3 py-2 rounded-lg"
+                            [ngClass]="{
+                                'bg-blue-600 text-blue-50': message.isMine,
+                                'bg-gray-500 text-gray-50': !message.isMine
+                            }"
+                        >
+                            <!-- Speech bubble tail -->
+                            <ng-container *ngIf="last || chat.messages[i + 1].isMine !== message.isMine">
+                                <div
+                                    class="absolute bottom-0 w-3"
+                                    [ngClass]="{
+                                        'text-blue-500 -right-1 -mr-px mb-px': message.isMine,
+                                        'text-gray-500 -left-1 -ml-px mb-px -scale-x-1': !message.isMine
+                                    }"
+                                >
+                                    <ng-container *ngTemplateOutlet="speechBubbleExtension"></ng-container>
+                                </div>
+                            </ng-container>
+                            <!-- Message -->
+                            <div class="min-w-4 leading-5" [innerHTML]="message.value"></div>
+                        </div>
+                        <!-- Time -->
+                        <ng-container
+                            *ngIf="
+                                first ||
+                                last ||
+                                chat.messages[i + 1].isMine !== message.isMine ||
+                                chat.messages[i + 1].createdAt !== message.createdAt
+                            "
+                        >
+                            <div
+                                class="my-0.5 text-sm font-medium text-secondary"
+                                [ngClass]="{ 'mr-3': message.isMine, 'ml-3': !message.isMine }"
+                            >
+                                {{ message.createdAt | date: 'HH:mm' }}
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <div class="h-8 w-full"></div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed left-1/2 -translate-x-1/2 bottom-0 w-full bg-white border-t">
+        <textarea
+            class="my-0 ml-5 resize-none bg-white w-3/4 rounded-lg p-0"
+            [rows]="1"
+            matInput
+            placeholder="Write a message..."
+            #messageInput
+        ></textarea>
+        <button mat-icon-button>
+            <mat-icon class="rotate-90 text-primary" [svgIcon]="'heroicons_outline:paper-airplane'"></mat-icon>
+        </button>
+    </div>
+</div>
+
+<!-- Speech bubble tail SVG -->
+<!-- @formatter:off -->
+<ng-template #speechBubbleExtension>
+    <svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+                d="M1.01522827,0.516204834 C-8.83532715,54.3062744 61.7609863,70.5215302 64.8009949,64.3061218 C68.8074951,54.8859711 30.1663208,52.9997559 37.5036011,0.516204834 L1.01522827,0.516204834 Z"
+                fill="currentColor"
+                fill-rule="nonzero"
+            ></path>
+        </g>
+    </svg>
+</ng-template>
+<!-- @formatter:on -->

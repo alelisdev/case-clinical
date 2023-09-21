@@ -1,0 +1,32 @@
+fragment TenantDetails on Tenant {
+  id
+  name
+  email
+  logo_url
+  phone
+  country
+  createdAt
+  updatedAt
+}
+
+query AdminTenants($input: AdminListTenantInput!) {
+  items: adminTenants(input: $input) {
+    ...TenantDetails
+  },
+  count: adminCountTenants(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+mutation AdminUpdateTenant($tenantId: String!, $input: AdminUpdateTenantInput!) {
+  updated: adminUpdateTenant(tenantId: $tenantId, input: $input) {
+    ...TenantDetails
+  }
+}
+
+mutation AdminCreateTenant($input: AdminCreateTenantInput!) {
+  created: adminCreateTenant(input: $input) {
+   ...TenantDetails
+  }
+}
+

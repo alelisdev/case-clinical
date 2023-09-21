@@ -1,0 +1,23 @@
+{
+  "name": "api-board-label-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/board-label/feature/src",
+  "prefix": "board-label",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/board-label/data-access/src/**/*.ts", "libs/api/board-label/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/board-label/data-access"],
+      "options": {
+        "jestConfig": "libs/api/board-label/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+
+fragment CalculationBasisTypeDetails on CalculationBasisType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+    ...ContractLists
+  }
+}
+
+fragment CalculationBasisTypeLists on CalculationBasisType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCalculationBasisTypes($input: AdminListCalculationBasisTypeInput) {
+  items: adminCalculationBasisTypes(input: $input) {
+    ...CalculationBasisTypeLists
+  }
+  count: adminCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCalculationBasisTypes($input: AdminListCalculationBasisTypeInput) {
+  count: adminCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCalculationBasisType($calculationBasisTypeId: String!) {
+  item: adminCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId) {
+    ...CalculationBasisTypeDetails
+  }
+}
+mutation AdminCreateCalculationBasisType($input: AdminCreateCalculationBasisTypeInput!) {
+  created: adminCreateCalculationBasisType(input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+mutation AdminUpdateCalculationBasisType($calculationBasisTypeId: String!, $input: AdminUpdateCalculationBasisTypeInput!) {
+  updated: adminUpdateCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId, input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+mutation AdminDeleteCalculationBasisType($calculationBasisTypeId: String!) {
+  deleted: adminDeleteCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+query UserCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  items: userCalculationBasisTypes(input: $input) {
+    ...CalculationBasisTypeLists
+  }
+  count: userCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  count: userCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  items: userSelectCalculationBasisTypes(input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+query UserCalculationBasisType($calculationBasisTypeId: String!) {
+  item: userCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+mutation UserCreateCalculationBasisType($input: UserCreateCalculationBasisTypeInput!) {
+  created: userCreateCalculationBasisType(input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+mutation UserUpdateCalculationBasisType($calculationBasisTypeId: String!, $input: UserUpdateCalculationBasisTypeInput!) {
+  updated: userUpdateCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId, input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+mutation UserUpdateCalculationBasisTypes($input: UserUpdateCalculationBasisTypesInput!) {
+  updated: userUpdateCalculationBasisTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCalculationBasisType($calculationBasisTypeId: String!) {
+  deleted: userDeleteCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+query PublicCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  items: publicCalculationBasisTypes(input: $input) {
+    ...CalculationBasisTypeLists
+  }
+  count: publicCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  count: publicCountCalculationBasisTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCalculationBasisTypes($input: UserListCalculationBasisTypeInput) {
+  items: publicSelectCalculationBasisTypes(input: $input) {
+    ...CalculationBasisTypeDetails
+  }
+}
+
+query PublicCalculationBasisType($calculationBasisTypeId: String!) {
+  item: publicCalculationBasisType(calculationBasisTypeId: $calculationBasisTypeId) {
+    ...CalculationBasisTypeDetails
+  }
+}

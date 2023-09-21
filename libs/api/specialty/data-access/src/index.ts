@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-specialty.input'
+export * from './lib/dto/admin-list-specialty.input'
+export * from './lib/dto/admin-update-specialty.input'
+export * from './lib/dto/specialty.input'
+export * from './lib/dto/user-create-specialty.input'
+export * from './lib/dto/user-list-specialty.input'
+export * from './lib/dto/user-update-specialty.input'
+export * from './lib/dto/user-update-specialties.input'
+export * from './lib/models/specialty.model'
+export * from './lib/api-specialty-data-access.module'
+
+export * from './lib/api-specialty-data-access-admin.service'
+export * from './lib/api-specialty-data-access-public.service'
+export * from './lib/api-specialty-data-access-user.service'

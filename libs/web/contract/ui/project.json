@@ -1,0 +1,23 @@
+{
+  "name": "web-contract-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/contract/ui/src",
+  "prefix": "contract",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/contract/ui/src/**/*.ts", "libs/web/contract/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/contract/ui"],
+      "options": {
+        "jestConfig": "libs/web/contract/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

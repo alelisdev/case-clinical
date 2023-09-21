@@ -1,0 +1,22 @@
+{
+  "name": "api-setting-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/setting/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/setting/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/setting/feature"],
+      "options": {
+        "jestConfig": "libs/api/setting/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

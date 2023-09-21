@@ -1,0 +1,207 @@
+<div>
+  <label class="block text-sm font-medium leading-5 text-gray-700">{{ to.label }}</label>
+  <div class="flex mt-1 rounded-md shadow-sm">
+    <div class="relative flex-grow focus-within:z-10">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <svg class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+          />
+        </svg>
+      </div>
+
+      <ng-select
+        class="z-auto"
+        [items]="options$ | async"
+        [placeholder]="to.placeholder"
+        [typeahead]="search$"
+        [bindValue]="'id'"
+        [bindLabel]="'name'"
+        [formControl]="formControl"
+        [virtualScroll]="true"
+        [groupBy]="to.groupBy"
+        (search)="onSearch($event)"
+        (change)="onChange($event)"
+      >
+      </ng-select>
+    </div>
+    <ng-container *ngIf="to.formlyConfig">
+      <button
+        type="button"
+        (click)="showContactForm($event)"
+        class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-r-md bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700"
+      >
+        <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"
+          />
+        </svg>
+        <span class="ml-2">{{ to.addon }}</span>
+      </button>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="contactFormVisible">
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <!--
+        Background overlay, show/hide based on modal state.
+        Entering: "ease-out duration-300"
+          From: "opacity-0"
+          To: "opacity-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
+        <!--
+        Modal panel, show/hide based on modal state.
+        Entering: "ease-out duration-300"
+          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          To: "opacity-100 translate-y-0 sm:scale-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100 translate-y-0 sm:scale-100"
+          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      -->
+        <div
+          class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-headline"
+        >
+          <div>
+            <div class="flex flex-col">
+              <h3 *ngIf="to.formTitle" class="text-lg font-medium leading-6 text-gray-900">
+                {{ to.formTitle }}
+              </h3>
+              <div *ngIf="to.formLead" class="max-w-xl mt-2 text-sm leading-5 text-gray-500">
+                <p>
+                  {{ to.formLead }}
+                </p>
+              </div>
+            </div>
+            <div class="mt-5">
+              <ui-form
+              *ngIf="vm$ | async as vm"
+                [form]="form"
+                [fields]="fields"
+                [model]="vm.item"
+                [options]="options"
+                (submitForm)="updateContact($event)"
+              >
+                <ui-button label="Save" type="submit"></ui-button>
+              </ui-form>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+            <span class="flex w-full rounded-md shadow-sm sm:col-start-2">
+              <button
+                type="button"
+                (click)="onSubmitClick($event)"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+              >
+                Submit
+              </button>
+            </span>
+            <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:col-start-1">
+              <button
+                type="button"
+                (click)="hideContactForm()"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+              >
+                Cancel
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedContact">
+    <div class="relative w-full px-6 py-6 bg-gray-100 rounded-md shadow-sm">
+      <div class="mt-0">
+        <div class="flex">
+          <div class="flex-none">
+            <p class="mb-2 text-lg font-semibold">{{ selectedContact?.firstName + ' ' + selectedContact?.lastName }}</p>
+          </div>
+          <div class="flex-grow"></div>
+          <div class="flex-none">
+            <svg
+              (click)="editContact($event)"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div class="flex my-3 space-x-2 text-sm text-gray-400">
+          <!-- svg  -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            />
+          </svg>
+
+          <p>{{ selectedContact.primaryPhoneNumber }}</p>
+        </div>
+        <div class="flex my-3 space-x-2 text-sm text-gray-400">
+          <!-- svg  -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+          <p>{{ selectedContact.primaryEmailAddress }}</p>
+        </div>
+        <div class="flex space-x-2 text-sm text-gray-400">
+          <!-- svg  -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          <p>
+            {{ selectedContact.primaryAddressLine1 }}
+            {{
+              selectedContact.primaryAddressCity +
+                ', ' +
+                selectedContact.primaryAddressStateOrProvince +
+                ' ' +
+                selectedContact.primaryAddressPostalCode
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

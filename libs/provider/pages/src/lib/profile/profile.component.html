@@ -1,0 +1,13 @@
+<ng-container *ngIf="me$ | async as me">
+  <ui-formly-json-form
+    class="w-full h-full"
+    formName="page_provider_profile"
+    [model]="me"
+    [showSubmitButton]="false"
+    [componentStore]="store"
+    [formData]="formData"
+    (save)="this.store.updateUserProfileEffect($event)"
+    (formIsReady)="this.onResize()"
+  ></ui-formly-json-form>
+</ng-container>
+

@@ -1,0 +1,153 @@
+
+fragment AcademyCategoryDetails on AcademyCategory {
+id
+createdAt
+updatedAt
+name
+slug
+title
+
+
+
+
+
+
+courses {
+    id
+    name
+  }
+}
+
+fragment AcademyCategoryLists on AcademyCategory {
+id
+createdAt
+updatedAt
+name
+slug
+title
+
+
+
+
+
+
+courses {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAcademyCategories($input: AdminListAcademyCategoryInput) {
+  items: adminAcademyCategories(input: $input) {
+    ...AcademyCategoryLists
+  }
+  count: adminCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAcademyCategories($input: AdminListAcademyCategoryInput) {
+  count: adminCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAcademyCategory($academyCategoryId: String!) {
+  item: adminAcademyCategory(academyCategoryId: $academyCategoryId) {
+    ...AcademyCategoryDetails
+  }
+}
+mutation AdminCreateAcademyCategory($input: AdminCreateAcademyCategoryInput!) {
+  created: adminCreateAcademyCategory(input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+mutation AdminUpdateAcademyCategory($academyCategoryId: String!, $input: AdminUpdateAcademyCategoryInput!) {
+  updated: adminUpdateAcademyCategory(academyCategoryId: $academyCategoryId, input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+mutation AdminDeleteAcademyCategory($academyCategoryId: String!) {
+  deleted: adminDeleteAcademyCategory(academyCategoryId: $academyCategoryId) {
+    ...AcademyCategoryDetails
+  }
+}
+
+query UserAcademyCategories($input: UserListAcademyCategoryInput) {
+  items: userAcademyCategories(input: $input) {
+    ...AcademyCategoryLists
+  }
+  count: userCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAcademyCategories($input: UserListAcademyCategoryInput) {
+  count: userCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAcademyCategories($input: UserListAcademyCategoryInput) {
+  items: userSelectAcademyCategories(input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+
+query UserAcademyCategory($academyCategoryId: String!) {
+  item: userAcademyCategory(academyCategoryId: $academyCategoryId) {
+    ...AcademyCategoryDetails
+  }
+}
+
+mutation UserCreateAcademyCategory($input: UserCreateAcademyCategoryInput!) {
+  created: userCreateAcademyCategory(input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+mutation UserUpdateAcademyCategory($academyCategoryId: String!, $input: UserUpdateAcademyCategoryInput!) {
+  updated: userUpdateAcademyCategory(academyCategoryId: $academyCategoryId, input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+
+mutation UserUpdateAcademyCategories($input: UserUpdateAcademyCategoriesInput!) {
+  updated: userUpdateAcademyCategories(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAcademyCategory($academyCategoryId: String!) {
+  deleted: userDeleteAcademyCategory(academyCategoryId: $academyCategoryId) {
+    ...AcademyCategoryDetails
+  }
+}
+
+query PublicAcademyCategories($input: UserListAcademyCategoryInput) {
+  items: publicAcademyCategories(input: $input) {
+    ...AcademyCategoryLists
+  }
+  count: publicCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAcademyCategories($input: UserListAcademyCategoryInput) {
+  count: publicCountAcademyCategories(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAcademyCategories($input: UserListAcademyCategoryInput) {
+  items: publicSelectAcademyCategories(input: $input) {
+    ...AcademyCategoryDetails
+  }
+}
+
+query PublicAcademyCategory($academyCategoryId: String!) {
+  item: publicAcademyCategory(academyCategoryId: $academyCategoryId) {
+    ...AcademyCategoryDetails
+  }
+}

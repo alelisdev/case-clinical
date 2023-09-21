@@ -1,0 +1,6 @@
+<div class="flex flex-wrap items-center flex-row root justify-center">
+    <ui-form style="width: 300px; height: 38px" [fields]="fields">
+    </ui-form>
+    <ui-button (click)="onSaveButtonDidClick()" [disabled]="selectedId === -1" [label]="'Save View'" icon="plus" [variant]="'Default'">
+    </ui-button>
+</div>

@@ -1,0 +1,148 @@
+
+fragment AdverseInsuranceStatusDetails on AdverseInsuranceStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    ...LegalCaseLists
+  }
+}
+
+fragment AdverseInsuranceStatusLists on AdverseInsuranceStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminAdverseInsuranceStatuses($input: AdminListAdverseInsuranceStatusInput) {
+  items: adminAdverseInsuranceStatuses(input: $input) {
+    ...AdverseInsuranceStatusLists
+  }
+  count: adminCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountAdverseInsuranceStatuses($input: AdminListAdverseInsuranceStatusInput) {
+  count: adminCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminAdverseInsuranceStatus($adverseInsuranceStatusId: String!) {
+  item: adminAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+mutation AdminCreateAdverseInsuranceStatus($input: AdminCreateAdverseInsuranceStatusInput!) {
+  created: adminCreateAdverseInsuranceStatus(input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+mutation AdminUpdateAdverseInsuranceStatus($adverseInsuranceStatusId: String!, $input: AdminUpdateAdverseInsuranceStatusInput!) {
+  updated: adminUpdateAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId, input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+mutation AdminDeleteAdverseInsuranceStatus($adverseInsuranceStatusId: String!) {
+  deleted: adminDeleteAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+query UserAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  items: userAdverseInsuranceStatuses(input: $input) {
+    ...AdverseInsuranceStatusLists
+  }
+  count: userCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  count: userCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  items: userSelectAdverseInsuranceStatuses(input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+query UserAdverseInsuranceStatus($adverseInsuranceStatusId: String!) {
+  item: userAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+mutation UserCreateAdverseInsuranceStatus($input: UserCreateAdverseInsuranceStatusInput!) {
+  created: userCreateAdverseInsuranceStatus(input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+mutation UserUpdateAdverseInsuranceStatus($adverseInsuranceStatusId: String!, $input: UserUpdateAdverseInsuranceStatusInput!) {
+  updated: userUpdateAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId, input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+mutation UserUpdateAdverseInsuranceStatuses($input: UserUpdateAdverseInsuranceStatusesInput!) {
+  updated: userUpdateAdverseInsuranceStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteAdverseInsuranceStatus($adverseInsuranceStatusId: String!) {
+  deleted: userDeleteAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+query PublicAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  items: publicAdverseInsuranceStatuses(input: $input) {
+    ...AdverseInsuranceStatusLists
+  }
+  count: publicCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  count: publicCountAdverseInsuranceStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectAdverseInsuranceStatuses($input: UserListAdverseInsuranceStatusInput) {
+  items: publicSelectAdverseInsuranceStatuses(input: $input) {
+    ...AdverseInsuranceStatusDetails
+  }
+}
+
+query PublicAdverseInsuranceStatus($adverseInsuranceStatusId: String!) {
+  item: publicAdverseInsuranceStatus(adverseInsuranceStatusId: $adverseInsuranceStatusId) {
+    ...AdverseInsuranceStatusDetails
+  }
+}

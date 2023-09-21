@@ -1,0 +1,23 @@
+{
+  "name": "web-message-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/message/ui/src",
+  "prefix": "message",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/message/ui/src/**/*.ts", "libs/web/message/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/message/ui"],
+      "options": {
+        "jestConfig": "libs/web/message/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

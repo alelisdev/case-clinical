@@ -1,0 +1,410 @@
+
+fragment CaseAccountDetails on CaseAccount {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+locationId
+vendorId
+accountStatusId
+procedureTypeId
+agreementTypeId
+accountAgentId
+claimProcedureId
+invoiceDetailId
+contractId
+portfolioId
+thirdPartyFunderName
+originalDueDate
+accountTerm
+serviceDate
+quantity
+originalDebt
+cost
+balance
+lastBalance
+reduction
+treatmentState
+accountNumber
+servicesPerformed
+cptCodes
+treatingPhysician
+referringPhysician
+collectionsDate
+deemedWriteOffDate
+expensedBadDebtDate
+paidDate
+ghostAccount
+ghostedDate
+ghostedBy
+unGhostedDate
+unGhostedBy
+additionalPayment
+missingBill
+missingLien
+missingMedicalRecords
+assignedTo
+resubmitted
+treatmentCity
+origination
+thresholdProviderRate
+thresholdLocationRate
+teamLeaderRateSource
+checkNumber
+accountDateReceived
+dateApplied
+amountApplied
+description
+note
+medicareRate
+providerPercentOfMedicare
+contractedAmount
+markupPercent
+reimbursedTotal
+initialRevenue
+factor
+retailBill
+estMargin
+roi
+attorneyPaid
+percentOfRetail
+reimbursedFromPCR
+ingredientCost
+dispensingCost
+administrativeCost
+coPay
+totalCost
+averageWholesalePrice
+weightedAverageCost
+averageSalePrice
+invoiceCost
+usualAndCustomary
+nationalDrugCode
+procedureVendorId
+legalCase {
+  id
+  name
+}
+location {
+  id
+  name
+}
+vendor {
+  id
+  name
+}
+accountStatus {
+  id
+  name
+}
+procedureType {
+  id
+  name
+}
+agreementType {
+  id
+  name
+}
+claimProcedure {
+  id
+  name
+}
+invoiceDetail {
+  id
+  name
+}
+contract {
+  id
+  name
+}
+portfolio {
+  id
+  name
+}
+procedureVendor {
+  id
+  name
+}
+
+
+
+
+
+writeOffs {
+    ...WriteOffDetails
+  }
+
+caseAccountPayments {
+    ...CaseAccountPaymentDetails
+  }
+
+journalEntries {
+    ...JournalEntryDetails
+  }
+}
+
+fragment CaseAccountLists on CaseAccount {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+locationId
+vendorId
+accountStatusId
+procedureTypeId
+agreementTypeId
+accountAgentId
+claimProcedureId
+invoiceDetailId
+contractId
+portfolioId
+thirdPartyFunderName
+originalDueDate
+accountTerm
+serviceDate
+quantity
+originalDebt
+cost
+balance
+lastBalance
+reduction
+treatmentState
+accountNumber
+servicesPerformed
+cptCodes
+treatingPhysician
+referringPhysician
+collectionsDate
+deemedWriteOffDate
+expensedBadDebtDate
+paidDate
+ghostAccount
+ghostedDate
+ghostedBy
+unGhostedDate
+unGhostedBy
+additionalPayment
+missingBill
+missingLien
+missingMedicalRecords
+assignedTo
+resubmitted
+treatmentCity
+origination
+thresholdProviderRate
+thresholdLocationRate
+teamLeaderRateSource
+checkNumber
+accountDateReceived
+dateApplied
+amountApplied
+description
+note
+medicareRate
+providerPercentOfMedicare
+contractedAmount
+markupPercent
+reimbursedTotal
+initialRevenue
+factor
+retailBill
+estMargin
+roi
+attorneyPaid
+percentOfRetail
+reimbursedFromPCR
+ingredientCost
+dispensingCost
+administrativeCost
+coPay
+totalCost
+averageWholesalePrice
+weightedAverageCost
+averageSalePrice
+invoiceCost
+usualAndCustomary
+nationalDrugCode
+procedureVendorId
+legalCase {
+    id
+    name
+}
+location {
+    id
+    name
+}
+vendor {
+    id
+    name
+}
+accountStatus {
+    id
+    name
+}
+procedureType {
+    id
+    name
+}
+agreementType {
+    id
+    name
+}
+claimProcedure {
+    id
+    name
+}
+invoiceDetail {
+    id
+    name
+}
+contract {
+    id
+    name
+}
+portfolio {
+    id
+    name
+}
+procedureVendor {
+    id
+    name
+}
+
+
+
+
+
+writeOffs {
+    id
+    name
+  }
+
+
+caseAccountPayments {
+    id
+    name
+  }
+
+
+journalEntries {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCaseAccounts($input: AdminListCaseAccountInput) {
+  items: adminCaseAccounts(input: $input) {
+    ...CaseAccountLists
+  }
+  count: adminCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseAccounts($input: AdminListCaseAccountInput) {
+  count: adminCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseAccount($caseAccountId: String!) {
+  item: adminCaseAccount(caseAccountId: $caseAccountId) {
+    ...CaseAccountDetails
+  }
+}
+mutation AdminCreateCaseAccount($input: AdminCreateCaseAccountInput!) {
+  created: adminCreateCaseAccount(input: $input) {
+    ...CaseAccountDetails
+  }
+}
+mutation AdminUpdateCaseAccount($caseAccountId: String!, $input: AdminUpdateCaseAccountInput!) {
+  updated: adminUpdateCaseAccount(caseAccountId: $caseAccountId, input: $input) {
+    ...CaseAccountDetails
+  }
+}
+mutation AdminDeleteCaseAccount($caseAccountId: String!) {
+  deleted: adminDeleteCaseAccount(caseAccountId: $caseAccountId) {
+    ...CaseAccountDetails
+  }
+}
+
+query UserCaseAccounts($input: UserListCaseAccountInput) {
+  items: userCaseAccounts(input: $input) {
+    ...CaseAccountLists
+  }
+  count: userCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseAccounts($input: UserListCaseAccountInput) {
+  count: userCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCaseAccounts($input: UserListCaseAccountInput) {
+  items: userSelectCaseAccounts(input: $input) {
+    ...CaseAccountDetails
+  }
+}
+
+query UserCaseAccount($caseAccountId: String!) {
+  item: userCaseAccount(caseAccountId: $caseAccountId) {
+    ...CaseAccountDetails
+  }
+}
+
+mutation UserCreateCaseAccount($input: UserCreateCaseAccountInput!) {
+  created: userCreateCaseAccount(input: $input) {
+    ...CaseAccountDetails
+  }
+}
+mutation UserUpdateCaseAccount($caseAccountId: String!, $input: UserUpdateCaseAccountInput!) {
+  updated: userUpdateCaseAccount(caseAccountId: $caseAccountId, input: $input) {
+    ...CaseAccountDetails
+  }
+}
+
+mutation UserUpdateCaseAccounts($input: UserUpdateCaseAccountsInput!) {
+  updated: userUpdateCaseAccounts(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseAccount($caseAccountId: String!) {
+  deleted: userDeleteCaseAccount(caseAccountId: $caseAccountId) {
+    ...CaseAccountDetails
+  }
+}
+
+query PublicCaseAccounts($input: UserListCaseAccountInput) {
+  items: publicCaseAccounts(input: $input) {
+    ...CaseAccountLists
+  }
+  count: publicCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseAccounts($input: UserListCaseAccountInput) {
+  count: publicCountCaseAccounts(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseAccounts($input: UserListCaseAccountInput) {
+  items: publicSelectCaseAccounts(input: $input) {
+    ...CaseAccountDetails
+  }
+}
+
+query PublicCaseAccount($caseAccountId: String!) {
+  item: publicCaseAccount(caseAccountId: $caseAccountId) {
+    ...CaseAccountDetails
+  }
+}

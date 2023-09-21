@@ -1,0 +1,148 @@
+
+fragment ReconciliationPeriodTypeDetails on ReconciliationPeriodType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+    ...ContractLists
+  }
+}
+
+fragment ReconciliationPeriodTypeLists on ReconciliationPeriodType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contracts {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminReconciliationPeriodTypes($input: AdminListReconciliationPeriodTypeInput) {
+  items: adminReconciliationPeriodTypes(input: $input) {
+    ...ReconciliationPeriodTypeLists
+  }
+  count: adminCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountReconciliationPeriodTypes($input: AdminListReconciliationPeriodTypeInput) {
+  count: adminCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminReconciliationPeriodType($reconciliationPeriodTypeId: String!) {
+  item: adminReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+mutation AdminCreateReconciliationPeriodType($input: AdminCreateReconciliationPeriodTypeInput!) {
+  created: adminCreateReconciliationPeriodType(input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+mutation AdminUpdateReconciliationPeriodType($reconciliationPeriodTypeId: String!, $input: AdminUpdateReconciliationPeriodTypeInput!) {
+  updated: adminUpdateReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId, input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+mutation AdminDeleteReconciliationPeriodType($reconciliationPeriodTypeId: String!) {
+  deleted: adminDeleteReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+query UserReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  items: userReconciliationPeriodTypes(input: $input) {
+    ...ReconciliationPeriodTypeLists
+  }
+  count: userCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  count: userCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  items: userSelectReconciliationPeriodTypes(input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+query UserReconciliationPeriodType($reconciliationPeriodTypeId: String!) {
+  item: userReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+mutation UserCreateReconciliationPeriodType($input: UserCreateReconciliationPeriodTypeInput!) {
+  created: userCreateReconciliationPeriodType(input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+mutation UserUpdateReconciliationPeriodType($reconciliationPeriodTypeId: String!, $input: UserUpdateReconciliationPeriodTypeInput!) {
+  updated: userUpdateReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId, input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+mutation UserUpdateReconciliationPeriodTypes($input: UserUpdateReconciliationPeriodTypesInput!) {
+  updated: userUpdateReconciliationPeriodTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteReconciliationPeriodType($reconciliationPeriodTypeId: String!) {
+  deleted: userDeleteReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+query PublicReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  items: publicReconciliationPeriodTypes(input: $input) {
+    ...ReconciliationPeriodTypeLists
+  }
+  count: publicCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  count: publicCountReconciliationPeriodTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectReconciliationPeriodTypes($input: UserListReconciliationPeriodTypeInput) {
+  items: publicSelectReconciliationPeriodTypes(input: $input) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}
+
+query PublicReconciliationPeriodType($reconciliationPeriodTypeId: String!) {
+  item: publicReconciliationPeriodType(reconciliationPeriodTypeId: $reconciliationPeriodTypeId) {
+    ...ReconciliationPeriodTypeDetails
+  }
+}

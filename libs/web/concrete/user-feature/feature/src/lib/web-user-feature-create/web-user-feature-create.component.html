@@ -1,0 +1,40 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <ng-template #controlsTemplate>
+    <div class="space-x-3 px-6">
+      <ui-button label="Discard" variant="white" (click)="handleDiscardClick($event)"></ui-button>
+    </div>
+  </ng-template>
+
+  <ng-template #headerTemplate>
+    <ui-card-header [title]="'Create New'" [controlsTemplate]="controlsTemplate"></ui-card-header>
+  </ng-template>
+
+  <ng-template #footerTemplate>
+    <div class="flex items-center justify-end pb-6 pt-3 dark:bg-transparent">
+      <ng-container></ng-container>
+    </div>
+  </ng-template>
+
+  <div class="absolute inset-0 flex flex-col overflow-y-auto">
+    <ui-panel
+      [headerTemplate]="headerTemplate"
+      [footerTemplate]="footerTemplate"
+      [disableHeaderPadding]="true"
+      [disableBodyPadding]="true"
+      [disableFooterPadding]="true"
+      class="p-2 md:p-4 overflow-y-hidden"
+    >
+      <div class="px-6 py-4 w-full flex flex-col">
+        <ui-form
+          [form]="form"
+          [fields]="fields"
+          [model]="model"
+          [options]="options"
+          (submitForm)="createUserFeature($event)"
+        >
+          <ui-button label="Save" type="submit"></ui-button>
+        </ui-form>
+      </div>
+    </ui-panel>
+  </div>
+</ng-container>

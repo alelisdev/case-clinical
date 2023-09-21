@@ -1,0 +1,156 @@
+
+fragment BatchControlDetails on BatchControl {
+id
+createdAt
+updatedAt
+name
+trackingNumber
+batchTotal
+defaultGLCode
+posted
+
+
+
+
+
+
+payments {
+    ...PaymentLists
+  }
+}
+
+fragment BatchControlLists on BatchControl {
+id
+createdAt
+updatedAt
+name
+trackingNumber
+batchTotal
+defaultGLCode
+posted
+
+
+
+
+
+
+payments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminBatchControls($input: AdminListBatchControlInput) {
+  items: adminBatchControls(input: $input) {
+    ...BatchControlLists
+  }
+  count: adminCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountBatchControls($input: AdminListBatchControlInput) {
+  count: adminCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminBatchControl($batchControlId: String!) {
+  item: adminBatchControl(batchControlId: $batchControlId) {
+    ...BatchControlDetails
+  }
+}
+mutation AdminCreateBatchControl($input: AdminCreateBatchControlInput!) {
+  created: adminCreateBatchControl(input: $input) {
+    ...BatchControlDetails
+  }
+}
+mutation AdminUpdateBatchControl($batchControlId: String!, $input: AdminUpdateBatchControlInput!) {
+  updated: adminUpdateBatchControl(batchControlId: $batchControlId, input: $input) {
+    ...BatchControlDetails
+  }
+}
+mutation AdminDeleteBatchControl($batchControlId: String!) {
+  deleted: adminDeleteBatchControl(batchControlId: $batchControlId) {
+    ...BatchControlDetails
+  }
+}
+
+query UserBatchControls($input: UserListBatchControlInput) {
+  items: userBatchControls(input: $input) {
+    ...BatchControlLists
+  }
+  count: userCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountBatchControls($input: UserListBatchControlInput) {
+  count: userCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectBatchControls($input: UserListBatchControlInput) {
+  items: userSelectBatchControls(input: $input) {
+    ...BatchControlDetails
+  }
+}
+
+query UserBatchControl($batchControlId: String!) {
+  item: userBatchControl(batchControlId: $batchControlId) {
+    ...BatchControlDetails
+  }
+}
+
+mutation UserCreateBatchControl($input: UserCreateBatchControlInput!) {
+  created: userCreateBatchControl(input: $input) {
+    ...BatchControlDetails
+  }
+}
+mutation UserUpdateBatchControl($batchControlId: String!, $input: UserUpdateBatchControlInput!) {
+  updated: userUpdateBatchControl(batchControlId: $batchControlId, input: $input) {
+    ...BatchControlDetails
+  }
+}
+
+mutation UserUpdateBatchControls($input: UserUpdateBatchControlsInput!) {
+  updated: userUpdateBatchControls(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteBatchControl($batchControlId: String!) {
+  deleted: userDeleteBatchControl(batchControlId: $batchControlId) {
+    ...BatchControlDetails
+  }
+}
+
+query PublicBatchControls($input: UserListBatchControlInput) {
+  items: publicBatchControls(input: $input) {
+    ...BatchControlLists
+  }
+  count: publicCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountBatchControls($input: UserListBatchControlInput) {
+  count: publicCountBatchControls(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectBatchControls($input: UserListBatchControlInput) {
+  items: publicSelectBatchControls(input: $input) {
+    ...BatchControlDetails
+  }
+}
+
+query PublicBatchControl($batchControlId: String!) {
+  item: publicBatchControl(batchControlId: $batchControlId) {
+    ...BatchControlDetails
+  }
+}

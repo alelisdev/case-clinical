@@ -1,0 +1,23 @@
+{
+  "name": "web-vendor-type-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/vendor-type/ui/src",
+  "prefix": "vendor-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/vendor-type/ui/src/**/*.ts", "libs/web/vendor-type/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/vendor-type/ui"],
+      "options": {
+        "jestConfig": "libs/web/vendor-type/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

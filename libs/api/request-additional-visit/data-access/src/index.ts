@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-request-additional-visit.input'
+export * from './lib/dto/admin-list-request-additional-visit.input'
+export * from './lib/dto/admin-update-request-additional-visit.input'
+export * from './lib/dto/request-additional-visit.input'
+export * from './lib/dto/user-create-request-additional-visit.input'
+export * from './lib/dto/user-list-request-additional-visit.input'
+export * from './lib/dto/user-update-request-additional-visit.input'
+export * from './lib/dto/user-update-request-additional-visits.input'
+export * from './lib/models/request-additional-visit.model'
+export * from './lib/api-request-additional-visit-data-access.module'
+
+export * from './lib/api-request-additional-visit-data-access-admin.service'
+export * from './lib/api-request-additional-visit-data-access-public.service'
+export * from './lib/api-request-additional-visit-data-access-user.service'

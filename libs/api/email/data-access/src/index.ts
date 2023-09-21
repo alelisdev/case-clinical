@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-email.input'
+export * from './lib/dto/admin-list-email.input'
+export * from './lib/dto/admin-update-email.input'
+export * from './lib/dto/email.input'
+export * from './lib/dto/user-create-email.input'
+export * from './lib/dto/user-list-email.input'
+export * from './lib/dto/user-update-email.input'
+export * from './lib/models/email.model'
+export * from './lib/models/search.model'
+export * from './lib/api-email-data-access.module'
+
+export * from './lib/api-email-data-access-admin.service'
+export * from './lib/api-email-data-access-public.service'
+export * from './lib/api-email-data-access-user.service'

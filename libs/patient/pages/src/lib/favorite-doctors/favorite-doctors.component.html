@@ -1,0 +1,10 @@
+<ui-formly-json-form
+  *ngIf="vm$ | async as vm"
+class="w-full h-full"
+formName="page_patient_favorites"
+[showSubmitButton]="false"
+[componentStore]="store"
+[model]="model"
+[formData]="getFormData(vm)"
+(formIsReady)="this.onResize()"
+></ui-formly-json-form>

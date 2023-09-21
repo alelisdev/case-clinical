@@ -1,0 +1,114 @@
+
+
+<div class="flex items-center">
+  <select
+    *ngIf="to.multiple; else singleSelect"
+    [class]="to.classNames || classNames"
+    multiple
+    [class.custom-select]="to.customSelect"
+    [formControl]="formControl"
+    [compareWith]="to.compareWith"
+    [class.is-invalid]="showError"
+    [formlyAttributes]="field"
+  >
+    <ng-container *ngIf="to.options | formlySelectOptions: field | async as opts">
+      <ng-container *ngIf="to._flatOptions; else grouplist">
+        <ng-container *ngFor="let opt of opts">
+          <option [ngValue]="opt.value" [disabled]="opt.disabled">
+            {{ opt.label }}
+          </option>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #grouplist>
+        <ng-container *ngFor="let opt of opts">
+          <option *ngIf="!opt.group; else optgroup" [ngValue]="opt.value" [disabled]="opt.disabled">
+            {{ opt.label }}
+          </option>
+          <ng-template #optgroup>
+            <optgroup [label]="opt.label">
+              <option *ngFor="let child of opt.group" [ngValue]="child.value" [disabled]="child.disabled">
+                {{ child.label }}
+              </option>
+            </optgroup>
+          </ng-template>
+        </ng-container>
+      </ng-template>
+    </ng-container>
+  </select>
+
+  <ng-template #singleSelect>
+    <select
+      class="mr-2"
+      [class]="classNames"
+      [formControl]="formControl"
+      [compareWith]="to.compareWith"
+      [bindValue]="'id'"
+      [bindLabel]="'name'"
+      [class.custom-select]="to.customSelect"
+      [class.is-invalid]="showError"
+      [formlyAttributes]="field"
+    >
+      <option *ngIf="to.placeholder" [ngValue]="undefined">
+        {{ to.placeholder }}
+      </option>
+      <ng-container *ngIf="to.options | formlySelectOptions: field | async as opts">
+        <ng-container *ngIf="to._flatOptions; else grouplist">
+          <ng-container *ngFor="let opt of opts">
+            <option [ngValue]="opt.value" [disabled]="opt.disabled">
+              {{ opt.label }}
+            </option>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #grouplist>
+          <ng-container *ngFor="let opt of opts">
+            <option *ngIf="!opt.group; else optgroup" [ngValue]="opt.value" [disabled]="opt.disabled">
+              {{ opt.label }}
+            </option>
+            <ng-template #optgroup>
+              <optgroup [label]="opt.label">
+                <option *ngFor="let child of opt.group" [ngValue]="child.value" [disabled]="child.disabled">
+                  {{ child.label }}
+                </option>
+              </optgroup>
+            </ng-template>
+          </ng-container>
+        </ng-template>
+      </ng-container>
+    </select>
+  </ng-template>
+
+  <button
+    type="button"
+    (click)="this.openDialog(createUserFeatureTpl, { userFeature: this.to.defaultValues || {} })"
+    class="-ml-px relative inline-flex items-center space-x-2 p-2 border border-gray-300 text-sm font-medium rounded-full h-10 w-10 text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition duration-300"
+  >
+    <!-- Heroicon name: solid/sort-ascending -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
+  </button>
+</div>
+
+<ng-template #createUserFeatureTpl let-ref>
+  <div class="flex-grow flex flex-col">
+    <div class="text-lg font-semibold tracking-wider px-4 py-3 flex space-x-4 items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <ui-icon icon="table"></ui-icon>
+        <div>Create User Feature</div>
+      </div>
+    </div>
+    <div class="flex-grow">
+      <ui-user-feature-form (send)="this.to.createUserFeature($event); ref.close()" [userFeature]="ref.data?.userFeature"> </ui-user-feature-form>
+    </div>
+  </div>
+</ng-template>
+

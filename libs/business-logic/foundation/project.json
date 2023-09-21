@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/foundation/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/foundation"],
+      "options": {
+        "project": "libs/foundation/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/foundation/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/foundation/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/foundation"],
+      "options": {
+        "jestConfig": "libs/foundation/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/foundation/**/*.ts", "libs/foundation/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-foundation"
+}

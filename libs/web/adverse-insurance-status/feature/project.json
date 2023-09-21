@@ -1,0 +1,26 @@
+{
+  "name": "web-adverse-insurance-status-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/adverse-insurance-status/feature/src",
+  "prefix": "adverse-insurance-status",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/adverse-insurance-status/feature/src/**/*.ts",
+          "libs/web/adverse-insurance-status/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/adverse-insurance-status/feature"],
+      "options": {
+        "jestConfig": "libs/web/adverse-insurance-status/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

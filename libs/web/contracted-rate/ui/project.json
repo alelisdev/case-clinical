@@ -1,0 +1,23 @@
+{
+  "name": "web-contracted-rate-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/contracted-rate/ui/src",
+  "prefix": "contracted-rate",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/contracted-rate/ui/src/**/*.ts", "libs/web/contracted-rate/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/contracted-rate/ui"],
+      "options": {
+        "jestConfig": "libs/web/contracted-rate/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

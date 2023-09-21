@@ -1,0 +1,23 @@
+{
+  "name": "web-premise-accident-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/premise-accident/ui/src",
+  "prefix": "premise-accident",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/premise-accident/ui/src/**/*.ts", "libs/web/premise-accident/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/premise-accident/ui"],
+      "options": {
+        "jestConfig": "libs/web/premise-accident/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<ui-formly-json-form
+*ngIf="appointment$ | async as appointment"
+class="w-full h-full"
+formName="page_patient_confirm_appointment"
+[showSubmitButton]="false"
+[model]="model"
+[formData]="getFormData(appointment)"
+[componentStore]="store"
+></ui-formly-json-form>

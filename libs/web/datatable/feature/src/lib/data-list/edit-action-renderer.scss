@@ -1,0 +1,7 @@
+::ng-deep .cdk-overlay-container {
+  z-index: 9999;
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: max-content !important;
+}

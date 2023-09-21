@@ -1,0 +1,148 @@
+
+fragment PayorTypeDetails on PayorType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+  ...PaymentLists
+  }
+}
+
+fragment PayorTypeLists on PayorType {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+payments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPayorTypes($input: AdminListPayorTypeInput) {
+  items: adminPayorTypes(input: $input) {
+    ...PayorTypeLists
+  }
+  count: adminCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPayorTypes($input: AdminListPayorTypeInput) {
+  count: adminCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPayorType($payorTypeId: String!) {
+  item: adminPayorType(payorTypeId: $payorTypeId) {
+    ...PayorTypeDetails
+  }
+}
+mutation AdminCreatePayorType($input: AdminCreatePayorTypeInput!) {
+  created: adminCreatePayorType(input: $input) {
+    ...PayorTypeDetails
+  }
+}
+mutation AdminUpdatePayorType($payorTypeId: String!, $input: AdminUpdatePayorTypeInput!) {
+  updated: adminUpdatePayorType(payorTypeId: $payorTypeId, input: $input) {
+    ...PayorTypeDetails
+  }
+}
+mutation AdminDeletePayorType($payorTypeId: String!) {
+  deleted: adminDeletePayorType(payorTypeId: $payorTypeId) {
+    ...PayorTypeDetails
+  }
+}
+
+query UserPayorTypes($input: UserListPayorTypeInput) {
+  items: userPayorTypes(input: $input) {
+    ...PayorTypeLists
+  }
+  count: userCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPayorTypes($input: UserListPayorTypeInput) {
+  count: userCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPayorTypes($input: UserListPayorTypeInput) {
+  items: userSelectPayorTypes(input: $input) {
+    ...PayorTypeDetails
+  }
+}
+
+query UserPayorType($payorTypeId: String!) {
+  item: userPayorType(payorTypeId: $payorTypeId) {
+    ...PayorTypeDetails
+  }
+}
+
+mutation UserCreatePayorType($input: UserCreatePayorTypeInput!) {
+  created: userCreatePayorType(input: $input) {
+    ...PayorTypeDetails
+  }
+}
+mutation UserUpdatePayorType($payorTypeId: String!, $input: UserUpdatePayorTypeInput!) {
+  updated: userUpdatePayorType(payorTypeId: $payorTypeId, input: $input) {
+    ...PayorTypeDetails
+  }
+}
+
+mutation UserUpdatePayorTypes($input: UserUpdatePayorTypesInput!) {
+  updated: userUpdatePayorTypes(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePayorType($payorTypeId: String!) {
+  deleted: userDeletePayorType(payorTypeId: $payorTypeId) {
+    ...PayorTypeDetails
+  }
+}
+
+query PublicPayorTypes($input: UserListPayorTypeInput) {
+  items: publicPayorTypes(input: $input) {
+    ...PayorTypeLists
+  }
+  count: publicCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPayorTypes($input: UserListPayorTypeInput) {
+  count: publicCountPayorTypes(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPayorTypes($input: UserListPayorTypeInput) {
+  items: publicSelectPayorTypes(input: $input) {
+    ...PayorTypeDetails
+  }
+}
+
+query PublicPayorType($payorTypeId: String!) {
+  item: publicPayorType(payorTypeId: $payorTypeId) {
+    ...PayorTypeDetails
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "api-premise-accident-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/premise-accident/feature/src",
+  "prefix": "premise-accident",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/premise-accident/data-access/src/**/*.ts",
+          "libs/api/premise-accident/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/premise-accident/data-access"],
+      "options": {
+        "jestConfig": "libs/api/premise-accident/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

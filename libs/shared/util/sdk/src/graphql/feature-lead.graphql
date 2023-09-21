@@ -1,0 +1,306 @@
+
+
+fragment LeadDetails on Lead {
+id
+createdAt
+updatedAt
+name
+firstName
+middleName
+lastName
+address
+city
+state
+postalCode
+dateOfBirth
+dateOfLoss
+dateOfRetention
+phoneNumber
+emailAddress
+priorRepresentation
+accidentTypeId
+driversLicenseId
+driversLicenseNumber
+driversLicenseState
+severeInjury
+emergencyContactId
+allowedToContactEmergencyContact
+policeReport
+policeReportAttachmentId
+phoneRecordingId
+leadStatusId
+leadSpecialistId
+leadSourceId
+submittedById
+legalCaseId
+accidentType {
+  id
+  name
+}
+driversLicense {
+  id
+  name
+}
+policeReportAttachment {
+  id
+  name
+}
+phoneRecording {
+  id
+  name
+}
+status {
+  id
+  name
+}
+sourceOfLead {
+  id
+  name
+}
+submittedBy {
+  id
+  name
+}
+
+
+
+
+
+bodyPartsInjured {
+    id
+    name
+  }
+
+leadActions {
+    id
+    name
+  }
+
+insurances {
+    id
+    name
+  }
+
+injuries {
+    id
+    name
+  }
+
+treatments {
+    id
+    name
+  }
+}
+
+fragment LeadLists on Lead {
+id
+createdAt
+updatedAt
+name
+firstName
+middleName
+lastName
+address
+city
+state
+postalCode
+dateOfBirth
+dateOfLoss
+dateOfRetention
+phoneNumber
+emailAddress
+priorRepresentation
+accidentTypeId
+driversLicenseId
+driversLicenseNumber
+driversLicenseState
+severeInjury
+emergencyContactId
+allowedToContactEmergencyContact
+policeReport
+policeReportAttachmentId
+phoneRecordingId
+leadStatusId
+leadSpecialistId
+leadSourceId
+submittedById
+legalCaseId
+accidentType {
+    id
+    name
+}
+driversLicense {
+    id
+    name
+}
+policeReportAttachment {
+    id
+    name
+}
+phoneRecording {
+    id
+    name
+}
+status {
+    id
+    name
+}
+sourceOfLead {
+    id
+    name
+}
+submittedBy {
+    id
+    name
+}
+
+
+
+
+
+bodyPartsInjured {
+    id
+    name
+  }
+
+
+leadActions {
+    id
+    name
+  }
+
+
+insurances {
+    id
+    name
+  }
+
+
+injuries {
+    id
+    name
+  }
+
+
+treatments {
+    id
+    name
+  }
+
+}
+
+query AdminLeads($input: AdminListLeadInput) {
+  items: adminLeads(input: $input) {
+    ...LeadLists
+  }
+  count: adminCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountLeads($input: AdminListLeadInput) {
+  count: adminCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminLead($leadId: String!) {
+  item: adminLead(leadId: $leadId) {
+    ...LeadDetails
+  }
+}
+mutation AdminCreateLead($input: AdminCreateLeadInput!) {
+  created: adminCreateLead(input: $input) {
+    ...LeadDetails
+  }
+}
+mutation AdminUpdateLead($leadId: String!, $input: AdminUpdateLeadInput!) {
+  updated: adminUpdateLead(leadId: $leadId, input: $input) {
+    ...LeadDetails
+  }
+}
+mutation AdminDeleteLead($leadId: String!) {
+  deleted: adminDeleteLead(leadId: $leadId) {
+    ...LeadDetails
+  }
+}
+
+query UserLeads($input: UserListLeadInput) {
+  items: userLeads(input: $input) {
+    ...LeadLists
+  }
+  count: userCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountLeads($input: UserListLeadInput) {
+  count: userCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectLeads($input: UserListLeadInput) {
+  items: userSelectLeads(input: $input) {
+    ...LeadDetails
+  }
+}
+
+query UserLead($leadId: String!) {
+  item: userLead(leadId: $leadId) {
+    ...LeadDetails
+  }
+}
+
+mutation UserCreateLead($input: UserCreateLeadInput!) {
+  created: userCreateLead(input: $input) {
+    ...LeadDetails
+  }
+}
+mutation UserUpdateLead($leadId: String!, $input: UserUpdateLeadInput!) {
+  updated: userUpdateLead(leadId: $leadId, input: $input) {
+    ...LeadDetails
+  }
+}
+
+mutation UserSyncMrnToPharmacy($input: UserUpdateLeadInput!, $mrn: String!) {
+  userSyncMrnToPharmacy(lead: $input, mrn: $mrn)
+}
+
+mutation UserUpdateLeads($input: UserUpdateLeadsInput!) {
+  updated: userUpdateLeads(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteLead($leadId: String!) {
+  deleted: userDeleteLead(leadId: $leadId) {
+    ...LeadDetails
+  }
+}
+
+query PublicLeads($input: UserListLeadInput) {
+  items: publicLeads(input: $input) {
+    ...LeadLists
+  }
+  count: publicCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountLeads($input: UserListLeadInput) {
+  count: publicCountLeads(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectLeads($input: UserListLeadInput) {
+  items: publicSelectLeads(input: $input) {
+    ...LeadDetails
+  }
+}
+
+query PublicLead($leadId: String!) {
+  item: publicLead(leadId: $leadId) {
+    ...LeadDetails
+  }
+}

@@ -1,0 +1,92 @@
+<div *ngIf="vm$ | async as vm" class="flex flex-col flex-auto h-full bg-card dark:bg-default">
+
+    <!-- Loading bar -->
+    <mat-progress-bar
+        class="absolute inset-x-0 top-0 h-0.5"
+        *ngIf="vm.loadingRoom"
+        [mode]="'indeterminate'">
+    </mat-progress-bar>
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center h-18 px-4 border-b bg-gray-50 dark:bg-transparent">
+        <button mat-icon-button (click)="drawer.close()">
+            <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+        <div class="ml-2 text-lg font-medium">Group info</div>
+    </div>
+
+    <div class="overflow-y-auto">
+        <!-- Group avatar & info -->
+        <div class="flex flex-col items-center mt-8">
+            <div class="w-40 h-40 rounded-full">
+                <!-- <ng-container *ngIf="room.group?.avatar">
+                    <img
+                        class="w-full h-full rounded-full object-cover"
+                        [src]="room.group?.avatar"
+                        [alt]="'Group avatar'">
+                </ng-container> -->
+                <ng-container>
+                    <div
+                        class="flex items-center justify-center w-full h-full rounded-full text-8xl font-semibold uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                        {{room?.name?.charAt(0)}}
+                    </div>
+                </ng-container>
+            </div>
+            <div class="mt-4 text-lg font-medium text-center px-5">{{room?.name}}</div>
+            <!-- <div class="mt-0.5 text-md text-secondary">{{room.group.about}}</div> -->
+        </div>
+
+        <div class="py-10 px-7">
+            <!-- Details of joined members -->
+            <div class="mt-10 space-y-4">
+                <div class="text-lg font-medium mb-3">Members</div>
+                <ng-container *ngIf="joinedMembers.length">
+                    <div class="flex-auto overflow-y-auto">
+                        <ng-container *ngFor="let member of joinedMembers; trackBy: trackByFn">
+                            <div class="z-20 flex items-center py-2 cursor-auto">
+                                <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                                    <ng-container>
+                                        <div
+                                            class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                            {{member?.name.charAt(0)}}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="min-w-0 ml-4">
+                                    <div class="font-medium leading-5 truncate">{{member?.name}}</div>
+                                </div>
+
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Details of invited members -->
+            <div class="mt-10 space-y-4" *ngIf="invitedMembers.length">
+                <div class="text-lg font-medium mb-3">Invited</div>
+                <ng-container>
+                    <div class="flex-auto overflow-y-auto">
+                        <ng-container *ngFor="let member of invitedMembers; trackBy: trackByFn">
+                            <div class="z-20 flex items-center py-2 cursor-auto">
+                                <div class="relative flex flex-0 items-center justify-center w-10 h-10">
+                                    <ng-container>
+                                        <div
+                                            class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                            {{member?.name.charAt(0)}}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="min-w-0 ml-4">
+                                    <div class="font-medium leading-5 truncate">{{member?.name}}</div>
+                                </div>
+
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+</div>

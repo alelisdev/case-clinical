@@ -1,0 +1,23 @@
+{
+  "name": "mobile-dashboard-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/dashboard/feature/src",
+  "prefix": "dashboard",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/dashboard/feature/src/**/*.ts", "libs/mobile/dashboard/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/dashboard/feature"],
+      "options": {
+        "jestConfig": "libs/mobile/dashboard/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

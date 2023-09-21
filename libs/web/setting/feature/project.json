@@ -1,0 +1,23 @@
+{
+  "name": "web-setting-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/setting/feature/src",
+  "prefix": "setting",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/setting/feature/src/**/*.ts", "libs/web/setting/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/setting/feature"],
+      "options": {
+        "jestConfig": "libs/web/setting/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

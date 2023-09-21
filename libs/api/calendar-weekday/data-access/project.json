@@ -1,0 +1,22 @@
+{
+  "name": "api-calendar-weekday-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/calendar-weekday/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/calendar-weekday/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/calendar-weekday/data-access"],
+      "options": {
+        "jestConfig": "libs/api/calendar-weekday/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

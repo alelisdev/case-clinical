@@ -1,0 +1,17 @@
+{
+  "name": "provider-shell-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/provider/shell/feature/src",
+  "prefix": "case-clinical",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/provider/shell/feature/**/*.ts", "libs/provider/shell/feature/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

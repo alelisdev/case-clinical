@@ -1,0 +1,7 @@
+::ng-deep .mat-expansion-indicator::after {
+  border-color: white !important;
+}
+
+::ng-deep body.light .mat-expansion-indicator::after {
+  border-color: black !important;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-core-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/core/feature/src",
+  "prefix": "core",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/core/feature/src/**/*.ts", "libs/web/core/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/core/feature"],
+      "options": {
+        "jestConfig": "libs/web/core/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+<ng-container *ngIf="vm$ | async as vm" >
+  <div class="flex flex-col h-full">
+    <!-- Users -->
+    <div class="flex flex-row gap-2 h-full">
+      <div class="flex-1 flex flex-col divide-y h-auto">
+        <!-- Add team member -->
+        <div class="w-full mb-8">
+          <mat-form-field class="fuse-mat-no-subscript w-full" [floatLabel]="'always'">
+            <mat-label>Add team members</mat-label>
+            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:user'" matPrefix></mat-icon>
+            <input matInput [placeholder]="'Email address'" (keydown)="setSearchQuery($event.target.value)">
+            <button mat-icon-button matSuffix>
+              <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <button
+            class="w-full py-5 text-white"
+            mat-flat-button
+            type="button"
+            (click)="openDialog(dlg, { value: null })"
+            [color]="'primary'">Add a member
+        </button>
+        <ng-template #dlg let-ref>
+        <div class="flex flex-col p-4 gap-2 h-full bg-grey-light overflow-auto">
+            <div class="w-full h-full px-10 py-6">
+              <!-- <ng-container #fieldComponent></ng-container> -->
+              <ui-formly-json-form
+                class="w-full h-full"
+                formName="user_create"
+                [showSubmitButton]="true"
+                [model]="vm.profile"
+                [formData]="vm.profile"
+                (save)="submit($event)"
+                [componentStore]="this.store"
+              ></ui-formly-json-form>
+              <!-- <ui-form [fields]="fields" [model]="model"  [options]="options" (submitForm)="createUser($event)">
+                <ui-button label="Save" type="submit"></ui-button>
+              </ui-form> -->
+            </div>
+          </div>
+        </ng-template>
+        <ng-container *ngFor="let user of vm.users; trackBy: trackByFn;">
+          <div
+            (click)="selectUser(user)"
+            class="flex flex-col sm:flex-row border-t sm:items-center py-6 px-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-hover  "
+            [ngClass]="{
+              'hover:bg-gray-100 dark:hover:bg-hover': user.id !== vm.selectedUserId,
+              'bg-primary-50 dark:bg-hover': user.id === vm.selectedUserId
+            }"
+          >
+            <div class="flex items-center">
+              <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+                <ng-container *ngIf="user.avatarUrl">
+                  <img class="object-cover w-full h-full" [src]="user.avatarUrl" alt="Contact avatar" />
+                </ng-container>
+                <ng-container *ngIf="!user.avatarUrl">
+                  <div
+                    class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                    {{user.username.charAt(0)}}
+                  </div>
+                </ng-container>
+              </div>
+              <div class="ml-4">
+                <div class="font-medium">{{user.username}}</div>
+                <div class="text-secondary">{{user.emails[0]?.email || ""}}</div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="flex-1 h-full flex flex-col">
+        <ui-role-table-view
+          class="flex-1 rounded-md"
+          [roles]="vm.roles"
+          (rowItemsSelected)="rowItemsSelected($event)"
+        >
+        </ui-role-table-view>
+        <div class="flex items-center justify-end my-2 mr-2">
+          <button
+              mat-stroked-button
+              (click)="setOriginalRoleIds()"
+              [disabled]="!vm.canSave"
+              type="button">
+              Cancel
+          </button>
+          <button
+            class="ml-4"
+            mat-flat-button
+            type="button"
+            [disabled]="!vm.canSave"
+            (click)="saveRoles()"
+            [color]="'primary'">Save Changes
+          </button>
+      </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

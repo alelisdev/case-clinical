@@ -1,0 +1,22 @@
+<ng-container *ngIf="to">
+    <div class="flex items-center">
+      <mat-button-toggle-group name="{{field.key}}"
+        [formControl]="formControl"
+        [formlyAttributes]="field"
+        [ngClass]="{'justify-between':getSize === 'full'}"
+        class="flex-row  w-full flex-wrap gap-{{to.gap}}"
+        value = "{{to.options[0]['value']}}"
+      >
+
+        <mat-button-toggle [ngClass]="{'noText': getFormat === 'onlyicon','grow': getSize === 'full' }" class="{{getFormat}} overflow-hidden mx-0" [ngStyle]="{'border-radius': getRadius+'px'}" *ngFor="let option of to.options; let i = index"
+          id="{{id + '_' + i}}"
+          name="{{field.name || id}}"
+          value="{{option.value}}"
+          >
+          <ui-la-icon *ngIf="getFormat !== 'text'" icon="{{option.icon}}" class="text-3xl text-gray-800" ></ui-la-icon>
+          <span class="text-slate-800 px-5 leading-6 text-lg" [ngClass]="{'pl-1': getFormat === 'both'}" *ngIf="getFormat !== 'onlyicon'">{{option.text}}</span>
+
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </ng-container>

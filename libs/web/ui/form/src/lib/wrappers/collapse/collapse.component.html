@@ -1,0 +1,9 @@
+<mat-expansion-panel [expanded]="expanded" class="mb-2">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="flex flex-row text-xl font-medium items-center gap-1 text-gray-800 dark:text-gray-50 box-shadow">
+      {{ title }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <p *ngIf="to.allowSubtitle" class="mt-1 mb-2 text-lg leading-6 text-gray-500"> {{ to.subtitle }}</p>
+  <ng-container #fieldComponent></ng-container>
+</mat-expansion-panel>

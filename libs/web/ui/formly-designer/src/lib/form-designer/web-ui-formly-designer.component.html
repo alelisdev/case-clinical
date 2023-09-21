@@ -1,0 +1,78 @@
+<div *ngIf="gridClassName$ | async as gridClassName" class="h-full p-2 w-full flex flex-col">
+    <div *ngIf="editMode===0" class="flex-1 flex flex-row">
+      <div class="w-120 flex flex-col gap-2 panel panel-primary" style="margin-right: 10px;">
+        <div class="p-4 text-white text-lg bg-primary">Entity Fields</div>
+          <div class="flex-1 panel-body">
+            <ui-formly-tool-box [gridClassName]="gridClassName" (onGridReady)="onGridReady($event, 0)"></ui-formly-tool-box>
+          </div>
+        </div>
+      <div class="flex-1 flex flex-col panel gap-2 panel-primary" style="margin-left: 10px;">
+          <div class="p-4 text-white text-lg bg-primary">Form Config</div>
+          <div class="flex-1 panel-body">
+            <ui-formly-config
+              [gridClassName]="gridClassName"
+              *ngIf="leftApi" #configGrid
+              (onGridReady)="onGridReady($event, 1)"
+              [formFieldEditCallback]="formFieldEditCallback.bind(this)"
+              [formFieldCopyCallback]="formFieldCopyCallback.bind(this)"
+              [canMove]="canPlaceFormField.bind(this)"
+            ></ui-formly-config>
+          </div>
+      </div>
+    </div>
+    <ui-preview-edit
+      [schema]="schema"
+      [testData]="testData"
+      [modelData]="modelData"
+      [customLayouts]="customLayouts"
+      [type]="type"
+      [gridClassName]="gridClassName"
+      (onGridReady)="onGridReady($event, 2)"
+      *ngIf="editMode===1"
+      (testDataDidChange)="testDataDidChange($event)"
+      (modelDataDidChange)="modelDataDidChange($event)"
+      class="flex-1 flex flex-row overflow-auto"
+    ></ui-preview-edit>
+    <div class="flex gap-1 mt-2">
+      <ui-button type="button" label="Save" (click)="saveFormConfig();dialog.closeAll()">
+      </ui-button>
+      <ui-button type="button" [variant]="white" label="Close" (click)="dialog.closeAll();">
+      </ui-button>
+      <ui-button type="button" [variant]="white" label="Define submit action" (click)="openSubmitActionEditDlg()">
+      </ui-button>
+      <ui-button type="button" [variant]="white" label="Define router keys" (click)="openRouterKeysEditDlg()">
+      </ui-button>
+      <ui-button type="button" [label]="editMode===1?'Normal Mode':'Preview Mode'" (click)="toggleEditMode()">
+      </ui-button>
+    </div>
+</div>
+
+<ng-template #editTpl let-ref>
+  <ui-form-field-edit
+    [autoSubmit]="false"
+    [model]="this.node?.data || {}"
+    class="w-full h-full overflow-auto bg-gray-50 dark:bg-gray-900 p-8 rounded-sm"
+    style="height: 80%;"
+    (save)="saveFormField($event);ref.close()"
+    (close)="close();ref.close()"
+  ></ui-form-field-edit>
+</ng-template>
+
+<ng-template #submitEditTpl let-ref>
+  <ui-submit-action-field-edit
+    class="w-full h-full"
+    [submitAction]="ref.data"
+    (close)="ref.close()"
+    (save)="ref.close(); this.submitAction=$event;"
+  ></ui-submit-action-field-edit>
+</ng-template>
+
+<ng-template #routerKeysEditTpl let-ref>
+  <ui-router-keys-edit
+    class="w-full h-full"
+    [routerKeys]="ref.data"
+    (close)="ref.close()"
+    (save)="ref.close(); this.routerKeys=$event;"
+  ></ui-router-keys-edit>
+</ng-template>
+

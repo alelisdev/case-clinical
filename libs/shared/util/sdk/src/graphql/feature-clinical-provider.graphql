@@ -1,0 +1,375 @@
+fragment ClinicalProviderDetails on ClinicalProvider {
+  id
+  createdAt
+  updatedAt
+  name
+  vendorId
+  expertId
+  npi
+  honorific
+  firstName
+  lastName
+  suffix
+  bio
+  phoneNumber
+  emailAddress
+  profilePictureId
+  compressProfilePictureId
+  rating
+  reviewCount
+  hourlyRate
+  stateLicenseNumber
+  caqhNumber
+
+  vendor {
+    id
+    name
+  }
+
+  profileImage {
+    ...DocumentOverview
+  }
+
+  educations {
+    id
+    name
+    school
+    degree
+    from
+    to
+  }
+
+  awards {
+    id
+    name
+    school
+    note
+    awardedAt
+  }
+
+  experiences {
+    id
+    name
+    workplace
+    from
+    to
+  }
+
+  services {
+    id
+    name
+    service {
+        id
+        name
+      }
+  }
+
+  reviews {
+    id,
+    name,
+    clinicalProviderId,
+    rating,
+    parentId
+  }
+
+  clinicalProviderTags {
+    id
+    name
+    tagId
+    tag {
+      id
+      name
+    }
+  }
+
+  clinicalProviderLocations {
+    id
+    createdAt
+    updatedAt
+    name
+    locationId
+    distance
+    clinicalProviderId
+    clinicalProvider {
+      id
+      name
+    }
+    location {
+        id
+        name
+        latitude
+        longitude
+        officePhone
+        locationImages {
+        id
+        name
+      }
+    }
+
+     clinicalProviderLocationAvailabilities {
+        id
+        name
+        day
+        startTime
+        endTime
+      }
+  }
+
+  clinicalProviderSpecialties {
+    ...ClinicalProviderSpecialtyLists
+  }
+
+  pchProviders {
+    ...PchProviderLists
+  }
+
+  favoriteProviders {
+    ...FavoriteProviderLists
+  }
+
+  medicalRecords {
+    ...MedicalRecordLists
+  }
+
+  appointments {
+    ...AppointmentLists
+  }
+
+  medicalConditionProviders {
+    ...MedicalConditionProviderLists
+  }
+
+  user {
+    id
+    name
+  }
+}
+
+fragment ClinicalProviderLists on ClinicalProvider {
+  id
+  createdAt
+  updatedAt
+  name
+  vendorId
+  expertId
+  npi
+  honorific
+  firstName
+  lastName
+  suffix
+  bio
+  phoneNumber
+  emailAddress
+  profilePictureId
+  compressProfilePictureId
+  rating
+  reviewCount
+  hourlyRate
+  stateLicenseNumber
+  caqhNumber
+  vendor {
+    id
+    name
+  }
+
+  profileImage {
+    ...DocumentOverview
+  }
+
+  services {
+    id
+    name
+    service {
+        id
+        name
+      }
+  }
+
+
+  clinicalProviderTags {
+    id
+    name
+    tagId
+    tag {
+      id
+      name
+    }
+  }
+
+  clinicalProviderLocations {
+    id
+    createdAt
+    updatedAt
+    name
+    distance
+    locationId
+    location {
+        id
+        name
+        latitude
+        longitude
+        officePhone
+      locationImages {
+        id
+        name
+      }
+    }
+  }
+
+  clinicalProviderSpecialties {
+    ...ClinicalProviderSpecialtyLists
+
+  }
+
+  pchProviders {
+    id
+    name
+  }
+
+  favoriteProviders {
+    id
+    name
+  }
+
+  medicalRecords {
+    id
+    name
+  }
+
+  appointments {
+    id
+    name
+  }
+
+  medicalConditionProviders {
+    id
+    name
+  }
+
+  user {
+    id
+    name
+  }
+}
+
+query AdminClinicalProviders($input: AdminListClinicalProviderInput) {
+  items: adminClinicalProviders(input: $input) {
+    ...ClinicalProviderLists
+  }
+  count: adminCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountClinicalProviders($input: AdminListClinicalProviderInput) {
+  count: adminCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query AdminClinicalProvider($clinicalProviderId: String!) {
+  item: adminClinicalProvider(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+mutation AdminCreateClinicalProvider($input: AdminCreateClinicalProviderInput!) {
+  created: adminCreateClinicalProvider(input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+mutation AdminUpdateClinicalProvider($clinicalProviderId: String!, $input: AdminUpdateClinicalProviderInput!) {
+  updated: adminUpdateClinicalProvider(clinicalProviderId: $clinicalProviderId, input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+mutation AdminDeleteClinicalProvider($clinicalProviderId: String!) {
+  deleted: adminDeleteClinicalProvider(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+
+query UserClinicalProviders($input: UserListClinicalProviderInput) {
+  items: userClinicalProviders(input: $input) {
+    ...ClinicalProviderLists
+  }
+  count: userCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountClinicalProviders($input: UserListClinicalProviderInput) {
+  count: userCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectClinicalProviders($input: UserListClinicalProviderInput) {
+  items: userSelectClinicalProviders(input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+
+query UserClinicalProvider($clinicalProviderId: String!) {
+  item: userClinicalProvider(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+
+mutation UserCreateClinicalProvider($input: UserCreateClinicalProviderInput!) {
+  created: userCreateClinicalProvider(input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+mutation UserUpdateClinicalProvider($clinicalProviderId: String!, $input: UserUpdateClinicalProviderInput!) {
+  updated: userUpdateClinicalProvider(clinicalProviderId: $clinicalProviderId, input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+
+mutation UserAddToFavorites($clinicalProviderId: String!) {
+  updated: userAddToFavorites(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+
+mutation UserRemoveFromFavorites($clinicalProviderId: String!) {
+  updated: userRemoveFromFavorites(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+
+mutation UserUpdateClinicalProviders($input: UserUpdateClinicalProvidersInput!) {
+  updated: userUpdateClinicalProviders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteClinicalProvider($clinicalProviderId: String!) {
+  deleted: userDeleteClinicalProvider(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}
+
+query PublicClinicalProviders($input: UserListClinicalProviderInput) {
+  items: publicClinicalProviders(input: $input) {
+    ...ClinicalProviderLists
+  }
+  count: publicCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountClinicalProviders($input: UserListClinicalProviderInput) {
+  count: publicCountClinicalProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectClinicalProviders($input: UserListClinicalProviderInput) {
+  items: publicSelectClinicalProviders(input: $input) {
+    ...ClinicalProviderDetails
+  }
+}
+
+query PublicClinicalProvider($clinicalProviderId: String!) {
+  item: publicClinicalProvider(clinicalProviderId: $clinicalProviderId) {
+    ...ClinicalProviderDetails
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "mobile-account-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/account/feature/src",
+  "prefix": "account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/account/feature/src/**/*.ts", "libs/mobile/account/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/account/feature"],
+      "options": {
+        "jestConfig": "libs/mobile/account/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

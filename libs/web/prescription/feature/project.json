@@ -1,0 +1,23 @@
+{
+  "name": "web-prescription-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/prescription/feature/src",
+  "prefix": "prescription",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/prescription/feature/src/**/*.ts", "libs/web/prescription/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/prescription/feature"],
+      "options": {
+        "jestConfig": "libs/web/prescription/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

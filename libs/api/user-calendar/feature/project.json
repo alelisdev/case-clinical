@@ -1,0 +1,22 @@
+{
+  "name": "api-user-calendar-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/user-calendar/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/user-calendar/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/user-calendar/feature"],
+      "options": {
+        "jestConfig": "libs/api/user-calendar/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

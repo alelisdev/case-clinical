@@ -1,0 +1,56 @@
+
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.wrapper {
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+}
+
+.svg {
+  height: 100%;
+  position: absolute;
+  transition: 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  top: 0;
+  left: 0;
+
+}
+
+.anchor {
+  fill: var(--color-brand-default);
+  stroke: white;
+  stroke-width: 3px;
+  cursor: pointer;
+  transform-origin: center center;
+  &--selected {
+    stroke: var(--color-success-default);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    stroke-width: 3px;
+  }
+  70% {
+    stroke-width: 1;
+  }
+    100% {
+    stroke-width: 3px;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "web-portfolio-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/portfolio/feature/src",
+  "prefix": "portfolio",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/portfolio/feature/src/**/*.ts", "libs/web/portfolio/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/portfolio/feature"],
+      "options": {
+        "jestConfig": "libs/web/portfolio/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

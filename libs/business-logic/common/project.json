@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/common/src",
+  "prefix": "schema-driven",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/common"],
+      "options": {
+        "project": "libs/common/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/common/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/common/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/common"],
+      "options": {
+        "jestConfig": "libs/common/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/common/**/*.ts", "libs/common/**/*.html"]
+      }
+    }
+  },
+  "tags": [],
+  "name": "business-logic-common"
+}

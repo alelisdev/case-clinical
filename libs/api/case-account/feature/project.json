@@ -1,0 +1,26 @@
+{
+  "name": "api-case-account-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/case-account/feature/src",
+  "prefix": "case-account",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/case-account/data-access/src/**/*.ts",
+          "libs/api/case-account/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/case-account/data-access"],
+      "options": {
+        "jestConfig": "libs/api/case-account/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

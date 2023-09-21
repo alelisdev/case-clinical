@@ -1,0 +1,63 @@
+:host {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+::ng-deep ui-formly-json-form mat-drawer-content{
+  z-index: 3 !important;
+}
+
+::ng-deep formly-form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep formly-group {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+::ng-deep formly-field {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+::ng-deep formly-field > ng-component {
+  flex: 1;
+}
+
+::ng-deep formly-group > ng-component {
+  flex: 1;
+}
+
+::ng-deep apx-chart svg {
+  height: auto !important;
+}
+
+::ng-deep form.ng-invalid button[type=submit] {
+  opacity: 0.7;
+  span{
+    color: white !important;
+  }
+}
+
+:host ::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+  padding:0px;
+  height: 35px;
+  width:35px;
+}
+:host ::ng-deep .mat-mdc-icon-button svg {
+  vertical-align: text-top;
+  width: 27px;
+  height: 24px;
+}
+
+
+:host {
+  font-family: 'poppins';
+}

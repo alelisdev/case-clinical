@@ -1,0 +1,12 @@
+fragment HoroScopeDetails on Horoscope {
+  icon
+  content
+}
+
+query publicHoroscope($input: HoroscopeInput) {
+  horoscope: publicHoroscope(input: $input) {
+    ...HoroScopeDetails
+  }
+}
+
+

@@ -1,0 +1,23 @@
+{
+  "name": "web-insurance-sector-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/insurance-sector/ui/src",
+  "prefix": "insurance-sector",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/insurance-sector/ui/src/**/*.ts", "libs/web/insurance-sector/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/insurance-sector/ui"],
+      "options": {
+        "jestConfig": "libs/web/insurance-sector/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "api-fee-schedule-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/fee-schedule/feature/src",
+  "prefix": "fee-schedule",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/fee-schedule/data-access/src/**/*.ts",
+          "libs/api/fee-schedule/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/fee-schedule/data-access"],
+      "options": {
+        "jestConfig": "libs/api/fee-schedule/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

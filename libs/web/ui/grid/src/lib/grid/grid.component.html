@@ -1,0 +1,21 @@
+<div class="p-2 flex flex-col" >
+  <div class='flex flex-row items-center justify-between gap-2 p-2 w-full'>
+    <h3 class='text-lg font-bold text-gray-800 dark:text-gray-50'>{{title}}</h3>
+    <button *ngIf="!readOnly" mat-flat-button (click)="onCreate()" type="button" class="bg-primary text-white">+ Add</button>
+  </div>
+  <div class="flex flex-col gap-2 h-full bg-grey-light">
+    <div class="w-full h-auto">
+      <ng-container *ngTemplateOutlet="listTemplate; context: {'data': { items: data, itemDidSelect: itemDidSelect }}"></ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #editTpl let-ref>
+  <div class="p-5 bg-gray-50 overflow-auto dark:bg-gray-800">
+    <ng-container *ngTemplateOutlet="editTemplate; context: { data: { value: ref.data, ref: ref, onSave: onSave }}"></ng-container>
+  </div>
+</ng-template>
+<ng-template #createTpl let-ref>
+  <div class="p-5 bg-gray-50 overflow-auto dark:bg-gray-800">
+    <ng-container *ngTemplateOutlet="createTemplate; context: { data: { value: {}, ref: ref, onSave: onSave }}"></ng-container>
+  </div>
+</ng-template>

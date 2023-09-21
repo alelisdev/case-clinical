@@ -1,0 +1,23 @@
+{
+  "name": "api-shortcut-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/shortcut/feature/src",
+  "prefix": "shortcut",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/shortcut/data-access/src/**/*.ts", "libs/api/shortcut/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/shortcut/data-access"],
+      "options": {
+        "jestConfig": "libs/api/shortcut/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+
+fragment CaseProgressStatusDetails on CaseProgressStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    ...LegalCaseLists
+  }
+}
+
+fragment CaseProgressStatusLists on CaseProgressStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+legalCases {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminCaseProgressStatuses($input: AdminListCaseProgressStatusInput) {
+  items: adminCaseProgressStatuses(input: $input) {
+    ...CaseProgressStatusLists
+  }
+  count: adminCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseProgressStatuses($input: AdminListCaseProgressStatusInput) {
+  count: adminCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseProgressStatus($caseProgressStatusId: String!) {
+  item: adminCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId) {
+    ...CaseProgressStatusDetails
+  }
+}
+mutation AdminCreateCaseProgressStatus($input: AdminCreateCaseProgressStatusInput!) {
+  created: adminCreateCaseProgressStatus(input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+mutation AdminUpdateCaseProgressStatus($caseProgressStatusId: String!, $input: AdminUpdateCaseProgressStatusInput!) {
+  updated: adminUpdateCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId, input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+mutation AdminDeleteCaseProgressStatus($caseProgressStatusId: String!) {
+  deleted: adminDeleteCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+query UserCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  items: userCaseProgressStatuses(input: $input) {
+    ...CaseProgressStatusLists
+  }
+  count: userCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  count: userCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  items: userSelectCaseProgressStatuses(input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+query UserCaseProgressStatus($caseProgressStatusId: String!) {
+  item: userCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+mutation UserCreateCaseProgressStatus($input: UserCreateCaseProgressStatusInput!) {
+  created: userCreateCaseProgressStatus(input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+mutation UserUpdateCaseProgressStatus($caseProgressStatusId: String!, $input: UserUpdateCaseProgressStatusInput!) {
+  updated: userUpdateCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId, input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+mutation UserUpdateCaseProgressStatuses($input: UserUpdateCaseProgressStatusesInput!) {
+  updated: userUpdateCaseProgressStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseProgressStatus($caseProgressStatusId: String!) {
+  deleted: userDeleteCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+query PublicCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  items: publicCaseProgressStatuses(input: $input) {
+    ...CaseProgressStatusLists
+  }
+  count: publicCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  count: publicCountCaseProgressStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseProgressStatuses($input: UserListCaseProgressStatusInput) {
+  items: publicSelectCaseProgressStatuses(input: $input) {
+    ...CaseProgressStatusDetails
+  }
+}
+
+query PublicCaseProgressStatus($caseProgressStatusId: String!) {
+  item: publicCaseProgressStatus(caseProgressStatusId: $caseProgressStatusId) {
+    ...CaseProgressStatusDetails
+  }
+}

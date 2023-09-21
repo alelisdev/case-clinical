@@ -1,0 +1,26 @@
+{
+  "name": "web-procedure-type-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/procedure-type/feature/src",
+  "prefix": "procedure-type",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/procedure-type/feature/src/**/*.ts",
+          "libs/web/procedure-type/feature/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/procedure-type/feature"],
+      "options": {
+        "jestConfig": "libs/web/procedure-type/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

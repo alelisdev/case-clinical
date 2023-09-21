@@ -1,0 +1,26 @@
+{
+  "name": "api-contracted-rate-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/contracted-rate/feature/src",
+  "prefix": "contracted-rate",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/contracted-rate/data-access/src/**/*.ts",
+          "libs/api/contracted-rate/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/contracted-rate/data-access"],
+      "options": {
+        "jestConfig": "libs/api/contracted-rate/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

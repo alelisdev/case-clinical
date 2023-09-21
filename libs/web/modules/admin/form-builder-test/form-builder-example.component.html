@@ -1,0 +1,233 @@
+<div class="flex flex-col w-full bg-gray-50 dark:bg-gray-900 min-w-0 sm:absolute sm:inset-0 sm:overflow-hidden">
+  <mat-drawer-container class="flex-auto sm:h-full">
+    <!-- Drawer -->
+    <mat-drawer class="sm:w-64 bg-gray-50 dark:bg-gray-900 flex flex-col" [autoFocus]="false" [mode]="drawerMode" [opened]="drawerOpened"
+      #drawer>
+      <!-- Header -->
+      <div class="flex items-center justify-between m-8 mr-6 sm:my-10">
+        <!-- Title -->
+        <div class="text-4xl text-gray-900 dark:text-gray-50 font-extrabold tracking-tight  leading-none">Examples</div>
+        <!-- Close button -->
+        <div class="lg:hidden">
+          <button mat-icon-button (click)="drawer.close()">
+            <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- Panel links -->
+      <div class="flex flex-col  divide-y border-red-800 border-b flex-1">
+        <!-- <ng-container *ngFor="let panel of panels; trackBy: trackByFn">
+          <div class="flex px-8 py-5 cursor-pointer" [ngClass]="{'hover:bg-gray-100 dark:hover:bg-hover': !selectedPanel || selectedPanel !== panel.id,
+                                    'bg-primary-50 dark:bg-hover': selectedPanel && selectedPanel === panel.id}"
+            (click)="goToPanel(panel.id)">
+            <div class="ml-3">
+              <div class="font-medium leading-6"
+                [ngClass]="{'text-primary dark:text-primary-500': selectedPanel && selectedPanel === panel.id}">
+                {{panel.title}}
+              </div>
+            </div>
+          </div>
+        </ng-container> -->
+        <example-tool-box (selected)="formFieldSelected($event)" clas="w-full h-full" style="height: 100%;"></example-tool-box>
+      </div>
+    </mat-drawer>
+
+    <!-- Drawer content -->
+    <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-gray-900">
+      <!-- Main -->
+      <div class="flex-auto px-6 pt-9 pb-12 md:p-8 md:pb-12 lg:p-12">
+        <!-- Panel header -->
+        <div class="flex items-center">
+          <!-- Drawer toggle -->
+          <button class="lg:hidden -ml-2" mat-icon-button (click)="drawer.toggle()">
+            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+          </button>
+          <!-- Panel title -->
+          <div class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none text-gray-900 dark:text-gray-50  font-serif">
+            {{ selectedPanel ?? 'Select one element in the left grid' }}
+          </div>
+        </div>
+        <!-- Load settings panel -->
+        <div class="h-full pt-8">
+          <ng-container [ngSwitch]="selectedPanel">
+            <!-- Account -->
+            <ng-container *ngSwitchCase="'Enumeration'">
+              <example-enumeration></example-enumeration>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Color Picker'">
+              <color-picker-example></color-picker-example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Typeahead'">
+              <typeahead_example></typeahead_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Address Picker'">
+              <AddressPicker_example></AddressPicker_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Group'">
+              <Group_example></Group_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Repeat'">
+              <Repeat_example></Repeat_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Card'">
+              <Card_example></Card_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Collapse'">
+              <Collapse_example></Collapse_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Tabs'">
+              <Tabs_example></Tabs_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Stepper'">
+              <Stepper_example></Stepper_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Json Editor'">
+              <JsonEditor_example></JsonEditor_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Filter Container'">
+              <FilterBar_example></FilterBar_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Grid Container'">
+              <GridLayout_example></GridLayout_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Grid'">
+              <Grid_example></Grid_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Paragraph'">
+              <Paragraph_example></Paragraph_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Heading'">
+              <Heading_example></Heading_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Title'">
+              <Title_example></Title_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Link'">
+              <Link_example></Link_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Divider'">
+              <Divider_example></Divider_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'DescriptionList'">
+              <DescriptionList_example></DescriptionList_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Embed'">
+              <Embed_example></Embed_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Label'">
+              <Label_example></Label_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Picture'">
+              <Picture_example></Picture_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Boolean'">
+              <Boolean_example></Boolean_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Date'">
+              <Date_example></Date_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'DateTime'">
+              <DateTime_example></DateTime_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Dropdown'">
+              <Dropdown_example></Dropdown_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Input'">
+              <Input_example></Input_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Integer'">
+              <Integer_example></Integer_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'MaskedInput'">
+              <MaskedInput_example></MaskedInput_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'MultiSelect'">
+              <MultiSelect_example></MultiSelect_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Number'">
+              <Number_example></Number_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Password'">
+              <Password_example></Password_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'TextArea'">
+              <TextArea_example></TextArea_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Google Map'">
+              <GoogleMap_example></GoogleMap_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Currency'">
+              <Currency_example></Currency_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Email'">
+              <Email_example></Email_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'MarkDown'">
+              <Markdown_example></Markdown_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'RichText'">
+              <RichText_example></RichText_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'SelectForm'">
+              <SelectForm_example></SelectForm_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Url'">
+              <Url_example></Url_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Carousel'">
+              <Carousel_example></Carousel_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Router'">
+              <Router_example></Router_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Vertical'">
+              <Vertical_example></Vertical_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Horizontal'">
+              <Horizontal_example></Horizontal_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Overview'">
+              <Overview_example></Overview_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Angular Chart'">
+              <AngularChart_example></AngularChart_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Style'">
+              <ClassBuilder_example></ClassBuilder_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Pie Chart'">
+              <PieChart_example></PieChart_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Bar Chart'">
+              <BarChart_example></BarChart_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'LA Icon'">
+              <LaIcon_example></LaIcon_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Where Does It Hurt'">
+              <AnatomicModel_example></AnatomicModel_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Svg View'">
+              <SvgView_example></SvgView_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'MusicWidget'">
+              <MusicWidget_example></MusicWidget_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Kanban'">
+              <Kanban_example></Kanban_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'AgGrid'">
+              <AgGrid_example></AgGrid_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Timeline Stepper'">
+              <TimeLineStepper_example></TimeLineStepper_example>
+            </ng-container>
+            <ng-container *ngSwitchCase="'Table'">
+              <Table_example></Table_example>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

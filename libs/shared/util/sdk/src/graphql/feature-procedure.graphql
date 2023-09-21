@@ -1,0 +1,157 @@
+
+fragment ProcedureDetails on Procedure {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+claimProcedures {
+    ...ClaimProcedureLists
+  }
+
+priorAuthorizationProcedureCodes {
+    ...PriorAuthorizationProcedureCodeLists
+  }
+}
+
+fragment ProcedureLists on Procedure {
+id
+createdAt
+updatedAt
+name
+code
+
+
+
+
+
+
+priorAuthorizationProcedureCodes {
+    id
+    name
+  }
+
+claimProcedures {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminProcedures($input: AdminListProcedureInput) {
+  items: adminProcedures(input: $input) {
+    ...ProcedureLists
+  }
+  count: adminCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountProcedures($input: AdminListProcedureInput) {
+  count: adminCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminProcedure($procedureId: String!) {
+  item: adminProcedure(procedureId: $procedureId) {
+    ...ProcedureDetails
+  }
+}
+mutation AdminCreateProcedure($input: AdminCreateProcedureInput!) {
+  created: adminCreateProcedure(input: $input) {
+    ...ProcedureDetails
+  }
+}
+mutation AdminUpdateProcedure($procedureId: String!, $input: AdminUpdateProcedureInput!) {
+  updated: adminUpdateProcedure(procedureId: $procedureId, input: $input) {
+    ...ProcedureDetails
+  }
+}
+mutation AdminDeleteProcedure($procedureId: String!) {
+  deleted: adminDeleteProcedure(procedureId: $procedureId) {
+    ...ProcedureDetails
+  }
+}
+
+query UserProcedures($input: UserListProcedureInput) {
+  items: userProcedures(input: $input) {
+    ...ProcedureLists
+  }
+  count: userCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountProcedures($input: UserListProcedureInput) {
+  count: userCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectProcedures($input: UserListProcedureInput) {
+  items: userSelectProcedures(input: $input) {
+    ...ProcedureDetails
+  }
+}
+
+query UserProcedure($procedureId: String!) {
+  item: userProcedure(procedureId: $procedureId) {
+    ...ProcedureDetails
+  }
+}
+
+mutation UserCreateProcedure($input: UserCreateProcedureInput!) {
+  created: userCreateProcedure(input: $input) {
+    ...ProcedureDetails
+  }
+}
+mutation UserUpdateProcedure($procedureId: String!, $input: UserUpdateProcedureInput!) {
+  updated: userUpdateProcedure(procedureId: $procedureId, input: $input) {
+    ...ProcedureDetails
+  }
+}
+
+mutation UserUpdateProcedures($input: UserUpdateProceduresInput!) {
+  updated: userUpdateProcedures(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteProcedure($procedureId: String!) {
+  deleted: userDeleteProcedure(procedureId: $procedureId) {
+    ...ProcedureDetails
+  }
+}
+
+query PublicProcedures($input: UserListProcedureInput) {
+  items: publicProcedures(input: $input) {
+    ...ProcedureLists
+  }
+  count: publicCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountProcedures($input: UserListProcedureInput) {
+  count: publicCountProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectProcedures($input: UserListProcedureInput) {
+  items: publicSelectProcedures(input: $input) {
+    ...ProcedureDetails
+  }
+}
+
+query PublicProcedure($procedureId: String!) {
+  item: publicProcedure(procedureId: $procedureId) {
+    ...ProcedureDetails
+  }
+}

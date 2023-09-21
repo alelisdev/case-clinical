@@ -1,0 +1,216 @@
+
+fragment PaymentDetails on Payment {
+id
+createdAt
+updatedAt
+paidOn
+name
+batchControlId
+bankId
+payorTypeId
+paymentTypeId
+amount
+collected
+dac
+isPartial
+dateReceived
+memo
+createdBy
+dateCreated
+securitizationGroup
+paymentApplicationMethodId
+batchControl {
+  id
+  name
+}
+bank {
+  id
+  name
+}
+payorType {
+  id
+  name
+}
+paymentType {
+  id
+  name
+}
+paymentApplicationMethod {
+  id
+  name
+}
+
+
+
+
+
+caseAccountPayments {
+    ...CaseAccountPaymentLists
+  }
+}
+
+fragment PaymentLists on Payment {
+id
+createdAt
+updatedAt
+paidOn
+name
+batchControlId
+bankId
+payorTypeId
+paymentTypeId
+amount
+collected
+dac
+isPartial
+dateReceived
+memo
+createdBy
+dateCreated
+securitizationGroup
+paymentApplicationMethodId
+batchControl {
+    id
+    name
+}
+bank {
+    id
+    name
+}
+payorType {
+    id
+    name
+}
+paymentType {
+    id
+    name
+}
+paymentApplicationMethod {
+    id
+    name
+}
+
+
+
+
+
+caseAccountPayments {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminPayments($input: AdminListPaymentInput) {
+  items: adminPayments(input: $input) {
+    ...PaymentLists
+  }
+  count: adminCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountPayments($input: AdminListPaymentInput) {
+  count: adminCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminPayment($paymentId: String!) {
+  item: adminPayment(paymentId: $paymentId) {
+    ...PaymentDetails
+  }
+}
+mutation AdminCreatePayment($input: AdminCreatePaymentInput!) {
+  created: adminCreatePayment(input: $input) {
+    ...PaymentDetails
+  }
+}
+mutation AdminUpdatePayment($paymentId: String!, $input: AdminUpdatePaymentInput!) {
+  updated: adminUpdatePayment(paymentId: $paymentId, input: $input) {
+    ...PaymentDetails
+  }
+}
+mutation AdminDeletePayment($paymentId: String!) {
+  deleted: adminDeletePayment(paymentId: $paymentId) {
+    ...PaymentDetails
+  }
+}
+
+query UserPayments($input: UserListPaymentInput) {
+  items: userPayments(input: $input) {
+    ...PaymentLists
+  }
+  count: userCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountPayments($input: UserListPaymentInput) {
+  count: userCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectPayments($input: UserListPaymentInput) {
+  items: userSelectPayments(input: $input) {
+    ...PaymentDetails
+  }
+}
+
+query UserPayment($paymentId: String!) {
+  item: userPayment(paymentId: $paymentId) {
+    ...PaymentDetails
+  }
+}
+
+mutation UserCreatePayment($input: UserCreatePaymentInput!) {
+  created: userCreatePayment(input: $input) {
+    ...PaymentDetails
+  }
+}
+mutation UserUpdatePayment($paymentId: String!, $input: UserUpdatePaymentInput!) {
+  updated: userUpdatePayment(paymentId: $paymentId, input: $input) {
+    ...PaymentDetails
+  }
+}
+
+mutation UserUpdatePayments($input: UserUpdatePaymentsInput!) {
+  updated: userUpdatePayments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeletePayment($paymentId: String!) {
+  deleted: userDeletePayment(paymentId: $paymentId) {
+    ...PaymentDetails
+  }
+}
+
+query PublicPayments($input: UserListPaymentInput) {
+  items: publicPayments(input: $input) {
+    ...PaymentLists
+  }
+  count: publicCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountPayments($input: UserListPaymentInput) {
+  count: publicCountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectPayments($input: UserListPaymentInput) {
+  items: publicSelectPayments(input: $input) {
+    ...PaymentDetails
+  }
+}
+
+query PublicPayment($paymentId: String!) {
+  item: publicPayment(paymentId: $paymentId) {
+    ...PaymentDetails
+  }
+}

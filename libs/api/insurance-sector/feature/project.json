@@ -1,0 +1,26 @@
+{
+  "name": "api-insurance-sector-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/insurance-sector/feature/src",
+  "prefix": "insurance-sector",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/api/insurance-sector/data-access/src/**/*.ts",
+          "libs/api/insurance-sector/data-access/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/insurance-sector/data-access"],
+      "options": {
+        "jestConfig": "libs/api/insurance-sector/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

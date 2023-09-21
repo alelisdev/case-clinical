@@ -1,0 +1,22 @@
+{
+  "name": "api-calendar-type-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/calendar-type/data-access/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/calendar-type/data-access/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/calendar-type/data-access"],
+      "options": {
+        "jestConfig": "libs/api/calendar-type/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

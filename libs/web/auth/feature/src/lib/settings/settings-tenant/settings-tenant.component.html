@@ -1,0 +1,127 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="h-full w-full flex flex-row gap-2">
+    <div class="flex-1 h-full">
+      <ng-container *ngFor="let user of vm.tenants; trackBy: trackByFn;">
+        <div
+          (click)="selectUser(user)"
+          class="flex flex-col sm:flex-row border-t sm:items-center py-6 px-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-hover  "
+          [ngClass]="{
+            'hover:bg-gray-100 dark:hover:bg-hover': user.id !== vm.selectedTenant?.id,
+            'bg-primary-50 dark:bg-hover': user.id === vm.selectedTenant?.id
+          }"
+        >
+          <div class="flex items-center">
+            <div class="flex flex-0 items-center justify-center w-10 h-10 rounded-full overflow-hidden">
+              <ng-container *ngIf="user.logo_url">
+                <img class="object-cover w-full h-full" [src]="user.logo_url | serverUrl" alt="Contact avatar" />
+              </ng-container>
+              <ng-container *ngIf="!user.logo_url">
+                <div
+                  class="flex items-center justify-center w-full h-full rounded-full text-lg uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-full h-full p-1">
+                    <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </ng-container>
+            </div>
+            <div class="ml-4">
+              <div class="font-medium">{{user.name}}</div>
+              <div class="text-secondary">{{user.email}}</div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="flex-1 h-full flex flex-row">
+      <ui-form [form]="formService.form" [fields]="fields" [model]="model" [options]="options" (submitForm)="submit($event)">
+        <ui-button [label]="'Save'" type="submit" ></ui-button>
+      </ui-form>
+      <ng-template>
+        <form [formGroup]="accountForm" class="px-6 flex-1 h-full overflow-hidden">
+          <div class="flex flex-col gap-6 w-full">
+              <!-- Logo -->
+              <div class="relative w-40 h-40 cursor-pointer rounded-full mx-auto overflow-hidden">
+                <!-- <img src="assets/images/logo/tenant_logo.png" class="w-full h-full" alt="tenant_logo" > -->
+                <div
+                    class="flex items-center justify-center w-full h-full rounded-full text-4xl uppercase bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                    BH
+                </div>
+              </div>
+              <!-- Name -->
+              <div>
+                  <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>Name</mat-label>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'heroicons_solid:user'"
+                          matPrefix></mat-icon>
+                      <input
+                          [formControlName]="'name'"
+                          matInput>
+                  </mat-form-field>
+              </div>
+              <div>
+                  <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>Email</mat-label>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'heroicons_solid:mail'"
+                          matPrefix></mat-icon>
+                      <input
+                          [formControlName]="'email'"
+                          matInput>
+                  </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Phone</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:phone'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'phone'"
+                        matInput>
+                </mat-form-field>
+            </div>
+              <div class="sm:col-span-2">
+                  <mat-form-field class="fuse-mat-no-subscript w-full">
+                      <mat-label>Country</mat-label>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'heroicons_solid:location-marker'"
+                          matPrefix></mat-icon>
+                      <mat-select [formControlName]="'country'">
+                          <mat-option [value]="'usa'">United States</mat-option>
+                          <mat-option [value]="'canada'">Canada</mat-option>
+                          <mat-option [value]="'mexico'">Mexico</mat-option>
+                          <mat-option [value]="'france'">France</mat-option>
+                          <mat-option [value]="'germany'">Germany</mat-option>
+                          <mat-option [value]="'italy'">Italy</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="mt-11 mb-10 border-t"></div>
+
+          <!-- Actions -->
+          <div class="flex items-center justify-end">
+              <button
+                  mat-stroked-button
+                  type="button">
+                  Cancel
+              </button>
+              <button
+                  class="ml-4"
+                  mat-flat-button
+                  type="button"
+                  [color]="'primary'">Save
+              </button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </div>
+</ng-container>

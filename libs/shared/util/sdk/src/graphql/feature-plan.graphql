@@ -1,0 +1,91 @@
+fragment PlanDetails on Plan {
+  id
+  name
+  price
+  updatedAt
+  createdAt
+  detail
+}
+
+fragment PriceSubscriptionDetails on PriceSubscription {
+  id
+  priceId
+  status
+}
+
+fragment BillingInfoDetails on BillingInfo {
+  id
+  cardHolder
+  last4
+  expireYear
+  expireMonth
+  cvc
+  zip
+  country
+}
+
+fragment PriceDetails on Price {
+  id
+  name
+  image
+  description
+  price
+  currency
+  interval
+  subscribed
+}
+
+mutation subscribe($priceId: String!) {
+  result: subscribe(priceId: $priceId) {
+    status
+  }
+}
+
+mutation cancelSubcribe($subscriptionId: String!) {
+  result: cancelSubcribe(subscriptionId: $subscriptionId) {
+    status
+  }
+}
+
+query UserPlans($input: UserListPlanInput!) {
+  plans: userPlans(input: $input) {
+  	...PlanDetails
+  }
+}
+
+mutation UserCreateBillingInfo($input: UserCreateBillingInfoInput!) {
+  billingInfo: userCreateBillingInfo(input: $input) {
+  	...BillingInfoDetails
+  }
+}
+
+mutation UserUpdateBillingInfo($input: UserUpdateBillingInfoInput!) {
+  billingInfo: userUpdateBillingInfo(input: $input) {
+  	...BillingInfoDetails
+  }
+}
+
+query UserBillingInfo($userId: String!) {
+  billingInfo: userBillingInfo(userId: $userId) {
+  	...BillingInfoDetails
+  }
+}
+
+mutation AdminCreatePlan($input: AdminCreatePlanInput!) {
+  created: adminCreatePlan(input: $input) {
+  	...PlanDetails
+  }
+}
+
+query listPrices($input: PriceListInput!) {
+  prices: listPrices(input: $input) {
+  	...PriceDetails
+  }
+}
+
+
+query ListSubscriptions($input: SubscriptionListInput  !) {
+  subscriptions: listSubscriptions(input: $input) {
+    ...PriceSubscriptionDetails
+  }
+}

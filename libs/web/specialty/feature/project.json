@@ -1,0 +1,23 @@
+{
+  "name": "web-specialty-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/specialty/feature/src",
+  "prefix": "specialty",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/specialty/feature/src/**/*.ts", "libs/web/specialty/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/specialty/feature"],
+      "options": {
+        "jestConfig": "libs/web/specialty/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

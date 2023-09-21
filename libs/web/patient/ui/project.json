@@ -1,0 +1,23 @@
+{
+  "name": "web-patient-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/patient/ui/src",
+  "prefix": "patient",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/patient/ui/src/**/*.ts", "libs/web/patient/ui/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/patient/ui"],
+      "options": {
+        "jestConfig": "libs/web/patient/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

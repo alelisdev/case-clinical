@@ -1,0 +1,23 @@
+{
+  "name": "web-med-level-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/med-level/feature/src",
+  "prefix": "med-level",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/med-level/feature/src/**/*.ts", "libs/web/med-level/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/med-level/feature"],
+      "options": {
+        "jestConfig": "libs/web/med-level/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

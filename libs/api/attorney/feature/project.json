@@ -1,0 +1,23 @@
+{
+  "name": "api-attorney-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/api/attorney/feature/src",
+  "prefix": "attorney",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/api/attorney/data-access/src/**/*.ts", "libs/api/attorney/data-access/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/attorney/data-access"],
+      "options": {
+        "jestConfig": "libs/api/attorney/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

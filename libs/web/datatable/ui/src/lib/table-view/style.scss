@@ -1,0 +1,16 @@
+::ng-deep .hideHorizontalScrollbar .ag-body-horizontal-scroll-viewport::-webkit-scrollbar {
+    display: none;
+}
+::ng-deep .ag-cell {
+    display: flex;
+    align-items: center;
+    checkbox-renderer input[type=checkbox]{
+        margin-top: 0px;
+        margin-bottom: 2px;
+    } 
+    app-checkbox-renderer input[type=checkbox]{
+        margin-top: 0px;
+        margin-bottom: 4px;
+    } 
+}
+

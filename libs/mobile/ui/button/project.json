@@ -1,0 +1,23 @@
+{
+  "name": "mobile-ui-button",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/mobile/ui/button/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/mobile/ui/button/src/**/*.ts", "libs/mobile/ui/button/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/mobile/ui/button"],
+      "options": {
+        "jestConfig": "libs/mobile/ui/button/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

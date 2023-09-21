@@ -1,0 +1,23 @@
+{
+  "name": "web-forms-ui-user-role",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/forms/ui/user-role/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/forms/ui/user-role/src/**/*.ts", "libs/web/forms/ui/user-role/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/forms/ui/user-role"],
+      "options": {
+        "jestConfig": "libs/web/forms/ui/user-role/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

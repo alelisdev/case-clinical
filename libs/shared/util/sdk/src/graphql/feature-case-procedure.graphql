@@ -1,0 +1,378 @@
+fragment CaseProcedureMasterDetailLists on CaseProcedure {
+  id
+  name
+  legalCase {
+        accidentType {
+            id
+            name
+        }
+        
+        medLevel {
+            id
+            name
+        }
+        firm {
+            id
+            name
+        }
+        attorney {
+            id
+            name
+        }
+        agent {
+            id
+            name
+        }
+  }
+  location {
+    id
+    name
+  }
+  procedureStatus {
+   id
+   name
+  }
+  procedureTypeId
+  procedureType {
+   id
+   name
+  }
+  procedureStatusId
+  appointment {
+    id
+    name
+    appointmentDateAndTime
+        appointmentStatus {
+            id
+            name
+        }
+        medicalRecordStatus {
+            id
+            name
+        }
+        medicalReport {
+            id
+            name
+        }
+        bill {
+            id
+            name
+        }
+        imaging {
+            id
+            name
+        }
+    location {
+        id
+        name
+        line1
+        city
+        state
+        postalCode
+    }
+    patient {
+        id
+        firstName
+        lastName
+    }
+    clinicalProvider {
+        id
+        firstName
+        lastName
+        name
+    }
+  }
+  procedureVendors {
+    id
+    name
+    estimate
+    fundingApproved
+    vendor {
+      id
+      name
+      vendorType {
+        id
+        name
+      }
+    }
+    contract {
+      id
+      name
+    }
+    caseAccounts {
+        id
+        name
+        description
+        medicareRate
+        providerPercentOfMedicare
+        contractedAmount
+        markupPercent
+        reimbursedTotal
+        initialRevenue
+        factor
+        retailBill
+        estMargin
+        roi
+        attorneyPaid
+        percentOfRetail
+        reimbursedFromPCR
+        journalEntries {
+            id
+            name
+            locationName
+            costRate
+            accountType
+            accountNumber
+            costCenter
+        }
+      }
+    }
+}
+
+
+
+fragment CaseProcedureDetails on CaseProcedure {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+appointmentId
+locationId
+procedureDate
+ procedureTypeId
+  procedureType {
+   id
+   name
+  }
+cost
+notes
+createdBy
+dateCreated
+removed
+procedureStatusId
+procedureStatus {
+   id
+   name
+  }
+approvedDate
+procedureReasonName
+decisionDate
+nextActionDate
+legalCase {
+  id
+  name
+}
+
+appointment {
+  id
+  name
+}
+location {
+  id
+  name
+}
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+procedureVendors {
+    id
+    name
+    estimate
+    fundingApproved
+    vendor {
+      id
+      name
+      vendorType {
+        id
+        name
+      }
+    }
+    contract {
+      id
+      name
+    }
+    
+  }
+}
+
+
+fragment CaseProcedureLists on CaseProcedure {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+appointmentId
+locationId
+procedureDate
+ procedureTypeId
+  procedureType {
+   id
+   name
+  }
+procedureStatusId
+procedureStatus {
+   id
+   name
+  }
+cost
+notes
+createdBy
+dateCreated
+removed
+approvedDate
+procedureReasonName
+decisionDate
+nextActionDate
+legalCase {
+    id
+    name
+}
+appointment {
+    id
+    name
+}
+location {
+    id
+    name
+}
+
+priorAuthorizationRequests {
+    id
+    name
+  }
+
+
+procedureVendors {
+    ...ProcedureVendorLists
+  }
+
+}
+
+
+
+query AdminCaseProcedures($input: AdminListCaseProcedureInput) {
+  items: adminCaseProcedures(input: $input) {
+    ...CaseProcedureLists
+  }
+  count: adminCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseProcedures($input: AdminListCaseProcedureInput) {
+  count: adminCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseProcedure($caseProcedureId: String!) {
+  item: adminCaseProcedure(caseProcedureId: $caseProcedureId) {
+    ...CaseProcedureDetails
+  }
+}
+mutation AdminCreateCaseProcedure($input: AdminCreateCaseProcedureInput!) {
+  created: adminCreateCaseProcedure(input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+mutation AdminUpdateCaseProcedure($caseProcedureId: String!, $input: AdminUpdateCaseProcedureInput!) {
+  updated: adminUpdateCaseProcedure(caseProcedureId: $caseProcedureId, input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+mutation AdminDeleteCaseProcedure($caseProcedureId: String!) {
+  deleted: adminDeleteCaseProcedure(caseProcedureId: $caseProcedureId) {
+    ...CaseProcedureDetails
+  }
+}
+
+query UserCaseProcedures($input: UserListCaseProcedureInput) {
+  items: userCaseProcedures(input: $input) {
+    ...CaseProcedureLists
+  }
+  count: userCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseProcedures($input: UserListCaseProcedureInput) {
+  count: userCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+query UserSelectCaseProcedures($input: UserListCaseProcedureInput) {
+  items: userSelectCaseProcedures(input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+
+query UserSelectDetailCaseProcedures($input: UserListCaseProcedureInput) {
+  items: userSelectDetailCaseProcedures(input: $input) {
+    ...CaseProcedureMasterDetailLists
+  }
+  count: userCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserCaseProcedure($caseProcedureId: String!) {
+  item: userCaseProcedure(caseProcedureId: $caseProcedureId) {
+    ...CaseProcedureDetails
+  }
+}
+
+mutation UserCreateCaseProcedure($input: UserCreateCaseProcedureInput!) {
+  created: userCreateCaseProcedure(input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+mutation UserUpdateCaseProcedure($caseProcedureId: String!, $input: UserUpdateCaseProcedureInput!) {
+  updated: userUpdateCaseProcedure(caseProcedureId: $caseProcedureId, input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+
+mutation UserUpdateCaseProcedures($input: UserUpdateCaseProceduresInput!) {
+  updated: userUpdateCaseProcedures(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseProcedure($caseProcedureId: String!) {
+  deleted: userDeleteCaseProcedure(caseProcedureId: $caseProcedureId) {
+    ...CaseProcedureDetails
+  }
+}
+
+query PublicCaseProcedures($input: UserListCaseProcedureInput) {
+  items: publicCaseProcedures(input: $input) {
+    ...CaseProcedureLists
+  }
+  count: publicCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseProcedures($input: UserListCaseProcedureInput) {
+  count: publicCountCaseProcedures(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseProcedures($input: UserListCaseProcedureInput) {
+  items: publicSelectCaseProcedures(input: $input) {
+    ...CaseProcedureDetails
+  }
+}
+
+query PublicCaseProcedure($caseProcedureId: String!) {
+  item: publicCaseProcedure(caseProcedureId: $caseProcedureId) {
+    ...CaseProcedureDetails
+  }
+}

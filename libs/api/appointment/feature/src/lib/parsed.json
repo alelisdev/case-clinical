@@ -1,0 +1,376 @@
+
+{
+  "carrier": {
+    "type": "string",
+    "value": "PI Lien PI ,"
+  },
+  "item1.medicare": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.medicaid": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.sponsors_ssn": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.member_id": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.ssn_or_id": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.ssn": {
+    "type": "boolean",
+    "value": false
+  },
+  "item1.id": {
+    "type": "boolean",
+    "value": true
+  },
+  "item1a.insureds_id_number": {
+    "type": "string",
+    "value": "0000"
+  },
+  "item2.patients_name": {
+    "type": "string",
+    "value": "Arreguin, Gabriela"
+  },
+  "item3.patients_birth_date": {
+    "source": "08 08 1980",
+    "value": "1980-08-08T00:00:00.000Z",
+    "type": "date"
+  },
+  "item3.male": {
+    "type": "boolean",
+    "value": false
+  },
+  "item3.female": {
+    "type": "boolean",
+    "value": true
+  },
+  "item4.insureds_name": {
+    "type": "string",
+    "value": "Arreguin, Gabriela"
+  },
+  "item5.patients_street_address": {
+    "type": "string",
+    "value": "660 Mariposa Ave Apt317"
+  },
+  "item5.patients_city": {
+    "type": "string",
+    "value": "Mountain View"
+  },
+  "item5.patients_state": {
+    "type": "string",
+    "value": "CA"
+  },
+  "item5.patients_zip_code": {
+    "type": "string",
+    "value": "94041"
+  },
+  "item5.patients_telephone": {
+    "type": "phoneNumber",
+    "source": "(650) 773 7311",
+    "value": "+16507737311"
+  },
+  "item6.patient_relationship_to_insured.self": {
+    "type": "boolean",
+    "value": true
+  },
+  "item6.patient_relationship_to_insured.spouse": {
+    "type": "boolean",
+    "value": false
+  },
+  "item6.patient_relationship_to_insured.child": {
+    "type": "boolean",
+    "value": false
+  },
+  "item6.patient_relationship_to_insured.other": {
+    "type": "boolean",
+    "value": false
+  },
+  "item7.insureds_street_address": {
+    "type": "string",
+    "value": "660 Mariposa Ave Apt317"
+  },
+  "item7.insureds_city": {
+    "type": "string",
+    "value": "Mountain View"
+  },
+  "item7.insureds_state": {
+    "type": "string",
+    "value": "CA"
+  },
+  "item7.insureds_zip_code": {
+    "type": "string",
+    "value": "94041"
+  },
+  "item7.insureds_telephone": {
+    "type": "string",
+    "value": "(650) 773 7311"
+  },
+  "item8.patient_status.single": {
+    "type": "boolean",
+    "value": true
+  },
+  "item8.patient_status.married": {
+    "type": "boolean",
+    "value": false
+  },
+  "item8.patient_status.other": {
+    "type": "boolean",
+    "value": false
+  },
+  "item8.patient_status.employed": {
+    "type": "boolean",
+    "value": false
+  },
+  "item8.patient_status.full_time_student": {
+    "type": "boolean",
+    "value": false
+  },
+  "item8.patient_status.part_time_student": {
+    "type": "boolean",
+    "value": false
+  },
+  "item9.other_insureds_name": null,
+  "item9a.other_insureds_name_policy_or_group_number": null,
+  "item9b.other_insureds_birth_date": null,
+  "item9b.male": {
+    "type": "boolean",
+    "value": false
+  },
+  "item9b.female": {
+    "type": "boolean",
+    "value": false
+  },
+  "item9c.employers_name_or_school_name": null,
+  "item9d.insurance_plan_name_or_program_name": null,
+  "item10a.is_patients_condition_related_to_employment": {
+    "type": "boolean",
+    "value": false
+  },
+  "item10b.is_patients_condition_related_to_auto_accident": {
+    "type": "boolean",
+    "value": true
+  },
+  "item10b.is_patients_condition_related_to_auto_accident.place": {
+    "type": "string",
+    "value": "CA"
+  },
+  "item10c.is_patients_condition_related_to_other_accident": {
+    "type": "boolean",
+    "value": false
+  },
+  "item10d.reserved_for_local_use": null,
+  "item11.insureds_policy_group_or_feca_number": null,
+  "item11a.insureds_birth_date": {
+    "source": "08 08 1980",
+    "value": "1980-08-08T00:00:00.000Z",
+    "type": "date"
+  },
+  "item11a.male": {
+    "type": "boolean",
+    "value": false
+  },
+  "item11a.female": {
+    "type": "boolean",
+    "value": true
+  },
+  "item11b.employers_name_or_school_name": null,
+  "item11c.insurance_plan_name_or_program_name": null,
+  "item11d.is_ther_another_health_benefit_plan": {
+    "type": "boolean",
+    "value": false
+  },
+  "item12.patients_authorized_persons.signature": {
+    "type": "string",
+    "value": "SIGNATURE ON FILE"
+  },
+  "item12.patients_authorized_persons.date": {
+    "source": "12/07/2022",
+    "value": "2022-12-07T00:00:00.000Z",
+    "type": "date"
+  },
+  "item13.insureds_authorized_persons.signature": {
+    "type": "string",
+    "value": "SIGNATURE ON FILE"
+  },
+  "item14.date_of_current": {
+    "source": "10 20 20",
+    "value": "2020-10-20T00:00:00.000Z",
+    "type": "date"
+  },
+  "item15.first_date_same_similar_issue": null,
+  "item16.dates_patient_unable_to_work_in_current_occupation.from": null,
+  "item16.dates_patient_unable_to_work_in_current_occupation.to": null,
+  "item17.name_of_referring_provider_or_other_source": null,
+  "item17a": null,
+  "item17b": {
+    "type": "string",
+    "value": "NPI"
+  },
+  "item18.hospitalization_dates_related_to_current_services.from": null,
+  "item18.hospitalization_dates_related_to_current_services.to": null,
+  "item19.reserved_for_local_use": null,
+  "item20.outside_lab": {
+    "type": "boolean",
+    "value": false
+  },
+  "item20.charges": null,
+  "item21": [
+    {
+      "item21.diagnosis_pointer": {
+        "type": "string",
+        "value": "1."
+      },
+      "item21.diagnosis_or_nature_of_illness_or_injury": {
+        "value": "F321",
+        "type": "string"
+      }
+    },
+    {
+      "item21.diagnosis_pointer": {
+        "type": "string",
+        "value": "3."
+      },
+      "item21.diagnosis_or_nature_of_illness_or_injury": {
+        "value": "F438",
+        "type": "string"
+      }
+    },
+    {
+      "item21.diagnosis_pointer": {
+        "type": "string",
+        "value": "2."
+      },
+      "item21.diagnosis_or_nature_of_illness_or_injury": {
+        "value": "F411",
+        "type": "string"
+      }
+    },
+    {
+      "item21.diagnosis_pointer": {
+        "type": "string",
+        "value": "4."
+      },
+      "item21.diagnosis_or_nature_of_illness_or_injury": null
+    }
+  ],
+  "item22.medicaid_resubmission.code": null,
+  "item22.medicaid_resubmission.original_ref_no": null,
+  "item23.prior_authorization_number": null,
+  "item24": [
+    {
+      "a.dates_of_service.from": {
+        "source": "12 07 22",
+        "value": "2022-12-07T00:00:00.000Z",
+        "type": "date"
+      },
+      "a.dates_of_service.to": {
+        "source": "12 07 22",
+        "value": "2022-12-07T00:00:00.000Z",
+        "type": "date"
+      },
+      "b.place_of_service": {
+        "type": "string",
+        "value": "2"
+      },
+      "c.emg": null,
+      "d.procedures_services_or_supplies": {
+        "type": "string",
+        "value": "99212 95"
+      },
+      "e.diagnosis_pointer": {
+        "type": "string",
+        "value": "123"
+      },
+      "f.charges": {
+        "source": "1000.00",
+        "value": 1000,
+        "unit": "$",
+        "type": "currency"
+      },
+      "g.days_or_units": {
+        "type": "string",
+        "value": "1"
+      },
+      "h.epsdt": null,
+      "i.id_qual": {
+        "type": "string",
+        "value": "NPI"
+      },
+      "j.rendering_provider_id": {
+        "type": "string",
+        "value": "1083769293"
+      }
+    }
+  ],
+  "item25.federal_tax_id_number": {
+    "type": "string",
+    "value": "264630573"
+  },
+  "item25.ssn": {
+    "type": "boolean",
+    "value": false
+  },
+  "item25.ein": {
+    "type": "boolean",
+    "value": true
+  },
+  "item26.patients_account_no": null,
+  "item27.accept_assignment": {
+    "type": "boolean",
+    "value": true
+  },
+  "item28.total_charge": {
+    "source": "$1000.00",
+    "value": 1000,
+    "unit": "$",
+    "type": "currency"
+  },
+  "item29.amount_paid": null,
+  "item30.balance_due": {
+    "source": "$1000.00",
+    "value": 1000,
+    "unit": "$",
+    "type": "currency"
+  },
+  "item31.signature_of_physician_or_supplier": {
+    "type": "string",
+    "value": "Amiri, Rod"
+  },
+  "item31.signature_of_physician_or_supplier.date": {
+    "source": "12/20/2022",
+    "value": "2022-12-20T00:00:00.000Z",
+    "type": "date"
+  },
+  "item32.service_facility_location_information": {
+    "type": "string",
+    "value": "Rod Amiri, MD Inc. 9301 Wilshire Blvd Beverly Hills, CA 90210"
+  },
+  "item32a": {
+    "type": "string",
+    "value": "1083769293"
+  },
+  "item32b": null,
+  "item33.billing_provider_info": {
+    "type": "string",
+    "value": "Rod Amiri, MD Inc. 9301 Wilshire Blvd Beverly Hills, CA 90210"
+  },
+  "item33.billing_provider_info.phone_number": {
+    "type": "phoneNumber",
+    "source": "(424) 226 7271",
+    "value": "+14242267271"
+  },
+  "item33a": {
+    "type": "string",
+    "value": "1083769293"
+  },
+  "item33b": null
+}

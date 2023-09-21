@@ -1,0 +1,27 @@
+a:hover {
+  text-decoration: none;
+}
+
+::ng-deep notification-center-web-component > span > button > svg:first-child {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+::ng-deep .mat-mdc-icon-button.mat-mdc-button-base {
+  padding:0px;
+  height: 35px;
+  width:35px;
+}
+
+::ng-deep ui-form-navbar mat-icon svg {
+  vertical-align: text-top;
+  margin-top: 5px;
+  width: 24px;
+  height: 24px;
+}
+
+::ng-deep ui-form-navbar mat-icon img {
+  margin-top: 5px;
+  width: 24px;
+  height: 24px;
+}

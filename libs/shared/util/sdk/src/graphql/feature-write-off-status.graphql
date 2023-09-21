@@ -1,0 +1,148 @@
+
+fragment WriteOffStatusDetails on WriteOffStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+writeOffs {
+   ...WriteOffLists
+  }
+}
+
+fragment WriteOffStatusLists on WriteOffStatus {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+writeOffs {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminWriteOffStatuses($input: AdminListWriteOffStatusInput) {
+  items: adminWriteOffStatuses(input: $input) {
+    ...WriteOffStatusLists
+  }
+  count: adminCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountWriteOffStatuses($input: AdminListWriteOffStatusInput) {
+  count: adminCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminWriteOffStatus($writeOffStatusId: String!) {
+  item: adminWriteOffStatus(writeOffStatusId: $writeOffStatusId) {
+    ...WriteOffStatusDetails
+  }
+}
+mutation AdminCreateWriteOffStatus($input: AdminCreateWriteOffStatusInput!) {
+  created: adminCreateWriteOffStatus(input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+mutation AdminUpdateWriteOffStatus($writeOffStatusId: String!, $input: AdminUpdateWriteOffStatusInput!) {
+  updated: adminUpdateWriteOffStatus(writeOffStatusId: $writeOffStatusId, input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+mutation AdminDeleteWriteOffStatus($writeOffStatusId: String!) {
+  deleted: adminDeleteWriteOffStatus(writeOffStatusId: $writeOffStatusId) {
+    ...WriteOffStatusDetails
+  }
+}
+
+query UserWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  items: userWriteOffStatuses(input: $input) {
+    ...WriteOffStatusLists
+  }
+  count: userCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  count: userCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  items: userSelectWriteOffStatuses(input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+
+query UserWriteOffStatus($writeOffStatusId: String!) {
+  item: userWriteOffStatus(writeOffStatusId: $writeOffStatusId) {
+    ...WriteOffStatusDetails
+  }
+}
+
+mutation UserCreateWriteOffStatus($input: UserCreateWriteOffStatusInput!) {
+  created: userCreateWriteOffStatus(input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+mutation UserUpdateWriteOffStatus($writeOffStatusId: String!, $input: UserUpdateWriteOffStatusInput!) {
+  updated: userUpdateWriteOffStatus(writeOffStatusId: $writeOffStatusId, input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+
+mutation UserUpdateWriteOffStatuses($input: UserUpdateWriteOffStatusesInput!) {
+  updated: userUpdateWriteOffStatuses(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteWriteOffStatus($writeOffStatusId: String!) {
+  deleted: userDeleteWriteOffStatus(writeOffStatusId: $writeOffStatusId) {
+    ...WriteOffStatusDetails
+  }
+}
+
+query PublicWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  items: publicWriteOffStatuses(input: $input) {
+    ...WriteOffStatusLists
+  }
+  count: publicCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  count: publicCountWriteOffStatuses(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectWriteOffStatuses($input: UserListWriteOffStatusInput) {
+  items: publicSelectWriteOffStatuses(input: $input) {
+    ...WriteOffStatusDetails
+  }
+}
+
+query PublicWriteOffStatus($writeOffStatusId: String!) {
+  item: publicWriteOffStatus(writeOffStatusId: $writeOffStatusId) {
+    ...WriteOffStatusDetails
+  }
+}

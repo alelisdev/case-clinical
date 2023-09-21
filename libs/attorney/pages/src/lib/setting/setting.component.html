@@ -1,0 +1,10 @@
+<ui-formly-json-form
+  *ngIf="vm$ | async as vm"
+  class="w-full h-full"
+  formName="page_attorney_setting"
+  [showSubmitButton]="false"
+  [model]="model"
+  [formData]="getFormData(vm)"
+  (formIsReady)="formIsReady()"
+  (save)="save($event)"
+></ui-formly-json-form>

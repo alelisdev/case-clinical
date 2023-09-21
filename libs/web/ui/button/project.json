@@ -1,0 +1,23 @@
+{
+  "name": "web-ui-button",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/ui/button/src",
+  "prefix": "ui",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/ui/button/src/**/*.ts", "libs/web/ui/button/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/ui/button"],
+      "options": {
+        "jestConfig": "libs/web/ui/button/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

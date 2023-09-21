@@ -1,0 +1,23 @@
+{
+  "name": "web-language-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/web/language/feature/src",
+  "prefix": "language",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/web/language/feature/src/**/*.ts", "libs/web/language/feature/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/web/language/feature"],
+      "options": {
+        "jestConfig": "libs/web/language/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

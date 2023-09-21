@@ -1,0 +1,149 @@
+
+fragment ContractKindDetails on ContractKind {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contractedRates {
+    id
+    name
+  }
+}
+
+fragment ContractKindLists on ContractKind {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contractedRates {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminContractKinds($input: AdminListContractKindInput) {
+  items: adminContractKinds(input: $input) {
+    ...ContractKindLists
+  }
+  count: adminCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountContractKinds($input: AdminListContractKindInput) {
+  count: adminCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminContractKind($contractKindId: String!) {
+  item: adminContractKind(contractKindId: $contractKindId) {
+    ...ContractKindDetails
+  }
+}
+mutation AdminCreateContractKind($input: AdminCreateContractKindInput!) {
+  created: adminCreateContractKind(input: $input) {
+    ...ContractKindDetails
+  }
+}
+mutation AdminUpdateContractKind($contractKindId: String!, $input: AdminUpdateContractKindInput!) {
+  updated: adminUpdateContractKind(contractKindId: $contractKindId, input: $input) {
+    ...ContractKindDetails
+  }
+}
+mutation AdminDeleteContractKind($contractKindId: String!) {
+  deleted: adminDeleteContractKind(contractKindId: $contractKindId) {
+    ...ContractKindDetails
+  }
+}
+
+query UserContractKinds($input: UserListContractKindInput) {
+  items: userContractKinds(input: $input) {
+    ...ContractKindLists
+  }
+  count: userCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountContractKinds($input: UserListContractKindInput) {
+  count: userCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectContractKinds($input: UserListContractKindInput) {
+  items: userSelectContractKinds(input: $input) {
+    ...ContractKindDetails
+  }
+}
+
+query UserContractKind($contractKindId: String!) {
+  item: userContractKind(contractKindId: $contractKindId) {
+    ...ContractKindDetails
+  }
+}
+
+mutation UserCreateContractKind($input: UserCreateContractKindInput!) {
+  created: userCreateContractKind(input: $input) {
+    ...ContractKindDetails
+  }
+}
+mutation UserUpdateContractKind($contractKindId: String!, $input: UserUpdateContractKindInput!) {
+  updated: userUpdateContractKind(contractKindId: $contractKindId, input: $input) {
+    ...ContractKindDetails
+  }
+}
+
+mutation UserUpdateContractKinds($input: UserUpdateContractKindsInput!) {
+  updated: userUpdateContractKinds(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteContractKind($contractKindId: String!) {
+  deleted: userDeleteContractKind(contractKindId: $contractKindId) {
+    ...ContractKindDetails
+  }
+}
+
+query PublicContractKinds($input: UserListContractKindInput) {
+  items: publicContractKinds(input: $input) {
+    ...ContractKindLists
+  }
+  count: publicCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountContractKinds($input: UserListContractKindInput) {
+  count: publicCountContractKinds(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectContractKinds($input: UserListContractKindInput) {
+  items: publicSelectContractKinds(input: $input) {
+    ...ContractKindDetails
+  }
+}
+
+query PublicContractKind($contractKindId: String!) {
+  item: publicContractKind(contractKindId: $contractKindId) {
+    ...ContractKindDetails
+  }
+}

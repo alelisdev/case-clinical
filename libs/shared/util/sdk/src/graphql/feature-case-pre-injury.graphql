@@ -1,0 +1,160 @@
+
+fragment CasePreInjuryDetails on CasePreInjury {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+affectsInjury
+injuryDate
+injured
+anatomic
+dateCreated
+removed
+legalCase {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment CasePreInjuryLists on CasePreInjury {
+id
+createdAt
+updatedAt
+name
+legalCaseId
+affectsInjury
+injuryDate
+injured
+anatomic
+dateCreated
+removed
+legalCase {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminCasePreInjuries($input: AdminListCasePreInjuryInput) {
+  items: adminCasePreInjuries(input: $input) {
+    ...CasePreInjuryLists
+  }
+  count: adminCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCasePreInjuries($input: AdminListCasePreInjuryInput) {
+  count: adminCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCasePreInjury($casePreInjuryId: String!) {
+  item: adminCasePreInjury(casePreInjuryId: $casePreInjuryId) {
+    ...CasePreInjuryDetails
+  }
+}
+mutation AdminCreateCasePreInjury($input: AdminCreateCasePreInjuryInput!) {
+  created: adminCreateCasePreInjury(input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+mutation AdminUpdateCasePreInjury($casePreInjuryId: String!, $input: AdminUpdateCasePreInjuryInput!) {
+  updated: adminUpdateCasePreInjury(casePreInjuryId: $casePreInjuryId, input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+mutation AdminDeleteCasePreInjury($casePreInjuryId: String!) {
+  deleted: adminDeleteCasePreInjury(casePreInjuryId: $casePreInjuryId) {
+    ...CasePreInjuryDetails
+  }
+}
+
+query UserCasePreInjuries($input: UserListCasePreInjuryInput) {
+  items: userCasePreInjuries(input: $input) {
+    ...CasePreInjuryLists
+  }
+  count: userCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCasePreInjuries($input: UserListCasePreInjuryInput) {
+  count: userCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCasePreInjuries($input: UserListCasePreInjuryInput) {
+  items: userSelectCasePreInjuries(input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+
+query UserCasePreInjury($casePreInjuryId: String!) {
+  item: userCasePreInjury(casePreInjuryId: $casePreInjuryId) {
+    ...CasePreInjuryDetails
+  }
+}
+
+mutation UserCreateCasePreInjury($input: UserCreateCasePreInjuryInput!) {
+  created: userCreateCasePreInjury(input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+mutation UserUpdateCasePreInjury($casePreInjuryId: String!, $input: UserUpdateCasePreInjuryInput!) {
+  updated: userUpdateCasePreInjury(casePreInjuryId: $casePreInjuryId, input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+
+mutation UserUpdateCasePreInjuries($input: UserUpdateCasePreInjuriesInput!) {
+  updated: userUpdateCasePreInjuries(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCasePreInjury($casePreInjuryId: String!) {
+  deleted: userDeleteCasePreInjury(casePreInjuryId: $casePreInjuryId) {
+    ...CasePreInjuryDetails
+  }
+}
+
+query PublicCasePreInjuries($input: UserListCasePreInjuryInput) {
+  items: publicCasePreInjuries(input: $input) {
+    ...CasePreInjuryLists
+  }
+  count: publicCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCasePreInjuries($input: UserListCasePreInjuryInput) {
+  count: publicCountCasePreInjuries(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCasePreInjuries($input: UserListCasePreInjuryInput) {
+  items: publicSelectCasePreInjuries(input: $input) {
+    ...CasePreInjuryDetails
+  }
+}
+
+query PublicCasePreInjury($casePreInjuryId: String!) {
+  item: publicCasePreInjury(casePreInjuryId: $casePreInjuryId) {
+    ...CasePreInjuryDetails
+  }
+}

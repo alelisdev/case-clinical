@@ -1,0 +1,160 @@
+
+fragment CaseAccountPaymentDetails on CaseAccountPayment {
+id
+createdAt
+updatedAt
+name
+amountApplied
+paymentId
+caseAccountId
+payment {
+  id
+  name
+}
+caseAccount {
+  id
+  name
+}
+
+
+
+
+
+}
+
+fragment CaseAccountPaymentLists on CaseAccountPayment {
+id
+createdAt
+updatedAt
+name
+amountApplied
+paymentId
+caseAccountId
+payment {
+    id
+    name
+}
+caseAccount {
+    id
+    name
+}
+
+
+
+
+
+}
+
+
+
+query AdminCaseAccountPayments($input: AdminListCaseAccountPaymentInput) {
+  items: adminCaseAccountPayments(input: $input) {
+    ...CaseAccountPaymentLists
+  }
+  count: adminCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountCaseAccountPayments($input: AdminListCaseAccountPaymentInput) {
+  count: adminCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminCaseAccountPayment($caseAccountPaymentId: String!) {
+  item: adminCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId) {
+    ...CaseAccountPaymentDetails
+  }
+}
+mutation AdminCreateCaseAccountPayment($input: AdminCreateCaseAccountPaymentInput!) {
+  created: adminCreateCaseAccountPayment(input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+mutation AdminUpdateCaseAccountPayment($caseAccountPaymentId: String!, $input: AdminUpdateCaseAccountPaymentInput!) {
+  updated: adminUpdateCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId, input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+mutation AdminDeleteCaseAccountPayment($caseAccountPaymentId: String!) {
+  deleted: adminDeleteCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+query UserCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  items: userCaseAccountPayments(input: $input) {
+    ...CaseAccountPaymentLists
+  }
+  count: userCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  count: userCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  items: userSelectCaseAccountPayments(input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+query UserCaseAccountPayment($caseAccountPaymentId: String!) {
+  item: userCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+mutation UserCreateCaseAccountPayment($input: UserCreateCaseAccountPaymentInput!) {
+  created: userCreateCaseAccountPayment(input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+mutation UserUpdateCaseAccountPayment($caseAccountPaymentId: String!, $input: UserUpdateCaseAccountPaymentInput!) {
+  updated: userUpdateCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId, input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+mutation UserUpdateCaseAccountPayments($input: UserUpdateCaseAccountPaymentsInput!) {
+  updated: userUpdateCaseAccountPayments(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteCaseAccountPayment($caseAccountPaymentId: String!) {
+  deleted: userDeleteCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+query PublicCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  items: publicCaseAccountPayments(input: $input) {
+    ...CaseAccountPaymentLists
+  }
+  count: publicCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  count: publicCountCaseAccountPayments(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectCaseAccountPayments($input: UserListCaseAccountPaymentInput) {
+  items: publicSelectCaseAccountPayments(input: $input) {
+    ...CaseAccountPaymentDetails
+  }
+}
+
+query PublicCaseAccountPayment($caseAccountPaymentId: String!) {
+  item: publicCaseAccountPayment(caseAccountPaymentId: $caseAccountPaymentId) {
+    ...CaseAccountPaymentDetails
+  }
+}

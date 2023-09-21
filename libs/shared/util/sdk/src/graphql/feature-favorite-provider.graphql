@@ -1,0 +1,159 @@
+
+fragment FavoriteProviderDetails on FavoriteProvider {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+userId
+specialtyId
+clinicalProvider {
+  id
+  name
+}
+specialty{
+  id 
+  name
+}
+
+
+
+
+
+}
+
+fragment FavoriteProviderLists on FavoriteProvider {
+id
+createdAt
+updatedAt
+name
+clinicalProviderId
+userId
+specialtyId
+clinicalProvider {
+    id
+    name
+}
+specialty{
+  id 
+  name
+}
+
+
+
+
+}
+
+
+
+query AdminFavoriteProviders($input: AdminListFavoriteProviderInput) {
+  items: adminFavoriteProviders(input: $input) {
+    ...FavoriteProviderLists
+  }
+  count: adminCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountFavoriteProviders($input: AdminListFavoriteProviderInput) {
+  count: adminCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminFavoriteProvider($favoriteProviderId: String!) {
+  item: adminFavoriteProvider(favoriteProviderId: $favoriteProviderId) {
+    ...FavoriteProviderDetails
+  }
+}
+mutation AdminCreateFavoriteProvider($input: AdminCreateFavoriteProviderInput!) {
+  created: adminCreateFavoriteProvider(input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+mutation AdminUpdateFavoriteProvider($favoriteProviderId: String!, $input: AdminUpdateFavoriteProviderInput!) {
+  updated: adminUpdateFavoriteProvider(favoriteProviderId: $favoriteProviderId, input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+mutation AdminDeleteFavoriteProvider($favoriteProviderId: String!) {
+  deleted: adminDeleteFavoriteProvider(favoriteProviderId: $favoriteProviderId) {
+    ...FavoriteProviderDetails
+  }
+}
+
+query UserFavoriteProviders($input: UserListFavoriteProviderInput) {
+  items: userFavoriteProviders(input: $input) {
+    ...FavoriteProviderLists
+  }
+  count: userCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountFavoriteProviders($input: UserListFavoriteProviderInput) {
+  count: userCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectFavoriteProviders($input: UserListFavoriteProviderInput) {
+  items: userSelectFavoriteProviders(input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+
+query UserFavoriteProvider($favoriteProviderId: String!) {
+  item: userFavoriteProvider(favoriteProviderId: $favoriteProviderId) {
+    ...FavoriteProviderDetails
+  }
+}
+
+mutation UserCreateFavoriteProvider($input: UserCreateFavoriteProviderInput!) {
+  created: userCreateFavoriteProvider(input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+mutation UserUpdateFavoriteProvider($favoriteProviderId: String!, $input: UserUpdateFavoriteProviderInput!) {
+  updated: userUpdateFavoriteProvider(favoriteProviderId: $favoriteProviderId, input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+
+mutation UserUpdateFavoriteProviders($input: UserUpdateFavoriteProvidersInput!) {
+  updated: userUpdateFavoriteProviders(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteFavoriteProvider($favoriteProviderId: String!) {
+  deleted: userDeleteFavoriteProvider(favoriteProviderId: $favoriteProviderId) {
+    ...FavoriteProviderDetails
+  }
+}
+
+query PublicFavoriteProviders($input: UserListFavoriteProviderInput) {
+  items: publicFavoriteProviders(input: $input) {
+    ...FavoriteProviderLists
+  }
+  count: publicCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountFavoriteProviders($input: UserListFavoriteProviderInput) {
+  count: publicCountFavoriteProviders(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectFavoriteProviders($input: UserListFavoriteProviderInput) {
+  items: publicSelectFavoriteProviders(input: $input) {
+    ...FavoriteProviderDetails
+  }
+}
+
+query PublicFavoriteProvider($favoriteProviderId: String!) {
+  item: publicFavoriteProvider(favoriteProviderId: $favoriteProviderId) {
+    ...FavoriteProviderDetails
+  }
+}

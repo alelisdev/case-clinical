@@ -1,0 +1,148 @@
+
+fragment IntegrationDetails on Integration {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contactSettings {
+    ...ContactSettingLists
+  }
+}
+
+fragment IntegrationLists on Integration {
+id
+createdAt
+updatedAt
+name
+
+
+
+
+
+
+contactSettings {
+    id
+    name
+  }
+
+}
+
+
+
+query AdminIntegrations($input: AdminListIntegrationInput) {
+  items: adminIntegrations(input: $input) {
+    ...IntegrationLists
+  }
+  count: adminCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query AdminCountIntegrations($input: AdminListIntegrationInput) {
+  count: adminCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+
+
+query AdminIntegration($integrationId: String!) {
+  item: adminIntegration(integrationId: $integrationId) {
+    ...IntegrationDetails
+  }
+}
+mutation AdminCreateIntegration($input: AdminCreateIntegrationInput!) {
+  created: adminCreateIntegration(input: $input) {
+    ...IntegrationDetails
+  }
+}
+mutation AdminUpdateIntegration($integrationId: String!, $input: AdminUpdateIntegrationInput!) {
+  updated: adminUpdateIntegration(integrationId: $integrationId, input: $input) {
+    ...IntegrationDetails
+  }
+}
+mutation AdminDeleteIntegration($integrationId: String!) {
+  deleted: adminDeleteIntegration(integrationId: $integrationId) {
+    ...IntegrationDetails
+  }
+}
+
+query UserIntegrations($input: UserListIntegrationInput) {
+  items: userIntegrations(input: $input) {
+    ...IntegrationLists
+  }
+  count: userCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query UserCountIntegrations($input: UserListIntegrationInput) {
+  count: userCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query UserSelectIntegrations($input: UserListIntegrationInput) {
+  items: userSelectIntegrations(input: $input) {
+    ...IntegrationDetails
+  }
+}
+
+query UserIntegration($integrationId: String!) {
+  item: userIntegration(integrationId: $integrationId) {
+    ...IntegrationDetails
+  }
+}
+
+mutation UserCreateIntegration($input: UserCreateIntegrationInput!) {
+  created: userCreateIntegration(input: $input) {
+    ...IntegrationDetails
+  }
+}
+mutation UserUpdateIntegration($integrationId: String!, $input: UserUpdateIntegrationInput!) {
+  updated: userUpdateIntegration(integrationId: $integrationId, input: $input) {
+    ...IntegrationDetails
+  }
+}
+
+mutation UserUpdateIntegrations($input: UserUpdateIntegrationsInput!) {
+  updated: userUpdateIntegrations(input: $input) {
+    ...UpdateResult
+  }
+}
+
+mutation UserDeleteIntegration($integrationId: String!) {
+  deleted: userDeleteIntegration(integrationId: $integrationId) {
+    ...IntegrationDetails
+  }
+}
+
+query PublicIntegrations($input: UserListIntegrationInput) {
+  items: publicIntegrations(input: $input) {
+    ...IntegrationLists
+  }
+  count: publicCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+query PublicCountIntegrations($input: UserListIntegrationInput) {
+  count: publicCountIntegrations(input: $input) {
+    ...CorePagingDetails
+  }
+}
+
+query PublicSelectIntegrations($input: UserListIntegrationInput) {
+  items: publicSelectIntegrations(input: $input) {
+    ...IntegrationDetails
+  }
+}
+
+query PublicIntegration($integrationId: String!) {
+  item: publicIntegration(integrationId: $integrationId) {
+    ...IntegrationDetails
+  }
+}

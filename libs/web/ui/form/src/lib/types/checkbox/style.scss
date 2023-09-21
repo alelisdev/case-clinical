@@ -1,0 +1,14 @@
+::ng-deep mat-checkbox input[type=checkbox]{
+    border: none !important;
+}
+::ng-deep .mdc-form-field>label {
+    margin-bottom: 0px;
+    padding-left:0px;
+}
+
+::ng-deep mat-checkbox input[type=checkbox]:disabled{
+    top: 7px !important;
+    left: 10px !important;
+    width: 18px !important;
+    height: 18px !important;
+}

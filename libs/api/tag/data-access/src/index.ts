@@ -1,0 +1,15 @@
+
+export * from './lib/dto/admin-create-tag.input'
+export * from './lib/dto/admin-list-tag.input'
+export * from './lib/dto/admin-update-tag.input'
+export * from './lib/dto/tag.input'
+export * from './lib/dto/user-create-tag.input'
+export * from './lib/dto/user-list-tag.input'
+export * from './lib/dto/user-update-tag.input'
+export * from './lib/dto/user-update-tags.input'
+export * from './lib/models/tag.model'
+export * from './lib/api-tag-data-access.module'
+
+export * from './lib/api-tag-data-access-admin.service'
+export * from './lib/api-tag-data-access-public.service'
+export * from './lib/api-tag-data-access-user.service'
